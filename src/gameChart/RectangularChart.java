@@ -73,6 +73,7 @@ public class RectangularChart extends AbstractChart {
 		this.width = width;
 		this.height = height;
 		chart = new Box[width][height];
+		
 	}
 	
 	public int getHeight() {
@@ -113,5 +114,9 @@ public class RectangularChart extends AbstractChart {
 		default:
 			return null;
 		}
+	}
+	
+	private void createChart() {
+		
 	}
 }

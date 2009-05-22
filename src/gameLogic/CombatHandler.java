@@ -1,13 +1,21 @@
-package characters;
+package gameLogic;
+
 
 import java.util.Random;
 
 public class CombatHandler {
+	
+	public enum AttackType {
+		Melee,
+		Ranged,
+		Magic
+	}
+	
 	public CombatHandler() {
 		
 	}
 	
-	public static int meleeAttack(Character from, Character to) {
+	public static int meleeAttack(CanAttack from, Attackable to) {
 		// Compute damage according to specifics
 		Random r = new Random();
 		double multiplier = 0.5;
@@ -33,12 +41,12 @@ public class CombatHandler {
 			damage = 0;
 		}
 		
-		int newhp = to.getHP() - damage;
+		int newhp = to.getHp() - damage;
 		if (newhp < 0) {
 			newhp = 0;
 		}
 		
-		to.setHP(newhp);
+		to.setHp(newhp);
 		
 		return damage;
 		

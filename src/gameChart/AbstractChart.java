@@ -1,6 +1,6 @@
 package gameChart;
 
-import globals.Token;
+import globals.Entity;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 public abstract class AbstractChart {
 	
-	private Map<Token, Box> positions;
+	private Map<Entity, Box> positions;
 	
 	public Set<Box> getBoxes() {
 		HashSet<Box> retset = new HashSet<Box>();
@@ -20,8 +20,8 @@ public abstract class AbstractChart {
 	
 	public abstract Set<Box> getAdjacentBoxes(Box b);
 	
-	public Token getTokenOn(Box b) {
-		for (Token item : positions.keySet()) {
+	public Entity getTokenOn(Box b) {
+		for (Entity item : positions.keySet()) {
 			if (positions.get(item) == b) {
 				return item;
 			}
@@ -34,23 +34,28 @@ public abstract class AbstractChart {
 		return positions.containsValue(b);
 	}
 	
-	public Box getBoxOwnedBy(Token t) {
+	public Box getBoxOwnedBy(Entity t) {
 		return positions.get(t);
 	}
 	
-	public Set<Token> getTokens() {
+	public Set<Entity> getTokens() {
 		return positions.keySet();
 	}
 	
-	public void move(Token t, Box b) throws BoxBusyException {
+	public void place(Entity t, Box b) throws BoxBusyException {
 		if (isBoxBusy(b)) {
 			throw new BoxBusyException("The chosen box is busy!");
 		}
 		
+		if (positions.containsKey(t)) {
+			positions.remove(t);
+		}
+		
 		positions.put(t, b);
+		t.setBox(b);
 	}
 	
-	public void remove(Token t) {
+	public void remove(Entity t) {
 		positions.remove(t);
 	}
 	

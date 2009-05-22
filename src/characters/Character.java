@@ -8,7 +8,8 @@ import items.Equipable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Character extends globals.Token {
+public abstract class Character extends globals.Entity implements gameLogic.Attackable,
+                                gameLogic.CanAttack, gameLogic.CanPick, gameLogic.Movable {
 	private String name;
 	private BaseAttributes attributes;
 	private ArrayList<items.Item> itemsList = new ArrayList<items.Item>();
@@ -72,7 +73,7 @@ public abstract class Character extends globals.Token {
 	public Boolean equip(items.Item i) throws EquipError {
 		if (this.canEquip(i)) {
 			if(i instanceof Consumable) {
-				setHP(getHP() + 10);
+				setHp(getHp() + 10);
 				return true;
 			} else if (i instanceof Equipable) {
 				
@@ -119,7 +120,7 @@ public abstract class Character extends globals.Token {
 		return attributes.getLuck();
 	}
 	
-	public int getHP() {
+	public int getHp() {
 		return attributes.getHp();
 	}
 	
@@ -143,7 +144,7 @@ public abstract class Character extends globals.Token {
 		attributes.setLuck(value);
 	}
 	
-	public void setHP(int value) {
+	public void setHp(int value) {
 		attributes.setHp(value);
 	}
 	

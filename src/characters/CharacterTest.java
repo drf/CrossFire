@@ -1,5 +1,7 @@
 package characters;
 
+import gameLogic.CombatHandler;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -84,7 +86,7 @@ public class CharacterTest {
 		int damage;
 		while (true) {
 			damage = CombatHandler.meleeAttack(a, b);
-			if (b.getHP() > 0) {
+			if (b.getHp() > 0) {
 				System.out.printf("Mazzate su b, per ben %d danni, ma ce la fa\n", damage);
 			} else {
 				System.out.printf("Mazzate su b, che schiatta!");
@@ -92,7 +94,7 @@ public class CharacterTest {
 			}
 			
 			damage = CombatHandler.meleeAttack(b, a);
-			if (a.getHP() > 0) {
+			if (a.getHp() > 0) {
 				System.out.printf("Mazzate su a, per ben %d danni, ma ce la fa\n", damage);
 			} else {
 				System.out.printf("Mazzate su a, che schiatta!");

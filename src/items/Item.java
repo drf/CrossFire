@@ -3,7 +3,7 @@ package items;
 import globals.BaseAttributes;
 import globals.ItemAttributes;
 
-public abstract class Item extends globals.Token {
+public abstract class Item extends globals.Entity implements gameLogic.Pickable {
 	
 	private ItemAttributes modifier;
 	private BaseAttributes minimumRequirements;
