@@ -1,5 +1,9 @@
 package characters;
 
+import gameChart.Box;
+import gameChart.City;
+import gameChart.Hill;
+import gameChart.Plain;
 import globals.BaseAttributes;
 
 import items.Equipable;
@@ -83,7 +87,9 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	public void equip(items.Item i) throws EquipError {
 		if (this.canEquip(i)) {
 			
+			removeTerrainChanges(getBox());
 			setAttrs(i.adjustAttrs(getAttrs()));
+			applyTerrainChanges(getBox());
 			
 			if(i instanceof Equipable){
 				
@@ -94,7 +100,9 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	}
 	
 	public void unequip(items.Item i) throws EquipError {
+		removeTerrainChanges(getBox());
 		setAttrs(i.resetAttrs(getAttrs()));
+		applyTerrainChanges(getBox());
 		
 		if (!this.itemsList.remove(i))
 			throw new EquipError(i.toString() + "cannot remove item");
@@ -170,5 +178,42 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
  	
 	public void onDeath() {
 		
+	}
+	
+	public void boxChanged(Box oldBox, Box newBox) {
+		removeTerrainChanges(oldBox);
+		applyTerrainChanges(newBox);
+	}
+	
+	private void applyTerrainChanges(Box box) {
+		if (box instanceof Hill) {
+			if (getDexterity() < 50) {
+				setStrength(getStrength() - 10);
+			} else if (getDexterity() >= 60) {
+				setStrength(getStrength() + 10);
+			}
+		} else if (box instanceof City) {
+			if (getIntelligence() > 60) {
+				setMagicSkill(getMagicSkill() + 10);
+			} else if (getIntelligence() <= 50) {
+				setDexterity(getDexterity() - 10);
+			}
+		}
+	}
+	
+	private void removeTerrainChanges(Box box) {
+		if (box instanceof Hill) {
+			if (getDexterity() < 50) {
+				setStrength(getStrength() + 10);
+			} else if (getDexterity() >= 60) {
+				setStrength(getStrength() - 10);
+			}
+		} else if (box instanceof City) {
+			if (getIntelligence() > 60) {
+				setMagicSkill(getMagicSkill() - 10);
+			} else if (getIntelligence() <= 50) {
+				setDexterity(getDexterity() + 10);
+			}
+		}
 	}
 }

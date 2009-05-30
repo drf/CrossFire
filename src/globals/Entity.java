@@ -10,6 +10,8 @@ public abstract class Entity {
 
 	private Box box;
 	
+	public abstract void boxChanged(Box oldBox, Box newBox);
+	
 	public Entity() {}
 	
 	public Box getBox() {
@@ -17,6 +19,7 @@ public abstract class Entity {
 	}
 	
 	public void setBox(Box box) {
+		this.boxChanged(this.box, box);
 		this.box = box;
 	}
 	
