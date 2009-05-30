@@ -172,5 +172,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return (getIntelligence() + getMagicSkill() >= 150);
 	}
 	
-	
+	public void onDeath() {
+		
+	}
 }

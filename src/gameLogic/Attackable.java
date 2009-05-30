@@ -6,4 +6,6 @@ public interface Attackable {
 	public int getDexterity();
 	public int getHp();
 	public void setHp(int value);
+	
+	public void onDeath();
 }
