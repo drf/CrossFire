@@ -3,7 +3,6 @@ package characters;
 import gameChart.Box;
 import gameChart.City;
 import gameChart.Hill;
-import gameChart.Plain;
 import globals.BaseAttributes;
 
 import items.Equipable;
