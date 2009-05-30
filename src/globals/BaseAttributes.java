@@ -65,7 +65,6 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 		this.luck = luck;
 	}
 
-	@Override
 	public int compareTo(BaseAttributes o) {
 		// The object is considered lessThan the other if o has
 		// even a single field bigger than this object

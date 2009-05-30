@@ -2,7 +2,6 @@ package characters;
 
 import globals.BaseAttributes;
 
-import items.Consumable;
 import items.Equipable;
 
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	private String name;
 	private BaseAttributes attributes;
 	private ArrayList<items.Item> itemsList = new ArrayList<items.Item>();
-	private ArrayList<BaseAttributes> modifiersList = new ArrayList<BaseAttributes>();
 	
 	public enum Race {
 		Human,
@@ -82,34 +80,24 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return true;
 	}
 	
-	public Boolean equip(items.Item i) throws EquipError {
+	public void equip(items.Item i) throws EquipError {
 		if (this.canEquip(i)) {
-			if(i instanceof Consumable) {
-				setHp(getHp() + 10);
-				return true;
-			} else if (i instanceof Equipable) {
+			
+			setAttrs(i.adjustAttrs(getAttrs()));
+			
+			if(i instanceof Equipable){
 				
-				if (this.itemsList.add(i)) {
-					if (this.modifiersList.add(i.getModifier())) {
-						return true;
-					}
-					else throw new EquipError(i.toString() + ": cannot add modifier");
-				}
-				else throw new EquipError(i.toString() + ": cannot add item");
+				if(!this.itemsList.add(i)) 
+					throw new EquipError(i.toString() + ": cannot add item");
 			}
-			else throw new EquipError(i.toString() + ": cannot determine item type");
 		}
-		return false;
 	}
 	
-	public Boolean unequip(items.Item i) throws EquipError {
-		if (this.itemsList.remove(i)){
-			if (this.modifiersList.remove(i.getModifier())){
-				return true;
-			}
-			else throw new EquipError(i.toString() + "cannot remove modifier");
-		}
-		else throw new EquipError(i.toString() + "cannot remove item");
+	public void unequip(items.Item i) throws EquipError {
+		setAttrs(i.resetAttrs(getAttrs()));
+		
+		if (!this.itemsList.remove(i))
+			throw new EquipError(i.toString() + "cannot remove item");
 	}
 	
 	public int getStrength() {
@@ -172,5 +160,12 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return (getIntelligence() + getMagicSkill() >= 150);
 	}
 	
+	public void setAttrs(BaseAttributes newAttrs) {
+		this.attributes = newAttrs;
+	}
 	
+	public BaseAttributes getAttrs() {
+		return this.attributes;
+	}
+ 	
 }
