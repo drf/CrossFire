@@ -37,7 +37,11 @@ public class CombatHandler {
 			newhp = 0;
 		}
 		
-		to.setHp(newhp);		
+		to.setHp(newhp);
+		
+		if (to.getHp() == 0) {
+			to.onDeath();
+		}
 		
 		if (to.getStrength() > 70 && to.getHp() > 0 && from instanceof Attackable && to instanceof CanMeleeAttack) {
 			System.out.println("Condition");
@@ -63,6 +67,10 @@ public class CombatHandler {
 			}
 			
 			to.setHp(newhp);
+			
+			if (to.getHp() == 0) {
+				to.onDeath();
+			}
 		}
 		
 		return new Pair<Integer>(damage, counterdamage);
@@ -109,6 +117,10 @@ public class CombatHandler {
 		
 		to.setHp(newhp);
 		
+		if (to.getHp() == 0) {
+			to.onDeath();
+		}
+		
 		return damage;
 	}
 	
@@ -129,6 +141,10 @@ public class CombatHandler {
 		}
 		
 		to.setHp(newhp);
+		
+		if (to.getHp() == 0) {
+			to.onDeath();
+		}
 		
 		return damage;
 	}

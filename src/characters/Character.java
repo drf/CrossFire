@@ -168,4 +168,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return this.attributes;
 	}
  	
+	public void onDeath() {
+		
+	}
 }
