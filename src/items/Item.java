@@ -10,9 +10,11 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 	private BaseAttributes maximumRequirements;
 
 	public Item(int intelligence, int power, int dexterity, int magicSkill, int luck,
-			int damageOut, int damageIn, int hp){
+			int hp, int bonusMagicDamage, int bonusMeleeDamage, int bonusRangedDamage, 
+			int bonusDamageReduction){
 		modifier = new Modifier(intelligence, power, dexterity, magicSkill, luck,
-				hp, damageIn, damageOut);
+				hp, bonusMagicDamage, bonusMeleeDamage, bonusRangedDamage, 
+				bonusDamageReduction);
 		minimumRequirements = null;
 		maximumRequirements = null;
 	}
@@ -43,13 +45,5 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 	
 	public BaseAttributes resetAttrs(BaseAttributes characterAttrs){
 		return getModifier().resetAttrs(characterAttrs);
-	}
-	
-	public int getDamageIn(){
-		return getModifier().getDamageIn();
-	}
-	
-	public int getDamageOut() {
-		return getModifier().getDamageOut();
 	}
 }
