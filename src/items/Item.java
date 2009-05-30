@@ -1,5 +1,6 @@
 package items;
 
+import gameChart.Box;
 import globals.BaseAttributes;
 import globals.Modifier;
 
@@ -45,5 +46,9 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 	
 	public BaseAttributes resetAttrs(BaseAttributes characterAttrs){
 		return getModifier().resetAttrs(characterAttrs);
+	}
+
+	public void boxChanged(Box oldBox, Box newBox) {
+		
 	}
 }

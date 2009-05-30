@@ -55,5 +55,9 @@ public class Bomb extends globals.Entity implements Attackable {
 	public void setHp(int value) {
 		hp = value;
 	}
+	
+	public void boxChanged(Box oldBox, Box newBox) {
+		
+	}
 
 }
