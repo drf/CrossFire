@@ -1,23 +1,23 @@
 package items;
 
 import globals.BaseAttributes;
-import globals.ItemAttributes;
+import globals.Modifier;
 
 public abstract class Item extends globals.Entity implements gameLogic.Pickable {
 	
-	private ItemAttributes modifier;
+	private Modifier modifier;
 	private BaseAttributes minimumRequirements;
 	private BaseAttributes maximumRequirements;
 
 	public Item(int intelligence, int power, int dexterity, int magicSkill, int luck,
 			int damageOut, int damageIn, int hp){
-		modifier = new ItemAttributes(intelligence, power, dexterity, magicSkill, luck,
+		modifier = new Modifier(intelligence, power, dexterity, magicSkill, luck,
 				hp, damageIn, damageOut);
 		minimumRequirements = null;
 		maximumRequirements = null;
 	}
 
-	public ItemAttributes getModifier() {
+	public Modifier getModifier() {
 		return modifier;
 	}
 	
@@ -35,5 +35,21 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 
 	protected void setMaximumRequirements(BaseAttributes maximumRequirements) {
 		this.maximumRequirements = maximumRequirements;
+	}
+	
+	public BaseAttributes adjustAttrs(BaseAttributes characterAttrs){
+		return getModifier().adjustAttrs(characterAttrs);
+	}
+	
+	public BaseAttributes resetAttrs(BaseAttributes characterAttrs){
+		return getModifier().resetAttrs(characterAttrs);
+	}
+	
+	public int getDamageIn(){
+		return getModifier().getDamageIn();
+	}
+	
+	public int getDamageOut() {
+		return getModifier().getDamageOut();
 	}
 }
