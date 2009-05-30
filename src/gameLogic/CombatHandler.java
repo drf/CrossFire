@@ -23,7 +23,6 @@ public class CombatHandler {
 		
 		// Now add some luck factor
 		damage += computeLuckFactor(from.getLuck() - to.getLuck(), 0.2);
-		
 		damage -= to.getDamageReduction();
 		
 		if (damage < 0) {

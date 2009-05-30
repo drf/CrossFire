@@ -109,6 +109,11 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 			throw new EquipError(i.toString() + "cannot remove item");
 	}
 	
+	public void dropEquip(items.Item i) throws EquipError {
+		unequip(i);
+		i.setBox(getBox());	
+	}
+	
 	public int getStrength() {
 		return attributes.getStrength();
 	}
