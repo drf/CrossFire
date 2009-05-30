@@ -20,8 +20,11 @@ public class CombatHandler {
 	
 	public static int genericAttack(CanAttack from, Attackable to, int damage)
 	{
+		
 		// Now add some luck factor
 		damage += computeLuckFactor(from.getLuck() - to.getLuck(), 0.2);
+		
+		damage -= to.getDamageReduction();
 		
 		if (damage < 0) {
 			damage = 0;
@@ -42,7 +45,7 @@ public class CombatHandler {
 		int damage, counterdamage = 0;
 		
 		// Compute damage according to specifics
-		damage = (int)(from.getStrength() * 0.5);
+		damage = (int)(from.getStrength() * 0.5) +from.getMeleeAttackBonus();
 		damage = genericAttack(from, to, damage);
 		
 		
@@ -54,7 +57,7 @@ public class CombatHandler {
 			from = (CanMeleeAttack)to;
 			to = tmpto;
 			
-			counterdamage = (int)(from.getStrength() * 0.3);
+			counterdamage = (int)(from.getStrength() * 0.3) + from.getMeleeAttackBonus();
 			counterdamage = genericAttack(from, to, counterdamage);
 		}
 		
@@ -85,14 +88,14 @@ public class CombatHandler {
 		}
 		
 		// If we got here, it means that the attack will actually be performed
-		int damage = (int)(from.getStrength() * 0.3);
+		int damage = (int)(from.getStrength() * 0.3) + from.getRangedAttackBonus();
 		damage = genericAttack(from, to, damage);
 		
 		return damage;
 	}
 	
 	public static int magicAttack(CanMagicAttack from, Attackable to) {
-		int damage = (int)(from.getIntelligence() * 0.2 + from.getMagicSkill() * 0.5);
+		int damage = (int)(from.getIntelligence() * 0.2 + from.getMagicSkill() * 0.5) + from.getMagicDamageBonus();
 		damage = genericAttack(from, to, damage);
 						
 		return damage;
