@@ -132,6 +132,27 @@ public class CombatHandler {
 		return damage;
 	}
 	
+	public static boolean canPerformAttack(CanAttack attacker, AttackType type) {
+		switch (type) {
+		case Magic:
+			if (attacker instanceof CanMagicAttack) {
+				return ((CanMagicAttack)attacker).canMagicAttack();
+			} else {
+				return false;
+			}
+		case Melee:
+			return attacker instanceof CanMeleeAttack;
+		case Ranged:
+			if (attacker instanceof CanRangedAttack) {
+				return ((CanRangedAttack)attacker).canRangedAttack();
+			} else {
+				return false;
+			}
+		default:
+			return false;
+		}
+	}
+	
 	private static int computeLuckFactor(int luck, double multiplier) {
 		Random r = new Random();
 		
