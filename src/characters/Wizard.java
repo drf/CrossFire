@@ -1,6 +1,9 @@
 package characters;
 
-public class Wizard extends Character {
+import gameLogic.CanMagicAttack;
+import gameLogic.CanRangedAttack;
+
+public class Wizard extends Character implements CanMagicAttack, CanRangedAttack {
 
 	public Wizard() {
 		super();

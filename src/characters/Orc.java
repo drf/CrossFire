@@ -1,8 +1,10 @@
 package characters;
 
+import gameLogic.CanRangedAttack;
+
 import java.util.ArrayList;
 
-public class Orc extends Character {
+public class Orc extends Character implements CanRangedAttack {
 
 	public Orc() {
 		super();

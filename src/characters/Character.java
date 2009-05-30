@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Character extends globals.Entity implements gameLogic.Attackable,
-                                gameLogic.CanAttack, gameLogic.CanPick, gameLogic.Movable {
+                                gameLogic.CanMeleeAttack, gameLogic.CanPick, gameLogic.Movable {
 	private String name;
 	private BaseAttributes attributes;
 	private ArrayList<items.Item> itemsList = new ArrayList<items.Item>();
@@ -150,5 +150,13 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	
 	public String toString(){
 		return "player:" + this.name;
-	}	
+	}
+	
+	public boolean canRangedAttack() {
+		return (getDexterity() + getIntelligence() >= 80);
+	}
+	
+	public boolean canMagicAttack() {
+		return (getIntelligence() + getMagicSkill() >= 150);
+	}
 }

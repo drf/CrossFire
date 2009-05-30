@@ -1,6 +1,9 @@
 package characters;
 
-public class Elf extends Character {
+import gameLogic.CanMagicAttack;
+import gameLogic.CanRangedAttack;
+
+public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 	
 	public Elf() {
 		super();

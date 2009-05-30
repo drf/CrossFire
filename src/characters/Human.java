@@ -1,8 +1,11 @@
 package characters;
 
+import gameLogic.CanMagicAttack;
+import gameLogic.CanRangedAttack;
+
 import java.util.ArrayList;
 
-public class Human extends Character {
+public class Human extends Character implements CanMagicAttack, CanRangedAttack {
 	
 	public Human() {
 		super();

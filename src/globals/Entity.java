@@ -3,7 +3,7 @@ package globals;
 import gameChart.Box;
 import gameChart.BoxBusyException;
 import gameLogic.Attackable;
-import gameLogic.CanAttack;
+import gameLogic.CanMeleeAttack;
 import gameLogic.CombatHandler;
 
 public abstract class Entity {
@@ -48,7 +48,7 @@ public abstract class Entity {
 	}
 	
 	private void meleeAttack(Entity to) {
-		if (!(this instanceof gameLogic.CanAttack) || to instanceof gameLogic.Attackable) {
+		if (!(this instanceof gameLogic.CanMeleeAttack) || to instanceof gameLogic.Attackable) {
 			return;
 		}
 		
@@ -56,6 +56,6 @@ public abstract class Entity {
 			return;
 		}
 		
-		CombatHandler.meleeAttack((CanAttack)this, (Attackable)to);
+		CombatHandler.meleeAttack((CanMeleeAttack)this, (Attackable)to);
 	}
 }
