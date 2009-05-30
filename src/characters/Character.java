@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Character extends globals.Entity implements gameLogic.Attackable,
-                                gameLogic.CanMeleeAttack, gameLogic.CanPick, gameLogic.Movable {
+                                gameLogic.CanMeleeAttack, gameLogic.CanPick, gameLogic.Movable,
+                                java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2790814461885173594L;
 	private String name;
 	private BaseAttributes attributes;
 	private ArrayList<items.Item> itemsList = new ArrayList<items.Item>();
@@ -166,4 +171,6 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	public boolean canMagicAttack() {
 		return (getIntelligence() + getMagicSkill() >= 150);
 	}
+	
+	
 }

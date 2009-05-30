@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 public class Orc extends Character implements CanRangedAttack {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2392388529182998813L;
+
 	public Orc() {
 		super();
 		

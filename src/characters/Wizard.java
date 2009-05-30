@@ -5,6 +5,11 @@ import gameLogic.CanRangedAttack;
 
 public class Wizard extends Character implements CanMagicAttack, CanRangedAttack {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5254710813109154059L;
+
 	public Wizard() {
 		super();
 		

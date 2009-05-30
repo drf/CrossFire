@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 public class Human extends Character implements CanMagicAttack, CanRangedAttack {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8123383954498179845L;
+
 	public Human() {
 		super();
 		ArrayList<Integer> attrs = Character.randomAttributes(0, 300, 5);

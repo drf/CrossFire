@@ -2,6 +2,13 @@ package player;
 
 import globals.BaseAttributes;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import characters.Character;
@@ -11,7 +18,11 @@ import characters.Orc;
 import characters.Wizard;
 import characters.Character.Race;
 
-public class Player {
+public class Player implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2965714766005181669L;
 	String name;
 	ArrayList<Character> characters;
 	
@@ -74,6 +85,42 @@ public class Player {
 		}
 		
 		return c;
+	}
+	
+	public void removeCharacter(Character c) {
+		characters.remove(c);
+	}
+	
+	public ArrayList<Character> getCharacters() {
+		return characters;
+	}
+	
+	public static Player loadPlayerFromFile(String path) {
+		try {
+			// Deserialize from a file
+	        File file = new File(path);
+	        ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+	        // Deserialize the object
+	        Player player = (Player) in.readObject();
+	        in.close();
+	        return player;
+		} catch (ClassNotFoundException e) {
+			return null;
+	    } catch (IOException e) {
+	    	return null;
+	    }
+	}
+	
+	public boolean saveToFile(String path) {
+		try {
+	        // Serialize to a file
+	        ObjectOutput out = new ObjectOutputStream(new FileOutputStream(path));
+	        out.writeObject(this);
+	        out.close();
+	        return true;
+	    } catch (IOException e) {
+	    	return false;
+	    }
 	}
 	
 }

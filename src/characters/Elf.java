@@ -5,6 +5,11 @@ import gameLogic.CanRangedAttack;
 
 public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -566722519869275030L;
+
 	public Elf() {
 		super();
 		
