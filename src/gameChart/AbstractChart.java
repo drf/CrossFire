@@ -20,7 +20,7 @@ public abstract class AbstractChart {
 	
 	public abstract Set<Box> getAdjacentBoxes(Box b);
 	
-	public Entity getTokenOn(Box b) {
+	public Entity getEntityOn(Box b) {
 		for (Entity item : positions.keySet()) {
 			if (positions.get(item) == b) {
 				return item;
@@ -38,7 +38,7 @@ public abstract class AbstractChart {
 		return positions.get(t);
 	}
 	
-	public Set<Entity> getTokens() {
+	public Set<Entity> getEntities() {
 		return positions.keySet();
 	}
 	

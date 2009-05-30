@@ -36,7 +36,7 @@ public class Bomb extends globals.Entity implements Attackable {
 	public void onDeath() {
 		// Deal 10 damage to each unity in the adjacent boxes
 		for (Box box : getBox().getAdjacentBoxes()) {
-			Entity ent = box.getChart().getTokenOn(box);
+			Entity ent = box.getChart().getEntityOn(box);
 			if (ent instanceof Attackable) {
 				int newhp = ((Attackable)ent).getHp();
 				
