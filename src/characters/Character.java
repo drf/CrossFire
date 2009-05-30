@@ -15,6 +15,13 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	private ArrayList<items.Item> itemsList = new ArrayList<items.Item>();
 	private ArrayList<BaseAttributes> modifiersList = new ArrayList<BaseAttributes>();
 	
+	public enum Race {
+		Human,
+		Elf,
+		Orc,
+		Wizard
+	}
+	
 	public Character() {
 		Random r = new Random();
 		attributes = new BaseAttributes(r.nextInt(101), r.nextInt(101), r.nextInt(101),
