@@ -13,7 +13,7 @@ import java.util.Random;
 
 public abstract class Character extends globals.Entity implements gameLogic.Attackable,
                                 gameLogic.CanMeleeAttack, gameLogic.CanPick, gameLogic.Movable,
-                                java.io.Serializable {
+                                java.io.Serializable, gameLogic.CanAttack {
 	/**
 	 * 
 	 */

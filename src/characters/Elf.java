@@ -1,6 +1,5 @@
 package characters;
 
-import gameChart.Box;
 import gameLogic.CanMagicAttack;
 import gameLogic.CanRangedAttack;
 
