@@ -3,6 +3,8 @@ package gameLogic;
 
 import globals.Pair;
 
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.Random;
 
 public class CombatHandler {
@@ -151,6 +153,28 @@ public class CombatHandler {
 		default:
 			return false;
 		}
+	}
+	
+	public static EnumSet<AttackType> attackCapabilities(CanAttack attacker) {
+		EnumSet<AttackType> retset = EnumSet.noneOf(AttackType.class);
+		
+		if (attacker instanceof CanMagicAttack) {
+			if(((CanMagicAttack)attacker).canMagicAttack()) {
+				retset.add(AttackType.Ranged);
+			}
+		}
+		
+		if (attacker instanceof CanMeleeAttack) {
+			retset.add(AttackType.Melee);
+		}
+		
+		if (attacker instanceof CanRangedAttack) {
+			if (((CanRangedAttack)attacker).canRangedAttack()) {
+				retset.add(AttackType.Magic);
+			}
+		}
+		
+		return retset;
 	}
 	
 	private static int computeLuckFactor(int luck, double multiplier) {
