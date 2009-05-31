@@ -1,6 +1,7 @@
 package gameChart;
 
 import globals.Entity;
+import globals.Pair;
 import globals.PlayableEntity;
 
 import java.util.HashSet;
@@ -9,8 +10,19 @@ import java.util.Set;
 
 public abstract class AbstractChart {
 	
+	private int width;
+	private int height;
+
+	private Box chart[][];
 	private Map<Entity, Box> positions;
 	
+	public enum Direction {
+		North,
+		South,
+		West,
+		East
+	}
+
 	public Set<Box> getBoxes() {
 		HashSet<Box> retset = new HashSet<Box>();
 		for (Box item : positions.values()) {
@@ -18,9 +30,96 @@ public abstract class AbstractChart {
 		}
 		return retset;
 	}
+		
+	public Box[][] getChart()
+	{
+		return chart;
+	}
 	
-	public abstract Set<Box> getAdjacentBoxes(Box b);
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
 	
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public void setSize(int width, int height) {
+		setWidth(width);
+		setHeight(height);
+		chart = new Box[width][height];
+	}
+
+	abstract Pair<Integer> getBoxPosition(Box b);
+
+	public Set<Box> getAdjacentBoxes(Box b) {
+		Pair<Integer> position = getBoxPosition(b);
+		
+		int w = position.getFirst();
+		int h = position.getSecond();
+		
+		Set<Box> retset = new HashSet<Box>();
+		
+		if (h + 1 < height) {
+			retset.add(chart[w][h+1]);
+		}
+		if (w + 1 < width) {
+			retset.add(chart[w+1][h]);
+		}
+		if (h - 1 > 0) {
+			retset.add(chart[w][h-1]);
+		}
+		if (w - 1 > 0) {
+			retset.add(chart[w-1][h]);
+		}
+		
+		return retset;
+	}
+
+	public Box getAdjacentBox(Direction d, Box b) {
+		Pair<Integer> position = getBoxPosition(b);
+		
+		int w = position.getFirst();
+		int h = position.getSecond();
+		
+		switch (d) {
+		case North:
+			if (h + 1 < height) {
+				return chart[w][h+1];
+			} else {
+				return null;
+			}
+		case South:
+			if (h - 1 > 0) {
+				return chart[w][h-1];
+			} else {
+				return null;
+			}
+		case East:
+			if (w + 1 < width) {
+				return chart[w+1][h];
+			} else {
+				return null;
+			}
+		case West:
+			if (w - 1 > 0) {
+				return chart[w-1][h];
+			} else {
+				return null;
+			}
+		default:
+			return null;
+		}
+	}
+
 	public Set<Entity> getEntitiesOn(Box b) {
 		HashSet<Entity> retset = new HashSet<Entity>();
 		for (Entity item : positions.keySet()) {
@@ -94,5 +193,5 @@ public abstract class AbstractChart {
 		return retset;
 		
 	}
-
+	
 }

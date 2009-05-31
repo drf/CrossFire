@@ -1,19 +1,30 @@
 package gameChart;
 
+import globals.Pair;
+
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Set;
 
 public class LinearChart extends AbstractChart {
-	private int length;
 	private Hashtable<Integer, Box> cells;
 	
 	public LinearChart() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public LinearChart(int length) {
-		this.length = length;
+	public LinearChart(int width) {
+		setSize(width, 0);
+	}
+
+	protected Pair<Integer> getBoxPosition(Box b) {		
+		for (int i = 0; i < getWidth(); ++i) {
+				if (getChart()[i][0] == b) {
+					return new Pair<Integer>(i, 0);
+				}
+		}
+		// Return a null pair
+		return new Pair<Integer>();
 	}
 
 	@Override
@@ -33,26 +44,6 @@ public class LinearChart extends AbstractChart {
 		}
 		return null;
 	}
-	
-	public Box getBoxAt(int index) throws OutOfBoundsException {
-		if (index >= length || index < 0) {
-			throw new OutOfBoundsException("You requested an index out of the chart");
-		}
-		return cells.get(index);
-	}
-	
-	public void insertBox(int index, Box box) throws OutOfBoundsException {
-		if (index >= length || index < 0) {
-			throw new OutOfBoundsException("You requested an index out of the chart");
-		}
-		cells.put(index, box);
-	}
-	
-	public int getLength() {
-		return length;
-	}
+		
 
-	public void setLength(int length) {
-		this.length = length;
-	}
 }
