@@ -3,7 +3,7 @@ package characters;
 import gameChart.Box;
 import gameChart.City;
 import gameChart.Hill;
-import gameLogic.PickError;
+import gameLogic.PickException;
 import globals.BaseAttributes;
 
 import items.Equipable;
@@ -85,7 +85,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return true;
 	}
 	
-	public void pick(items.Item i) throws PickError {
+	public void pick(items.Item i) throws PickException {
 		if (this.canPick(i)) {
 			
 			removeTerrainChanges(getBox());
@@ -95,21 +95,22 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 			if(i instanceof Equipable){
 				
 				if(!this.itemsList.add(i)) 
-					throw new PickError(i.toString() + ": cannot add item");
+					throw new PickException(i.toString() + ": cannot add item");
 			}
 		}
 	}
 	
-	public void unequip(items.Item i) throws PickError {
+	public void unequip(items.Item i) throws PickException {
 		removeTerrainChanges(getBox());
 		setAttrs(i.resetAttrs(getAttrs()));
 		applyTerrainChanges(getBox());
 		
-		if (!this.itemsList.remove(i))
-			throw new PickError(i.toString() + "cannot remove item");
+		if (!this.itemsList.remove(i)) {
+			throw new PickException(i.toString() + "cannot remove item");
+		}
 	}
 	
-	public void dropEquip(items.Item i) throws PickError {
+	public void dropEquip(items.Item i) throws PickException {
 		unequip(i);
 		i.setBox(getBox());	
 	}
@@ -183,40 +184,48 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	}
  	
 	public void onDeath() {
-		
+		for(Item i: this.itemsList) {
+			if (i instanceof Equipable) {
+				try {
+					dropEquip(i);
+				} catch (PickException e) {
+					
+				}
+			}
+		}
 	}
 	
-	public int getDamageReduction(){
+	public int getDamageReduction() {
 		int damageReduction = 0;
 		
-		for(Item i: this.itemsList) {
+		for (Item i: this.itemsList) {
 			damageReduction += i.getModifier().getBonusDamageReduction();
 		}
 		return damageReduction;
 	}
 
-	public int getMeleeAttackBonus(){
+	public int getMeleeAttackBonus() {
 		int bonusMeleeDamage = 0;
 		
-		for(Item i: this.itemsList) {
+		for (Item i: this.itemsList) {
 			bonusMeleeDamage += i.getModifier().getBonusMeleeDamage();
 		}
 		return bonusMeleeDamage;
 	}
 	
-	public int getMagicDamageBonus(){
+	public int getMagicDamageBonus() {
 		int bonusMagicDamage = 0;
 		
-		for(Item i: this.itemsList) {
+		for (Item i: this.itemsList) {
 			bonusMagicDamage += i.getModifier().getBonusMagicDamage();
 		}
 		return bonusMagicDamage;
 	}
 
-	public int getRangedAttackBonus(){
+	public int getRangedAttackBonus() {
 		int bonusRangedDamage = 0;
 		
-		for(Item i: this.itemsList) {
+		for (Item i: this.itemsList) {
 			bonusRangedDamage += i.getModifier().getBonusRangedDamage();
 		}
 		return bonusRangedDamage;
