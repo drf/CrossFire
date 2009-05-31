@@ -1,6 +1,7 @@
 package gameChart;
 
 import globals.Entity;
+import globals.PlayableEntity;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -20,18 +21,31 @@ public abstract class AbstractChart {
 	
 	public abstract Set<Box> getAdjacentBoxes(Box b);
 	
-	public Entity getEntityOn(Box b) {
+	public Set<Entity> getEntitiesOn(Box b) {
+		HashSet<Entity> retset = new HashSet<Entity>();
 		for (Entity item : positions.keySet()) {
 			if (positions.get(item) == b) {
-				return item;
+				retset.add(item);
+			}
+		}
+		return retset;
+	}
+	
+	public boolean isBoxBusyFor(Box box, Entity entity) {
+		if (entity instanceof PlayableEntity) {
+			// In this case, it can be on any box at any moment
+			return false;
+		}
+		
+		for (Entity item : positions.keySet()) {
+			if (positions.get(item) == box) {
+				if (item instanceof PlayableEntity) {
+					return true;
+				}
 			}
 		}
 		
-		return null;
-	}
-	
-	public boolean isBoxBusy(Box b) {
-		return positions.containsValue(b);
+		return false;
 	}
 	
 	public Box getBoxOwnedBy(Entity t) {
@@ -43,8 +57,8 @@ public abstract class AbstractChart {
 	}
 	
 	public void place(Entity t, Box b) throws BoxBusyException {
-		if (isBoxBusy(b)) {
-			throw new BoxBusyException("The chosen box is busy!");
+		if (isBoxBusyFor(b, t)) {
+			throw new BoxBusyException("The entity can not be on the chosen box!");
 		}
 		
 		if (positions.containsKey(t)) {
