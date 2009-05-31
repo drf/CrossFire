@@ -16,6 +16,10 @@ public class CharacterTest {
 	 */
 	public static void main(String[] args) {
 		
+		System.out.println(ItemGenerator.generateCasualPickable().toString());
+		System.out.println(ItemGenerator.generateCasualPickable().toString());
+		System.out.println(ItemGenerator.generateCasualPickable().toString());
+		
 		Random r = new Random();
 		System.out.println("Creazione personaggi");
 		Set<Character> chars = new HashSet<Character>();
