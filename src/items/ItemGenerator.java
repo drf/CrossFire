@@ -24,16 +24,14 @@ public class ItemGenerator {
 		HashSet<Equipable> items = new HashSet<Equipable>();
 		
 		for (Class<?> type : items()) {
-			for (Class<?> item : type.getInterfaces()) {
-				if (item == Equipable.class) {
-					try {
-						items.add((Equipable)item.newInstance());
-					} catch (InstantiationException e) {
-						
-					} catch (IllegalAccessException e) {
-						
-					}
-				}
+			try {
+				items.add((Equipable)type.newInstance());
+			} catch (InstantiationException e) {
+
+			} catch (IllegalAccessException e) {
+
+			} catch (ClassCastException e) {
+				
 			}
 		}
 		
@@ -45,16 +43,14 @@ public class ItemGenerator {
 		HashSet<Consumable> items = new HashSet<Consumable>();
 		
 		for (Class<?> type : items()) {
-			for (Class<?> item : type.getInterfaces()) {
-				if (item == Consumable.class) {
-					try {
-						items.add((Consumable)item.newInstance());
-					} catch (InstantiationException e) {
-						
-					} catch (IllegalAccessException e) {
-						
-					}
-				}
+			try {
+				items.add((Consumable)type.newInstance());
+			} catch (InstantiationException e) {
+
+			} catch (IllegalAccessException e) {
+
+			} catch (ClassCastException e) {
+				
 			}
 		}
 		
@@ -72,6 +68,8 @@ public class ItemGenerator {
 
 			} catch (IllegalAccessException e) {
 
+			} catch (ClassCastException e) {
+				
 			}
 		}
 		
