@@ -2,9 +2,7 @@ package globals;
 
 import gameChart.Box;
 import gameChart.BoxBusyException;
-import gameLogic.Attackable;
-import gameLogic.CanMeleeAttack;
-import gameLogic.CombatHandler;
+import gameLogic.Movable;
 
 public abstract class Entity implements java.io.Serializable {
 
@@ -14,8 +12,6 @@ public abstract class Entity implements java.io.Serializable {
 	private static final long serialVersionUID = 602249422396237313L;
 	private Box box;
 	
-	public abstract void boxChanged(Box oldBox, Box newBox);
-	
 	public Entity() {}
 	
 	public Box getBox() {
@@ -23,7 +19,9 @@ public abstract class Entity implements java.io.Serializable {
 	}
 	
 	public void setBox(Box box) {
-		this.boxChanged(this.box, box);
+		if (this instanceof Movable) {
+			((Movable)this).boxChanged(this.box, box);
+		}
 		this.box = box;
 	}
 	
