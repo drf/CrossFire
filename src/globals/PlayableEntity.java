@@ -2,6 +2,13 @@ package globals;
 
 import player.Player;
 
+/**
+ * @author Dario Freddi
+ * @author Vincenzo Iozzo
+ * 
+ * PlayableEntity represents an Entity that is able to perform a turn.
+ * Playable has the strict meaning of "being able to be used by a player".
+ */
 public abstract class PlayableEntity extends Entity {
 
 	/**
