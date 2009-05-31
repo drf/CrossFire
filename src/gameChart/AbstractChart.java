@@ -1,7 +1,6 @@
 package gameChart;
 
 import globals.Entity;
-import globals.Pair;
 import globals.PlayableEntity;
 
 import java.util.HashSet;
@@ -22,6 +21,7 @@ public abstract class AbstractChart {
 	}
 
 	abstract Set<Box> getAdjacentBoxes(Box b);
+	abstract void createChart();
 	
 	public Set<Entity> getEntitiesOn(Box b) {
 		HashSet<Entity> retset = new HashSet<Entity>();

@@ -1,6 +1,5 @@
 package items;
 
-import gameChart.Box;
 import globals.BaseAttributes;
 import globals.Modifier;
 

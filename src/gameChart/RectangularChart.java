@@ -12,7 +12,7 @@ public class RectangularChart extends BidimentionalChart {
 		setSize(width, height);
 	}
 	
-	private void createChart() {
+	protected void createChart() {
 		
 	}
 }

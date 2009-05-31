@@ -1,6 +1,5 @@
 package gameChart;
 
-import globals.Pair;
 
 
 public class LinearChart extends BidimentionalChart {
@@ -11,6 +10,12 @@ public class LinearChart extends BidimentionalChart {
 	
 	public LinearChart(int width) {
 		setSize(width, 1);
+	}
+
+	@Override
+	void createChart() {
+		// TODO Auto-generated method stub
+		
 	}
 		
 }
