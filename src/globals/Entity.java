@@ -40,25 +40,4 @@ public abstract class Entity {
 		}
 	}
 	
-	public void attack(Entity to, gameLogic.CombatHandler.AttackType type) {
-		switch (type) {
-		case Melee:
-			meleeAttack(to);
-			break;
-		default:
-			return;
-		}
-	}
-	
-	private void meleeAttack(Entity to) {
-		if (!(this instanceof gameLogic.CanMeleeAttack) || to instanceof gameLogic.Attackable) {
-			return;
-		}
-		
-		if (!box.isAdjacentTo(to.getBox())) {
-			return;
-		}
-		
-		CombatHandler.meleeAttack((CanMeleeAttack)this, (Attackable)to);
-	}
 }
