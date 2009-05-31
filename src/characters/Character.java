@@ -3,6 +3,7 @@ package characters;
 import gameChart.Box;
 import gameChart.City;
 import gameChart.Hill;
+import gameLogic.PickError;
 import globals.BaseAttributes;
 
 import items.Equipable;
@@ -13,7 +14,7 @@ import java.util.Random;
 
 public abstract class Character extends globals.Entity implements gameLogic.Attackable,
                                 gameLogic.CanMeleeAttack, gameLogic.CanPick, gameLogic.Movable,
-                                java.io.Serializable, gameLogic.CanAttack {
+                                java.io.Serializable {
 	/**
 	 * 
 	 */
@@ -68,7 +69,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return ret;
 	}
 	
-	public Boolean canEquip(items.Item i) {
+	public Boolean canPick(items.Item i) {
 		if (i.getMaximumRequirements() != null) {
 			if (i.getMaximumRequirements().compareTo(attributes) < 0) {
 				return false;
@@ -84,8 +85,8 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return true;
 	}
 	
-	public void equip(items.Item i) throws EquipError {
-		if (this.canEquip(i)) {
+	public void pick(items.Item i) throws PickError {
+		if (this.canPick(i)) {
 			
 			removeTerrainChanges(getBox());
 			setAttrs(i.adjustAttrs(getAttrs()));
@@ -94,21 +95,21 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 			if(i instanceof Equipable){
 				
 				if(!this.itemsList.add(i)) 
-					throw new EquipError(i.toString() + ": cannot add item");
+					throw new PickError(i.toString() + ": cannot add item");
 			}
 		}
 	}
 	
-	public void unequip(items.Item i) throws EquipError {
+	public void unequip(items.Item i) throws PickError {
 		removeTerrainChanges(getBox());
 		setAttrs(i.resetAttrs(getAttrs()));
 		applyTerrainChanges(getBox());
 		
 		if (!this.itemsList.remove(i))
-			throw new EquipError(i.toString() + "cannot remove item");
+			throw new PickError(i.toString() + "cannot remove item");
 	}
 	
-	public void dropEquip(items.Item i) throws EquipError {
+	public void dropEquip(items.Item i) throws PickError {
 		unequip(i);
 		i.setBox(getBox());	
 	}

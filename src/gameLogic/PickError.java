@@ -1,17 +1,17 @@
-package characters;
+package gameLogic;
 
-public class EquipError extends Exception {
+public class PickError extends Exception {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6527603333584172700L;
 
-	public EquipError() {
+	public PickError() {
 		 super(); 
 	}
 	
-	public EquipError(String s) {
+	public PickError(String s) {
 		super(s);
 	}
 }

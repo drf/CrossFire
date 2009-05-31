@@ -4,7 +4,7 @@ import gameChart.Box;
 import gameLogic.Attackable;
 import globals.Entity;
 
-public class Bomb extends globals.Entity  {
+public class Bomb extends globals.Entity implements Attackable  {
 
 	int hp;
 	
@@ -56,4 +56,7 @@ public class Bomb extends globals.Entity  {
 		
 	}
 
+	public int getDamageReduction() {
+		return 0;
+	}
 }
