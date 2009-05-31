@@ -1,5 +1,6 @@
 package items;
 
+import gameLogic.Equipable;
 import globals.BaseAttributes;
 
 public class MagicStick extends Item implements Equipable {

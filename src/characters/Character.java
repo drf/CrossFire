@@ -3,25 +3,24 @@ package characters;
 import gameChart.Box;
 import gameChart.City;
 import gameChart.Hill;
+import gameLogic.Equipable;
 import gameLogic.PickException;
+import gameLogic.Pickable;
 import globals.BaseAttributes;
-
-import items.Equipable;
-import items.Item;
+import globals.Entity;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Character extends globals.Entity implements gameLogic.Attackable,
-                                gameLogic.CanMeleeAttack, gameLogic.CanPick, gameLogic.Movable,
-                                java.io.Serializable {
+public abstract class Character extends globals.PlayableEntity implements gameLogic.Attackable,
+                                gameLogic.CanMeleeAttack, gameLogic.CanPick, gameLogic.Movable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2790814461885173594L;
 	private String name;
 	private BaseAttributes attributes;
-	private ArrayList<items.Item> itemsList = new ArrayList<items.Item>();
+	private ArrayList<Equipable> itemsList = new ArrayList<Equipable>();
 	
 	public enum Race {
 		Human,
@@ -69,7 +68,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return ret;
 	}
 	
-	public Boolean canPick(items.Item i) {
+	public Boolean canPick(Pickable i) {
 		if (i.getMaximumRequirements() != null) {
 			if (i.getMaximumRequirements().compareTo(attributes) < 0) {
 				return false;
@@ -85,24 +84,23 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		return true;
 	}
 	
-	public void pick(items.Item i) throws PickException {
+	public void pick(Pickable i) throws PickException {
 		if (this.canPick(i)) {
 			
 			removeTerrainChanges(getBox());
-			setAttrs(i.adjustAttrs(getAttrs()));
+			setAttrs(i.getModifier().adjustAttrs(getAttrs()));
 			applyTerrainChanges(getBox());
 			
-			if(i instanceof Equipable){
-				
-				if(!this.itemsList.add(i)) 
+			if(i instanceof Equipable) {
+				if(!this.itemsList.add((Equipable)i)) 
 					throw new PickException(i.toString() + ": cannot add item");
 			}
 		}
 	}
 	
-	public void unequip(items.Item i) throws PickException {
+	public void unequip(Equipable i) throws PickException {
 		removeTerrainChanges(getBox());
-		setAttrs(i.resetAttrs(getAttrs()));
+		setAttrs(i.getModifier().resetAttrs(getAttrs()));
 		applyTerrainChanges(getBox());
 		
 		if (!this.itemsList.remove(i)) {
@@ -110,9 +108,9 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 		}
 	}
 	
-	public void dropEquip(items.Item i) throws PickException {
+	public void dropEquip(Equipable i) throws PickException {
 		unequip(i);
-		i.setBox(getBox());	
+		((Entity)i).setBox(getBox());	
 	}
 	
 	public int getStrength() {
@@ -184,7 +182,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	}
  	
 	public void onDeath() {
-		for(Item i: this.itemsList) {
+		for(Equipable i: this.itemsList) {
 			if (i instanceof Equipable) {
 				try {
 					dropEquip(i);
@@ -198,7 +196,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	public int getDamageReduction() {
 		int damageReduction = 0;
 		
-		for (Item i: this.itemsList) {
+		for (Equipable i: this.itemsList) {
 			damageReduction += i.getModifier().getBonusDamageReduction();
 		}
 		return damageReduction;
@@ -207,7 +205,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	public int getMeleeAttackBonus() {
 		int bonusMeleeDamage = 0;
 		
-		for (Item i: this.itemsList) {
+		for (Equipable i: this.itemsList) {
 			bonusMeleeDamage += i.getModifier().getBonusMeleeDamage();
 		}
 		return bonusMeleeDamage;
@@ -216,7 +214,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	public int getMagicDamageBonus() {
 		int bonusMagicDamage = 0;
 		
-		for (Item i: this.itemsList) {
+		for (Equipable i: this.itemsList) {
 			bonusMagicDamage += i.getModifier().getBonusMagicDamage();
 		}
 		return bonusMagicDamage;
@@ -225,7 +223,7 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 	public int getRangedAttackBonus() {
 		int bonusRangedDamage = 0;
 		
-		for (Item i: this.itemsList) {
+		for (Equipable i: this.itemsList) {
 			bonusRangedDamage += i.getModifier().getBonusRangedDamage();
 		}
 		return bonusRangedDamage;
