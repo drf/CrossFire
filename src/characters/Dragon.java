@@ -1,6 +1,9 @@
 package characters;
 
+import items.ItemGenerator;
 import gameChart.Box;
+import gameChart.BoxBusyException;
+import globals.Entity;
 
 public class Dragon extends Monster {
 
@@ -23,7 +26,12 @@ public class Dragon extends Monster {
 
 	
 	public void onDeath() {
-		
+		// Drop an item as a reward
+		try {
+			getBox().getChart().place((Entity)ItemGenerator.generateCasualEquipable(), getBox());
+		} catch (BoxBusyException e) {
+			
+		}
 	}
 
 	
