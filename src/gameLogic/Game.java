@@ -5,10 +5,11 @@ import java.util.Map;
 import player.Player;
 
 import gameChart.AbstractChart;
+import globals.PlayableEntity;
 
 public class Game {
 	AbstractChart chart;
-	Map<Character, Player> characters;
+	Map<PlayableEntity, Player> entities;
 	
 	public Game() {}
 	
@@ -16,11 +17,21 @@ public class Game {
 		this.chart = chart;
 	}
 	
-	public void addCharacter(Character c, Player p) {
-		characters.put(c, p);
+	public void addEntity(PlayableEntity c, Player p) {
+		entities.put(c, p);
 	}
 	
-	public void removeCharacter(Character c) {
-		characters.remove(c);
+	public void removeEntity(PlayableEntity c) {
+		entities.remove(c);
+	}
+	
+	public void startGame() {
+		while (entities.keySet().size() != 1) {
+			for (PlayableEntity entity : entities.keySet()) {
+				if (entity != null) {
+					entities.get(entity).handleTurn(entity);
+				}				
+			}
+		}
 	}
 }
