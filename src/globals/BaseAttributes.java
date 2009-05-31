@@ -9,12 +9,12 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 	private int hp;
 	
 	public BaseAttributes() {
-		this.intelligence = -9999;
-		this.strength = -9999;
-		this.dexterity = -9999;
-		this.magicSkill = -9999;
-		this.luck = -9999;
-		this.hp = -9999;
+		this.intelligence = 0;
+		this.strength = 0;
+		this.dexterity = 0;
+		this.magicSkill = 0;
+		this.luck = 0;
+		this.hp = 0;
 	}
 	
 	public BaseAttributes(int intelligence, int power, int dexterity,
@@ -66,12 +66,9 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 	}
 
 	public int compareTo(BaseAttributes o) {
-		// The object is considered lessThan the other if o has
-		// even a single field bigger than this object
-		// -9999 reads invalid and will be excluded from the compare
 		int ret = 0;
 
-		if (intelligence != -9999 && o.getIntelligence() != -9999) {
+		if (intelligence != 0 && o.getIntelligence() != 0) {
 			if (intelligence < o.getIntelligence()) {
 				return -1;
 			} else if (intelligence > o.getIntelligence()) {
@@ -79,7 +76,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 			}
 		}
 
-		if (strength != -9999 && o.getStrength() != -9999) {
+		if (strength != 0 && o.getStrength() != 0) {
 			if (strength < o.getStrength()) {
 				return -1;
 			} else if (strength > o.getStrength()) {
@@ -87,7 +84,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 			}
 		}
 
-		if (dexterity != -9999 && o.getDexterity() != -9999) {
+		if (dexterity != 0 && o.getDexterity() != 0) {
 			if (dexterity < o.getDexterity()) {
 				return -1;
 			} else if (dexterity > o.getDexterity()) {
@@ -95,7 +92,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 			}
 		}
 
-		if (magicSkill != -9999 && o.getMagicSkill() != -9999) {
+		if (magicSkill != 0 && o.getMagicSkill() != 0) {
 			if (magicSkill < o.getMagicSkill()) {
 				return -1;
 			} else if (intelligence > o.getIntelligence()) {
@@ -103,7 +100,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 			}
 		}
 
-		if (luck != -9999 && o.getLuck() != -9999) {
+		if (luck != 0 && o.getLuck() != 0) {
 			if (luck < o.getLuck()) {
 				return -1;
 			} else if (luck > o.getLuck()) {
@@ -111,7 +108,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 			}
 		}
 		
-		if (hp != -9999 && o.getHp() != -9999) {
+		if (hp != 0 && o.getHp() != 0) {
 			if (hp < o.getHp()) {
 				return -1;
 			} else if (hp > o.getHp()) {

@@ -6,13 +6,14 @@ import gameChart.Hill;
 import globals.BaseAttributes;
 
 import items.Equipable;
+import items.Item;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Character extends globals.Entity implements gameLogic.Attackable,
                                 gameLogic.CanMeleeAttack, gameLogic.CanPick, gameLogic.Movable,
-                                java.io.Serializable {
+                                java.io.Serializable, gameLogic.CanAttack {
 	/**
 	 * 
 	 */
@@ -107,6 +108,11 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
 			throw new EquipError(i.toString() + "cannot remove item");
 	}
 	
+	public void dropEquip(items.Item i) throws EquipError {
+		unequip(i);
+		i.setBox(getBox());	
+	}
+	
 	public int getStrength() {
 		return attributes.getStrength();
 	}
@@ -177,6 +183,42 @@ public abstract class Character extends globals.Entity implements gameLogic.Atta
  	
 	public void onDeath() {
 		
+	}
+	
+	public int getDamageReduction(){
+		int damageReduction = 0;
+		
+		for(Item i: this.itemsList) {
+			damageReduction += i.getModifier().getBonusDamageReduction();
+		}
+		return damageReduction;
+	}
+
+	public int getMeleeAttackBonus(){
+		int bonusMeleeDamage = 0;
+		
+		for(Item i: this.itemsList) {
+			bonusMeleeDamage += i.getModifier().getBonusMeleeDamage();
+		}
+		return bonusMeleeDamage;
+	}
+	
+	public int getMagicDamageBonus(){
+		int bonusMagicDamage = 0;
+		
+		for(Item i: this.itemsList) {
+			bonusMagicDamage += i.getModifier().getBonusMagicDamage();
+		}
+		return bonusMagicDamage;
+	}
+
+	public int getRangedAttackBonus(){
+		int bonusRangedDamage = 0;
+		
+		for(Item i: this.itemsList) {
+			bonusRangedDamage += i.getModifier().getBonusRangedDamage();
+		}
+		return bonusRangedDamage;
 	}
 	
 	public void boxChanged(Box oldBox, Box newBox) {

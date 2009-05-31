@@ -18,59 +18,46 @@ public class CombatHandler {
 		
 	}
 	
-	public static Pair<Integer> meleeAttack(CanMeleeAttack from, Attackable to) {
-		// Compute damage according to specifics
-		double multiplier = 0.5;
-		int damage, counterdamage = 0;
-		
-		damage = (int)(from.getStrength() * multiplier);
+	public static int genericAttack(CanAttack from, Attackable to, int damage)
+	{
 		
 		// Now add some luck factor
 		damage += computeLuckFactor(from.getLuck() - to.getLuck(), 0.2);
+		damage -= to.getDamageReduction();
 		
 		if (damage < 0) {
 			damage = 0;
 		}
 		
-		int newhp = to.getHp() - damage;
-		if (newhp < 0) {
-			newhp = 0;
-		}
-		
-		to.setHp(newhp);
-		
-		if (to.getHp() == 0) {
+		if(to.getHp() > damage)
+		{
+			to.setHp(to.getHp() - damage);
+		}else {
+			to.setHp(0);
 			to.onDeath();
 		}
 		
+		return damage;
+	}
+	
+	public static Pair<Integer> meleeAttack(CanMeleeAttack from, Attackable to) {
+		int damage, counterdamage = 0;
+		
+		// Compute damage according to specifics
+		damage = (int)(from.getStrength() * 0.5) +from.getMeleeAttackBonus();
+		damage = genericAttack(from, to, damage);
+		
+		
+		// Can we counter?
 		if (to.getStrength() > 70 && to.getHp() > 0 && from instanceof Attackable && to instanceof CanMeleeAttack) {
 			System.out.println("Condition");
-			// Ok, we can counter
-			multiplier = 0.3;
 			
 			Attackable tmpto = (Attackable)from;
 			from = (CanMeleeAttack)to;
 			to = tmpto;
 			
-			counterdamage = (int)(from.getStrength() * multiplier);
-			
-			// Now add some luck factor
-			counterdamage += computeLuckFactor(from.getLuck() - to.getLuck(), 0.2);
-			
-			if (counterdamage < 0) {
-				counterdamage = 0;
-			}
-			
-			newhp = to.getHp() - counterdamage;
-			if (newhp < 0) {
-				newhp = 0;
-			}
-			
-			to.setHp(newhp);
-			
-			if (to.getHp() == 0) {
-				to.onDeath();
-			}
+			counterdamage = (int)(from.getStrength() * 0.3) + from.getMeleeAttackBonus();
+			counterdamage = genericAttack(from, to, counterdamage);
 		}
 		
 		return new Pair<Integer>(damage, counterdamage);
@@ -100,52 +87,16 @@ public class CombatHandler {
 		}
 		
 		// If we got here, it means that the attack will actually be performed
-		
-		int damage = (int)(from.getStrength() * 0.3);
-		
-		// Now add some luck factor
-		damage += computeLuckFactor(from.getLuck() - to.getLuck(), 0.2);
-		
-		if (damage < 0) {
-			damage = 0;
-		}
-		
-		int newhp = to.getHp() - damage;
-		if (newhp < 0) {
-			newhp = 0;
-		}
-		
-		to.setHp(newhp);
-		
-		if (to.getHp() == 0) {
-			to.onDeath();
-		}
+		int damage = (int)(from.getStrength() * 0.3) + from.getRangedAttackBonus();
+		damage = genericAttack(from, to, damage);
 		
 		return damage;
 	}
 	
 	public static int magicAttack(CanMagicAttack from, Attackable to) {
-		int damage = (int)(from.getIntelligence() * 0.2 + from.getMagicSkill() * 0.5);
-		
-		// Now add some luck factor
-		damage += computeLuckFactor(from.getLuck() - to.getLuck(), 0.2);
-		
-		if (damage < 0) {
-			damage = 0;
-		}
-		
-		int newhp = to.getHp() - damage;
-		
-		if (newhp < 0) {
-			newhp = 0;
-		}
-		
-		to.setHp(newhp);
-		
-		if (to.getHp() == 0) {
-			to.onDeath();
-		}
-		
+		int damage = (int)(from.getIntelligence() * 0.2 + from.getMagicSkill() * 0.5) + from.getMagicDamageBonus();
+		damage = genericAttack(from, to, damage);
+						
 		return damage;
 	}
 	
