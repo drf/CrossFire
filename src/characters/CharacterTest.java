@@ -3,6 +3,8 @@ package characters;
 import gameLogic.CombatHandler;
 import globals.Pair;
 
+import items.ItemGenerator;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
