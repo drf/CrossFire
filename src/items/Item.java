@@ -6,6 +6,10 @@ import globals.Modifier;
 
 public abstract class Item extends globals.Entity implements gameLogic.Pickable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6452318424066853070L;
 	private Modifier modifier;
 	private BaseAttributes minimumRequirements;
 	private BaseAttributes maximumRequirements;
@@ -50,5 +54,5 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 
 	public void boxChanged(Box oldBox, Box newBox) {
 		
-	}
+	}	
 }
