@@ -18,7 +18,7 @@ public class CombatHandler {
 		
 	}
 	
-	public static int genericAttack(CanAttack from, Attackable to, int damage)
+	private static int genericAttack(CanAttack from, Attackable to, int damage)
 	{
 		
 		// Now add some luck factor

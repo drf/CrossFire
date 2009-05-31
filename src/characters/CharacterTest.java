@@ -3,6 +3,8 @@ package characters;
 import gameLogic.CombatHandler;
 import globals.Pair;
 
+import items.ItemGenerator;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -13,6 +15,10 @@ public class CharacterTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		System.out.println(ItemGenerator.generateCasualPickable().toString());
+		System.out.println(ItemGenerator.generateCasualPickable().toString());
+		System.out.println(ItemGenerator.generateCasualPickable().toString());
 		
 		Random r = new Random();
 		System.out.println("Creazione personaggi");
