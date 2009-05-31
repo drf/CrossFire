@@ -30,16 +30,17 @@ public abstract class Entity implements java.io.Serializable {
 			return;
 		}
 		
-		if (!box.isAdjacentTo(toBox)) {
+		if (!getBox().isAdjacentTo(toBox)) {
 			return;
 		}
 		
 		try {
-			box.getChart().place(this, toBox);
+			getBox().getChart().place(this, toBox);
 		} catch (BoxBusyException e) {
 			return;
 			// TODO: handle exception
 		}
+		
 	}
 	
 }
