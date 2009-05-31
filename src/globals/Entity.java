@@ -6,8 +6,12 @@ import gameLogic.Attackable;
 import gameLogic.CanMeleeAttack;
 import gameLogic.CombatHandler;
 
-public abstract class Entity {
+public abstract class Entity implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 602249422396237313L;
 	private Box box;
 	
 	public abstract void boxChanged(Box oldBox, Box newBox);
