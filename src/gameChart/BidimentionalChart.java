@@ -5,7 +5,7 @@ import java.util.Set;
 
 import globals.Pair;
 
-public class BidimentionalChart extends AbstractChart {
+public abstract class BidimentionalChart extends AbstractChart {
 
 	private int width;
 	private int height;

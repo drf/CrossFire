@@ -21,7 +21,6 @@ public abstract class AbstractChart {
 		return retset;
 	}
 
-	abstract Pair<Integer> getBoxPosition(Box b);
 	abstract Set<Box> getAdjacentBoxes(Box b);
 	
 	public Set<Entity> getEntitiesOn(Box b) {
