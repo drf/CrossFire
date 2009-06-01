@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import globals.Pair;
+import gameChart.LandscapeGenerator;
+import gameChart.Box;
 
 public abstract class BidimentionalChart extends AbstractChart {
 
@@ -116,6 +118,14 @@ public abstract class BidimentionalChart extends AbstractChart {
 		}
 		// Return a null pair
 		return new Pair<Integer>();
+	}
+	protected void createChart() {
+		LandscapeGenerator randomLandscape = new LandscapeGenerator();
+		
+		for(int i = 0; i< getWidth(); ++i) 
+			for(int j=0; j < getHeight(); ++j)
+					chart[i][j] = randomLandscape.generateRandomLandscape();
+
 	}
 
 }

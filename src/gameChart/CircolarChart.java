@@ -19,10 +19,4 @@ public class CircolarChart extends BidimentionalChart {
 		return null;
 	}
 
-	@Override
-	void createChart() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
