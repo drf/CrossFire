@@ -11,7 +11,6 @@ import gameLogic.CanMeleeAttack;
 import gameLogic.CanPick;
 import gameLogic.CombatHandler;
 import gameLogic.Movable;
-import gameLogic.PickException;
 import gameLogic.Pickable;
 import gameLogic.CombatHandler.AttackType;
 import globals.Entity;
@@ -117,11 +116,7 @@ public class ComputerPlayer extends Player {
 		if (entity instanceof CanPick) {
 			for (Entity item : entity.getBox().getChart().getEntitiesOn(entity.getBox())) {
 				if (item instanceof Pickable) {
-					try {
-						((CanPick)entity).pick((Pickable)item);
-					} catch (PickException e) {
-						
-					}
+					((CanPick)entity).pick((Pickable)item);
 				}
 			}
 		}

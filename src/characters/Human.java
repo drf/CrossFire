@@ -5,6 +5,13 @@ import gameLogic.CanRangedAttack;
 
 import java.util.ArrayList;
 
+/**
+ * <b>Human</b> is one of {@link Character}'s races. It has balanced attributes
+ * 
+ * @author Dario Freddi
+ * @author Vincenzo Iozzo
+ *
+ */
 public class Human extends Character implements CanMagicAttack, CanRangedAttack {
 	
 	/**
