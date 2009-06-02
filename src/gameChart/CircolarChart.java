@@ -3,7 +3,7 @@ package gameChart;
 
 import java.util.Set;
 
-public class CircolarChart extends BidimentionalChart {
+public class CircolarChart extends BidimensionalChart {
 
 	public CircolarChart() {
 		// TODO Auto-generated constructor stub

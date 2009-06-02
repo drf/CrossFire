@@ -1,5 +1,22 @@
 package globals;
 
+/**
+ * 
+ * <b>BaseAttributes</b> represents a set of attributes for an {@link Entity}.
+ * The attributes are: 
+ * <ul>
+ * <li>intelligence the intelligence an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
+ * <li>power the power an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
+ * <li>dexterity the dexterity an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
+ * <li>magicSkill the magic skill an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
+ * <li>luck the luck an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
+ * <li>hp	the vital points an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
+ * </ul>
+ * Each attribute has a getter/setter.
+ * @author	Dario Freddi
+ * @author	Vincenzo Iozzo
+ */
+
 public class BaseAttributes implements Comparable<BaseAttributes> {
 	private int intelligence;
 	private int strength;
@@ -8,6 +25,15 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 	private int luck;
 	private int hp;
 	
+	/**
+	 *
+     * Class constructor.
+     *
+	 * 
+	 * This method always returns immediately. 
+	 *
+	 * @return      An instance of {@link BaseAttributes}
+	 */
 	public BaseAttributes() {
 		this.intelligence = 0;
 		this.strength = 0;
@@ -17,6 +43,25 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 		this.hp = 0;
 	}
 	
+	/**
+	 * Class constructor.
+	 * 
+	 * Returns a BaseAttribute object that can by associated with an {@link Entity}. 
+	 * No checks are performed here on the consistency of the values for a specific {@link Entity}.
+	 * If it used inside a {@link Character} this object represents the attributes for it, when used
+	 * for a {@link Item} it represents "modifier" values which need to be applied to a given {@link Character}
+	 * 
+	 * This method always returns immediately. 
+	 *
+	 * @param	intelligence 
+	 * @param	power 
+	 * @param	dexterity 
+	 * @param	magicSkill 
+	 * @param	luck 
+	 * @param	hp	
+	 * @return	An instance of {@link BaseAttributes}
+	 * @see 	BaseAttributes
+	 */
 	public BaseAttributes(int intelligence, int power, int dexterity,
 			int magicSkill, int luck, int hp) {
 		super();
@@ -64,6 +109,16 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 	public void setLuck(int luck) {
 		this.luck = luck;
 	}
+	
+	/**
+	 * Returns a value which represents the similarity between two objects.
+	 * By similarity we mean that each attribute (integer) is compared
+	 * 
+	 * This method always returns immediately. 
+	 *
+	 * @param  o  a BaseAttributes object which must be compared
+	 * @return      0 if they are equal, -1 if the first object passed as a parameter is greater, 1 if this object is greater
+	 */
 
 	public int compareTo(BaseAttributes o) {
 		int ret = 0;

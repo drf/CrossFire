@@ -7,7 +7,7 @@ import globals.Pair;
 import gameChart.LandscapeGenerator;
 import gameChart.Box;
 
-public abstract class BidimentionalChart extends AbstractChart {
+public abstract class BidimensionalChart extends AbstractChart {
 
 	private int width;
 	private int height;

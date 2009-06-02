@@ -2,7 +2,7 @@ package gameChart;
 
 
 
-public class LinearChart extends BidimentionalChart {
+public class LinearChart extends BidimensionalChart {
 	
 	public LinearChart() {
 		// TODO Auto-generated constructor stub

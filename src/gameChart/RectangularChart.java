@@ -1,7 +1,7 @@
 package gameChart;
 
 
-public class RectangularChart extends BidimentionalChart {
+public class RectangularChart extends BidimensionalChart {
 
 
 	public RectangularChart() {
