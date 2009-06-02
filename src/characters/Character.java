@@ -195,7 +195,7 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	/**
 	 * @return the melee attack bonus for this character
 	 */
-	public int getMeleeAttackBonus() {
+	public int getMeleeDamageBonus() {
 		int bonusMeleeDamage = 0;
 		
 		for (Equipable i: this.itemsList) {

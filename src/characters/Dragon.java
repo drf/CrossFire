@@ -49,7 +49,7 @@ public class Dragon extends Monster {
 	}
 
 	
-	public int getMeleeAttackBonus() {
+	public int getMeleeDamageBonus() {
 		return 5;
 	}
 

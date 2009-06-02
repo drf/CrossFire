@@ -44,7 +44,7 @@ public class CombatHandler {
 		int damage, counterdamage = 0;
 		
 		// Compute damage according to specifics
-		damage = (int)(from.getStrength() * 0.5) +from.getMeleeAttackBonus();
+		damage = (int)(from.getStrength() * 0.5) +from.getMeleeDamageBonus();
 		damage = genericAttack(from, to, damage);
 		
 		
@@ -56,7 +56,7 @@ public class CombatHandler {
 			from = (CanMeleeAttack)to;
 			to = tmpto;
 			
-			counterdamage = (int)(from.getStrength() * 0.3) + from.getMeleeAttackBonus();
+			counterdamage = (int)(from.getStrength() * 0.3) + from.getMeleeDamageBonus();
 			counterdamage = genericAttack(from, to, counterdamage);
 		}
 		
