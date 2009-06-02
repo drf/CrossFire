@@ -3,8 +3,20 @@ package characters;
 import items.ItemGenerator;
 import gameChart.Box;
 import gameChart.BoxBusyException;
+import gameLogic.Attackable;
+import gameLogic.Equipable;
 import globals.Entity;
 
+/**
+ * <b>Dragon</b> is a {@link Monster} that can only perform melee attacks, but
+ * has an extremely high attack potential.
+ * <p>
+ * Just like {@link Monster}, is implemented to show the flexibility of the approach
+ * 
+ * @author Dario Freddi
+ * @author Vincenzo Iozzo
+ *
+ */
 public class Dragon extends Monster {
 
 	/**
@@ -24,7 +36,9 @@ public class Dragon extends Monster {
 		return 5;
 	}
 
-	
+	/**
+	 * Reimplemented from {@link Attackable}. Drops a random {@link Equipable}
+	 */
 	public void onDeath() {
 		// Drop an item as a reward
 		try {

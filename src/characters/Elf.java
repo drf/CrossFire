@@ -3,6 +3,13 @@ package characters;
 import gameLogic.CanMagicAttack;
 import gameLogic.CanRangedAttack;
 
+/**
+ * <b>Elf</b> is one of {@link Character}'s races. It has strong luck and intelligence
+ * 
+ * @author Dario Freddi
+ * @author Vincenzo Iozzo
+ *
+ */
 public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 	
 	/**
