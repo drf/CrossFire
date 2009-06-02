@@ -3,11 +3,24 @@ package items;
 import java.util.HashSet;
 import java.util.Random;
 
+import gameLogic.Consumable;
 import gameLogic.Equipable;
 import gameLogic.Pickable;
 
+/**
+ * <b>ItemGenerator</b> is a set of static functions that generate casual items. 
+ * Its internals are based upon {@link Class} properties.
+ * 
+ * @author drf
+ *
+ */
 public class ItemGenerator {
 	
+	/**
+	 * Internal to ItemGenerator
+	 * 
+	 * @return a list of the available items in the game
+	 */
 	private static HashSet<Class<?>> items() {
 		HashSet<Class<?>> retset = new HashSet<Class<?>>();
 		
@@ -20,6 +33,11 @@ public class ItemGenerator {
 		return retset;
 	}
 	
+	/**
+	 * Generate a casual {@link Equipable}
+	 * 
+	 * @return a random {@link Equipable}
+	 */
 	public static Equipable generateCasualEquipable() {
 		HashSet<Equipable> items = new HashSet<Equipable>();
 		
@@ -39,6 +57,11 @@ public class ItemGenerator {
 		return (Equipable) items.toArray()[r.nextInt(items.size())];
 	}
 
+	/**
+	 * Generate a casual {@link Consumable}
+	 * 
+	 * @return a random {@link Consumable}
+	 */
 	public static Consumable generateCasualConsumable() {
 		HashSet<Consumable> items = new HashSet<Consumable>();
 		
@@ -58,6 +81,11 @@ public class ItemGenerator {
 		return (Consumable) items.toArray()[r.nextInt(items.size())];
 	}
 	
+	/**
+	 * Generate a casual {@link Pickable}
+	 * 
+	 * @return a a random {@link Pickable}
+	 */
 	public static Pickable generateCasualPickable() {
 		HashSet<Pickable> items = new HashSet<Pickable>();
 		

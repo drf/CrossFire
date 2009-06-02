@@ -114,10 +114,11 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 					return false;
 				}
 			}
-			
-			removeTerrainChanges(getBox());
-			setAttibutes(i.getModifier().adjustAttrs(getAttributes()));
-			applyTerrainChanges(getBox());
+			if (i.getModifier() != null) {
+				removeTerrainChanges(getBox());
+				setAttibutes(i.getModifier().adjustAttrs(getAttributes()));
+				applyTerrainChanges(getBox());
+			}
 			
 			// Now, remove the entity from the chart
 			if (i instanceof Entity) {
@@ -137,9 +138,11 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	 * @throws PickException
 	 */
 	public void unequip(Equipable i){
-		removeTerrainChanges(getBox());
-		setAttibutes(i.getModifier().resetAttrs(getAttributes()));
-		applyTerrainChanges(getBox());
+		if (i.getModifier() != null) {
+			removeTerrainChanges(getBox());
+			setAttibutes(i.getModifier().resetAttrs(getAttributes()));
+			applyTerrainChanges(getBox());
+		}
 		
 		this.itemsList.remove(i);
 	}
@@ -189,7 +192,9 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 		int damageReduction = 0;
 		
 		for (Equipable i: this.itemsList) {
-			damageReduction += i.getModifier().getBonusDamageReduction();
+			if (i.getModifier() != null) {
+				damageReduction += i.getModifier().getBonusDamageReduction();
+			}
 		}
 		return damageReduction;
 	}
@@ -201,7 +206,9 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 		int bonusMeleeDamage = 0;
 		
 		for (Equipable i: this.itemsList) {
-			bonusMeleeDamage += i.getModifier().getBonusMeleeDamage();
+			if (i.getModifier() != null) {
+				bonusMeleeDamage += i.getModifier().getBonusMeleeDamage();
+			}
 		}
 		return bonusMeleeDamage;
 	}
@@ -213,7 +220,9 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 		int bonusMagicDamage = 0;
 		
 		for (Equipable i: this.itemsList) {
-			bonusMagicDamage += i.getModifier().getBonusMagicDamage();
+			if (i.getModifier() != null) {
+				bonusMagicDamage += i.getModifier().getBonusMagicDamage();
+			}
 		}
 		return bonusMagicDamage;
 	}
@@ -225,7 +234,9 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 		int bonusRangedDamage = 0;
 		
 		for (Equipable i: this.itemsList) {
-			bonusRangedDamage += i.getModifier().getBonusRangedDamage();
+			if (i.getModifier() != null) {
+				bonusRangedDamage += i.getModifier().getBonusRangedDamage();
+			}
 		}
 		return bonusRangedDamage;
 	}
