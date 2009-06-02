@@ -14,5 +14,5 @@ public interface CanPick {
 	 * @param i the {@link Pickable} to pick
 	 * @throws PickException
 	 */
-	public void pick(Pickable i) throws PickException;
+	public boolean pick(Pickable i);
 }

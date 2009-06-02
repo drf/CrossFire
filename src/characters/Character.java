@@ -5,7 +5,6 @@ import gameChart.City;
 import gameChart.Hill;
 import gameLogic.Equipable;
 import gameLogic.Movable;
-import gameLogic.PickException;
 import gameLogic.Pickable;
 import globals.Entity;
 
@@ -107,18 +106,27 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	 * @param i the {@link Pickable} to pick
 	 * @throws PickException
 	 */
-	public void pick(Pickable i) throws PickException {
+	public boolean pick(Pickable i) {
 		if (this.canPick(i)) {
+			
+			if(i instanceof Equipable) {
+				if(!this.itemsList.add((Equipable)i)) {
+					return false;
+				}
+			}
 			
 			removeTerrainChanges(getBox());
 			setAttibutes(i.getModifier().adjustAttrs(getAttributes()));
 			applyTerrainChanges(getBox());
 			
-			if(i instanceof Equipable) {
-				if(!this.itemsList.add((Equipable)i)) 
-					throw new PickException(i.toString() + ": cannot add item");
+			// Now, remove the entity from the chart
+			if (i instanceof Entity) {
+				Entity ent = (Entity)i;
+				ent.getBox().getChart().remove(ent);
 			}
 		}
+		
+		return false;
 	}
 	
 	/**
@@ -128,14 +136,12 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	 * @param i the {@link Equipable} to remove
 	 * @throws PickException
 	 */
-	public void unequip(Equipable i) throws PickException {
+	public void unequip(Equipable i){
 		removeTerrainChanges(getBox());
 		setAttibutes(i.getModifier().resetAttrs(getAttributes()));
 		applyTerrainChanges(getBox());
 		
-		if (!this.itemsList.remove(i)) {
-			throw new PickException(i.toString() + "cannot remove item");
-		}
+		this.itemsList.remove(i);
 	}
 	
 	/**
@@ -145,7 +151,7 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	 * @throws PickException
 	 * @see unequip
 	 */
-	public void dropEquip(Equipable i) throws PickException {
+	public void dropEquip(Equipable i) {
 		unequip(i);
 		((Entity)i).setBox(getBox());	
 	}
@@ -171,11 +177,7 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	public void onDeath() {
 		for(Equipable i: this.itemsList) {
 			if (i instanceof Equipable) {
-				try {
-					dropEquip(i);
-				} catch (PickException e) {
-					
-				}
+				dropEquip(i);
 			}
 		}
 	}
