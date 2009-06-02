@@ -87,7 +87,7 @@ public class CombatHandler {
 		}
 		
 		// If we got here, it means that the attack will actually be performed
-		int damage = (int)(from.getStrength() * 0.3) + from.getRangedAttackBonus();
+		int damage = (int)(from.getStrength() * 0.3) + from.getRangedDamageBonus();
 		damage = genericAttack(from, to, damage);
 		
 		return damage;

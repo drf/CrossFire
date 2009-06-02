@@ -219,7 +219,7 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	/**
 	 * @return the ranged attack bonus for this character
 	 */
-	public int getRangedAttackBonus() {
+	public int getRangedDamageBonus() {
 		int bonusRangedDamage = 0;
 		
 		for (Equipable i: this.itemsList) {
