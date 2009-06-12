@@ -1,5 +1,10 @@
 package gameChart;
 
+/**
+ * <b>OutOfBoundsException</b> inherits from Exception and it is used to notify that a box is out of the game chart boundaries
+ * @author	Dario Freddi
+ * @author	Vincenzo Iozzo
+ */
 public class OutOfBoundsException extends Exception {
 
 	/**
