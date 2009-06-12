@@ -3,6 +3,7 @@ package player;
 import java.util.Random;
 import java.util.Set;
 
+
 import gameChart.Box;
 import gameLogic.Attackable;
 import gameLogic.CanAttack;
@@ -15,6 +16,12 @@ import gameLogic.CombatHandler.AttackType;
 import globals.Entity;
 import globals.PlayableEntity;
 
+/**
+ * <b>ComputerPlayer</b> is a subclass of {@link Player}. The main aim of this class is to provide a way to create an automated player managed by the computer.  
+ * @author	Dario Freddi
+ * @author	Vincenzo Iozzo
+ */
+
 public class ComputerPlayer extends Player {
 
 	/**
@@ -25,6 +32,36 @@ public class ComputerPlayer extends Player {
 	public ComputerPlayer() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	/**
+	 * This method handles a computer turn. The logic works as follow: 
+	 * 
+	 * 
+	 * <ul>
+	 * <li>If the entity can attack:
+	 * <ul> 
+	 * <li>try a Magic attack 
+	 * <li>try a Melee attack
+	 * <li> try a Ranged attack
+	 * </ul>
+	 *
+	 * <li>if the entity can be moved, try a movement in a random direction
+	 * <li> if we find anything in the new position let's try to grab it
+	 * </ul>
+	 * 
+	 * This method always returns immediately. 
+	 *
+	 * @param  entity  a character that can be used to play 
+	 * @return void
+	 * @see PlayableEntity
+	 * @see CanMagicAttack
+	 * @see CanMeleeAttack
+	 * @see CanRangedAttack
+	 * @see Movable
+	 * @see CanPick
+	 * @see CombatHandler
+	 * 
+	 */
 
 	@Override
 	public void handleTurn(PlayableEntity entity) {

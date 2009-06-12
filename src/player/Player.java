@@ -1,5 +1,6 @@
 package player;
 
+import globals.Entity;
 import globals.PlayableEntity;
 
 import java.io.File;
@@ -10,6 +11,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+/**
+ * 
+ * <b>Player</b> is an abstract class. The main aim of this class is to provide a way to handle multiple characters, 
+ * either by the computer or by an human player.
+ * The attributes are: 
+ * <ul>
+ * <li>name the name of the player
+ * <li>entities an array which contains all the characters of type {@link Entity} that the player handles
+ * </ul>
+ * Each attribute has a getter/setter.
+ * @author	Dario Freddi
+ * @author	Vincenzo Iozzo
+ */
 
 public abstract class Player implements java.io.Serializable {
 	/**
@@ -31,10 +46,29 @@ public abstract class Player implements java.io.Serializable {
 		this.name = name;
 	}
 	
+	/**
+	 * This method adds a new {@link Entity}Êto the list they player handles
+	 * 
+	 * This method always returns immediately. 
+	 *
+	 * @param  entity  the entity we want to add
+	 * @return      void
+	 * 
+	 */
+
 	public void addNewPlayableEntity(PlayableEntity entity) {
 		entities.add(entity);
 	}
 	
+	/**
+	 * This method removes an {@link Entity}Êfrom the list they player handles
+	 * 
+	 * This method always returns immediately. 
+	 *
+	 * @param  entity  the entity we want to remove
+	 * @return      void
+	 * 
+	 */
 	public void removeEntity(PlayableEntity c) {
 		entities.remove(c);
 	}
@@ -43,6 +77,15 @@ public abstract class Player implements java.io.Serializable {
 		return entities;
 	}
 	
+	/**
+	 * This method is capable of loading a serialized player from a file.
+	 * 
+	 * This method always returns immediately. 
+	 *
+	 * @param  path  the path to the file containing the serialized player
+	 * @return A {@link Player} instance
+	 * 
+	 */
 	public static Player loadPlayerFromFile(String path) {
 		try {
 			// Deserialize from a file
@@ -59,6 +102,15 @@ public abstract class Player implements java.io.Serializable {
 	    }
 	}
 	
+	/**
+	 * This method is capable of saving a player to a file.
+	 * 
+	 * This method always returns immediately. 
+	 *
+	 * @param  path  the path to the file we want to serialized the player
+	 * @return <b>true</b> if the save was successful, <b>false</b> otherwise
+	 * 
+	 */
 	public boolean saveToFile(String path) {
 		try {
 	        // Serialize to a file
