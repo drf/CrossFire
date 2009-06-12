@@ -2,6 +2,9 @@ package gui;
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
 
+import gameLogic.Game;
+import gameLogic.Game.GamePhase;
+
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -110,7 +113,7 @@ public class MainPanel extends javax.swing.JPanel {
 	
 	private void newButtonMouseClicked(MouseEvent evt) {
 		System.out.println("newButton.mouseClicked, event="+evt);
-		//TODO add your code for newButton.mouseClicked
+		Game.getInstance().setState(GamePhase.GameCreation);
 	}
 
 }
