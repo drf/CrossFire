@@ -1,16 +1,17 @@
 package gui;
 
+import gameLogic.Game;
+import gameLogic.GamePhaseChangedEvent;
+import gameLogic.GamePhaseChangedListener;
+import gameLogic.Game.GamePhase;
+
 import java.awt.BorderLayout;
 
 import javax.swing.ActionMap;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JToolBar;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.Application;
@@ -32,7 +33,9 @@ import org.jdesktop.application.SingleFrameApplication;
 /**
  * 
  */
-public class CrossFireApplication extends SingleFrameApplication {
+public class CrossFireApplication extends SingleFrameApplication 
+	implements GamePhaseChangedListener {
+	
     private JMenuBar menuBar;
     private JPanel topPanel;
     private JMenuItem jMenuItem3;
@@ -91,12 +94,39 @@ public class CrossFireApplication extends SingleFrameApplication {
             }
         }
         getMainFrame().setJMenuBar(menuBar);
-        contentPanel.add(new MainPanel());
+        Game.getInstance().addGameChangedEventListener(this);
+        Game.getInstance().setState(GamePhase.None);
         show(topPanel);
     }
 
     public static void main(String[] args) {
         launch(CrossFireApplication.class, args);
     }
+
+	@Override
+	public void GamePhaseChanged(GamePhaseChangedEvent e) {
+		for (int i = 0; i < contentPanel.getComponentCount(); i++) {
+			contentPanel.remove(i);
+		}
+		
+		switch (e.getPhase()) {
+		case CharacterSetup:
+			
+			break;
+		case EndGame:
+			
+			break;
+		case GameCreation:
+			
+			break;
+		case None:
+			contentPanel.add(new MainPanel());
+			break;
+		case Turn:
+			break;
+		default:
+			break;
+		}
+	}
 
 }
