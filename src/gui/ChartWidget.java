@@ -1,6 +1,7 @@
 package gui;
 
 import gameChart.BidimensionalChart;
+import gameChart.City;
 import gameChart.Hill;
 import gameChart.Plain;
 import gameChart.RectangularChart;
@@ -57,7 +58,7 @@ public class ChartWidget extends javax.swing.JPanel {
 	private boolean draggingMode = false;
 	private BufferedImage plainTexture;
 	private BufferedImage hillTexture;
-	
+	private BufferedImage cityTexture;
 	
 	
 	
@@ -86,6 +87,13 @@ public class ChartWidget extends javax.swing.JPanel {
 		
 		try {
 			hillTexture = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-11.gif"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			cityTexture = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/FlrTle2-07.gif"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -161,13 +169,15 @@ public class ChartWidget extends javax.swing.JPanel {
 		        
 		        // Paint with the correct texture
 		        if (chart.getBoxAt(i, j) instanceof Plain) {
-					
 					g2.drawImage(plainTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
 				}
 		        
 		        if (chart.getBoxAt(i, j) instanceof Hill) {
-					
 					g2.drawImage(hillTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
+				}
+		        
+		        if (chart.getBoxAt(i, j) instanceof City) {
+					g2.drawImage(cityTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
 				}
 		        
 		        try {
