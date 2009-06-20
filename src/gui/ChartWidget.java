@@ -4,6 +4,7 @@ import gameChart.BidimensionalChart;
 import gameChart.RectangularChart;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -42,6 +43,7 @@ public class ChartWidget extends javax.swing.JPanel {
 	private int YPosition = 100;
 	private int lastXMouseOffset;
 	private int lastYMouseOffset;
+	private boolean draggingMode = false;
 	
 	/**
 	* Auto-generated main method to display this 
@@ -86,6 +88,9 @@ public class ChartWidget extends javax.swing.JPanel {
 			}
 			{
 				this.addKeyListener(new KeyAdapter() {
+					public void keyReleased(KeyEvent evt) {
+						thisKeyReleased(evt);
+					}
 					public void keyPressed(KeyEvent evt) {
 						thisKeyPressed(evt);
 					}
@@ -122,16 +127,14 @@ public class ChartWidget extends javax.swing.JPanel {
 		        g2.draw(rectangle);
 			}
 		}
-		
-		
-		
 	}
 	
 	private void thisKeyPressed(KeyEvent evt) {
 		System.out.println("this.keyPressed, event="+evt);
 		
-		if (evt.getKeyChar() == 'a') {
-			multiplier += 1;
+		if (evt.getKeyCode() == KeyEvent.VK_CONTROL) {
+			draggingMode = true;
+			setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 		}
 	}
 	
@@ -151,19 +154,31 @@ public class ChartWidget extends javax.swing.JPanel {
 		System.out.println("this.mouseDragged, event="+evt);
 		//TODO add your code for this.mouseDragged
 		
-		XPosition -= lastXMouseOffset - evt.getX();
-		YPosition -= lastYMouseOffset - evt.getY();
-		
-		lastXMouseOffset = evt.getX();
-		lastYMouseOffset = evt.getY();
-		
-		updateUI();
+		if (draggingMode) {
+
+			XPosition -= lastXMouseOffset - evt.getX();
+			YPosition -= lastYMouseOffset - evt.getY();
+
+			lastXMouseOffset = evt.getX();
+			lastYMouseOffset = evt.getY();
+
+			updateUI();
+		}
 	}
 	
 	private void thisMousePressed(MouseEvent evt) {
 		System.out.println("this.mousePressed, event="+evt);
 		lastXMouseOffset = evt.getX();
 		lastYMouseOffset = evt.getY();
+	}
+	
+	private void thisKeyReleased(KeyEvent evt) {
+		System.out.println("this.keyReleased, event="+evt);
+		
+		if (evt.getKeyCode() == KeyEvent.VK_CONTROL) {
+			draggingMode = false;
+			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
 	}
 
 }
