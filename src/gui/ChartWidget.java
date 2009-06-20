@@ -17,6 +17,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.WindowConstants;
@@ -43,6 +45,8 @@ public class ChartWidget extends javax.swing.JPanel {
 	private int YPosition = 100;
 	private int lastXMouseOffset;
 	private int lastYMouseOffset;
+	private int mouseXPosition;
+	private int mouseYPosition;
 	private boolean draggingMode = false;
 	
 	/**
@@ -74,6 +78,9 @@ public class ChartWidget extends javax.swing.JPanel {
 			}
 			{
 				this.addMouseMotionListener(new MouseMotionAdapter() {
+					public void mouseMoved(MouseEvent evt) {
+						thisMouseMoved(evt);
+					}
 					public void mouseDragged(MouseEvent evt) {
 						thisMouseDragged(evt);
 					}
@@ -125,6 +132,15 @@ public class ChartWidget extends javax.swing.JPanel {
 			for (int j = 0; j < chart.getHeight(); j++) {
 		        Rectangle2D rectangle = new Rectangle2D.Float(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
 		        g2.draw(rectangle);
+		        try {
+					if (rectangle.contains(at.inverseTransform(new Point2D.Double((double)mouseXPosition, (double)mouseYPosition), null))) {
+						g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
+					}
+				} catch (NoninvertibleTransformException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		        
 			}
 		}
 	}
@@ -179,6 +195,14 @@ public class ChartWidget extends javax.swing.JPanel {
 			draggingMode = false;
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		}
+	}
+	
+	private void thisMouseMoved(MouseEvent evt) {
+		
+		mouseXPosition = evt.getX();
+		mouseYPosition = evt.getY();
+		
+		updateUI();
 	}
 
 }
