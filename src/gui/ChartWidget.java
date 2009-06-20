@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseWheelEvent;
@@ -37,8 +38,10 @@ public class ChartWidget extends javax.swing.JPanel {
 
 	private BidimensionalChart chart;
 	private int multiplier = 20;
-	private int XBounds = 100;
-	private int YBounds = 100;
+	private int XPosition = 100;
+	private int YPosition = 100;
+	private int lastXMouseOffset;
+	private int lastYMouseOffset;
 	
 	/**
 	* Auto-generated main method to display this 
@@ -46,20 +49,27 @@ public class ChartWidget extends javax.swing.JPanel {
 	*/
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(new ChartWidget());
+		frame.getContentPane().add(new ChartWidget(new RectangularChart(15, 10)));
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}
 	
-	public ChartWidget() {
+	public ChartWidget(BidimensionalChart chart) {
 		super();
-		chart = new RectangularChart(15, 10);
+		this.chart = chart;
 		initGUI();
 	}
 	
 	private void initGUI() {
 		try {
+			{
+				this.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent evt) {
+						thisMousePressed(evt);
+					}
+				});
+			}
 			{
 				this.addMouseMotionListener(new MouseMotionAdapter() {
 					public void mouseDragged(MouseEvent evt) {
@@ -99,7 +109,7 @@ public class ChartWidget extends javax.swing.JPanel {
 		int width = chart.getWidth() * multiplier;
 		int heigth = chart.getHeight() * multiplier;
 		
-		AffineTransform at = AffineTransform.getRotateInstance(-0.91, XBounds + width/2 , YBounds + heigth/2);
+		AffineTransform at = AffineTransform.getRotateInstance(-0.91, XPosition + width/2 , YPosition + heigth/2);
 		at.shear(0, .3);
 		at.translate(-50, 0);
 		
@@ -108,7 +118,7 @@ public class ChartWidget extends javax.swing.JPanel {
 		g2.transform(at);
 		for (int i = 0; i < chart.getWidth(); i++) {
 			for (int j = 0; j < chart.getHeight(); j++) {
-		        Rectangle2D rectangle = new Rectangle2D.Float(XBounds + i * multiplier, YBounds + j * multiplier, multiplier, multiplier);
+		        Rectangle2D rectangle = new Rectangle2D.Float(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
 		        g2.draw(rectangle);
 			}
 		}
@@ -129,10 +139,10 @@ public class ChartWidget extends javax.swing.JPanel {
 		System.out.println("this.mouseWheelMoved, event="+evt);
 		//TODO add your code for this.mouseWheelMoved
 		if (evt.getWheelRotation() > 0) {
-			multiplier++;
+			--multiplier;
 			updateUI();
 		} else {
-			multiplier--;
+			++multiplier;
 			updateUI();
 		}
 	}
@@ -140,9 +150,20 @@ public class ChartWidget extends javax.swing.JPanel {
 	private void thisMouseDragged(MouseEvent evt) {
 		System.out.println("this.mouseDragged, event="+evt);
 		//TODO add your code for this.mouseDragged
-		XBounds = evt.getX();
-		YBounds = evt.getY();
+		
+		XPosition -= lastXMouseOffset - evt.getX();
+		YPosition -= lastYMouseOffset - evt.getY();
+		
+		lastXMouseOffset = evt.getX();
+		lastYMouseOffset = evt.getY();
+		
 		updateUI();
+	}
+	
+	private void thisMousePressed(MouseEvent evt) {
+		System.out.println("this.mousePressed, event="+evt);
+		lastXMouseOffset = evt.getX();
+		lastYMouseOffset = evt.getY();
 	}
 
 }
