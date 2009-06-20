@@ -55,7 +55,7 @@ public class ChartWidget extends javax.swing.JPanel {
 	*/
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(new ChartWidget(new RectangularChart(15, 10)));
+		frame.getContentPane().add(new ChartWidget(new RectangularChart(10,15)));
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
@@ -135,6 +135,7 @@ public class ChartWidget extends javax.swing.JPanel {
 		        try {
 					if (rectangle.contains(at.inverseTransform(new Point2D.Double((double)mouseXPosition, (double)mouseYPosition), null))) {
 						g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
+						System.out.println(chart.getBoxAt(i, j));
 					}
 				} catch (NoninvertibleTransformException e) {
 					// TODO Auto-generated catch block

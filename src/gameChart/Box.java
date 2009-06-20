@@ -18,7 +18,7 @@ import java.util.Set;
 public abstract class Box {
 	
 	AbstractChart chart;
-
+	
 	public Box(AbstractChart chart) {
 		this.chart = chart;
 	}

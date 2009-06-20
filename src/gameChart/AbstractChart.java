@@ -11,7 +11,6 @@ public abstract class AbstractChart {
 	
 	private Map<Entity, Box> positions;
 	
-
 	public Set<Box> getBoxes() {
 		HashSet<Box> retset = new HashSet<Box>();
 		for (Box item : positions.values()) {

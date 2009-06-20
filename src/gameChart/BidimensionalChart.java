@@ -107,6 +107,10 @@ public abstract class BidimensionalChart extends AbstractChart {
 			return null;
 		}
 	}
+	
+	public Box getBoxAt(int w, int h) {
+		return chart[w][h];
+	}
 
 	protected Pair<Integer> getBoxPosition(Box b) {		
 		for (int i = 0; i < getWidth(); ++i) {
@@ -119,12 +123,16 @@ public abstract class BidimensionalChart extends AbstractChart {
 		// Return a null pair
 		return new Pair<Integer>();
 	}
-	protected void createChart() {
-		LandscapeGenerator randomLandscape = new LandscapeGenerator();
+	
+	protected void createChart() {		
+		chart = new Box[getWidth()][getHeight()];
 		
-		for(int i = 0; i< getWidth(); ++i) 
-			for(int j=0; j < getHeight(); ++j)
-					chart[i][j] = randomLandscape.generateRandomLandscape();
+		for(int i = 0; i< getWidth(); ++i) {
+			for(int j=0; j < getHeight(); ++j) {
+				chart[i][j] = LandscapeGenerator.generateRandomLandscape(this);
+				System.out.println("Generated " + chart[i][j] + " at " + i + j);
+			}
+		}
 
 	}
 

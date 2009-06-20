@@ -12,26 +12,6 @@ import java.util.Random;
 public class LandscapeGenerator {
 
 	/**
-	 * This method populates an array with all the possible landscapes. 
-	 * This method always returns immediately. 
-	 *
-	 * @return an HashSet will all the landscape types
-	 * @see City
-	 * @see Hill
-	 * @see Plain
-	 * 
-	 */
-	private static HashSet<Class<?>> items() {
-		HashSet<Class<?>> retset = new HashSet<Class<?>>();
-		
-		retset.add(City.class);
-		retset.add(Hill.class);
-		retset.add(Plain.class);
-		
-		return retset;
-	}
-	
-	/**
 	 * This method chooses a random landscape taken from the array. 
 	 *
 	 * @return an instance of a random landscape
@@ -44,23 +24,18 @@ public class LandscapeGenerator {
 	 * @see Box
 	 * 
 	 */
-	public static Box generateRandomLandscape() {
-		HashSet<Box> items = new HashSet<Box>();
-		
-		for (Class<?> type : items()) {
-			try {
-				items.add((Box)type.newInstance());
-			} catch (InstantiationException e) {
-
-			} catch (IllegalAccessException e) {
-
-			} catch (ClassCastException e) {
-				
-			}
-		}
-		
+	public static Box generateRandomLandscape(AbstractChart chart) {
 		Random r = new Random();
-		return (Box) items.toArray()[r.nextInt(items.size())];
+		switch (r.nextInt(3)) {
+		case 0:
+			return new City(chart);
+		case 1:
+			return new Hill(chart);
+		case 2:
+			return new Plain(chart);
+		default:
+			return null;
+		}
 	}
 
 }

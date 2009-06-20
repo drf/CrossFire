@@ -10,9 +10,10 @@ public class RectangularChart extends BidimensionalChart {
 	
 	public RectangularChart(int width, int height) {
 		setSize(width, height);
+		createChart();
 	}
 	
 	protected void createChart() {
-		
+		super.createChart();
 	}
 }
