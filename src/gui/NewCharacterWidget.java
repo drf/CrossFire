@@ -78,7 +78,7 @@ public class NewCharacterWidget extends javax.swing.JPanel {
 		try {
 			AnchorLayout thisLayout = new AnchorLayout();
 			this.setLayout(thisLayout);
-			setPreferredSize(new Dimension(400, 300));
+			setPreferredSize(new Dimension(500, 300));
 			{
 				ComboBoxModel raceComboModel = 
 					new DefaultComboBoxModel(

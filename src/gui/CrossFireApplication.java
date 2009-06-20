@@ -105,21 +105,30 @@ public class CrossFireApplication extends SingleFrameApplication
     }
 
 	public void GamePhaseChanged(GamePhaseChangedEvent e) {
-		contentPanel.removeAll();
-		contentPanel.validate();
 		
 		switch (e.getPhase()) {
 		case CharacterSetup:
+			/*This is basically wrong, we have to find a way to pop up NewCharacterWidget without closing 
+			 *NewPlayerWidget()
+			 */
+			contentPanel.removeAll();
+			contentPanel.validate();
 			
+			contentPanel.add(new NewCharacterWidget());
+			contentPanel.validate();
 			break;
 		case EndGame:
 			
 			break;
 		case GameCreation:
+			contentPanel.removeAll();
+			contentPanel.validate();
 			contentPanel.add(new NewPlayerWidget());
 			contentPanel.validate();
 			break;
 		case None:
+			contentPanel.removeAll();
+			contentPanel.validate();
 			contentPanel.add(new MainPanel());
 			contentPanel.validate();
 			break;

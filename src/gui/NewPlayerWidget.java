@@ -2,7 +2,13 @@ package gui;
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
 
+import gameLogic.Game;
+import gameLogic.Game.GamePhase;
+
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -59,12 +65,17 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 		try {
 			AnchorLayout thisLayout = new AnchorLayout();
 			this.setLayout(thisLayout);
-			setPreferredSize(new Dimension(400, 300));
+			setPreferredSize(new Dimension(500, 300));
 			{
 				manageCharacterButton = new JButton();
 				this.add(manageCharacterButton, new AnchorConstraint(529, 825, 795, 603, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				manageCharacterButton.setPreferredSize(new java.awt.Dimension(139, 85));
 				manageCharacterButton.setName("manageCharacterButton");
+				manageCharacterButton.addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent evt) {
+						manageCharacterButtonMouseClicked(evt);
+					}
+				});
 			}
 			{
 				removeButton = new JButton();
@@ -102,6 +113,11 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	private void manageCharacterButtonMouseClicked(MouseEvent evt) {
+		System.out.println("manageCharacterButtonMouseClicked, event="+evt);
+		Game.getInstance().setState(GamePhase.CharacterSetup);
+
 	}
 
 }
