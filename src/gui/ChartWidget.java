@@ -55,6 +55,11 @@ public class ChartWidget extends javax.swing.JPanel {
 	private int mouseXPosition;
 	private int mouseYPosition;
 	private boolean draggingMode = false;
+	private BufferedImage plainTexture;
+	private BufferedImage hillTexture;
+	
+	
+	
 	
 	/**
 	* Auto-generated main method to display this 
@@ -72,6 +77,20 @@ public class ChartWidget extends javax.swing.JPanel {
 		super();
 		this.chart = chart;
 		initGUI();
+		try {
+			plainTexture = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-00.gif"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			hillTexture = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-11.gif"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private void initGUI() {
@@ -142,27 +161,13 @@ public class ChartWidget extends javax.swing.JPanel {
 		        
 		        // Paint with the correct texture
 		        if (chart.getBoxAt(i, j) instanceof Plain) {
-					System.out.println("Plain");
-					BufferedImage img = null;
-					try {
-						img = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-00.gif"));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					g2.drawImage(img, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
+					
+					g2.drawImage(plainTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
 				}
 		        
 		        if (chart.getBoxAt(i, j) instanceof Hill) {
-					System.out.println("Plain");
-					BufferedImage img = null;
-					try {
-						img = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-11.gif"));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					g2.drawImage(img, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
+					
+					g2.drawImage(hillTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
 				}
 		        
 		        try {
