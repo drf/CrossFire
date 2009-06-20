@@ -34,6 +34,7 @@ public interface CanMagicAttack extends CanAttack {
 	public int getMagicDamageBonus();
 	
 	public HashSet<Spell> getAvailableSpells();
+	public void setAvailableSpells(HashSet<Spell> spells);
 	
 	public int getMp();
 	public void setMp(int mp);

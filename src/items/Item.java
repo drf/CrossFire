@@ -1,5 +1,6 @@
 package items;
 
+import gameLogic.CanPick;
 import gameLogic.Consumable;
 import gameLogic.Pickable;
 import globals.BaseAttributes;
@@ -104,5 +105,9 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 		} else {
 			return characterAttrs;
 		}
+	}
+	
+	public void onPick(CanPick picker) {
+		
 	}
 }

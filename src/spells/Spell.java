@@ -12,6 +12,7 @@ public abstract class Spell {
 	private int targetRange;
 	private String name;
 	private String description;
+	private boolean dealsDamage = true;
 	
 	public Spell(int cost, int distanceRange, int targetRange, String name, String description) {
 		super();
@@ -51,7 +52,12 @@ public abstract class Spell {
 	public String getDescription() {
 		return description;
 	}
-	
+	public boolean dealsDamage() {
+		return dealsDamage;
+	}
+	protected void setDealsDamage(boolean deals) {
+		dealsDamage = deals;
+	}
 	
 	
 }

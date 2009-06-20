@@ -125,6 +125,8 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 				Entity ent = (Entity)i;
 				ent.getBox().getChart().remove(ent);
 			}
+			
+			i.onPick(this);
 		}
 		
 		return false;

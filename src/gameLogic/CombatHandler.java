@@ -156,18 +156,37 @@ public class CombatHandler {
 	 */
 	public static Map<Attackable, Integer> magicAttack(CanMagicAttack from, Attackable to, Spell spell) {
 		Map<Attackable, Integer> retmap = new HashMap<Attackable, Integer>();
-				
-		retmap.put(to, genericAttack(from, to, spell.computeDamage(from, to, 0)));
 		
-		// If the spell has a range, let's compute it
-		if (spell.getTargetRange() > 0) {
-			for (int i = 1; i <= spell.getTargetRange(); i++) {
-				for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
-					for (Entity ent : b.getChart().getEntitiesOn(b)) {
-						if (ent instanceof Attackable) {
-							Attackable target = (Attackable)ent;
-							
-							retmap.put(target, genericAttack(from, target, spell.computeDamage(from, to, i)));
+		if (spell.dealsDamage()) {
+			retmap.put(to, genericAttack(from, to, spell.computeDamage(from, to, 0)));
+
+			// If the spell has a range, let's compute it
+			if (spell.getTargetRange() > 0) {
+				for (int i = 1; i <= spell.getTargetRange(); i++) {
+					for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
+						for (Entity ent : b.getChart().getEntitiesOn(b)) {
+							if (ent instanceof Attackable) {
+								Attackable target = (Attackable)ent;
+
+								retmap.put(target, genericAttack(from, target, spell.computeDamage(from, target, i)));
+							}
+						}
+					}
+				}
+			}
+		} else {
+			// The spell doesn't deal damage, so let's just process it
+			spell.computeDamage(from, to, 0);
+			
+			// If the spell has a range, let's compute it
+			if (spell.getTargetRange() > 0) {
+				for (int i = 1; i <= spell.getTargetRange(); i++) {
+					for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
+						for (Entity ent : b.getChart().getEntitiesOn(b)) {
+							if (ent instanceof Attackable) {
+								Attackable target = (Attackable)ent;
+								spell.computeDamage(from, target, i);
+							}
 						}
 					}
 				}

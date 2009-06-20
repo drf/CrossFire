@@ -40,4 +40,9 @@ public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 	public HashSet<Spell> getAvailableSpells() {
 		return spells;
 	}
+	
+	@Override
+	public void setAvailableSpells(HashSet<Spell> spells) {
+		this.spells = spells;
+	}
 }

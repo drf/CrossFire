@@ -45,6 +45,11 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 	public HashSet<Spell> getAvailableSpells() {
 		return spells;
 	}
+
+	@Override
+	public void setAvailableSpells(HashSet<Spell> spells) {
+		this.spells = spells;
+	}
 	
 	
 }
