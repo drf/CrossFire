@@ -6,13 +6,10 @@ import gameChart.Hill;
 import gameChart.Plain;
 import gameChart.RectangularChart;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -191,6 +188,19 @@ public class ChartWidget extends javax.swing.JPanel {
 		        
 			}
 		}
+		
+		try {
+			g2.setTransform(new AffineTransform());
+			Point2D pt = null;
+				pt = at.transform(new Point2D.Double((double)(XPosition + 5 * multiplier + multiplier/2), (double)(YPosition + 5 * multiplier + multiplier/2)), null);
+			
+			g2.drawImage(ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/angel.gif")), (int)(pt.getX()), (int)(pt.getY()), (int)(multiplier*1.5), (int)(multiplier*1.5), null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	private void thisKeyPressed(KeyEvent evt) {
