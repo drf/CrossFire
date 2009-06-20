@@ -100,14 +100,13 @@ public class CrossFireApplication extends SingleFrameApplication
     }
 
     public static void main(String[] args) {
-        launch(CrossFireApplication.class, args);
+
+    	launch(CrossFireApplication.class, args);
     }
 
-	@Override
 	public void GamePhaseChanged(GamePhaseChangedEvent e) {
-		for (int i = 0; i < contentPanel.getComponentCount(); i++) {
-			contentPanel.remove(i);
-		}
+		contentPanel.removeAll();
+		contentPanel.validate();
 		
 		switch (e.getPhase()) {
 		case CharacterSetup:
@@ -117,10 +116,12 @@ public class CrossFireApplication extends SingleFrameApplication
 			
 			break;
 		case GameCreation:
-			
+			contentPanel.add(new NewPlayerWidget());
+			contentPanel.validate();
 			break;
 		case None:
 			contentPanel.add(new MainPanel());
+			contentPanel.validate();
 			break;
 		case Turn:
 			break;

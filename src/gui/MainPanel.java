@@ -29,6 +29,10 @@ import javax.swing.JLabel;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class MainPanel extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5929205279245834501L;
 	private JLabel introLabel;
 	private JButton quitButton;
 	private JButton loadButton;

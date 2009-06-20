@@ -1,6 +1,5 @@
 package gameLogic;
 
-import java.util.EventListener;
 import java.util.Map;
 
 import javax.swing.event.EventListenerList;

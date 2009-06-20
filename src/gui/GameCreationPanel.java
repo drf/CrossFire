@@ -9,10 +9,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 import javax.swing.WindowConstants;
-import org.jdesktop.application.Application;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.jdesktop.application.Application;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -27,6 +28,10 @@ import javax.swing.JPanel;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class GameCreationPanel extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2780769207856411488L;
 	private JLabel jLabel1;
 	private JPanel widgetsPanel;
 	private JButton addButton;

@@ -27,6 +27,10 @@ import javax.swing.JTextField;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class NewPlayerWidget extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 763238634689294973L;
 	private JLabel jLabel1;
 	private JTextField nameBox;
 	private JLabel jLabel2;
@@ -58,14 +62,14 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 			setPreferredSize(new Dimension(400, 300));
 			{
 				manageCharacterButton = new JButton();
-				this.add(manageCharacterButton, new AnchorConstraint(535, 978, 800, 771, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				manageCharacterButton.setPreferredSize(new java.awt.Dimension(83, 30));
+				this.add(manageCharacterButton, new AnchorConstraint(529, 825, 795, 603, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				manageCharacterButton.setPreferredSize(new java.awt.Dimension(139, 85));
 				manageCharacterButton.setName("manageCharacterButton");
 			}
 			{
 				removeButton = new JButton();
-				this.add(removeButton, new AnchorConstraint(127, 975, 382, 771, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				removeButton.setPreferredSize(new java.awt.Dimension(88, 25));
+				this.add(removeButton, new AnchorConstraint(126, 820, 382, 603, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				removeButton.setPreferredSize(new java.awt.Dimension(136, 82));
 				removeButton.setName("removeButton");
 			}
 			{
@@ -73,9 +77,9 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 					new DefaultComboBoxModel(
 							new String[] { "Human", "Computer", "Monster" });
 				controllerCombo = new JComboBox();
-				this.add(controllerCombo, new AnchorConstraint(535, 709, 831, 265, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(controllerCombo, new AnchorConstraint(529, 552, 823, 109, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				controllerCombo.setModel(controllerComboModel);
-				controllerCombo.setPreferredSize(new java.awt.Dimension(192, 29));
+				controllerCombo.setPreferredSize(new java.awt.Dimension(278, 94));
 			}
 			{
 				jLabel2 = new JLabel();
@@ -85,8 +89,8 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 			}
 			{
 				nameBox = new JTextField();
-				this.add(nameBox, new AnchorConstraint(127, 709, 382, 265, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				nameBox.setPreferredSize(new java.awt.Dimension(192, 25));
+				this.add(nameBox, new AnchorConstraint(126, 547, 382, 104, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				nameBox.setPreferredSize(new java.awt.Dimension(278, 82));
 			}
 			{
 				jLabel1 = new JLabel();

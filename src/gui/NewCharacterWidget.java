@@ -27,6 +27,10 @@ import javax.swing.JTextField;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class NewCharacterWidget extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7287597263958530429L;
 	private JLabel jLabel1;
 	private JLabel jLabel2;
 	private JLabel jLabel3;
