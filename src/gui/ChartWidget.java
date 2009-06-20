@@ -1,6 +1,8 @@
 package gui;
 
 import gameChart.BidimensionalChart;
+import gameChart.Hill;
+import gameChart.Plain;
 import gameChart.RectangularChart;
 
 import java.awt.Color;
@@ -9,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -20,7 +23,11 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 
@@ -132,10 +139,35 @@ public class ChartWidget extends javax.swing.JPanel {
 			for (int j = 0; j < chart.getHeight(); j++) {
 		        Rectangle2D rectangle = new Rectangle2D.Float(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
 		        g2.draw(rectangle);
+		        
+		        // Paint with the correct texture
+		        if (chart.getBoxAt(i, j) instanceof Plain) {
+					System.out.println("Plain");
+					BufferedImage img = null;
+					try {
+						img = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-00.gif"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					g2.drawImage(img, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
+				}
+		        
+		        if (chart.getBoxAt(i, j) instanceof Hill) {
+					System.out.println("Plain");
+					BufferedImage img = null;
+					try {
+						img = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-11.gif"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					g2.drawImage(img, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
+				}
+		        
 		        try {
 					if (rectangle.contains(at.inverseTransform(new Point2D.Double((double)mouseXPosition, (double)mouseYPosition), null))) {
 						g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
-						System.out.println(chart.getBoxAt(i, j));
 					}
 				} catch (NoninvertibleTransformException e) {
 					// TODO Auto-generated catch block
