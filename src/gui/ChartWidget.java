@@ -82,7 +82,7 @@ public class ChartWidget extends javax.swing.JPanel {
 		super();
 		this.chart = chart;
 		try {
-			chart.place(new Dragon(), chart.getBoxAt(8, 8));
+			chart.place(new Dragon(), chart.getBoxAt(0,0));
 		} catch (BoxBusyException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -169,7 +169,7 @@ public class ChartWidget extends javax.swing.JPanel {
 	
 	public Point2D getPointAtIndex(int width, int height) {
 		return baseTransform.transform(new Point2D.Double((double)(XPosition + multiplier + width * multiplier - multiplier/4), 
-														  (double)(YPosition - multiplier + height * multiplier - multiplier/4)), 
+														  (double)(YPosition + height * multiplier - multiplier/4)), 
 														  null);
 	}
 
@@ -227,7 +227,7 @@ public class ChartWidget extends javax.swing.JPanel {
 				for (Entity item : chart.getEntitiesOn(chart.getBoxAt(i, j))) {
 					g2.setTransform(new AffineTransform());
 					Point2D pt = getPointAtIndex(i, j);
-					g2.drawImage(item.getImage(), (int)(pt.getX()), (int)(pt.getY()), (int)(multiplier*1.5), (int)(multiplier*1.5), null);
+					g2.drawImage(item.getImage(), (int)(pt.getX() - multiplier/6), (int)(pt.getY() - multiplier/6), (int)(multiplier), (int)(multiplier), null);
 					g2.setTransform(baseTransform);
 				}
 			}

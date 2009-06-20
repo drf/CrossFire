@@ -33,7 +33,7 @@ public class Dragon extends Monster {
 	public Dragon() {
 		super(50, 80, 30, 0, 5, 60);
 		try {
-			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/angel.gif")));
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/dragon.gif")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
