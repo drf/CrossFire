@@ -48,7 +48,7 @@ import javax.swing.JFrame;
 public class ChartWidget extends javax.swing.JPanel {
 
 	private BidimensionalChart chart;
-	private int multiplier = 20;
+	private int multiplier = 40;
 	private int XPosition = 100;
 	private int YPosition = 100;
 	private int lastXMouseOffset;
@@ -203,10 +203,11 @@ public class ChartWidget extends javax.swing.JPanel {
 	}
 	
 	private void thisMouseWheelMoved(MouseWheelEvent evt) {
-		System.out.println("this.mouseWheelMoved, event="+evt);
-		//TODO add your code for this.mouseWheelMoved
 		if (evt.getWheelRotation() > 0) {
-			--multiplier;
+			// Avoid getting reversed
+			if (multiplier > 1) {
+				--multiplier;
+			}
 			updateUI();
 		} else {
 			++multiplier;
