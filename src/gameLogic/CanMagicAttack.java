@@ -35,8 +35,8 @@ public interface CanMagicAttack extends CanAttack {
 	
 	public HashSet<Spell> getAvailableSpells();
 	
-	public int getMP();
-	public void setMP(int mp);
+	public int getMp();
+	public void setMp(int mp);
 	
 	/**
 	 * This function serves as a runtime check to see if the object is actually able

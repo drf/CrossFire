@@ -1,7 +1,12 @@
 package characters;
 
+import java.awt.Image;
 import java.util.HashSet;
 
+import spells.AuraBolt;
+import spells.Fireball;
+import spells.Heal;
+import spells.Implosion;
 import spells.Spell;
 
 import gameLogic.CanMagicAttack;
@@ -29,5 +34,17 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 		this.setIntelligence(Character.randomAttributes(90, 100 + 1, 1).get(0));
 		this.setStrength(Character.randomAttributes(0, 20 + 1, 1).get(0));
 		this.setMagicSkill(Character.randomAttributes(80, 100 + 1, 1).get(0));
+		
+		spells.add(new Heal());
+		spells.add(new AuraBolt());
+		spells.add(new Implosion());
+		spells.add(new Fireball());
 	}
+
+	@Override
+	public HashSet<Spell> getAvailableSpells() {
+		return spells;
+	}
+	
+	
 }

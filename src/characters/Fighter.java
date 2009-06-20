@@ -34,7 +34,7 @@ public abstract class Fighter extends PlayableEntity {
 		super();
 		Random r = new Random();
 		attributes = new BaseAttributes(r.nextInt(101), r.nextInt(101), r.nextInt(101),
-				r.nextInt(101), r.nextInt(101), 100);		
+				r.nextInt(101), r.nextInt(101), 100, 100);		
 	}
 	
 	/**
@@ -47,8 +47,8 @@ public abstract class Fighter extends PlayableEntity {
 	 * @param luck the fighter's luck
 	 * @param HP the fighter's health points
 	 */
-	public Fighter(int intelligence, int strength, int dexterity, int magicskill, int luck, int HP) {
-		attributes = new BaseAttributes(intelligence, strength, dexterity, magicskill, luck, HP);
+	public Fighter(int intelligence, int strength, int dexterity, int magicskill, int luck, int HP, int MP) {
+		attributes = new BaseAttributes(intelligence, strength, dexterity, magicskill, luck, HP, MP);
 	}
 	
 	/**
@@ -132,6 +132,13 @@ public abstract class Fighter extends PlayableEntity {
 	}
 	
 	/**
+	 * @return The magic points of the fighter
+	 */
+	public int getMp() {
+		return attributes.getMp();
+	}
+	
+	/**
 	 * @param value the new strength for the fighter
 	 */
 	public void setStrength(int value) {
@@ -171,6 +178,13 @@ public abstract class Fighter extends PlayableEntity {
 	 */
 	public void setHp(int value) {
 		attributes.setHp(value);
+	}
+	
+	/**
+	 * @param value the new magic points for the fighter
+	 */
+	public void setMp(int value) {
+		attributes.setMp(value);
 	}
 	
 	public String toString() {

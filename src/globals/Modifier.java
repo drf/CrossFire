@@ -52,9 +52,9 @@ public class Modifier extends BaseAttributes {
 	 */
 
 	public Modifier(int intelligence, int power, int dexterity,
-			int magicSkill, int luck, int hp, int bonusMagicDamage, 
+			int magicSkill, int luck, int hp, int mp, int bonusMagicDamage, 
 			int bonusMeleeDamage, int bonusRangedDamage, int bonusDamageReduction) {
-		super(intelligence, power, dexterity, magicSkill, luck, hp);
+		super(intelligence, power, dexterity, magicSkill, luck, hp, mp);
 		this.bonusDamageReduction = bonusDamageReduction;
 		this.bonusMagicDamage = bonusMagicDamage;
 		this.bonusMeleeDamage = bonusMeleeDamage;
@@ -64,7 +64,7 @@ public class Modifier extends BaseAttributes {
 	/**
 	 *
      * This method changes the values of a {@link BaseAttributes} with the attributes of this object. It must be called
-     * when an {@link Item}Êis picked by a {@Character}
+     * when an {@link Item}ï¿½is picked by a {@Character}
 	 * This method always returns immediately. 
 	 *
 	 * @param	characterAttrs the attributes of a {@link Character}
@@ -80,13 +80,14 @@ public class Modifier extends BaseAttributes {
 		characterAttrs.setMagicSkill(characterAttrs.getMagicSkill() + getMagicSkill());
 		characterAttrs.setStrength(characterAttrs.getStrength() + getStrength());
 		characterAttrs.setHp(characterAttrs.getHp() + getHp());
+		characterAttrs.setMp(characterAttrs.getMp() + getMp());
 		return characterAttrs;
 	}
 
 	/**
 	 *
      * This method resets the values of a {@link BaseAttributes} with the attributes of this object. It must be called
-     * when an {@link Item}Êis dropped by a {@Character}
+     * when an {@link Item}ï¿½is dropped by a {@Character}
 	 * This method always returns immediately. 
 	 *
 	 * @param	characterAttrs the attributes of a {@link Character}
@@ -102,6 +103,7 @@ public class Modifier extends BaseAttributes {
 		characterAttrs.setMagicSkill(characterAttrs.getMagicSkill() - getMagicSkill());
 		characterAttrs.setStrength(characterAttrs.getStrength() - getStrength());
 		characterAttrs.setHp(characterAttrs.getHp() - getHp());
+		characterAttrs.setMp(characterAttrs.getMp() - getMp());
 		return characterAttrs;
 	
 	}

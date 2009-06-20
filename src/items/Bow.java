@@ -19,7 +19,7 @@ public class Bow extends Item {
 	 * Creates a new bow according to specifics
 	 */
 	public Bow() {
-		super(0, 0, 0, 0, 0, 0, 0, 0, +10, 0);
+		super(0, 0, 0, 0, 0, 0, 0, 0, 0, +10, 0);
 		BaseAttributes min = new BaseAttributes();
 		min.setLuck(50);
 		min.setDexterity(50);

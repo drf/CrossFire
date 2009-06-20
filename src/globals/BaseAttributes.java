@@ -24,6 +24,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 	private int magicSkill;
 	private int luck;
 	private int hp;
+	private int mp;
 	
 	/**
 	 *
@@ -41,6 +42,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 		this.magicSkill = 0;
 		this.luck = 0;
 		this.hp = 0;
+		this.mp = 0;
 	}
 	
 	/**
@@ -63,7 +65,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 	 * @see 	BaseAttributes
 	 */
 	public BaseAttributes(int intelligence, int power, int dexterity,
-			int magicSkill, int luck, int hp) {
+			int magicSkill, int luck, int hp, int mp) {
 		super();
 		this.intelligence = intelligence;
 		this.strength = power;
@@ -71,6 +73,7 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 		this.magicSkill = magicSkill;
 		this.luck = luck;
 		this.hp = hp;
+		this.mp = mp;
 	}
 
 	public int getHp() {
@@ -78,6 +81,12 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 	}
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+	public int getMp() {
+		return mp;
+	}
+	public void setMp(int mp) {
+		this.mp = mp;
 	}
 	public int getIntelligence() {
 		return intelligence;
@@ -167,6 +176,14 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 			if (hp < o.getHp()) {
 				return -1;
 			} else if (hp > o.getHp()) {
+				ret = 1;
+			}
+		}
+		
+		if (mp != 0 && o.getMp() != 0) {
+			if (mp < o.getMp()) {
+				return -1;
+			} else if (mp > o.getMp()) {
 				ret = 1;
 			}
 		}

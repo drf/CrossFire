@@ -1,5 +1,10 @@
 package characters;
 
+import java.util.HashSet;
+
+import spells.AuraBolt;
+import spells.Heal;
+import spells.Spell;
 import gameLogic.CanMagicAttack;
 import gameLogic.CanRangedAttack;
 
@@ -16,6 +21,8 @@ public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 	 * 
 	 */
 	private static final long serialVersionUID = -566722519869275030L;
+	
+	private HashSet<Spell> spells = new HashSet<Spell>();
 
 	public Elf() {
 		super();
@@ -24,5 +31,13 @@ public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 		this.setIntelligence(Character.randomAttributes(70, 100 + 1, 1).get(0));
 		this.setStrength(Character.randomAttributes(0, 50 + 1, 1).get(0));
 		this.setMagicSkill(Character.randomAttributes(50 - 1, 80, 1).get(0));
+		
+		spells.add(new Heal());
+		spells.add(new AuraBolt());
+	}
+
+	@Override
+	public HashSet<Spell> getAvailableSpells() {
+		return spells;
 	}
 }

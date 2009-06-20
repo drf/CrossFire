@@ -5,14 +5,12 @@ import gameChart.Box;
 import globals.Entity;
 import globals.Pair;
 
-import java.util.Dictionary;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 import spells.Spell;
-import sun.security.action.GetBooleanAction;
 
 /**
  * <b>CombatHandler</b> is a container of static functions that handle a multitude
@@ -177,7 +175,7 @@ public class CombatHandler {
 		}
 		
 		// Subtract the MPs
-		from.setMP(from.getMP() - spell.getCost());
+		from.setMp(from.getMp() - spell.getCost());
 						
 		return retmap;
 	}
@@ -222,7 +220,7 @@ public class CombatHandler {
 	 * the provided {@link AttackType} or not
 	 */
 	public static boolean canCastSpell(CanMagicAttack attacker, Spell type) {
-		if (attacker.getAvailableSpells().contains(type) && type.getCost() <= attacker.getMP()) {
+		if (attacker.getAvailableSpells().contains(type) && type.getCost() <= attacker.getMp()) {
 			return true;
 		}
 		
