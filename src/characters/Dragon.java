@@ -2,6 +2,7 @@ package characters;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 
 import javax.imageio.ImageIO;
 
@@ -32,7 +33,7 @@ public class Dragon extends Monster {
 	public Dragon() {
 		super(50, 80, 30, 0, 5, 60);
 		try {
-			setImage(ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/angel.gif")));
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/angel.gif")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
