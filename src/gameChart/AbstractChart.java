@@ -97,4 +97,24 @@ public abstract class AbstractChart {
 		
 	}
 	
+	public Set<Box> getBoxesAtRange(Box b, int range) {
+		HashSet<Box> retset = new HashSet<Box>();
+		HashSet<Box> latestBoxes = new HashSet<Box>();
+		
+		for (int i = 0; i < range; i++) {
+			HashSet<Box> currentBoxes = new HashSet<Box>();
+			for (Box box : latestBoxes) {
+				currentBoxes.addAll(getAdjacentBoxes(box));
+			}
+			latestBoxes.clear();
+			latestBoxes.addAll(currentBoxes);
+			currentBoxes.clear();
+		}
+		
+		retset.addAll(latestBoxes);
+		
+		return retset;
+		
+	}
+	
 }

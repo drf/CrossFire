@@ -1,5 +1,9 @@
 package gameLogic;
 
+import java.util.HashSet;
+
+import spells.Spell;
+
 import characters.Fighter;
 
 /**
@@ -28,6 +32,11 @@ public interface CanMagicAttack extends CanAttack {
 	 * @return the magic damage bonus of the object implementing the interface
 	 */
 	public int getMagicDamageBonus();
+	
+	public HashSet<Spell> getAvailableSpells();
+	
+	public int getMP();
+	public void setMP(int mp);
 	
 	/**
 	 * This function serves as a runtime check to see if the object is actually able

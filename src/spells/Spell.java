@@ -11,13 +11,15 @@ public abstract class Spell {
 	private int distanceRange;
 	private int targetRange;
 	private String name;
+	private String description;
 	
-	public Spell(int cost, int distanceRange, int targetRange, String name) {
+	public Spell(int cost, int distanceRange, int targetRange, String name, String description) {
 		super();
 		this.cost = cost;
 		this.distanceRange = distanceRange;
 		this.targetRange = targetRange;
 		this.name = name;
+		this.description = description;
 	}
 	/**
 	 * @return the cost
@@ -43,6 +45,13 @@ public abstract class Spell {
 	public String getName() {
 		return name;
 	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	
 	
 	
 }
