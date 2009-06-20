@@ -52,11 +52,11 @@ public class ChartWidget extends javax.swing.JPanel {
 	private int lastYMouseOffset;
 	private int mouseXPosition;
 	private int mouseYPosition;
-	private boolean draggingMode = false;
+	private boolean draggingMode = true;
 	private BufferedImage plainTexture;
 	private BufferedImage hillTexture;
 	private BufferedImage cityTexture;
-	
+	private AffineTransform baseTransform;
 	
 	
 	/**
@@ -74,7 +74,12 @@ public class ChartWidget extends javax.swing.JPanel {
 	public ChartWidget(BidimensionalChart chart) {
 		super();
 		this.chart = chart;
-		initGUI();
+		
+		baseTransform = AffineTransform.getRotateInstance(-0.91, XPosition + (chart.getWidth() * multiplier)/2 ,
+														  YPosition + (chart.getHeight() * multiplier)/2);
+		baseTransform.shear(0, .3);
+		baseTransform.translate(-50, 0);
+		
 		try {
 			plainTexture = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-00.gif"));
 		} catch (IOException e) {
@@ -95,6 +100,8 @@ public class ChartWidget extends javax.swing.JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		initGUI();
 		
 	}
 	
@@ -146,19 +153,21 @@ public class ChartWidget extends javax.swing.JPanel {
 		super.paintComponent(g);
 		paintInDeviceCoords(g);
 	}
+	
+	public Point2D getPointAtIndex(int width, int height) {
+		return baseTransform.transform(new Point2D.Double((double)(XPosition + multiplier + width * multiplier - multiplier/4), 
+														  (double)(YPosition - multiplier + height * multiplier - multiplier/4)), 
+														  null);
+	}
 
 	public void paintInDeviceCoords(Graphics g)
 	{
 		int width = chart.getWidth() * multiplier;
 		int heigth = chart.getHeight() * multiplier;
 		
-		AffineTransform at = AffineTransform.getRotateInstance(-0.91, XPosition + width/2 , YPosition + heigth/2);
-		at.shear(0, .3);
-		at.translate(-50, 0);
-		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		g2.transform(at);
+		g2.transform(baseTransform);
 		for (int i = 0; i < chart.getWidth(); i++) {
 			for (int j = 0; j < chart.getHeight(); j++) {
 		        Rectangle2D rectangle = new Rectangle2D.Float(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
@@ -178,7 +187,7 @@ public class ChartWidget extends javax.swing.JPanel {
 				}
 		        
 		        try {
-					if (rectangle.contains(at.inverseTransform(new Point2D.Double((double)mouseXPosition, (double)mouseYPosition), null))) {
+					if (rectangle.contains(baseTransform.inverseTransform(new Point2D.Double((double)mouseXPosition, (double)mouseYPosition), null))) {
 						g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
 					}
 				} catch (NoninvertibleTransformException e) {
@@ -191,9 +200,16 @@ public class ChartWidget extends javax.swing.JPanel {
 		
 		try {
 			g2.setTransform(new AffineTransform());
-			Point2D pt = null;
-				pt = at.transform(new Point2D.Double((double)(XPosition + 5 * multiplier + multiplier/2), (double)(YPosition + 5 * multiplier + multiplier/2)), null);
-			
+			Point2D pt = getPointAtIndex(0, 0);
+			g2.drawImage(ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/angel.gif")), (int)(pt.getX()), (int)(pt.getY()), (int)(multiplier*1.5), (int)(multiplier*1.5), null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			g2.setTransform(new AffineTransform());
+			Point2D pt = getPointAtIndex(5, 0);
 			g2.drawImage(ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/angel.gif")), (int)(pt.getX()), (int)(pt.getY()), (int)(multiplier*1.5), (int)(multiplier*1.5), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
