@@ -1,15 +1,19 @@
 package gui;
 
 import gameChart.BidimensionalChart;
+import gameChart.Box;
+import gameChart.BoxBusyException;
 import gameChart.City;
 import gameChart.Hill;
 import gameChart.Plain;
 import gameChart.RectangularChart;
+import globals.Entity;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.dnd.DragGestureEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -28,6 +32,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
+
+import characters.Dragon;
+import characters.Human;
 
 
 /**
@@ -74,6 +81,12 @@ public class ChartWidget extends javax.swing.JPanel {
 	public ChartWidget(BidimensionalChart chart) {
 		super();
 		this.chart = chart;
+		try {
+			chart.place(new Dragon(), chart.getBoxAt(8, 8));
+		} catch (BoxBusyException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		baseTransform = AffineTransform.getRotateInstance(-0.91, XPosition + (chart.getWidth() * multiplier)/2 ,
 														  YPosition + (chart.getHeight() * multiplier)/2);
@@ -160,63 +173,65 @@ public class ChartWidget extends javax.swing.JPanel {
 														  null);
 	}
 
-	public void paintInDeviceCoords(Graphics g)
+	private void paintInDeviceCoords(Graphics g)
 	{
-		int width = chart.getWidth() * multiplier;
-		int heigth = chart.getHeight() * multiplier;
-		
 		Graphics2D g2 = (Graphics2D)g;
 		
 		g2.transform(baseTransform);
 		for (int i = 0; i < chart.getWidth(); i++) {
 			for (int j = 0; j < chart.getHeight(); j++) {
+				
+				// Draw the rectangle
+				
 		        Rectangle2D rectangle = new Rectangle2D.Float(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
 		        g2.draw(rectangle);
 		        
 		        // Paint with the correct texture
-		        if (chart.getBoxAt(i, j) instanceof Plain) {
-					g2.drawImage(plainTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
-				}
-		        
-		        if (chart.getBoxAt(i, j) instanceof Hill) {
-					g2.drawImage(hillTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
-				}
-		        
-		        if (chart.getBoxAt(i, j) instanceof City) {
-					g2.drawImage(cityTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
-				}
-		        
+		        paintBox(g2, i, j);
+
+		        // Check for mouse hover effect
 		        try {
-					if (rectangle.contains(baseTransform.inverseTransform(new Point2D.Double((double)mouseXPosition, (double)mouseYPosition), null))) {
-						g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
-					}
-				} catch (NoninvertibleTransformException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		        	if (rectangle.contains(baseTransform.inverseTransform(new Point2D.Double((double)mouseXPosition, (double)mouseYPosition), null))) {
+		        		g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
+		        	}
+		        } catch (NoninvertibleTransformException e) {
+		        	e.printStackTrace();
+		        }
 		        
 			}
 		}
 		
-		try {
-			g2.setTransform(new AffineTransform());
-			Point2D pt = getPointAtIndex(0, 0);
-			g2.drawImage(ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/angel.gif")), (int)(pt.getX()), (int)(pt.getY()), (int)(multiplier*1.5), (int)(multiplier*1.5), null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		// Paint the entities (they should be on top view)
+		paintEntities(g2);
+	}
+	
+	private void paintBox(Graphics2D g2, int i, int j) {
+		// Draw texture
+		if (chart.getBoxAt(i, j) instanceof Plain) {
+			g2.drawImage(plainTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
 		}
-		
-		try {
-			g2.setTransform(new AffineTransform());
-			Point2D pt = getPointAtIndex(5, 0);
-			g2.drawImage(ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/angel.gif")), (int)(pt.getX()), (int)(pt.getY()), (int)(multiplier*1.5), (int)(multiplier*1.5), null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+        
+        if (chart.getBoxAt(i, j) instanceof Hill) {
+			g2.drawImage(hillTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
 		}
-		
-		
+        
+        if (chart.getBoxAt(i, j) instanceof City) {
+			g2.drawImage(cityTexture, XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, null);
+		}
+	}
+	
+	private void paintEntities(Graphics2D g2) {
+		// Draw entities
+		for (int i = 0; i < chart.getWidth(); i++) {
+			for (int j = 0; j < chart.getHeight(); j++) {
+				for (Entity item : chart.getEntitiesOn(chart.getBoxAt(i, j))) {
+					g2.setTransform(new AffineTransform());
+					Point2D pt = getPointAtIndex(i, j);
+					g2.drawImage(item.getImage(), (int)(pt.getX()), (int)(pt.getY()), (int)(multiplier*1.5), (int)(multiplier*1.5), null);
+					g2.setTransform(baseTransform);
+				}
+			}
+		}
 	}
 	
 	private void thisKeyPressed(KeyEvent evt) {

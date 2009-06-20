@@ -1,5 +1,7 @@
 package globals;
 
+import java.awt.image.BufferedImage;
+
 import gameChart.Box;
 import gameChart.BoxBusyException;
 import gameLogic.Movable;
@@ -28,6 +30,7 @@ public abstract class Entity implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 602249422396237313L;
 	private Box box;
+	private BufferedImage image;
 	
 	public Entity() {}
 	
@@ -70,5 +73,14 @@ public abstract class Entity implements java.io.Serializable {
 		}
 		
 	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	protected void setImage(BufferedImage image) {
+		this.image = image;
+	}
+	
 	
 }

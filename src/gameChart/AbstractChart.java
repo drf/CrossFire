@@ -3,13 +3,14 @@ package gameChart;
 import globals.Entity;
 import globals.PlayableEntity;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public abstract class AbstractChart {
 	
-	private Map<Entity, Box> positions;
+	private Map<Entity, Box> positions = new HashMap<Entity, Box>();
 	
 	public Set<Box> getBoxes() {
 		HashSet<Box> retset = new HashSet<Box>();
