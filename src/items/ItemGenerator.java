@@ -29,6 +29,8 @@ public class ItemGenerator {
 		retset.add(MagicStick.class);
 		retset.add(Potion.class);
 		retset.add(Shield.class);
+		retset.add(Elixir.class);
+		retset.add(SpellBook.class);
 		
 		return retset;
 	}

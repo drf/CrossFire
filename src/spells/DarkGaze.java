@@ -1,6 +1,5 @@
 package spells;
 
-import characters.Fighter;
 import gameLogic.Attackable;
 import gameLogic.CanMagicAttack;
 import globals.PlayableEntity;
