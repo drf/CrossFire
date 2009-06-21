@@ -238,8 +238,10 @@ public class CombatHandler {
 	 * @return whether the provided {@link CanAttack} can perform 
 	 * the provided {@link AttackType} or not
 	 */
-	public static boolean canCastSpell(CanMagicAttack attacker, Spell type) {
-		if (attacker.getAvailableSpells().contains(type) && type.getCost() <= attacker.getMp()) {
+	public static boolean canCastSpell(CanMagicAttack attacker,Attackable target, Spell type) {
+		if (attacker.getAvailableSpells().contains(type) && 
+			type.getCost() <= attacker.getMp() &&
+			type.fulfillsSpecialRequirements(attacker, target)) {
 			return true;
 		}
 		

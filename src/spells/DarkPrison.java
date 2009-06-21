@@ -21,5 +21,11 @@ public class DarkPrison extends Spell {
 		enemy.setMagicSkill(enemy.getMagicSkill() - (int)((caster.getIntelligence() + caster.getMagicSkill()) * 0.1));
 		return 0;
 	}
+	
+	@Override
+	public boolean fulfillsSpecialRequirements(CanMagicAttack caster,
+			Attackable target) {
+		return target instanceof Fighter;
+	}
 
 }

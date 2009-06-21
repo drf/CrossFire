@@ -22,4 +22,15 @@ public class Bless extends Spell {
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see spells.Spell#fulfillsSpecialRequirements(gameLogic.CanMagicAttack, gameLogic.Attackable)
+	 */
+	@Override
+	public boolean fulfillsSpecialRequirements(CanMagicAttack caster,
+			Attackable target) {
+		return target instanceof Fighter;
+	}
+	
+	
+
 }
