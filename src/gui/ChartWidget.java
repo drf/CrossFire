@@ -94,21 +94,21 @@ public class ChartWidget extends javax.swing.JPanel {
 		baseTransform.translate(-50, 0);
 		
 		try {
-			plainTexture = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-00.gif"));
+			plainTexture = ImageIO.read(ClassLoader.getSystemResource("resources/Terrain2-00.gif"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
-			hillTexture = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/Terrain2-11.gif"));
+			hillTexture = ImageIO.read(ClassLoader.getSystemResource("resources/Terrain2-11.gif"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
-			cityTexture = ImageIO.read(new File("/home/drf/workspace/CrossFIre/src/resources/FlrTle2-07.gif"));
+			cityTexture = ImageIO.read(ClassLoader.getSystemResource("resources/FlrTle2-07.gif"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
