@@ -1,5 +1,6 @@
 package spells;
 
+import characters.Fighter;
 import gameLogic.Attackable;
 import gameLogic.CanMagicAttack;
 import globals.PlayableEntity;
@@ -16,6 +17,12 @@ public class DarkGaze extends Spell {
 			int rangeLevel) {
 		((PlayableEntity)target).setPlayer(((PlayableEntity)caster).getPlayer());
 		return 0;
+	}
+	
+	@Override
+	public boolean fulfillsSpecialRequirements(CanMagicAttack caster,
+			Attackable target) {
+		return target instanceof PlayableEntity && caster instanceof PlayableEntity;
 	}
 
 }

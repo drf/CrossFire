@@ -58,6 +58,9 @@ public abstract class Spell {
 	protected void setDealsDamage(boolean deals) {
 		dealsDamage = deals;
 	}
+	public boolean fulfillsSpecialRequirements(CanMagicAttack caster, Attackable target) {
+		return true;
+	}
 	
 	
 }
