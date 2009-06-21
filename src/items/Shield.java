@@ -1,12 +1,14 @@
 package items;
 
+import gameLogic.Equipable;
+
 /**
  * Shield as defined in the game specifics
  * 
  * @author drf
  *
  */
-public class Shield extends Item {
+public class Shield extends Item implements Equipable {
 
 	/**
 	 * 
@@ -17,7 +19,7 @@ public class Shield extends Item {
 	 * Create a new shield
 	 */
 	public Shield() {
-		super(0, 0, -10, 0, 0, 0, 0, 0, 0, 10);
+		super(0, 0, 0, -10, 0, 0, 0, 0, 0, 0, 10);
 	}
 
 }

@@ -4,6 +4,10 @@ import gameLogic.CanMagicAttack;
 import gameLogic.CanRangedAttack;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+
+import spells.AuraBolt;
+import spells.Spell;
 
 /**
  * <b>Human</b> is one of {@link Character}'s races. It has balanced attributes
@@ -18,6 +22,8 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 	 * 
 	 */
 	private static final long serialVersionUID = 8123383954498179845L;
+	
+	private HashSet<Spell> spells = new HashSet<Spell>();
 
 	public Human() {
 		super();
@@ -27,5 +33,17 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 		this.setIntelligence(attrs.get(2));
 		this.setLuck(attrs.get(3));
 		this.setMagicSkill(attrs.get(4));		
+		
+		spells.add(new AuraBolt());
+	}
+
+	@Override
+	public HashSet<Spell> getAvailableSpells() {
+		return spells;
+	}
+	
+	@Override
+	public void setAvailableSpells(HashSet<Spell> spells) {
+		this.spells = spells;
 	}
 }

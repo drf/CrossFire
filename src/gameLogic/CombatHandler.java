@@ -1,10 +1,16 @@
 package gameLogic;
 
 
+import gameChart.Box;
+import globals.Entity;
 import globals.Pair;
 
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+
+import spells.Spell;
 
 /**
  * <b>CombatHandler</b> is a container of static functions that handle a multitude
@@ -148,11 +154,49 @@ public class CombatHandler {
 	 * @return the dealt damage
 	 * 
 	 */
-	public static int magicAttack(CanMagicAttack from, Attackable to) {
-		int damage = (int)(from.getIntelligence() * 0.2 + from.getMagicSkill() * 0.5) + from.getMagicDamageBonus();
-		damage = genericAttack(from, to, damage);
+	public static Map<Attackable, Integer> magicAttack(CanMagicAttack from, Attackable to, Spell spell) {
+		Map<Attackable, Integer> retmap = new HashMap<Attackable, Integer>();
+		
+		if (spell.dealsDamage()) {
+			retmap.put(to, genericAttack(from, to, spell.computeDamage(from, to, 0)));
+
+			// If the spell has a range, let's compute it
+			if (spell.getTargetRange() > 0) {
+				for (int i = 1; i <= spell.getTargetRange(); i++) {
+					for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
+						for (Entity ent : b.getChart().getEntitiesOn(b)) {
+							if (ent instanceof Attackable) {
+								Attackable target = (Attackable)ent;
+
+								retmap.put(target, genericAttack(from, target, spell.computeDamage(from, target, i)));
+							}
+						}
+					}
+				}
+			}
+		} else {
+			// The spell doesn't deal damage, so let's just process it
+			spell.computeDamage(from, to, 0);
+			
+			// If the spell has a range, let's compute it
+			if (spell.getTargetRange() > 0) {
+				for (int i = 1; i <= spell.getTargetRange(); i++) {
+					for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
+						for (Entity ent : b.getChart().getEntitiesOn(b)) {
+							if (ent instanceof Attackable) {
+								Attackable target = (Attackable)ent;
+								spell.computeDamage(from, target, i);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		// Subtract the MPs
+		from.setMp(from.getMp() - spell.getCost());
 						
-		return damage;
+		return retmap;
 	}
 	
 	/**
@@ -183,6 +227,25 @@ public class CombatHandler {
 		default:
 			return false;
 		}
+	}
+	
+	/**
+	 * This function returns, based on static and dynamic properties, if a generic
+	 * {@link CanAttack} can perform a specific {@link AttackType}.
+	 * 
+	 * @param attacker the {@link CanAttack} to check capabilities for
+	 * @param type the {@link AttackType} to check
+	 * @return whether the provided {@link CanAttack} can perform 
+	 * the provided {@link AttackType} or not
+	 */
+	public static boolean canCastSpell(CanMagicAttack attacker,Attackable target, Spell type) {
+		if (attacker.getAvailableSpells().contains(type) && 
+			type.getCost() <= attacker.getMp() &&
+			type.fulfillsSpecialRequirements(attacker, target)) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	/**

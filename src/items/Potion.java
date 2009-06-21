@@ -19,7 +19,7 @@ public class Potion extends Item implements Consumable {
 	 * Create a new potion
 	 */
 	public Potion() {
-		super(0, 0, 0, 0, 0, +10, 0, 0, 0, 0);
+		super(0, 0, 0, 0, 0, 0, +10, 0, 0, 0, 0);
 	}
 
 }

@@ -20,7 +20,7 @@ public class MagicStick extends Item implements Equipable {
 	 * Create a new magic stick
 	 */
 	public MagicStick() {
-		super(0, 0, 0, 0, 0, 0, +10, 0, 0, 0);
+		super(0, 0, 0, 0, 0, 0, 0, +10, 0, 0, 0);
 		BaseAttributes minReq = new BaseAttributes();
 		minReq.setMagicSkill(70);
 		setMinimumRequirements(minReq);

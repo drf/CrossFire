@@ -20,7 +20,7 @@ public class LongSword extends Item implements Equipable {
 	 * Create new long sword
 	 */
 	public LongSword() {
-		super(0, +20, -20, 0, 0, 0, 0, 0, 0, 0);
+		super(0, +20, -20, 0, 0, 0, 0, 0, 0, 0, 0);
 		BaseAttributes minReq = new BaseAttributes();
 		minReq.setStrength(65);
 		setMinimumRequirements(minReq);

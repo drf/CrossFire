@@ -31,7 +31,7 @@ public class Dragon extends Monster {
 	private static final long serialVersionUID = 3947223500999381060L;
 
 	public Dragon() {
-		super(50, 80, 30, 0, 5, 60);
+		super(50, 80, 30, 0, 5, 60, 0);
 		try {
 			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/dragon.gif")));
 		} catch (IOException e) {

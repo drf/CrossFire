@@ -46,8 +46,8 @@ public abstract class Monster extends Fighter implements Attackable,
 	 * @param HP the monster's health points
 	 */
 	public Monster(int intelligence, int strength, int dexterity,
-			int magicskill, int luck, int HP) {
-		super(intelligence, strength, dexterity, magicskill, luck, HP);
+			int magicskill, int luck, int HP, int MP) {
+		super(intelligence, strength, dexterity, magicskill, luck, HP, MP);
 		// TODO Auto-generated constructor stub
 	}
 }

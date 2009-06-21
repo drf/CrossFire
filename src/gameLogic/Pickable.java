@@ -28,4 +28,11 @@ public abstract interface Pickable {
 	 * @see Modifier
 	 */
 	public Modifier getModifier();
+	
+	/**
+	 * This function will get called whenever the object gets picked, since it can have
+	 * some special effects on the target
+	 * @param picker
+	 */
+	public void onPick(CanPick picker);
 }

@@ -1,5 +1,6 @@
 package items;
 
+import gameLogic.CanPick;
 import gameLogic.Consumable;
 import gameLogic.Pickable;
 import globals.BaseAttributes;
@@ -40,10 +41,10 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 	 * @param bonusDamageReduction
 	 */
 	public Item(int intelligence, int power, int dexterity, int magicSkill, int luck,
-			int hp, int bonusMagicDamage, int bonusMeleeDamage, int bonusRangedDamage, 
+			int hp, int mp, int bonusMagicDamage, int bonusMeleeDamage, int bonusRangedDamage, 
 			int bonusDamageReduction){
 		modifier = new Modifier(intelligence, power, dexterity, magicSkill, luck,
-				hp, bonusMagicDamage, bonusMeleeDamage, bonusRangedDamage, 
+				hp, mp, bonusMagicDamage, bonusMeleeDamage, bonusRangedDamage, 
 				bonusDamageReduction);
 		minimumRequirements = null;
 		maximumRequirements = null;
@@ -104,5 +105,9 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 		} else {
 			return characterAttrs;
 		}
+	}
+	
+	public void onPick(CanPick picker) {
+		
 	}
 }

@@ -71,8 +71,8 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	 * @param luck the character's luck
 	 * @param HP the character's health points
 	 */
-	public Character(int intelligence, int strength, int dexterity, int magicskill, int luck, int HP) {
-		super(intelligence, strength, dexterity, magicskill, luck, 100);
+	public Character(int intelligence, int strength, int dexterity, int magicskill, int luck, int HP, int MP) {
+		super(intelligence, strength, dexterity, magicskill, luck, 100, 100);
 	}
 	
 	/**
@@ -125,6 +125,8 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 				Entity ent = (Entity)i;
 				ent.getBox().getChart().remove(ent);
 			}
+			
+			i.onPick(this);
 		}
 		
 		return false;
