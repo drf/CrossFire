@@ -29,6 +29,7 @@ public class SpellGenerator {
 		retset.add(DarkPrison.class);
 		retset.add(DarkGaze.class);
 		retset.add(Bless.class);
+		retset.add(UnholySacrifice.class);
 		
 		return retset;
 	}

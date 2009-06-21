@@ -1,6 +1,5 @@
 package characters;
 
-import java.awt.Image;
 import java.util.HashSet;
 
 import spells.AuraBolt;
@@ -8,6 +7,7 @@ import spells.Fireball;
 import spells.Heal;
 import spells.Implosion;
 import spells.Spell;
+import spells.UnholySacrifice;
 
 import gameLogic.CanMagicAttack;
 import gameLogic.CanRangedAttack;
@@ -39,6 +39,7 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 		spells.add(new AuraBolt());
 		spells.add(new Implosion());
 		spells.add(new Fireball());
+		spells.add(new UnholySacrifice());
 	}
 
 	@Override
