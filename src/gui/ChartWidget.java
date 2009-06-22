@@ -1,7 +1,6 @@
 package gui;
 
 import gameChart.BidimensionalChart;
-import gameChart.Box;
 import gameChart.BoxBusyException;
 import gameChart.City;
 import gameChart.Hill;
@@ -13,7 +12,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.dnd.DragGestureEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -26,7 +24,6 @@ import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -34,7 +31,6 @@ import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 
 import characters.Dragon;
-import characters.Human;
 
 
 /**
@@ -51,6 +47,11 @@ import characters.Human;
 */
 public class ChartWidget extends javax.swing.JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9112439029483183330L;
+	
 	private BidimensionalChart chart;
 	private int multiplier = 40;
 	private int XPosition = 100;
@@ -83,6 +84,7 @@ public class ChartWidget extends javax.swing.JPanel {
 		this.chart = chart;
 		try {
 			chart.place(new Dragon(), chart.getBoxAt(0,0));
+			chart.place(new Dragon(), chart.getBoxAt(6,8));
 		} catch (BoxBusyException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -154,7 +156,7 @@ public class ChartWidget extends javax.swing.JPanel {
 					}
 				});
 			}
-			setPreferredSize(new Dimension(chart.getWidth()*20, chart.getHeight()*20));
+			setPreferredSize(new Dimension(chart.getWidth()*multiplier, chart.getHeight()*multiplier));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -162,7 +164,6 @@ public class ChartWidget extends javax.swing.JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
 		super.paintComponent(g);
 		paintInDeviceCoords(g);
 	}
@@ -221,17 +222,19 @@ public class ChartWidget extends javax.swing.JPanel {
 	}
 	
 	private void paintEntities(Graphics2D g2) {
+		g2.setTransform(new AffineTransform());
 		// Draw entities
 		for (int i = 0; i < chart.getWidth(); i++) {
 			for (int j = 0; j < chart.getHeight(); j++) {
 				for (Entity item : chart.getEntitiesOn(chart.getBoxAt(i, j))) {
-					g2.setTransform(new AffineTransform());
+					
 					Point2D pt = getPointAtIndex(i, j);
 					g2.drawImage(item.getImage(), (int)(pt.getX() - multiplier/6), (int)(pt.getY() - multiplier/6), (int)(multiplier), (int)(multiplier), null);
-					g2.setTransform(baseTransform);
+					
 				}
 			}
 		}
+		g2.setTransform(baseTransform);
 	}
 	
 	private void thisKeyPressed(KeyEvent evt) {

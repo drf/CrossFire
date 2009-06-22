@@ -1,5 +1,6 @@
 package globals;
 
+import gameLogic.Turn;
 import player.Player;
 
 /**
@@ -24,6 +25,7 @@ public abstract class PlayableEntity extends Entity {
 	private static final long serialVersionUID = 3398477358319337273L;
 	
 	private Player player;
+	private Turn currentTurn = null;
 
 	public PlayableEntity() {}
 
@@ -33,5 +35,21 @@ public abstract class PlayableEntity extends Entity {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	public Turn getCurrentTurn() {
+		return currentTurn;
+	}
+	
+	public boolean isOnTurn() {
+		return currentTurn != null;
+	}
+	
+	public void startNewTurn() {
+		currentTurn = new Turn();
+	}
+	
+	public void completeTurn() {
+		currentTurn = null;
 	}
 }

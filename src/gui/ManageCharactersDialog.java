@@ -6,6 +6,11 @@ import javax.swing.SwingUtilities;
 public class ManageCharactersDialog extends javax.swing.JDialog {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 264933129314849488L;
+
+	/**
 	* Auto-generated main method to display this JDialog
 	*/
 	public static void main(String[] args) {
