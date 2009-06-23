@@ -380,10 +380,17 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		case Magic:
 			if (e.isSuccess()) {
 				if (e.getSpell().dealsDamage()) {
-					gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacker()).getName() +
-					                   " casted " + e.getSpell().getName() + " on " +
-					                   ((Entity)e.getAttacked()).getName() + " causing " +
-					                   e.getDamage() + " damage" + '\n');
+					if (e.getDamage() > 0) {
+						gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacker()).getName() +
+								" casted " + e.getSpell().getName() + " on " +
+								((Entity)e.getAttacked()).getName() + " causing " +
+								e.getDamage() + " damage" + '\n');
+					} else {
+						gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacker()).getName() +
+								" casted " + e.getSpell().getName() + " on " +
+								((Entity)e.getAttacked()).getName() + " healing him for " +
+								-e.getDamage() + " HP" + '\n');
+					}
 				} else {
 					gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacker()).getName() +
 					                   " casted " + e.getSpell().getName() + " on " +

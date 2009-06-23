@@ -61,13 +61,21 @@ public class CombatHandler {
 	 */
 	private int genericAttack(CanAttack from, Attackable to, int damage)
 	{
-		
-		// Now add some luck factor
-		damage += computeLuckFactor(from.getLuck() - to.getLuck(), 0.2);
-		damage -= to.getDamageReduction();
-		
-		if (damage < 0) {
-			damage = 0;
+		if (damage >= 0) {
+			// Now add some luck factor
+			damage += computeLuckFactor(from.getLuck() - to.getLuck(), 0.2);
+			damage -= to.getDamageReduction();
+			
+			if (damage < 0) {
+				damage = 0;
+			}
+		} else {
+			// Now add some luck factor
+			damage -= computeLuckFactor(from.getLuck() + to.getLuck(), 0.02);
+			
+			if (damage > 0) {
+				damage = 0;
+			}
 		}
 		
 		if (to.getHp() > damage) {
