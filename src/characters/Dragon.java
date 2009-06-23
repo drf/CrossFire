@@ -44,6 +44,7 @@ public class Dragon extends Monster {
 	 * Reimplemented from {@link Attackable}. Drops a random {@link Equipable}
 	 */
 	public void onDeath() {
+		super.onDeath();
 		// Drop an item as a reward
 		try {
 			getBox().getChart().place((Entity)ItemGenerator.generateCasualEquipable(), getBox());

@@ -13,6 +13,7 @@ import gameLogic.CanRangedAttack;
 import gameLogic.CombatEvent;
 import gameLogic.CombatHandler;
 import gameLogic.CombatListener;
+import gameLogic.DeathEvent;
 import gameLogic.EntityEvent;
 import gameLogic.EntityListener;
 import gameLogic.Game;
@@ -237,6 +238,9 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			PickEvent p = (PickEvent)e;
 			gameLogger.setText(gameLogger.getText() + ((Entity)p.getPicker()).getName() +
 			           		   " has picked " + ((Entity)p.getPicked()).getName() + '\n');
+		} else if (e instanceof DeathEvent) {
+			gameLogger.setText(gameLogger.getText() + ((Entity)e.getSource()).getName() +
+			           		   " was killed!!\n");
 		} else if (e instanceof TurnEvent) {
 			TurnEvent t = (TurnEvent)e;
 			switch (t.getType()) {

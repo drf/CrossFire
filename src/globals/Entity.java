@@ -6,6 +6,7 @@ import javax.swing.event.EventListenerList;
 
 import gameChart.Box;
 import gameChart.BoxBusyException;
+import gameLogic.DeathEvent;
 import gameLogic.EntityListener;
 import gameLogic.Movable;
 import gameLogic.MoveEvent;
@@ -133,6 +134,19 @@ public abstract class Entity implements java.io.Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void onDeath() {
+		// Stream the event
+		DeathEvent evt = new DeathEvent(this);
+		
+		Object[] listeners = getListeners().getListenerList();
+        
+        for (int i = 0; i < listeners.length; i += 2) {
+            if (listeners[i] == EntityListener.class) {
+            	((EntityListener)listeners[i+1]).EntityEventOccurred(evt);
+            }
+        }
 	}
 	
 	

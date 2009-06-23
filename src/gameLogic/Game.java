@@ -19,10 +19,11 @@ import player.HumanPlayer;
 import player.Player;
 
 import gameChart.AbstractChart;
+import globals.Entity;
 import globals.Modifier;
 import globals.PlayableEntity;
 
-public class Game {
+public class Game implements EntityListener {
 	private AbstractChart chart;
 	/**
 	 * @return the chart
@@ -144,6 +145,7 @@ public class Game {
 	
 	private void addEntity(PlayableEntity c, Player p) {
 		entities.put(c, p);
+		c.addEntityEventListener(this);
 	}
 	
 	public void removeEntity(PlayableEntity c) {
@@ -237,5 +239,16 @@ public class Game {
 	
 	public Set<PlayableEntity> getEntities() {
 		return entities.keySet();
+	}
+
+	@Override
+	public void EntityEventOccurred(EntityEvent e) {
+		if (e instanceof DeathEvent) {
+			// Delete the entity
+			if (entities.containsKey(e.getSource())) {
+				chart.remove((Entity)(e.getSource()));
+				entities.remove(e.getSource());
+			}
+		}
 	}
 }
