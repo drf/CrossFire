@@ -89,10 +89,10 @@ public abstract class Fighter extends PlayableEntity {
 		return ret;
 	}
 	
-	public int randomAttribute(int max, int min)
+	public int randomAttribute(int min, int max)
 	{
 		Random r = new Random();
-		return min + r.nextInt(max -min);
+		return min + r.nextInt(max - min);
 		
 	}
 	

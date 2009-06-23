@@ -99,7 +99,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		Game.getInstance().assignCharacter(p2, Game.getInstance().createCharacter(characters.Character.Race.Wizard, new Modifier(), "picci"));
 		try {
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));
-			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 9));			
+			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(5, 9));			
 		} catch (BoxBusyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

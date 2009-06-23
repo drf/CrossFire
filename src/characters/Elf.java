@@ -31,10 +31,10 @@ public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 		super();
 		setName(name);
 		
-		this.setLuck(Character.randomAttributes(60, 100 + 1, 1).get(0));
-		this.setIntelligence(Character.randomAttributes(70, 100 + 1, 1).get(0));
-		this.setStrength(Character.randomAttributes(0, 50 + 1, 1).get(0));
-		this.setMagicSkill(Character.randomAttributes(50 - 1, 80, 1).get(0));
+		this.setLuck(randomAttribute(60, 100 + 1));
+		this.setIntelligence(randomAttribute(70, 100));
+		this.setStrength(randomAttribute(0, 50 + 1));
+		this.setMagicSkill(randomAttribute(50 - 1, 80 -1));
 		
 		spells.add(new Heal());
 		spells.add(new AuraBolt());
