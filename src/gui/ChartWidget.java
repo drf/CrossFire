@@ -1,6 +1,7 @@
 package gui;
 
 import gameChart.BidimensionalChart;
+import gameChart.Box;
 import gameChart.BoxBusyException;
 import gameChart.City;
 import gameChart.Hill;
@@ -15,6 +16,7 @@ import gameLogic.TurnEvent;
 import gameLogic.TurnEvent.TypeEvent;
 import globals.Entity;
 import globals.Modifier;
+import globals.Pair;
 import globals.PlayableEntity;
 import gui.GamePanel.ActionState;
 
@@ -86,8 +88,7 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 	private int targetRange;
 	private PlayableEntity onTurn;
 	private EventListenerList eventListeners = new EventListenerList();
-	HashSet<Integer> widthList = new HashSet<Integer>();
-	HashSet<Integer> heightList = new HashSet<Integer>();
+	HashSet<Pair<Integer>> targetCoordinates = new HashSet<Pair<Integer>>();
 	private Color greenFill = new Color(120, 125, 0, 128);
 	private Color redFill = new Color(255, 0, 0, 128);
 	
@@ -248,10 +249,8 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 		}
 		
 		if (actionState != GamePanel.ActionState.OnNavigate) {
-			for (Integer i : widthList) {
-				for (Integer j : heightList) {
-					g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
-				}
+			for (Pair<Integer> i : targetCoordinates) {
+					g2.fillRect(XPosition + i.getFirst() * multiplier, YPosition + i.getSecond() * multiplier, multiplier, multiplier);
 			}
 		}
         	
@@ -381,15 +380,13 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 		actionState = evt.getState();
 		targetRange = evt.getTargetRange();
 		distanceRange = evt.getDistanceRange();
-		widthList.clear();
-		heightList.clear();
+		targetCoordinates.clear();
 		// Check the range
 		for (int i = 0; i < chart.getWidth(); i++) {
 			for (int j = 0; j < chart.getHeight(); j++) {
 				if (chart.getEntitiesOn(chart.getBoxAt(i, j)).contains(onTurn)) {
-					for (int k = 0; k <= distanceRange; k++) {
-						widthList.add(i + k);
-						heightList.add(j + k);
+					for (Box box : chart.getBoxesInRange(chart.getBoxAt(i, j), distanceRange)) {
+						targetCoordinates.add(chart.getBoxPosition(box));
 					}
 				}
 			}

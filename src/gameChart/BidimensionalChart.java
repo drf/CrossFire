@@ -112,7 +112,7 @@ public abstract class BidimensionalChart extends AbstractChart {
 		return chart[w][h];
 	}
 
-	protected Pair<Integer> getBoxPosition(Box b) {		
+	public Pair<Integer> getBoxPosition(Box b) {		
 		for (int i = 0; i < getWidth(); ++i) {
 			for (int j = 0; j < getHeight(); ++j) {
 				if (getChart()[i][j] == b) {
