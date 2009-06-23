@@ -286,7 +286,7 @@ public class Game implements EntityListener {
 		return npcs.keySet();
 	}
 
-	@Override
+
 	public void EntityEventOccurred(EntityEvent e) {
 		if (e instanceof DeathEvent) {
 			// Delete the entity
