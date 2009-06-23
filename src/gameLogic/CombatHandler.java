@@ -308,6 +308,15 @@ public class CombatHandler {
 		return false;
 	}
 	
+	public static boolean canCastSpell(CanMagicAttack attacker, Spell type) {
+		if (attacker.getAvailableSpells().contains(type) && 
+			type.getCost() <= attacker.getMp()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	/**
 	 * This function returns, based on static and dynamic properties, a list of the
 	 * attack types a generic {@link CanAttack} is able to perform

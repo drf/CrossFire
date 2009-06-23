@@ -1,4 +1,6 @@
 package gui;
+import java.awt.Dimension;
+
 import gameLogic.CanMagicAttack;
 
 import javax.swing.DefaultComboBoxModel;
@@ -55,7 +57,7 @@ public class SelectSpellDialog extends javax.swing.JDialog {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				JFrame frame = new JFrame();
-				SelectSpellDialog inst = new SelectSpellDialog(frame, new Wizard());
+				SelectSpellDialog inst = new SelectSpellDialog(frame, new Wizard("culo"));
 				inst.setVisible(true);
 			}
 		});
@@ -96,9 +98,9 @@ public class SelectSpellDialog extends javax.swing.JDialog {
 			}
 			{
 				okButton = new JButton();
-				getContentPane().add(okButton, new AnchorConstraint(864, 615, 940, 392, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				getContentPane().add(okButton, new AnchorConstraint(846, 614, 919, 392, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				okButton.setName("okButton");
-				okButton.setPreferredSize(new java.awt.Dimension(87, 21));
+				okButton.setPreferredSize(new java.awt.Dimension(99, 27));
 			}
 			{
 				jl1 = new JLabel();
@@ -108,9 +110,9 @@ public class SelectSpellDialog extends javax.swing.JDialog {
 			}
 			{
 				descLabel = new JLabel();
-				getContentPane().add(descLabel, new AnchorConstraint(45, 1065, 465, 645, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				getContentPane().add(descLabel, new AnchorConstraint(44, 974, 464, 646, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				descLabel.setName("descLabel");
-				descLabel.setPreferredSize(new java.awt.Dimension(164, 116));
+				descLabel.setPreferredSize(new java.awt.Dimension(146, 154));
 			}
 			{
 				jLabel1 = new JLabel();
@@ -120,9 +122,9 @@ public class SelectSpellDialog extends javax.swing.JDialog {
 			}
 			{
 				costLabel = new JLabel();
-				getContentPane().add(costLabel, new AnchorConstraint(545, 1080, 596, 645, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				getContentPane().add(costLabel, new AnchorConstraint(546, 974, 595, 646, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				costLabel.setName("costLabel");
-				costLabel.setPreferredSize(new java.awt.Dimension(170, 14));
+				costLabel.setPreferredSize(new java.awt.Dimension(146, 18));
 			}
 			Application.getInstance().getContext().getResourceMap(getClass()).injectComponents(getContentPane());
 			pack();
