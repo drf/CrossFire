@@ -22,8 +22,6 @@ import characters.Wizard;
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
 
-import com.sun.org.apache.xml.internal.security.c14n.CanonicalizerSpi;
-
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial

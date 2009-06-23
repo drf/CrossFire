@@ -66,7 +66,7 @@ public abstract class Fighter extends PlayableEntity {
 		ArrayList<Integer> ret = new ArrayList<Integer>();
 		int total = r.nextInt(max - min);
 		int sum = 0;
-		
+
 		for(int i = 0; i < n; i++) {
 			int newVal = (total- r.nextInt(n))/n;
 			ret.add(newVal);
@@ -87,6 +87,13 @@ public abstract class Fighter extends PlayableEntity {
 		}
 		
 		return ret;
+	}
+	
+	public int randomAttribute(int max, int min)
+	{
+		Random r = new Random();
+		return min + r.nextInt(max -min);
+		
 	}
 	
 	/**
