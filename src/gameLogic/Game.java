@@ -44,7 +44,23 @@ public class Game implements EntityListener {
 	private static Game instance = null;
 	private HashMap<Integer, PlayableEntity> turnTokens = new HashMap<Integer, PlayableEntity>();
 	private HashSet<PlayableEntity> turnQueue = new HashSet<PlayableEntity>();
+	private PlayableEntity onTurn = null;
+	private Player winner = null;
 	
+	/**
+	 * @return the onTurn
+	 */
+	public PlayableEntity getOnTurn() {
+		return onTurn;
+	}
+
+	/**
+	 * @return the winner
+	 */
+	public Player getWinner() {
+		return winner;
+	}
+
 	// Event Listeners
 	EventListenerList eventListeners = new EventListenerList();
 
@@ -64,6 +80,10 @@ public class Game implements EntityListener {
 		}
 		
 		return instance;
+	}
+	
+	public static void resetGame() {
+		instance = null;
 	}
 	
 	public GamePhase getState() {
@@ -195,7 +215,7 @@ public class Game implements EntityListener {
 	public void performNextTurn() {
 
 		if (hasAWinner()) {
-			setState(GamePhase.EndGame);
+			endGame();
 			return;
 		}
 		
@@ -248,7 +268,19 @@ public class Game implements EntityListener {
 			if (entities.containsKey(e.getSource())) {
 				chart.remove((Entity)(e.getSource()));
 				entities.remove(e.getSource());
+				
+				if (onTurn.getPlayer() instanceof HumanPlayer) {
+					((HumanPlayer)(onTurn.getPlayer())).skipTurn();
+				}
+				
+				endGame();
 			}
 		}
+	}
+	
+	private void endGame() {
+		// Find the winner
+		winner = (Player)(entities.values().toArray()[0]);
+		setState(GamePhase.EndGame);
 	}
 }
