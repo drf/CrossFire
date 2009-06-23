@@ -12,6 +12,7 @@ import gameLogic.Game.GamePhase;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -59,6 +60,7 @@ public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupList
 	private JComboBox controllerCombo;
 	private EventListenerList eventListeners = new EventListenerList();
 	private Player player;
+	private ArrayList<Character> charList;
 
 
 	/**
@@ -187,13 +189,17 @@ public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupList
 	}
 	
 	private void jButton1MouseClicked(MouseEvent evt) {
-		String name = nameBox.getText();
-		int playerType;
+		boolean isHuman;
 		
-		playerType = controllerCombo.getSelectedIndex();
-		if(playerType == -1)
-			playerType = 0;
+		if(controllerCombo.getSelectedIndex() == 0)
+			isHuman = true;
+		else
+			isHuman = false;
 		
+		player = Game.getInstance().createNewPlayer(nameBox.getText(), isHuman);
+		for(Character c: charList)
+			Game.getInstance().assignCharacter(player, c);
+
 		GameSetupEvent e = new GameSetupEvent(this, GameSetupEvent.SetupPhase.AddedPlayer, player);
 		
 		Object[] listeners = eventListeners.getListenerList();
@@ -215,6 +221,8 @@ public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupList
     	case AddedCharacter:
     		Character addedChar = evt.getAddedCharacter();
     		Game.getInstance().assignCharacter(player, addedChar);
+    		charList.add(addedChar);
+    		jButton1.setEnabled(true);
     		//TODO add to Jlist
     		
     		break;
