@@ -399,6 +399,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				onTurn.move(evt.getBox());
 				moveButton.setSelected(false);
 				setNewActionState(ActionState.OnNavigate, 0, 0);
+				return;
 			}
 			gameLogger.setText(gameLogger.getText() + "You cannot move here\n");
 			break;

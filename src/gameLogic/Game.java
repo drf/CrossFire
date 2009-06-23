@@ -242,7 +242,8 @@ public class Game implements EntityListener {
 		
 		onTurn = computeNextEntity();
 		
-		if (onTurn != null && !onTurn.isOnTurn()) {
+		if (onTurn != null && !onTurn.isOnTurn() &&
+		    (entities.containsKey(onTurn) || npcs.containsKey(onTurn))) {
 			int token = generateToken();
 			turnTokens.put(token, onTurn);
 
@@ -253,6 +254,9 @@ public class Game implements EntityListener {
 			} else {
 				npcs.get(onTurn).handleTurn(onTurn, token);
 			}
+		} else {
+			turnQueue.remove(onTurn);
+			performNextTurn();
 		}
 
 	}
@@ -299,6 +303,9 @@ public class Game implements EntityListener {
 				}
 				
 				endGame();
+			} else if (npcs.containsKey(e.getSource())) {
+				chart.remove((Entity)(e.getSource()));
+				npcs.remove(e.getSource());
 			}
 		}
 	}
