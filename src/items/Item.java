@@ -18,6 +18,11 @@ import globals.Modifier;
  */
 public abstract class Item extends globals.Entity implements gameLogic.Pickable {
 	
+	public Item(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 */

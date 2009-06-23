@@ -50,7 +50,7 @@ public class Game {
 	public enum GamePhase {
 		None,
 		GameCreation,
-		CharacterSetup,
+		SetupDone,
 		Turn,
 		EndGame
 	}
@@ -107,25 +107,34 @@ public class Game {
 		switch(race)
 		{
 			case Elf:
-				newChar = new Elf();
+				newChar = new Elf(name);
 				break;
 			case Human:
-				newChar = new Human();
+				newChar = new Human(name);
 				break;
 			case Orc: 
-				newChar = new Orc();
+				newChar = new Orc(name);
 				break;
 			case Wizard:
-				newChar = new Wizard();
+				newChar = new Wizard(name);
 				break;	
 			
 		}
 		
-		if (newChar == null || player == null) {
-			return false;
-		}
+		if (newChar == null)
+			return null;
 		
 		newChar.setAttibutes(bonus.adjustAttrs(newChar.getAttributes()));
+		
+	
+		return newChar;
+
+	}
+	public boolean assignCharacter(Player player, Character character) {
+		
+		if (character == null || player == null) {
+			return false;
+		}
 		
 		addEntity(newChar, player);
 		newChar.setPlayer(player);
@@ -133,7 +142,7 @@ public class Game {
 		return true;
 	}
 	
-	public void addEntity(PlayableEntity c, Player p) {
+	private void addEntity(PlayableEntity c, Player p) {
 		entities.put(c, p);
 	}
 	

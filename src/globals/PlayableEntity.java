@@ -32,6 +32,15 @@ public abstract class PlayableEntity extends Entity {
 
 	public PlayableEntity() {}
 
+	
+	
+	public PlayableEntity(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public Player getPlayer() {
 		return player;
 	}

@@ -136,5 +136,4 @@ public abstract class Entity implements java.io.Serializable {
 	}
 	
 	
-	
 }

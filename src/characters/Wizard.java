@@ -30,9 +30,9 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 	private static final long serialVersionUID = 5254710813109154059L;
 	private HashSet<Spell> spells = new HashSet<Spell>();
 
-	public Wizard() {
+	public Wizard(String name) {
 		super();
-		
+		setName(name);
 		this.setLuck(Character.randomAttributes(50, 100 + 1, 1).get(0));
 		this.setIntelligence(Character.randomAttributes(90, 100 + 1, 1).get(0));
 		this.setStrength(Character.randomAttributes(0, 20 + 1, 1).get(0));
@@ -51,12 +51,12 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 		}
 	}
 
-	@Override
+	
 	public HashSet<Spell> getAvailableSpells() {
 		return spells;
 	}
 
-	@Override
+	
 	public void setAvailableSpells(HashSet<Spell> spells) {
 		this.spells = spells;
 	}

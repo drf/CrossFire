@@ -27,8 +27,9 @@ public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 	
 	private HashSet<Spell> spells = new HashSet<Spell>();
 
-	public Elf() {
+	public Elf(String name) {
 		super();
+		setName(name);
 		
 		this.setLuck(Character.randomAttributes(60, 100 + 1, 1).get(0));
 		this.setIntelligence(Character.randomAttributes(70, 100 + 1, 1).get(0));
@@ -45,12 +46,12 @@ public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 		}
 	}
 
-	@Override
+	
 	public HashSet<Spell> getAvailableSpells() {
 		return spells;
 	}
 	
-	@Override
+	
 	public void setAvailableSpells(HashSet<Spell> spells) {
 		this.spells = spells;
 	}

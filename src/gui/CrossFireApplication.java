@@ -4,10 +4,13 @@ import gameLogic.Game;
 import gameLogic.GamePhaseChangedEvent;
 import gameLogic.GamePhaseChangedListener;
 import gameLogic.Game.GamePhase;
+import gameLogic.GameSetupEvent;
+import gameLogic.GameSetupListener;
 
 import java.awt.BorderLayout;
 
 import javax.swing.ActionMap;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -33,8 +36,9 @@ import org.jdesktop.application.SingleFrameApplication;
 /**
  * 
  */
+
 public class CrossFireApplication extends SingleFrameApplication 
-	implements GamePhaseChangedListener {
+	implements GamePhaseChangedListener, GameSetupListener {
 	
     private JMenuBar menuBar;
     private JPanel topPanel;
@@ -43,7 +47,9 @@ public class CrossFireApplication extends SingleFrameApplication
     private JMenuItem jMenuItem1;
     private JMenu fileMenu;
     private JPanel contentPanel;
-
+    private ManagerCharacter characterFrame;
+    private ManagerPlayers playerFrame;
+    
     @Action
     public void open() {
     }
@@ -104,28 +110,44 @@ public class CrossFireApplication extends SingleFrameApplication
     	launch(CrossFireApplication.class, args);
     }
 
-	public void GamePhaseChanged(GamePhaseChangedEvent e) {
+    public void GameSetupStateChanged (GameSetupEvent evt)
+    {
+    	switch(evt.getPhase()) {
+    	case AddedPlayer:
+    		
+    		break;
+    	case AddedCharacter:
+    		characterFrame.dispose();
+    		break;
+    	
+    	case AddCharacter:
+			characterFrame = new ManagerCharacter();
+			characterFrame.getCharacterWidget().addGameSetupListener(this);
+			characterFrame.getCharacterWidget().addGameSetupListener(playerFrame.getPlayerWidget());
+			characterFrame.setVisible(true);
+			break;
+    		
+    	}
+    }
+ 
+  
+    public void GamePhaseChanged(GamePhaseChangedEvent e) {
 		
 		switch (e.getPhase()) {
-		case CharacterSetup:
-			/*This is basically wrong, we have to find a way to pop up NewCharacterWidget without closing 
-			 *NewPlayerWidget()
-			 */
-			contentPanel.removeAll();
-			contentPanel.validate();
-			
-			contentPanel.add(new NewCharacterWidget());
-			contentPanel.validate();
+		case SetupDone:
 			break;
+			
 		case EndGame:
-			
 			break;
+			
 		case GameCreation:
 			contentPanel.removeAll();
 			contentPanel.validate();
-			contentPanel.add(new NewPlayerWidget());
-			contentPanel.validate();
+			playerFrame = new ManagerPlayers();
+			playerFrame.getPlayerWidget().addGameSetupListener(this);
+			playerFrame.setVisible(true);
 			break;
+			
 		case None:
 			contentPanel.removeAll();
 			contentPanel.validate();

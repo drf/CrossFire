@@ -55,7 +55,7 @@ public abstract class Monster extends Fighter implements Attackable,
 	/* (non-Javadoc)
 	 * @see gameLogic.Movable#boxChanged(gameChart.Box, gameChart.Box)
 	 */
-	@Override
+
 	public void boxChanged(Box oldBox, Box newBox) {
 	}
 	
