@@ -358,7 +358,6 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 		}
 	}
 
-	@Override
 	public void EntityEventOccurred(EntityEvent e) {
 		if (e instanceof TurnEvent) {
 			TurnEvent t = (TurnEvent)e;
@@ -374,7 +373,7 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 		eventListeners.add(BoxClickedListener.class, listener);
 	}
 
-	@Override
+
 	public void ActionStateChanged(ActionStateChangedEvent evt) {
 		System.out.println("action");
 		actionState = evt.getState();

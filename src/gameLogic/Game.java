@@ -101,7 +101,7 @@ public class Game {
 		return p;
 	}
 	
-	public boolean createCharacter(Character.Race race, Player player, Modifier bonus) {
+	public Character createCharacter(Character.Race race, Modifier bonus, String name) {
 		Character newChar = null; 
 		
 		switch(race)
@@ -136,8 +136,8 @@ public class Game {
 			return false;
 		}
 		
-		addEntity(newChar, player);
-		newChar.setPlayer(player);
+		addEntity(character, player);
+		character.setPlayer(player);
 	
 		return true;
 	}

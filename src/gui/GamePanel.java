@@ -85,11 +85,6 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	* JPanel inside a new JFrame.
 	*/
 	public static void main(String[] args) {
-		Player p1 = Game.getInstance().createNewPlayer("test", true);
-		Player p2 = Game.getInstance().createNewPlayer("test2", true);
-		
-		Game.getInstance().createCharacter(characters.Character.Race.Wizard, p1, new Modifier());
-		Game.getInstance().createCharacter(characters.Character.Race.Elf, p2, new Modifier());
 		Game.getInstance().setChart(new RectangularChart(10,10));
 		try {
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));
@@ -219,7 +214,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		}
 	}
 
-	@Override
+
 	public void EntityEventOccurred(EntityEvent e) {
 		
 		System.out.println("start");
@@ -299,7 +294,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		}
 	}
 
-	@Override
+
 	public void CombatEventOccurred(CombatEvent e) {
 		switch (e.getAttackType()) {
 		case Melee:
@@ -335,7 +330,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		}
 	}
 
-	@Override
+
 	public void BoxClicked(BoxClickedEvent evt) {
 		System.out.println("A box got clicked");
 		switch (state) {
