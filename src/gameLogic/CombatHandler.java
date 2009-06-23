@@ -255,7 +255,7 @@ public class CombatHandler {
 							Attackable target = (Attackable)ent;
 							int damage = genericAttack(from, target, spell.computeDamage(from, target, i));
 
-							CombatEvent evt = new CombatEvent(from, to, spell, damage, true);
+							CombatEvent evt = new CombatEvent(from, target, spell, damage, true);
 
 							Object[] listeners = eventListeners.getListenerList();
 
@@ -277,7 +277,7 @@ public class CombatHandler {
 							Attackable target = (Attackable)ent;
 							boolean success = spell.computeDamage(from, target, i) >= 0;
 
-							CombatEvent evt = new CombatEvent(from, to, spell, 0, success);
+							CombatEvent evt = new CombatEvent(from, target, spell, 0, success);
 
 							Object[] listeners = eventListeners.getListenerList();
 
