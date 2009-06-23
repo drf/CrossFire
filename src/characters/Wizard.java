@@ -50,13 +50,11 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 			e.printStackTrace();
 		}
 	}
-
 	
 	public HashSet<Spell> getAvailableSpells() {
 		return spells;
 	}
 
-	
 	public void setAvailableSpells(HashSet<Spell> spells) {
 		this.spells = spells;
 	}

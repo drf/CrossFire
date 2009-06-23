@@ -8,6 +8,7 @@ import gameChart.BoxBusyException;
 import gameChart.RectangularChart;
 import gameLogic.Attackable;
 import gameLogic.CanAttack;
+import gameLogic.CanMagicAttack;
 import gameLogic.CanMeleeAttack;
 import gameLogic.CanRangedAttack;
 import gameLogic.CombatEvent;
@@ -27,6 +28,7 @@ import globals.PlayableEntity;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JToggleButton;
@@ -36,9 +38,13 @@ import org.jdesktop.application.Application;
 
 import player.HumanPlayer;
 import player.Player;
+import spells.Spell;
 
+import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -396,7 +402,29 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	
 	private void spellButtonMouseClicked(MouseEvent evt) {
 		if (spellButton.isSelected()) {
-			setNewActionState(ActionState.OnMove, 0, 1);
+			HashSet<String> possibilities = new HashSet<String>();
+			for (Spell spell : ((CanMagicAttack)onTurn).getAvailableSpells()) {
+				if (CombatHandler.canCastSpell((CanMagicAttack)onTurn, spell)) {
+					possibilities.add(spell.getName());
+				}
+			}
+			String s = (String)JOptionPane.showInputDialog(
+			                    this,
+			                    "Select a spell.",
+			                    "Select a spell",
+			                    JOptionPane.PLAIN_MESSAGE,
+			                    null,
+			                    possibilities.toArray(),
+			                    "ham");
+
+			//If a string was returned, say so.
+			if ((s != null) && (s.length() > 0)) {
+				for (Spell spell : ((CanMagicAttack)onTurn).getAvailableSpells()) {
+					if (spell.getName() == s) {
+						setNewActionState(ActionState.OnSpellCasting, spell.getTargetRange(), spell.getDistanceRange());
+					}
+				}
+			}
 		} else {
 			setNewActionState(ActionState.OnNavigate, 0, 0);
 		}

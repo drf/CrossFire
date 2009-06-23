@@ -38,11 +38,9 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 		spells.add(new AuraBolt());
 	}
 
-
 	public HashSet<Spell> getAvailableSpells() {
 		return spells;
 	}
-	
 	
 	public void setAvailableSpells(HashSet<Spell> spells) {
 		this.spells = spells;
