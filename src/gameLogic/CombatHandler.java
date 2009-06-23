@@ -89,6 +89,35 @@ public class CombatHandler {
 	 * @param from the {@link CanMeleeAttack} attempting the attack
 	 * @param to the {@link Attackable} being attacked
 	 */
+	public void fixedAttack(CanAttack from, Attackable to, int damage) {
+		
+		if (to.getHp() > damage) {
+			to.setHp(to.getHp() - damage);
+		} else {
+			to.setHp(0);
+			to.onDeath();
+		}
+		
+		CombatEvent evt = new CombatEvent(from, to, AttackType.Melee, damage, true);
+		
+		Object[] listeners = eventListeners.getListenerList();
+        
+        for (int i = 0; i < listeners.length; i += 2) {
+            if (listeners[i] == CombatListener.class) {
+                ((CombatListener)listeners[i+1]).CombatEventOccurred(evt);
+            }
+        }		
+	}
+	
+	/**
+	 * Performs a melee attack. This function will take care of computing the damage,
+	 * based on specifics and on a luck+random factor, and deal the damage. Since the
+	 * specifics say that there is a possibility to counter attack, this function also
+	 * handles the possible counter damage.
+	 * 
+	 * @param from the {@link CanMeleeAttack} attempting the attack
+	 * @param to the {@link Attackable} being attacked
+	 */
 	public void meleeAttack(CanMeleeAttack from, Attackable to) {
 		int damage = 0, counterdamage = 0;
 		

@@ -15,4 +15,5 @@ public interface CanPick {
 	 * @throws PickException
 	 */
 	public boolean pick(Pickable i);
+	public boolean canPick(Pickable i);
 }

@@ -11,5 +11,6 @@ public class Elixir extends Item implements Consumable {
 
 	public Elixir() {
 		super(0, 0, 0, 0, 0, 0, +15, 0, 0, 0, 0);
+		setName("Magic Elixir");
 	}
 }

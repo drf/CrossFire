@@ -1,5 +1,9 @@
 package items;
 
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import gameLogic.Equipable;
 import globals.BaseAttributes;
 
@@ -24,5 +28,11 @@ public class LongSword extends Item implements Equipable {
 		BaseAttributes minReq = new BaseAttributes();
 		minReq.setStrength(65);
 		setMinimumRequirements(minReq);
+		setName("Long Sword");
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/Sword.GIF")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

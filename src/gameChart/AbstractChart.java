@@ -34,7 +34,7 @@ public abstract class AbstractChart {
 	}
 	
 	public boolean isBoxBusyFor(Box box, Entity entity) {
-		if (entity instanceof PlayableEntity) {
+		if (!(entity instanceof PlayableEntity)) {
 			// In this case, it can be on any box at any moment
 			return false;
 		}

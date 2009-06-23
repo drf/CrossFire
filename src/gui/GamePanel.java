@@ -1,5 +1,6 @@
 package gui;
 import characters.Dragon;
+import characters.Fighter;
 
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
@@ -11,6 +12,7 @@ import gameLogic.Attackable;
 import gameLogic.CanAttack;
 import gameLogic.CanMagicAttack;
 import gameLogic.CanMeleeAttack;
+import gameLogic.CanPick;
 import gameLogic.CanRangedAttack;
 import gameLogic.CombatEvent;
 import gameLogic.CombatHandler;
@@ -21,11 +23,16 @@ import gameLogic.EntityListener;
 import gameLogic.Game;
 import gameLogic.MoveEvent;
 import gameLogic.PickEvent;
+import gameLogic.Pickable;
 import gameLogic.Turn;
 import gameLogic.TurnEvent;
 import globals.Entity;
 import globals.Modifier;
 import globals.PlayableEntity;
+
+import items.Bomb;
+import items.LongSword;
+import items.SpellBook;
 
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -73,6 +80,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	private JPanel showDataPanel;
 	private ChartWidget chartArea;
 	private JToggleButton moveButton;
+	private JButton pickButton;
 	private JTextPane descriptionText;
 	private JButton skipButton;
 	private JToggleButton spellButton;
@@ -109,6 +117,9 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(5, 9));
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getNPCS().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(4, 7));
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getNPCS().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(6, 9));
+			Game.getInstance().getChart().place(new SpellBook(), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));
+			Game.getInstance().getChart().place(new LongSword(), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 6));
+			Game.getInstance().getChart().place(new Bomb(), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(4, 8));
 		} catch (BoxBusyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -142,6 +153,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				gameLogger = new JTextArea();
 				gameLogger.setName("gameLogger");
 				gameLogger.setPreferredSize(new java.awt.Dimension(387, 70));
+				gameLogger.setDefaultLocale(new java.util.Locale("en", "GB"));
 				JScrollPane pScroll = new JScrollPane(gameLogger, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 				this.add(pScroll, new AnchorConstraint(751, 986, 985, 18, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 			}
@@ -153,9 +165,9 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				actionPanel.setPreferredSize(new java.awt.Dimension(186, 149));
 				{
 					moveButton = new JToggleButton();
-					actionPanel.add(moveButton, new AnchorConstraint(610, 814, 729, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					actionPanel.add(moveButton, new AnchorConstraint(515, 816, 641, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					moveButton.setName("moveButton");
-					moveButton.setPreferredSize(new java.awt.Dimension(59, 13));
+					moveButton.setPreferredSize(new java.awt.Dimension(66, 16));
 					moveButton.addMouseListener(new MouseAdapter() {
 						public void mouseClicked(MouseEvent evt) {
 							moveButtonMouseClicked(evt);
@@ -167,6 +179,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					actionPanel.add(meleeButton, new AnchorConstraint(4, 814, 142, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					meleeButton.setName("meleeButton");
 					meleeButton.setPreferredSize(new java.awt.Dimension(59, 15));
+					meleeButton.setBounds(26, 0, 59, 15);
 					meleeButton.addMouseListener(new MouseAdapter() {
 						public void mouseClicked(MouseEvent evt) {
 							meleeButtonMouseClicked(evt);
@@ -175,9 +188,9 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				}
 				{
 					rangedButton = new JToggleButton();
-					actionPanel.add(rangedButton, new AnchorConstraint(211, 819, 352, 250, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					actionPanel.add(rangedButton, new AnchorConstraint(161, 816, 303, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					rangedButton.setName("rangedButton");
-					rangedButton.setBounds(32, 26, 68, 21);
+					rangedButton.setPreferredSize(new java.awt.Dimension(66, 18));
 					rangedButton.addMouseListener(new MouseAdapter() {
 						public void mouseClicked(MouseEvent evt) {
 							rangedButtonMouseClicked(evt);
@@ -186,9 +199,9 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				}
 				{
 					spellButton = new JToggleButton();
-					actionPanel.add(spellButton, new AnchorConstraint(426, 814, 564, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					actionPanel.add(spellButton, new AnchorConstraint(342, 816, 476, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					spellButton.setName("spellButton");
-					spellButton.setPreferredSize(new java.awt.Dimension(59, 15));
+					spellButton.setPreferredSize(new java.awt.Dimension(66, 17));
 					spellButton.addMouseListener(new MouseAdapter() {
 						public void mouseClicked(MouseEvent evt) {
 							spellButtonMouseClicked(evt);
@@ -197,12 +210,23 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				}
 				{
 					skipButton = new JButton();
-					actionPanel.add(skipButton, new AnchorConstraint(775, 814, 912, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					actionPanel.add(skipButton, new AnchorConstraint(877, 824, 1003, 260, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					skipButton.setName("skipButton");
-					skipButton.setPreferredSize(new java.awt.Dimension(59, 15));
+					skipButton.setPreferredSize(new java.awt.Dimension(66, 16));
 					skipButton.addMouseListener(new MouseAdapter() {
 						public void mouseClicked(MouseEvent evt) {
 							skipButtonMouseClicked(evt);
+						}
+					});
+				}
+				{
+					pickButton = new JButton();
+					actionPanel.add(pickButton, new AnchorConstraint(681, 816, 791, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					pickButton.setName("pickButton");
+					pickButton.setPreferredSize(new java.awt.Dimension(66, 14));
+					pickButton.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent evt) {
+							pickButtonMouseClicked(evt);
 						}
 					});
 				}
@@ -217,9 +241,9 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					descriptionText = new JTextPane();
 					AnchorLayout descriptionTextLayout = new AnchorLayout();
 					descriptionText.setLayout(descriptionTextLayout);
-					showDataPanel.add(descriptionText, new AnchorConstraint(4, 1004, 1004, 4, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					showDataPanel.add(descriptionText, new AnchorConstraint(4, 1004, 1004, 61, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					descriptionText.setName("descriptionText");
-					descriptionText.setPreferredSize(new java.awt.Dimension(105, 106));
+					descriptionText.setPreferredSize(new java.awt.Dimension(99, 106));
 				}
 			}
 			{
@@ -258,6 +282,14 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				gameLogger.setText(gameLogger.getText() + (t.getPlayer()).getName() +
 		           		   		   ", it's " + ((Entity)t.getEntity()).getName() +
 		           		   		   " turn" + '\n');
+				descriptionText.setText(((Entity)t.getEntity()).getName() + "\n\nHP: " +
+										((Fighter)t.getEntity()).getHp() + "\nMP:" +
+										((Fighter)t.getEntity()).getMp() + "\nDexterity: " +
+										((Fighter)t.getEntity()).getDexterity() + "\nIntelligence: " +
+										((Fighter)t.getEntity()).getIntelligence() + "\nStrength:" +
+										((Fighter)t.getEntity()).getStrength() + "\nLuck:" +
+										((Fighter)t.getEntity()).getLuck() + "\nMagic Skill:" +
+										((Fighter)t.getEntity()).getMagicSkill());
 				if (t.getPlayer() instanceof HumanPlayer) {
 					// Then we need to manage it
 					
@@ -267,6 +299,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					rangedButton.setEnabled(false);
 					spellButton.setEnabled(false);
 					skipButton.setEnabled(false);
+					pickButton.setEnabled(false);
 					moveButton.setEnabled(false);
 					break;
 				}
@@ -277,6 +310,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				rangedButton.setEnabled(false);
 				spellButton.setEnabled(false);
 				moveButton.setEnabled(false);
+				pickButton.setEnabled(false);
 				skipButton.setEnabled(true);
 				
 				if (t.getEntity().getCurrentTurn().availableActions().contains(Turn.Action.Attack)) {
@@ -299,6 +333,16 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					moveButton.setEnabled(true);
 				}
 				
+				if (t.getEntity() instanceof CanPick) {
+					for (Entity ent : t.getEntity().getBox().getChart().getEntitiesOn(t.getEntity().getBox())) {
+						if (ent instanceof Pickable) {
+							if (((CanPick)t.getEntity()).canPick((Pickable)ent)) {
+								pickButton.setEnabled(true);
+							}
+						}
+					}
+				}
+				
 				break;
 				
 			case Finished:
@@ -311,6 +355,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				rangedButton.setEnabled(false);
 				spellButton.setEnabled(false);
 				moveButton.setEnabled(false);
+				pickButton.setEnabled(false);
 				skipButton.setEnabled(false);
 				break;			
 			}
@@ -502,6 +547,19 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	
 	public void addActionStateChangedEventListener(ActionStateChangedListener listener) {
 		eventListeners.add(ActionStateChangedListener.class, listener);
+	}
+	
+	private void pickButtonMouseClicked(MouseEvent evt) {
+		if (onTurn instanceof CanPick) {
+			for (Entity ent : onTurn.getBox().getChart().getEntitiesOn(onTurn.getBox())) {
+				if (ent instanceof Pickable) {
+					if (((CanPick)onTurn).canPick((Pickable)ent)) {
+						((CanPick)onTurn).pick((Pickable)ent);
+					}
+				}
+			}
+		}
+		pickButton.setEnabled(false);
 	}
 
 }

@@ -20,6 +20,7 @@ public class Shield extends Item implements Equipable {
 	 */
 	public Shield() {
 		super(0, 0, 0, -10, 0, 0, 0, 0, 0, 0, 10);
+		setName("Shield");
 	}
 
 }

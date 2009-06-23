@@ -84,7 +84,7 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	 * @return whether the character is able to pick it or not
 	 * @see Pickable
 	 */
-	public Boolean canPick(Pickable i) {
+	public boolean canPick(Pickable i) {
 		if (i.getMaximumRequirements() != null) {
 			if (i.getMaximumRequirements().compareTo(getAttributes()) < 0) {
 				return false;

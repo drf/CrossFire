@@ -14,9 +14,11 @@ public class SpellBook extends Item implements Consumable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2906582863509321014L;
+	private Spell spell = SpellGenerator.generateCasualSpell();
 
 	public SpellBook() {
 		super(0,0,0,0,0,0,0,0,0,0,0);
+		setName("SpellBook of " + spell.getName());
 	}
 
 	/* (non-Javadoc)
@@ -26,9 +28,7 @@ public class SpellBook extends Item implements Consumable {
 	public void onPick(CanPick picker) {
 		if (picker instanceof CanMagicAttack) {
 			CanMagicAttack caster = (CanMagicAttack)picker;
-			// Let's learn a new spell!
-			Spell spell = SpellGenerator.generateCasualSpell();
-			
+			// Let's learn a new spell!			
 			for (Spell sp : caster.getAvailableSpells()) {
 				if (spell.getClass() == sp.getClass()) {
 					// Ah, we already know it. Whatever

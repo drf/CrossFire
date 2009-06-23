@@ -24,6 +24,7 @@ public class MagicStick extends Item implements Equipable {
 		BaseAttributes minReq = new BaseAttributes();
 		minReq.setMagicSkill(70);
 		setMinimumRequirements(minReq);
+		setName("Magic Stick");
 	}
 
 }

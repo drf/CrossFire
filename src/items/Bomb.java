@@ -2,6 +2,8 @@ package items;
 
 import gameChart.Box;
 import gameLogic.Attackable;
+import gameLogic.CanAttack;
+import gameLogic.CombatHandler;
 import globals.Entity;
 
 /**
@@ -13,7 +15,7 @@ import globals.Entity;
  * @author drf
  *
  */
-public class Bomb extends globals.Entity implements Attackable  {
+public class Bomb extends globals.Entity implements Attackable, CanAttack  {
 
 	/**
 	 * 
@@ -26,6 +28,7 @@ public class Bomb extends globals.Entity implements Attackable  {
 	 */
 	public Bomb() {
 		hp = 10;
+		setName("Bomb");
 	}
 	
 	/**
@@ -66,31 +69,16 @@ public class Bomb extends globals.Entity implements Attackable  {
 		for (Box box : getBox().getAdjacentBoxes()) {
 			for (Entity ent : box.getChart().getEntitiesOn(box)) {
 				if (ent instanceof Attackable) {
-					int newhp = ((Attackable)ent).getHp() - 10;
-					
-					if (newhp <= 0) {
-						newhp = 0;
-						((Attackable)ent).setHp(newhp);
-						((Attackable)ent).onDeath();
-					} else {
-						((Attackable)ent).setHp(newhp);
-					}
+					CombatHandler.getInstance().fixedAttack(this, (Attackable)ent, 10);
 				}
 			}
 		}
 		for (Entity ent : getBox().getChart().getEntitiesOn(getBox())) {
-			if (ent instanceof Attackable) {
-				int newhp = ((Attackable)ent).getHp() - 20;
-				
-				if (newhp <= 0) {
-					newhp = 0;
-					((Attackable)ent).setHp(newhp);
-					((Attackable)ent).onDeath();
-				} else {
-					((Attackable)ent).setHp(newhp);
-				}
+			if (ent instanceof Attackable && ent != this) {
+				CombatHandler.getInstance().fixedAttack(this, (Attackable)ent, 20);
 			}
 		}
+		getBox().getChart().remove(this);
 	}
 
 	/**
