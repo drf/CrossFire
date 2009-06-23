@@ -6,13 +6,13 @@ import gameLogic.CanMagicAttack;
 public class Implosion extends Spell {
 
 	public Implosion() {
-		super(25, 70, 0, "Implosion", "Deals serious damage to a target");
+		super(30, 70, 0, "Implosion", "Deals serious damage to a target");
 	}
 	
 	@Override
 	public int computeDamage(CanMagicAttack caster, Attackable target,
 			int rangeLevel) {
-		return (int)((caster.getIntelligence() * 0.6 + caster.getMagicSkill() * 0.8) 
+		return (int)((caster.getIntelligence() * 0.2 + caster.getMagicSkill() * 0.5) 
 			         + caster.getMagicDamageBonus());
 	}
 

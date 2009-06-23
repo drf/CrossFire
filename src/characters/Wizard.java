@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import javax.imageio.ImageIO;
 
+import spells.AncientKnowledge;
 import spells.AuraBolt;
 import spells.DarkGaze;
 import spells.DivineIntervention;
@@ -42,10 +43,8 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 		
 		spells.add(new Heal());
 		spells.add(new AuraBolt());
-		spells.add(new Implosion());
-		spells.add(new Fireball());
 		spells.add(new UnholySacrifice());
-		spells.add(new DivineIntervention());
+		spells.add(new AncientKnowledge());
 		
 		try {
 			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/angel.gif")));

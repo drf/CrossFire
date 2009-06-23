@@ -12,7 +12,7 @@ public class Fireball extends Spell {
 	@Override
 	public int computeDamage(CanMagicAttack caster, Attackable target,
 			int rangeLevel) {
-		return (int)((caster.getIntelligence() * 0.6 + caster.getMagicSkill() * 0.6) 
+		return (int)((caster.getIntelligence() * 0.25 + caster.getMagicSkill() * 0.2) 
 				     * (1 - rangeLevel * 0.5) + caster.getMagicDamageBonus());
 	}
 

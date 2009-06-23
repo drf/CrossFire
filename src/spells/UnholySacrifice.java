@@ -14,10 +14,10 @@ public class UnholySacrifice extends Spell {
 	public int computeDamage(CanMagicAttack caster, Attackable target,
 			int rangeLevel) {
 		target.setHp(target.getHp() - 10);
-		caster.setMp(caster.getMp() + 10 + (int)(caster.getIntelligence() + 
+		caster.setMp(caster.getMp() + 10 + (int)((caster.getIntelligence() + 
 												 caster.getMagicSkill() +
-												 caster.getMagicDamageBonus()
-												 * 0.02));
+												 caster.getMagicDamageBonus())
+												 * 0.12));
 		return 10;
 	}
 

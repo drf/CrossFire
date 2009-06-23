@@ -1,5 +1,9 @@
 package spells;
 
+import java.util.Random;
+
+import characters.Fighter;
+
 import gameLogic.Attackable;
 import gameLogic.CanMagicAttack;
 import globals.PlayableEntity;
@@ -14,8 +18,19 @@ public class DarkGaze extends Spell {
 	@Override
 	public int computeDamage(CanMagicAttack caster, Attackable target,
 			int rangeLevel) {
-		((PlayableEntity)target).setPlayer(((PlayableEntity)caster).getPlayer());
-		return 0;
+		Random r = new Random();
+		if (target instanceof Fighter) {
+			int possibility = 50 + (caster.getIntelligence() - ((Fighter)target).getIntelligence()) * 2;
+			if (r.nextInt(101) <= possibility) {
+				((PlayableEntity)target).setPlayer(((PlayableEntity)caster).getPlayer());
+				return 0;
+			} else {
+				return -1;
+			}
+		} else {
+			((PlayableEntity)target).setPlayer(((PlayableEntity)caster).getPlayer());
+			return 0;
+		}
 	}
 	
 	@Override

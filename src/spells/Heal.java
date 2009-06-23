@@ -12,7 +12,7 @@ public class Heal extends Spell {
 	@Override
 	public int computeDamage(CanMagicAttack caster, Attackable target,
 			int rangeLevel) {
-		return -(int)(caster.getIntelligence() * 0.4 + caster.getMagicSkill() * 0.3);
+		return -(int)(caster.getIntelligence() * 0.1 + caster.getMagicSkill() * 0.3);
 	}
 
 }
