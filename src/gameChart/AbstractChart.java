@@ -100,6 +100,7 @@ public abstract class AbstractChart {
 	public Set<Box> getBoxesAtRange(Box b, int range) {
 		HashSet<Box> retset = new HashSet<Box>();
 		HashSet<Box> latestBoxes = new HashSet<Box>();
+		latestBoxes.add(b);
 		
 		for (int i = 0; i < range; i++) {
 			HashSet<Box> currentBoxes = new HashSet<Box>();

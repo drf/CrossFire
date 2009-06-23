@@ -2,9 +2,14 @@ package globals;
 
 import java.awt.image.BufferedImage;
 
+import javax.swing.event.EventListenerList;
+
 import gameChart.Box;
 import gameChart.BoxBusyException;
+import gameLogic.EntityListener;
 import gameLogic.Movable;
+import gameLogic.MoveEvent;
+import gameLogic.Turn;
 
 /**
  * 
@@ -31,6 +36,8 @@ public abstract class Entity implements java.io.Serializable {
 	private static final long serialVersionUID = 602249422396237313L;
 	private Box box;
 	private BufferedImage image;
+	
+	private EventListenerList eventListeners = new EventListenerList();
 	
 	public Entity() {}
 	
@@ -65,6 +72,8 @@ public abstract class Entity implements java.io.Serializable {
 			return;
 		}
 		
+		Box oldBox = getBox();
+		
 		try {
 			getBox().getChart().place(this, toBox);
 		} catch (BoxBusyException e) {
@@ -72,6 +81,23 @@ public abstract class Entity implements java.io.Serializable {
 			// TODO: handle exception
 		}
 		
+		// Stream the event
+		MoveEvent evt = new MoveEvent((Movable)this, oldBox, toBox);
+		
+		Object[] listeners = getListeners().getListenerList();
+        
+        for (int i = 0; i < listeners.length; i += 2) {
+            if (listeners[i] == EntityListener.class) {
+            	((EntityListener)listeners[i+1]).EntityEventOccurred(evt);
+            }
+        }
+        
+        // If it has a turn, process it
+        if (this instanceof PlayableEntity) {
+        	if (((PlayableEntity)this).isOnTurn()) {
+        		((PlayableEntity)this).performTurnAction(Turn.Action.Move);
+        	}
+        }
 	}
 
 	public BufferedImage getImage() {
@@ -82,5 +108,11 @@ public abstract class Entity implements java.io.Serializable {
 		this.image = image;
 	}
 	
+	public void addEntityEventListener(EntityListener listener) {
+		eventListeners.add(EntityListener.class, listener);
+	}
 	
+	protected EventListenerList getListeners() {
+		return eventListeners;
+	}
 }

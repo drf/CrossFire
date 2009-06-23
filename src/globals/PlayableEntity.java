@@ -1,6 +1,9 @@
 package globals;
 
+import gameLogic.EntityListener;
 import gameLogic.Turn;
+import gameLogic.TurnEvent;
+import gameLogic.TurnEvent.TypeEvent;
 import player.Player;
 
 /**
@@ -47,9 +50,52 @@ public abstract class PlayableEntity extends Entity {
 	
 	public void startNewTurn() {
 		currentTurn = new Turn();
+		
+		// Stream the event
+		TurnEvent evt = new TurnEvent(player, this, TypeEvent.Started);
+		
+		Object[] listeners = getListeners().getListenerList();
+        
+        for (int i = 0; i < listeners.length; i += 2) {
+            if (listeners[i] == EntityListener.class) {
+            	((EntityListener)listeners[i+1]).EntityEventOccurred(evt);
+            }
+        }
 	}
 	
 	public void completeTurn() {
+		
+		// Stream the event
+		TurnEvent evt = new TurnEvent(player, this, TypeEvent.Finished);
+		
+		Object[] listeners = getListeners().getListenerList();
+        
+        for (int i = 0; i < listeners.length; i += 2) {
+            if (listeners[i] == EntityListener.class) {
+            	((EntityListener)listeners[i+1]).EntityEventOccurred(evt);
+            }
+        }
+		
 		currentTurn = null;
+	}
+	
+	public boolean performTurnAction(Turn.Action action) {
+		if (currentTurn.performAction(action)) {
+			
+			// Stream the event
+			TurnEvent evt = new TurnEvent(player, this, TypeEvent.Changed);
+			
+			Object[] listeners = getListeners().getListenerList();
+	        
+	        for (int i = 0; i < listeners.length; i += 2) {
+	            if (listeners[i] == EntityListener.class) {
+	            	((EntityListener)listeners[i+1]).EntityEventOccurred(evt);
+	            }
+	        }
+			
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

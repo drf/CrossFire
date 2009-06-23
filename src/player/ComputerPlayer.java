@@ -10,6 +10,7 @@ import gameLogic.CanAttack;
 import gameLogic.CanMeleeAttack;
 import gameLogic.CanPick;
 import gameLogic.CombatHandler;
+import gameLogic.Game;
 import gameLogic.Movable;
 import gameLogic.Pickable;
 import gameLogic.CombatHandler.AttackType;
@@ -64,7 +65,7 @@ public class ComputerPlayer extends Player {
 	 */
 
 	@Override
-	public void handleTurn(PlayableEntity entity) {
+	public void handleTurn(PlayableEntity entity, int token) {
 		// Attack, if possible
 		if (entity instanceof CanAttack) {
 			// Ok, let's see what we're capable of. Our entity will prefer,
@@ -90,7 +91,7 @@ public class ComputerPlayer extends Player {
 							}
 							
 							// Great, let's hit it!
-							CombatHandler.meleeAttack((CanMeleeAttack)attacker, (Attackable)ent);
+							CombatHandler.getInstance().meleeAttack((CanMeleeAttack)attacker, (Attackable)ent);
 							// End of turn
 							return;
 						}
@@ -120,6 +121,9 @@ public class ComputerPlayer extends Player {
 				}
 			}
 		}
+		
+		// End turn
+		Game.getInstance().endTurn(token);
 		
 	}
 

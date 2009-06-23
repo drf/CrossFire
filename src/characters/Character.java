@@ -3,8 +3,10 @@ package characters;
 import gameChart.Box;
 import gameChart.City;
 import gameChart.Hill;
+import gameLogic.EntityListener;
 import gameLogic.Equipable;
 import gameLogic.Movable;
+import gameLogic.PickEvent;
 import gameLogic.Pickable;
 import globals.Entity;
 
@@ -127,6 +129,17 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 			}
 			
 			i.onPick(this);
+			
+			// Stream the event
+			PickEvent evt = new PickEvent(this, i);
+			
+			Object[] listeners = getListeners().getListenerList();
+	        
+	        for (int j = 0; j < listeners.length; j += 2) {
+	            if (listeners[j] == EntityListener.class) {
+	            	((EntityListener)listeners[j+1]).EntityEventOccurred(evt);
+	            }
+	        }
 		}
 		
 		return false;

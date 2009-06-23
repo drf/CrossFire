@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 public class Turn {
 	
-	enum Action {
+	public enum Action {
 		Attack,
 		Move
 	}

@@ -1,5 +1,6 @@
 package player;
 
+import gameLogic.Game;
 import globals.BaseAttributes;
 import globals.PlayableEntity;
 import characters.Character;
@@ -21,12 +22,13 @@ public class HumanPlayer extends Player {
 	 * 
 	 */
 	private static final long serialVersionUID = -2548924442744837336L;
+	private int token;
 
 	public HumanPlayer() {
 	}
 	
 	/**
-	 * This method creates a new {@link Character}Êand adds it to the player list.
+	 * This method creates a new {@link Character}ï¿½and adds it to the player list.
 	 * 
 	 * This method always returns immediately. 
 	 *
@@ -85,6 +87,11 @@ public class HumanPlayer extends Player {
 	}
 
 	@Override
-	public void handleTurn(PlayableEntity entity) {
+	public void handleTurn(PlayableEntity entity, int token) {
+		this.token = token;
+	}
+	
+	public void skipTurn() {
+		Game.getInstance().endTurn(token);
 	}
 }

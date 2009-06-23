@@ -36,7 +36,9 @@ public abstract class Player implements java.io.Serializable {
 	
 	public Player() {}
 	
-	public abstract void handleTurn(PlayableEntity entity);
+	public void handleTurn(PlayableEntity entity, int token) {
+		
+	}
 	
 	public String getName() {
 		return name;
@@ -47,7 +49,7 @@ public abstract class Player implements java.io.Serializable {
 	}
 	
 	/**
-	 * This method adds a new {@link Entity}Êto the list they player handles
+	 * This method adds a new {@link Entity}ï¿½to the list they player handles
 	 * 
 	 * This method always returns immediately. 
 	 *
@@ -61,7 +63,7 @@ public abstract class Player implements java.io.Serializable {
 	}
 	
 	/**
-	 * This method removes an {@link Entity}Êfrom the list they player handles
+	 * This method removes an {@link Entity}ï¿½from the list they player handles
 	 * 
 	 * This method always returns immediately. 
 	 *

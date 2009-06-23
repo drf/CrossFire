@@ -3,12 +3,11 @@ package gameLogic;
 
 import gameChart.Box;
 import globals.Entity;
-import globals.Pair;
 
 import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
+
+import javax.swing.event.EventListenerList;
 
 import spells.Spell;
 
@@ -34,6 +33,23 @@ public class CombatHandler {
 		Magic
 	}
 	
+	private static CombatHandler instance = null;
+	private EventListenerList eventListeners = new EventListenerList();
+	
+	private CombatHandler() {}
+	
+	public static CombatHandler getInstance() {
+		if (instance == null) {
+			instance = new CombatHandler();
+		}
+		
+		return instance;
+	}
+	
+	public void addCombatListener(CombatListener listener) {
+		eventListeners.add(CombatListener.class, listener);
+	}
+	
 	/**
 	 * This function is internal to {@link CombatHandler}, and it's used to compute
 	 * and apply the final damage to a specific object.
@@ -43,7 +59,7 @@ public class CombatHandler {
 	 * @param damage the amount of damage, without luck and damage reduction modifiers 
 	 * @return the final damage dealt
 	 */
-	private static int genericAttack(CanAttack from, Attackable to, int damage)
+	private int genericAttack(CanAttack from, Attackable to, int damage)
 	{
 		
 		// Now add some luck factor
@@ -72,15 +88,23 @@ public class CombatHandler {
 	 * 
 	 * @param from the {@link CanMeleeAttack} attempting the attack
 	 * @param to the {@link Attackable} being attacked
-	 * @return a {@link Pair} containing the dealt damage as the first member, and the
-	 * counter damage as the second member
 	 */
-	public static Pair<Integer> meleeAttack(CanMeleeAttack from, Attackable to) {
-		int damage, counterdamage = 0;
+	public void meleeAttack(CanMeleeAttack from, Attackable to) {
+		int damage = 0, counterdamage = 0;
 		
 		// Compute damage according to specifics
 		damage = (int)(from.getStrength() * 0.5) +from.getMeleeDamageBonus();
 		damage = genericAttack(from, to, damage);
+		
+		CombatEvent evt = new CombatEvent(from, to, AttackType.Melee, damage, true);
+		
+		Object[] listeners = eventListeners.getListenerList();
+        
+        for (int i = 0; i < listeners.length; i += 2) {
+            if (listeners[i] == CombatListener.class) {
+                ((CombatListener)listeners[i+1]).CombatEventOccurred(evt);
+            }
+        }
 		
 		
 		// Can we counter?
@@ -93,10 +117,15 @@ public class CombatHandler {
 			
 			counterdamage = (int)(from.getStrength() * 0.3) + from.getMeleeDamageBonus();
 			counterdamage = genericAttack(from, to, counterdamage);
-		}
-		
-		return new Pair<Integer>(damage, counterdamage);
-		
+			
+			evt = new CombatEvent(from, to, AttackType.Melee, counterdamage, true);
+			
+	        for (int i = 0; i < listeners.length; i += 2) {
+	            if (listeners[i] == CombatListener.class) {
+	                ((CombatListener)listeners[i+1]).CombatEventOccurred(evt);
+	            }
+	        }
+		}		
 	}
 	
 	/**
@@ -109,17 +138,25 @@ public class CombatHandler {
 	 * 
 	 * @param from the {@link CanRangedAttack} attempting the attack
 	 * @param to the {@link Attackable} being attacked
-	 * @return the dealt damage, -1 if the attack got evaded
 	 * 
 	 */
-	public static int rangedAttack(CanRangedAttack from, Attackable to) {
+	public void rangedAttack(CanRangedAttack from, Attackable to) {
 		// First of all let's check if the attack can be evaded
 		if (to.getDexterity() > from.getDexterity()) {
 			Random r = new Random();
 			int possibility = (to.getDexterity() - from.getDexterity()) * 2;
 			
 			if (possibility >= 100) {
-				return -1;
+				CombatEvent evt = new CombatEvent(from, to, AttackType.Ranged, 0, false);
+				
+				Object[] listeners = eventListeners.getListenerList();
+		        
+		        for (int i = 0; i < listeners.length; i += 2) {
+		            if (listeners[i] == CombatListener.class) {
+		                ((CombatListener)listeners[i+1]).CombatEventOccurred(evt);
+		            }
+		        }
+		        return;
 			}
 			
 			// Lucky factor
@@ -129,7 +166,17 @@ public class CombatHandler {
 			// Obviously, the randomized is balanced upon the difference of attributes
 			if (possibility > 0) {
 				if (r.nextInt(100) <= possibility) {
-					return -1;
+					CombatEvent evt = new CombatEvent(from, to, AttackType.Ranged, 0, false);
+					
+					Object[] listeners = eventListeners.getListenerList();
+			        
+			        for (int i = 0; i < listeners.length; i += 2) {
+			            if (listeners[i] == CombatListener.class) {
+			                ((CombatListener)listeners[i+1]).CombatEventOccurred(evt);
+			            }
+			        }
+			        
+			        return;
 				}
 			}
 		}
@@ -138,7 +185,15 @@ public class CombatHandler {
 		int damage = (int)(from.getStrength() * 0.3) + from.getRangedDamageBonus();
 		damage = genericAttack(from, to, damage);
 		
-		return damage;
+		CombatEvent evt = new CombatEvent(from, to, AttackType.Ranged, damage, true);
+		
+		Object[] listeners = eventListeners.getListenerList();
+        
+        for (int i = 0; i < listeners.length; i += 2) {
+            if (listeners[i] == CombatListener.class) {
+                ((CombatListener)listeners[i+1]).CombatEventOccurred(evt);
+            }
+        }
 	}
 	
 	/**
@@ -154,21 +209,23 @@ public class CombatHandler {
 	 * @return the dealt damage
 	 * 
 	 */
-	public static Map<Attackable, Integer> magicAttack(CanMagicAttack from, Attackable to, Spell spell) {
-		Map<Attackable, Integer> retmap = new HashMap<Attackable, Integer>();
-		
+	public void magicAttack(CanMagicAttack from, Attackable to, Spell spell) {
 		if (spell.dealsDamage()) {
-			retmap.put(to, genericAttack(from, to, spell.computeDamage(from, to, 0)));
+			for (int i = 0; i <= spell.getTargetRange(); i++) {
+				for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
+					for (Entity ent : b.getChart().getEntitiesOn(b)) {
+						if (ent instanceof Attackable) {
+							Attackable target = (Attackable)ent;
+							int damage = genericAttack(from, target, spell.computeDamage(from, target, i));
 
-			// If the spell has a range, let's compute it
-			if (spell.getTargetRange() > 0) {
-				for (int i = 1; i <= spell.getTargetRange(); i++) {
-					for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
-						for (Entity ent : b.getChart().getEntitiesOn(b)) {
-							if (ent instanceof Attackable) {
-								Attackable target = (Attackable)ent;
+							CombatEvent evt = new CombatEvent(from, to, spell, damage, true);
 
-								retmap.put(target, genericAttack(from, target, spell.computeDamage(from, target, i)));
+							Object[] listeners = eventListeners.getListenerList();
+
+							for (int j = 0; j < listeners.length; j += 2) {
+								if (listeners[j] == CombatListener.class) {
+									((CombatListener)listeners[j+1]).CombatEventOccurred(evt);
+								}
 							}
 						}
 					}
@@ -176,16 +233,21 @@ public class CombatHandler {
 			}
 		} else {
 			// The spell doesn't deal damage, so let's just process it
-			spell.computeDamage(from, to, 0);
-			
-			// If the spell has a range, let's compute it
-			if (spell.getTargetRange() > 0) {
-				for (int i = 1; i <= spell.getTargetRange(); i++) {
-					for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
-						for (Entity ent : b.getChart().getEntitiesOn(b)) {
-							if (ent instanceof Attackable) {
-								Attackable target = (Attackable)ent;
-								spell.computeDamage(from, target, i);
+			for (int i = 0; i <= spell.getTargetRange(); i++) {
+				for (Box b : ((Entity)to).getBox().getChart().getBoxesAtRange(((Entity)to).getBox(), i)) {
+					for (Entity ent : b.getChart().getEntitiesOn(b)) {
+						if (ent instanceof Attackable) {
+							Attackable target = (Attackable)ent;
+							boolean success = spell.computeDamage(from, target, i) >= 0;
+
+							CombatEvent evt = new CombatEvent(from, to, spell, 0, success);
+
+							Object[] listeners = eventListeners.getListenerList();
+
+							for (int j = 0; j < listeners.length; j += 2) {
+								if (listeners[j] == CombatListener.class) {
+									((CombatListener)listeners[j+1]).CombatEventOccurred(evt);
+								}
 							}
 						}
 					}
@@ -195,8 +257,6 @@ public class CombatHandler {
 		
 		// Subtract the MPs
 		from.setMp(from.getMp() - spell.getCost());
-						
-		return retmap;
 	}
 	
 	/**
@@ -286,7 +346,7 @@ public class CombatHandler {
 	 * @return the difference of damage to apply. Can be negative if the luck influences
 	 * positively the defender, in this case the damage gets reduced.
 	 */
-	private static int computeLuckFactor(int luck, double multiplier) {
+	private int computeLuckFactor(int luck, double multiplier) {
 		Random r = new Random();
 		
 		if (luck < 0) {

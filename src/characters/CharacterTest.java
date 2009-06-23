@@ -1,7 +1,6 @@
 package characters;
 
 import gameLogic.CombatHandler;
-import globals.Pair;
 import items.ItemGenerator;
 import java.util.HashSet;
 import java.util.Random;
@@ -88,37 +87,10 @@ public class CharacterTest {
 	}
 	
 	public static Character killahFaighht(Character a, Character b) {
-		Pair<Integer> damage;
 		while (true) {
-			damage = CombatHandler.meleeAttack(a, b);
-			if (b.getHp() > 0 && damage.getSecond() == 0) {
-				//System.out.printf("Mazzate su b, per ben %d danni, ma ce la fa\n", damage.getFirst());
-			} else if (b.getHp() > 0 && a.getHp() > 0) {
-				//System.out.printf("Mazzate su b, per ben %d danni, ma ce la fa e contrattacca su a " +
-				//		"per ben %d danni\n", damage.getFirst(), damage.getSecond());
-			} else if (b.getHp() > 0) {
-				//System.out.printf("Mazzate su b, per ben %d danni, ma ce la fa e contrattacca su a " +
-				//		"per ben %d danni, facendolo schiattare!\n", damage.getFirst(), damage.getSecond());
-				return b;
-			} else {
-				//System.out.printf("Mazzate su b, che schiatta!");
-				return a;
-			}
+			CombatHandler.getInstance().meleeAttack(a, b);
 			
-			damage = CombatHandler.meleeAttack(b, a);
-			if (a.getHp() > 0 && damage.getSecond() == 0) {
-				//System.out.printf("Mazzate su a, per ben %d danni, ma ce la fa\n", damage.getFirst());
-			} else if (a.getHp() > 0 && b.getHp() > 0) {
-				//System.out.printf("Mazzate su a, per ben %d danni, ma ce la fa e contrattacca su b " +
-					//	"per ben %d danni\n", damage.getFirst(), damage.getSecond());
-			} else if (a.getHp() > 0) {
-				//System.out.printf("Mazzate su a, per ben %d danni, ma ce la fa e contrattacca su b " +
-					//	"per ben %d danni, facendolo schiattare!\n", damage.getFirst(), damage.getSecond());
-				return a;
-			} else {
-				//System.out.printf("Mazzate su a, che schiatta!");
-				return b;
-			}
+			CombatHandler.getInstance().meleeAttack(b, a);
 		}
 	}
 

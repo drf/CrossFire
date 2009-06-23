@@ -1,5 +1,6 @@
 package characters;
 
+import gameChart.Box;
 import gameLogic.Attackable;
 import gameLogic.CanMeleeAttack;
 import gameLogic.Movable;
@@ -50,4 +51,13 @@ public abstract class Monster extends Fighter implements Attackable,
 		super(intelligence, strength, dexterity, magicskill, luck, HP, MP);
 		// TODO Auto-generated constructor stub
 	}
+
+	/* (non-Javadoc)
+	 * @see gameLogic.Movable#boxChanged(gameChart.Box, gameChart.Box)
+	 */
+	@Override
+	public void boxChanged(Box oldBox, Box newBox) {
+	}
+	
+	
 }

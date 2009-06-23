@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import items.ItemGenerator;
-import gameChart.Box;
 import gameChart.BoxBusyException;
 import gameLogic.Attackable;
 import gameLogic.Equipable;
@@ -36,10 +35,6 @@ public class Dragon extends Monster {
 			e.printStackTrace();
 		}
 	}
-	
-	public void boxChanged(Box oldBox, Box newBox) {
-	}
-
 	
 	public int getDamageReduction() {
 		return 5;
