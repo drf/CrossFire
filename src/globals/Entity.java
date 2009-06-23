@@ -36,10 +36,15 @@ public abstract class Entity implements java.io.Serializable {
 	private static final long serialVersionUID = 602249422396237313L;
 	private Box box;
 	private BufferedImage image;
+	private String name;
 	
 	private EventListenerList eventListeners = new EventListenerList();
 	
 	public Entity() {}
+	
+	public Entity(String name) {
+		this.name = name;
+	}
 	
 	public Box getBox() {
 		return this.box;
@@ -115,4 +120,21 @@ public abstract class Entity implements java.io.Serializable {
 	protected EventListenerList getListeners() {
 		return eventListeners;
 	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
 }
