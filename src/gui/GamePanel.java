@@ -354,8 +354,8 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				// Perform the attack
 				for (Entity ent : evt.getBox().getChart().getEntitiesOn(evt.getBox())) {
 					if (ent instanceof Attackable) {
-						CombatHandler.getInstance().meleeAttack((CanMeleeAttack)onTurn, (Attackable)ent);
 						onTurn.performTurnAction(Turn.Action.Attack);
+						CombatHandler.getInstance().meleeAttack((CanMeleeAttack)onTurn, (Attackable)ent);
 						meleeButton.setSelected(false);
 						setNewActionState(ActionState.OnNavigate, 0, 0);
 						return;
@@ -369,8 +369,8 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				// Perform the attack
 				for (Entity ent : evt.getBox().getChart().getEntitiesOn(evt.getBox())) {
 					if (ent instanceof Attackable) {
-						CombatHandler.getInstance().rangedAttack((CanRangedAttack)onTurn, (Attackable)ent);
 						onTurn.performTurnAction(Turn.Action.Attack);
+						CombatHandler.getInstance().rangedAttack((CanRangedAttack)onTurn, (Attackable)ent);
 						rangedButton.setSelected(false);
 						setNewActionState(ActionState.OnNavigate, 0, 0);
 						return;
@@ -402,8 +402,8 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 						if (!CombatHandler.canCastSpell((CanMagicAttack)onTurn, (Attackable)ent, currentSpell)) {
 							continue;
 						}
-						CombatHandler.getInstance().magicAttack((CanMagicAttack)onTurn, (Attackable)ent, currentSpell);
 						onTurn.performTurnAction(Turn.Action.Attack);
+						CombatHandler.getInstance().magicAttack((CanMagicAttack)onTurn, (Attackable)ent, currentSpell);
 						currentSpell = null;
 						spellButton.setSelected(false);
 						setNewActionState(ActionState.OnNavigate, 0, 0);
