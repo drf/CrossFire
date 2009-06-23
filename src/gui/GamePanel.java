@@ -92,6 +92,10 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	*/
 	public static void main(String[] args) {
 		Game.getInstance().setChart(new RectangularChart(10,10));
+		Player p1 = Game.getInstance().createNewPlayer("Test1", true);
+		Player p2 = Game.getInstance().createNewPlayer("Test2", true);
+		Game.getInstance().assignCharacter(p1, Game.getInstance().createCharacter(characters.Character.Race.Elf, new Modifier(), "cicci"));
+		Game.getInstance().assignCharacter(p2, Game.getInstance().createCharacter(characters.Character.Race.Wizard, new Modifier(), "picci"));
 		try {
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 9));			
