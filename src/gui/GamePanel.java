@@ -1,4 +1,6 @@
 package gui;
+import characters.Dragon;
+
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
 
@@ -35,6 +37,7 @@ import javax.swing.JToggleButton;
 import javax.swing.WindowConstants;
 import org.jdesktop.application.Application;
 
+import player.ComputerPlayer;
 import player.HumanPlayer;
 import player.Player;
 import spells.Spell;
@@ -96,11 +99,16 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		Game.getInstance().setChart(new RectangularChart(10,10));
 		Player p1 = Game.getInstance().createNewPlayer("Test1", true);
 		Player p2 = Game.getInstance().createNewPlayer("Test2", true);
+		ComputerPlayer p3 = (ComputerPlayer)(Game.getInstance().createNewPlayer("TestPC", false));
 		Game.getInstance().assignCharacter(p1, Game.getInstance().createCharacter(characters.Character.Race.Elf, new Modifier(), "cicci"));
 		Game.getInstance().assignCharacter(p2, Game.getInstance().createCharacter(characters.Character.Race.Wizard, new Modifier(), "picci"));
+		Game.getInstance().assignNPC(p3, new Dragon());
+		Game.getInstance().assignNPC(p3, new Dragon());
 		try {
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));
-			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(5, 9));			
+			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(5, 9));
+			Game.getInstance().getChart().place((Entity)(Game.getInstance().getNPCS().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(4, 7));
+			Game.getInstance().getChart().place((Entity)(Game.getInstance().getNPCS().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(6, 9));
 		} catch (BoxBusyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
