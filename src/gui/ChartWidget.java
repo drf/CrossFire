@@ -6,8 +6,19 @@ import gameChart.City;
 import gameChart.Hill;
 import gameChart.Plain;
 import gameChart.RectangularChart;
+import gameLogic.EntityEvent;
+import gameLogic.EntityListener;
+import gameLogic.Game;
+import gameLogic.Movable;
+import gameLogic.MoveEvent;
+import gameLogic.TurnEvent;
+import gameLogic.TurnEvent.TypeEvent;
 import globals.Entity;
+import globals.Modifier;
+import globals.PlayableEntity;
+import gui.GamePanel.ActionState;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -25,10 +36,14 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashSet;
 
 import javax.imageio.ImageIO;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
+import javax.swing.event.EventListenerList;
+
+import player.Player;
 
 import characters.Dragon;
 
@@ -45,7 +60,7 @@ import characters.Dragon;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class ChartWidget extends javax.swing.JPanel {
+public class ChartWidget extends javax.swing.JPanel implements EntityListener, ActionStateChangedListener {
 
 	/**
 	 * 
@@ -61,10 +76,20 @@ public class ChartWidget extends javax.swing.JPanel {
 	private int mouseXPosition;
 	private int mouseYPosition;
 	private boolean draggingMode = true;
+	private boolean streamClickEvent = false;
 	private BufferedImage plainTexture;
 	private BufferedImage hillTexture;
 	private BufferedImage cityTexture;
 	private AffineTransform baseTransform;
+	private ActionState actionState;
+	private int distanceRange;
+	private int targetRange;
+	private PlayableEntity onTurn;
+	private EventListenerList eventListeners = new EventListenerList();
+	HashSet<Integer> widthList = new HashSet<Integer>();
+	HashSet<Integer> heightList = new HashSet<Integer>();
+	private Color greenFill = new Color(120, 125, 0, 128);
+	private Color redFill = new Color(255, 0, 0, 128);
 	
 	
 	/**
@@ -73,21 +98,26 @@ public class ChartWidget extends javax.swing.JPanel {
 	*/
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(new ChartWidget(new RectangularChart(10,15)));
+		frame.getContentPane().add(new ChartWidget(new RectangularChart(10,15), null));
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}
 	
-	public ChartWidget(BidimensionalChart chart) {
+	public ChartWidget(BidimensionalChart chart, GamePanel parent) {
 		super();
 		this.chart = chart;
+		parent.addActionStateChangedEventListener(this);
 		try {
 			chart.place(new Dragon(), chart.getBoxAt(0,0));
 			chart.place(new Dragon(), chart.getBoxAt(6,8));
 		} catch (BoxBusyException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+		
+		for (PlayableEntity ent : Game.getInstance().getEntities()) {
+			ent.addEntityEventListener(this);
 		}
 		
 		baseTransform = AffineTransform.getRotateInstance(-0.91, XPosition + (chart.getWidth() * multiplier)/2 ,
@@ -117,7 +147,6 @@ public class ChartWidget extends javax.swing.JPanel {
 		}
 		
 		initGUI();
-		
 	}
 	
 	private void initGUI() {
@@ -179,6 +208,7 @@ public class ChartWidget extends javax.swing.JPanel {
 		Graphics2D g2 = (Graphics2D)g;
 		
 		g2.transform(baseTransform);
+		
 		for (int i = 0; i < chart.getWidth(); i++) {
 			for (int j = 0; j < chart.getHeight(); j++) {
 				
@@ -189,11 +219,26 @@ public class ChartWidget extends javax.swing.JPanel {
 		        
 		        // Paint with the correct texture
 		        paintBox(g2, i, j);
+		        
 
 		        // Check for mouse hover effect
 		        try {
 		        	if (rectangle.contains(baseTransform.inverseTransform(new Point2D.Double((double)mouseXPosition, (double)mouseYPosition), null))) {
-		        		g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
+		        		if (streamClickEvent) {
+		        			// Stream the event
+		        			BoxClickedEvent evt = new BoxClickedEvent(chart.getBoxAt(i, j));
+		        			
+		        			Object[] listeners = eventListeners.getListenerList();
+		        	        
+		        	        for (int k = 0; k < listeners.length; k += 2) {
+		        	            if (listeners[k] == BoxClickedListener.class) {
+		        	            	((BoxClickedListener)listeners[k+1]).BoxClicked(evt);
+		        	            }
+		        	        }
+		        		}
+		        		
+		        		
+		        		g2.fillRoundRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier, multiplier/8, multiplier/8);
 		        	}
 		        } catch (NoninvertibleTransformException e) {
 		        	e.printStackTrace();
@@ -202,8 +247,19 @@ public class ChartWidget extends javax.swing.JPanel {
 			}
 		}
 		
+		if (actionState != GamePanel.ActionState.OnNavigate) {
+			for (Integer i : widthList) {
+				for (Integer j : heightList) {
+					g2.fillRect(XPosition + i * multiplier, YPosition + j * multiplier, multiplier, multiplier);
+				}
+			}
+		}
+        	
+		
 		// Paint the entities (they should be on top view)
 		paintEntities(g2);
+		// Sorry mate
+		streamClickEvent = false;
 	}
 	
 	private void paintBox(Graphics2D g2, int i, int j) {
@@ -279,6 +335,9 @@ public class ChartWidget extends javax.swing.JPanel {
 		System.out.println("this.mousePressed, event="+evt);
 		lastXMouseOffset = evt.getX();
 		lastYMouseOffset = evt.getY();
+		
+		streamClickEvent = true;
+		updateUI();
 	}
 	
 	private void thisKeyReleased(KeyEvent evt) {
@@ -292,8 +351,55 @@ public class ChartWidget extends javax.swing.JPanel {
 	
 	private void thisMouseMoved(MouseEvent evt) {
 		
-		mouseXPosition = evt.getX();
-		mouseYPosition = evt.getY();
+		if (Math.abs(mouseXPosition - evt.getX()) > 10 || Math.abs(mouseYPosition - evt.getY()) > 10) {
+			mouseXPosition = evt.getX();
+			mouseYPosition = evt.getY();
+
+			updateUI();
+		}
+	}
+
+	@Override
+	public void EntityEventOccurred(EntityEvent e) {
+		if (e instanceof TurnEvent) {
+			TurnEvent t = (TurnEvent)e;
+			if (t.getType() == TypeEvent.Started) {
+				onTurn = t.getEntity();
+			}
+		}
+		
+		updateUI();
+	}
+	
+	public void addBoxClickedEventListener(BoxClickedListener listener) {
+		eventListeners.add(BoxClickedListener.class, listener);
+	}
+
+	@Override
+	public void ActionStateChanged(ActionStateChangedEvent evt) {
+		System.out.println("action");
+		actionState = evt.getState();
+		targetRange = evt.getTargetRange();
+		distanceRange = evt.getDistanceRange();
+		widthList.clear();
+		heightList.clear();
+		// Check the range
+		for (int i = 0; i < chart.getWidth(); i++) {
+			for (int j = 0; j < chart.getHeight(); j++) {
+				if (chart.getEntitiesOn(chart.getBoxAt(i, j)).contains(onTurn)) {
+					for (int k = 0; k <= distanceRange; k++) {
+						widthList.add(i + k);
+						heightList.add(j + k);
+					}
+				}
+			}
+		}
+		
+		if (actionState != GamePanel.ActionState.OnNavigate) {
+			((Graphics2D)getGraphics()).setPaint(redFill);
+		} else {
+			((Graphics2D)getGraphics()).setPaint(greenFill);
+		}
 		
 		updateUI();
 	}

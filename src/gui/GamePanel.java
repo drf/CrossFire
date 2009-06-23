@@ -2,30 +2,46 @@ package gui;
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
 
+import gameChart.BidimensionalChart;
+import gameChart.Box;
+import gameChart.BoxBusyException;
 import gameChart.RectangularChart;
+import gameLogic.Attackable;
 import gameLogic.CanAttack;
+import gameLogic.CanMeleeAttack;
+import gameLogic.CanRangedAttack;
 import gameLogic.CombatEvent;
 import gameLogic.CombatHandler;
 import gameLogic.CombatListener;
 import gameLogic.EntityEvent;
 import gameLogic.EntityListener;
+import gameLogic.Game;
 import gameLogic.MoveEvent;
 import gameLogic.PickEvent;
 import gameLogic.Turn;
 import gameLogic.TurnEvent;
 import globals.Entity;
+import globals.Modifier;
+import globals.PlayableEntity;
 
 import java.awt.Dimension;
-import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.JToggleButton;
 
 import javax.swing.WindowConstants;
 import org.jdesktop.application.Application;
 
 import player.HumanPlayer;
+import player.Player;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.event.EventListenerList;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -39,31 +55,64 @@ import javax.swing.JTextPane;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class GamePanel extends javax.swing.JPanel implements EntityListener, CombatListener {
+public class GamePanel extends javax.swing.JPanel implements EntityListener, CombatListener, BoxClickedListener {
 	private JTextPane gameLogger;
 	private JPanel actionPanel;
 	private JPanel showDataPanel;
-	private JPanel chartArea;
+	private ChartWidget chartArea;
+	private JToggleButton moveButton;
 	private JTextPane descriptionText;
 	private JButton skipButton;
-	private JButton spellButton;
-	private JButton rangedButton;
-	private JButton meleeButton;
+	private JToggleButton spellButton;
+	private JToggleButton rangedButton;
+	private JToggleButton meleeButton;
+	private PlayableEntity onTurn;
+	private ActionState state;
+	private EventListenerList eventListeners = new EventListenerList();
 
+	public enum ActionState {
+		OnNavigate,
+		OnMove,
+		OnMeleeAttack,
+		OnRangedAttack,
+		OnSpellCasting,
+	}
+	
 	/**
 	* Auto-generated main method to display this 
 	* JPanel inside a new JFrame.
 	*/
 	public static void main(String[] args) {
+		Player p1 = Game.getInstance().createNewPlayer("test", true);
+		Player p2 = Game.getInstance().createNewPlayer("test2", true);
+		
+		Game.getInstance().createCharacter(characters.Character.Race.Wizard, p1, new Modifier());
+		Game.getInstance().createCharacter(characters.Character.Race.Elf, p2, new Modifier());
+		Game.getInstance().setChart(new RectangularChart(10,10));
+		try {
+			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));
+			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 9));			
+		} catch (BoxBusyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(new GamePanel());
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
+		
+		Game.getInstance().setState(Game.GamePhase.Turn);
+		Game.getInstance().performNextTurn();
 	}
 	
 	public GamePanel() {
 		super();
+		CombatHandler.getInstance().addCombatListener(this);
+		for (PlayableEntity ent : Game.getInstance().getEntities()) {
+			ent.addEntityEventListener(this);
+		}
 		initGUI();
 	}
 	
@@ -85,28 +134,59 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				this.add(actionPanel, new AnchorConstraint(1, 1000, 366, 739, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				actionPanel.setPreferredSize(new java.awt.Dimension(186, 149));
 				{
-					meleeButton = new JButton();
-					actionPanel.add(meleeButton, new AnchorConstraint(3, 782, 144, 271, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-					meleeButton.setName("meleeButton");
-					meleeButton.setPreferredSize(new java.awt.Dimension(95, 21));
+					moveButton = new JToggleButton();
+					actionPanel.add(moveButton, new AnchorConstraint(610, 814, 729, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					moveButton.setName("moveButton");
+					moveButton.setPreferredSize(new java.awt.Dimension(59, 13));
+					moveButton.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent evt) {
+							moveButtonMouseClicked(evt);
+						}
+					});
 				}
 				{
-					rangedButton = new JButton();
+					meleeButton = new JToggleButton();
+					actionPanel.add(meleeButton, new AnchorConstraint(4, 814, 142, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					meleeButton.setName("meleeButton");
+					meleeButton.setPreferredSize(new java.awt.Dimension(59, 15));
+					meleeButton.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent evt) {
+							meleeButtonMouseClicked(evt);
+						}
+					});
+				}
+				{
+					rangedButton = new JToggleButton();
 					actionPanel.add(rangedButton, new AnchorConstraint(211, 819, 352, 250, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					rangedButton.setName("rangedButton");
-					rangedButton.setPreferredSize(new java.awt.Dimension(106, 21));
+					rangedButton.setBounds(32, 26, 68, 21);
+					rangedButton.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent evt) {
+							rangedButtonMouseClicked(evt);
+						}
+					});
 				}
 				{
-					spellButton = new JButton();
-					actionPanel.add(spellButton, new AnchorConstraint(426, 739, 567, 330, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					spellButton = new JToggleButton();
+					actionPanel.add(spellButton, new AnchorConstraint(426, 814, 564, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					spellButton.setName("spellButton");
-					spellButton.setPreferredSize(new java.awt.Dimension(76, 21));
+					spellButton.setPreferredSize(new java.awt.Dimension(59, 15));
+					spellButton.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent evt) {
+							spellButtonMouseClicked(evt);
+						}
+					});
 				}
 				{
 					skipButton = new JButton();
-					actionPanel.add(skipButton, new AnchorConstraint(640, 717, 781, 330, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+					actionPanel.add(skipButton, new AnchorConstraint(775, 814, 912, 252, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 					skipButton.setName("skipButton");
-					skipButton.setPreferredSize(new java.awt.Dimension(72, 21));
+					skipButton.setPreferredSize(new java.awt.Dimension(59, 15));
+					skipButton.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent evt) {
+							skipButtonMouseClicked(evt);
+						}
+					});
 				}
 			}
 			{
@@ -125,9 +205,10 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				}
 			}
 			{
-				chartArea = new ChartWidget(new RectangularChart(10,10));
+				chartArea = new ChartWidget((BidimensionalChart)Game.getInstance().getChart(), this);
 				this.add(chartArea, new AnchorConstraint(13, 755, 736, 7, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				chartArea.setPreferredSize(new java.awt.Dimension(532, 295));
+				chartArea.addBoxClickedEventListener(this);
 			}
 			Application.getInstance().getContext().getResourceMap(getClass()).injectComponents(this);
 		} catch (Exception e) {
@@ -137,6 +218,8 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 
 	@Override
 	public void EntityEventOccurred(EntityEvent e) {
+		
+		System.out.println("start");
 		if (e instanceof MoveEvent) {
 			MoveEvent m = (MoveEvent)e;
 			gameLogger.setText(gameLogger.getText() + ((Entity)m.getSource()).getName() +
@@ -150,6 +233,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			switch (t.getType()) {
 			case Started:
 				// Log it
+				onTurn = t.getEntity();
 				gameLogger.setText(gameLogger.getText() + (t.getPlayer()).getName() +
 		           		   		   ", it's " + ((Entity)t.getEntity()).getName() +
 		           		   		   " turn" + '\n');
@@ -162,6 +246,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					rangedButton.setEnabled(false);
 					spellButton.setEnabled(false);
 					skipButton.setEnabled(false);
+					moveButton.setEnabled(false);
 					break;
 				}
 			case Changed:
@@ -170,6 +255,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				meleeButton.setEnabled(false);
 				rangedButton.setEnabled(false);
 				spellButton.setEnabled(false);
+				moveButton.setEnabled(false);
 				skipButton.setEnabled(true);
 				
 				if (t.getEntity().getCurrentTurn().availableActions().contains(Turn.Action.Attack)) {
@@ -187,6 +273,11 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 						}
 					}
 				}
+				
+				if (t.getEntity().getCurrentTurn().availableActions().contains(Turn.Action.Move)) {
+					moveButton.setEnabled(true);
+				}
+				
 				break;
 				
 			case Finished:
@@ -198,6 +289,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				meleeButton.setEnabled(false);
 				rangedButton.setEnabled(false);
 				spellButton.setEnabled(false);
+				moveButton.setEnabled(false);
 				skipButton.setEnabled(false);
 				break;			
 			}
@@ -238,6 +330,101 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			}
 			break;
 		}
+	}
+
+	@Override
+	public void BoxClicked(BoxClickedEvent evt) {
+		System.out.println("A box got clicked");
+		switch (state) {
+		case OnMeleeAttack:
+			if (onTurn.getBox().getAdjacentBoxes().contains(evt.getBox())) {
+				// Perform the attack
+				for (Entity ent : evt.getBox().getChart().getEntitiesOn(evt.getBox())) {
+					if (ent instanceof Attackable) {
+						CombatHandler.getInstance().meleeAttack((CanMeleeAttack)onTurn, (Attackable)ent);
+						onTurn.performTurnAction(Turn.Action.Attack);
+						break;
+					}
+				}
+			}
+			break;
+		case OnRangedAttack:
+			if (onTurn.getBox().getChart().getBoxesInRange(onTurn.getBox(), 10).contains(evt.getBox())) {
+				// Perform the attack
+				for (Entity ent : evt.getBox().getChart().getEntitiesOn(evt.getBox())) {
+					if (ent instanceof Attackable) {
+						CombatHandler.getInstance().rangedAttack((CanRangedAttack)onTurn, (Attackable)ent);
+						onTurn.performTurnAction(Turn.Action.Attack);
+						break;
+					}
+				}
+			}
+			break;
+		case OnMove:
+			if (onTurn.getBox().getAdjacentBoxes().contains(evt.getBox())) {
+				// Move it
+				for (Entity ent : evt.getBox().getChart().getEntitiesOn(evt.getBox())) {
+					if (ent instanceof PlayableEntity) {
+						return;
+					}
+				}
+				onTurn.move(evt.getBox());
+			}
+			break;
+		}
+	}
+	
+	private void meleeButtonMouseClicked(MouseEvent evt) {
+		if (meleeButton.isSelected()) {
+			setNewActionState(ActionState.OnMeleeAttack, 0, 1);
+		} else {
+			setNewActionState(ActionState.OnNavigate, 0, 0);
+		}
+	}
+	
+	private void rangedButtonMouseClicked(MouseEvent evt) {
+		if (rangedButton.isSelected()) {
+			setNewActionState(ActionState.OnRangedAttack, 0, 10);
+		} else {
+			setNewActionState(ActionState.OnNavigate, 0, 0);
+		}
+	}
+	
+	private void spellButtonMouseClicked(MouseEvent evt) {
+		System.out.println("spellButton.mouseClicked, event="+evt);
+		//TODO add your code for spellButton.mouseClicked
+	}
+	
+	private void moveButtonMouseClicked(MouseEvent evt) {
+		if (rangedButton.isSelected()) {
+			setNewActionState(ActionState.OnMove, 0, 1);
+		} else {
+			setNewActionState(ActionState.OnNavigate, 0, 0);
+		}
+	}
+	
+	private void skipButtonMouseClicked(MouseEvent evt) {
+		// Let's skip the turn
+		((HumanPlayer)(onTurn.getPlayer())).skipTurn();
+	}
+	
+	private void setNewActionState(ActionState state, int tr, int dr) {
+		this.state = state;
+		
+		// Stream the event
+		ActionStateChangedEvent evt = new ActionStateChangedEvent(this, state, tr, dr);
+		
+		Object[] listeners = eventListeners.getListenerList();
+        
+        for (int k = 0; k < listeners.length; k += 2) {
+            if (listeners[k] == ActionStateChangedListener.class) {
+            	((ActionStateChangedListener)listeners[k+1]).ActionStateChanged(evt);
+            }
+        }
+	}
+	
+	public void addActionStateChangedEventListener(ActionStateChangedListener listener) {
+		eventListeners.add(ActionStateChangedListener.class, listener);
 	}
 
 }

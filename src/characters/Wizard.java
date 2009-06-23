@@ -1,6 +1,9 @@
 package characters;
 
+import java.io.IOException;
 import java.util.HashSet;
+
+import javax.imageio.ImageIO;
 
 import spells.AuraBolt;
 import spells.Fireball;
@@ -40,6 +43,12 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 		spells.add(new Implosion());
 		spells.add(new Fireball());
 		spells.add(new UnholySacrifice());
+		
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/angel.gif")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

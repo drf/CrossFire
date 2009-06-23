@@ -3,6 +3,7 @@ package gameLogic;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import javax.swing.event.EventListenerList;
 
@@ -13,6 +14,8 @@ import characters.Human;
 import characters.Orc;
 import characters.Wizard;
 
+import player.ComputerPlayer;
+import player.HumanPlayer;
 import player.Player;
 
 import gameChart.AbstractChart;
@@ -21,6 +24,20 @@ import globals.PlayableEntity;
 
 public class Game {
 	private AbstractChart chart;
+	/**
+	 * @return the chart
+	 */
+	public AbstractChart getChart() {
+		return chart;
+	}
+
+	/**
+	 * @param chart the chart to set
+	 */
+	public void setChart(AbstractChart chart) {
+		this.chart = chart;
+	}
+
 	private HashMap<PlayableEntity, Player> entities = new HashMap<PlayableEntity, Player>();
 	private GamePhase state;
 	private static Game instance = null;
@@ -70,6 +87,20 @@ public class Game {
         }
 	}
 	
+	public Player createNewPlayer(String name, boolean human) {
+		Player p;
+		
+		if (human) {
+			p = new HumanPlayer();			
+		} else {
+			p = new ComputerPlayer();
+		}
+		
+		p.setName(name);
+		
+		return p;
+	}
+	
 	public boolean createCharacter(Character.Race race, Player player, Modifier bonus) {
 		Character newChar = null; 
 		
@@ -97,6 +128,7 @@ public class Game {
 		newChar.setAttibutes(bonus.adjustAttrs(newChar.getAttributes()));
 		
 		addEntity(newChar, player);
+		newChar.setPlayer(player);
 	
 		return true;
 	}
@@ -174,20 +206,27 @@ public class Game {
 	}
 	
 	public void endTurn(int token) {
+		System.out.println("Ending turn");
 		if (turnTokens.containsKey(token)) {
 			turnTokens.get(token).completeTurn();
 			
 			// Cleanup
 			turnQueue.remove(turnTokens.get(token));
 			turnTokens.remove(token);
-			
+		
+			System.out.println("Nexti");
 			// Move forward
 			performNextTurn();
 		}
+		
 	}
 	
 	private Integer generateToken() {
 		Random r = new Random();
 		return r.nextInt(65532);
+	}
+	
+	public Set<PlayableEntity> getEntities() {
+		return entities.keySet();
 	}
 }
