@@ -250,7 +250,7 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 		
 		if (actionState != GamePanel.ActionState.OnNavigate) {
 			for (Pair<Integer> i : targetCoordinates) {
-					g2.fillRect(XPosition + i.getFirst() * multiplier, YPosition + i.getSecond() * multiplier, multiplier, multiplier);
+				g2.fillRect(XPosition + i.getFirst() * multiplier, YPosition + i.getSecond() * multiplier, multiplier, multiplier);
 			}
 		}
         	

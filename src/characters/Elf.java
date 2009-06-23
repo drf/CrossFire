@@ -1,6 +1,9 @@
 package characters;
 
+import java.io.IOException;
 import java.util.HashSet;
+
+import javax.imageio.ImageIO;
 
 import spells.AuraBolt;
 import spells.Heal;
@@ -34,6 +37,12 @@ public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 		
 		spells.add(new Heal());
 		spells.add(new AuraBolt());
+		
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/hydra.gif")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

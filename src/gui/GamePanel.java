@@ -40,6 +40,8 @@ import player.Player;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.event.EventListenerList;
 
@@ -56,7 +58,7 @@ import javax.swing.event.EventListenerList;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class GamePanel extends javax.swing.JPanel implements EntityListener, CombatListener, BoxClickedListener {
-	private JTextPane gameLogger;
+	private JTextArea gameLogger;
 	private JPanel actionPanel;
 	private JPanel showDataPanel;
 	private ChartWidget chartArea;
@@ -122,10 +124,11 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			AnchorLayout thisLayout = new AnchorLayout();
 			this.setLayout(thisLayout);
 			{
-				gameLogger = new JTextPane();
-				this.add(gameLogger, new AnchorConstraint(751, 1000, 1001, 0, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				gameLogger = new JTextArea();
 				gameLogger.setName("gameLogger");
-				gameLogger.setPreferredSize(new java.awt.Dimension(711, 102));
+				gameLogger.setPreferredSize(new java.awt.Dimension(387, 70));
+				JScrollPane pScroll = new JScrollPane(gameLogger, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+				this.add(pScroll, new AnchorConstraint(751, 986, 985, 18, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 			}
 			{
 				actionPanel = new JPanel();
@@ -397,8 +400,11 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	}
 	
 	private void spellButtonMouseClicked(MouseEvent evt) {
-		System.out.println("spellButton.mouseClicked, event="+evt);
-		//TODO add your code for spellButton.mouseClicked
+		if (spellButton.isSelected()) {
+			setNewActionState(ActionState.OnMove, 0, 1);
+		} else {
+			setNewActionState(ActionState.OnNavigate, 0, 0);
+		}
 	}
 	
 	private void moveButtonMouseClicked(MouseEvent evt) {
