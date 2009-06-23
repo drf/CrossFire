@@ -223,15 +223,15 @@ public class Game implements EntityListener {
 			refillTurnQueue();
 		}
 		
-		PlayableEntity entity = computeNextEntity();
+		onTurn = computeNextEntity();
 		
-		if (entity != null && !entity.isOnTurn()) {
+		if (onTurn != null && !onTurn.isOnTurn()) {
 			int token = generateToken();
-			turnTokens.put(token, entity);
+			turnTokens.put(token, onTurn);
 
-			entity.startNewTurn();
+			onTurn.startNewTurn();
 
-			entities.get(entity).handleTurn(entity, token);
+			entities.get(onTurn).handleTurn(onTurn, token);
 		}
 
 	}
