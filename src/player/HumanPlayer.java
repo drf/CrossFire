@@ -40,16 +40,16 @@ public class HumanPlayer extends Player {
 		Character ch = null;
 		switch (race) {
 		case Elf:
-			ch = new Elf();
+			ch = new Elf(null);
 			break;
 		case Orc:
-			ch = new Orc();
+			ch = new Orc(null);
 			break;
 		case Human:
-			ch = new Human();
+			ch = new Human(null);
 			break;
 		case Wizard:
-			ch = new Wizard();
+			ch = new Wizard(null);
 		default:
 			break;
 		}

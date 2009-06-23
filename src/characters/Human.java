@@ -25,8 +25,9 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 	
 	private HashSet<Spell> spells = new HashSet<Spell>();
 
-	public Human() {
+	public Human(String name) {
 		super();
+		setName(name);
 		ArrayList<Integer> attrs = Character.randomAttributes(0, 300, 5);
 		this.setStrength(attrs.get(0));
 		this.setDexterity(attrs.get(1));
@@ -37,12 +38,12 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 		spells.add(new AuraBolt());
 	}
 
-	@Override
+
 	public HashSet<Spell> getAvailableSpells() {
 		return spells;
 	}
 	
-	@Override
+	
 	public void setAvailableSpells(HashSet<Spell> spells) {
 		this.spells = spells;
 	}

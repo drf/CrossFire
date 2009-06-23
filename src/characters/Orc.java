@@ -19,9 +19,9 @@ public class Orc extends Character implements CanRangedAttack {
 	 */
 	private static final long serialVersionUID = 2392388529182998813L;
 
-	public Orc() {
+	public Orc(String name) {
 		super();
-		
+		setName(name);
 		ArrayList<Integer> attrs;
 		attrs = Character.randomAttributes(80, 200 + 1, 2);
 		this.setStrength(attrs.get(0));
