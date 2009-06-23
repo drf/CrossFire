@@ -3,7 +3,6 @@ import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
 
 import gameChart.BidimensionalChart;
-import gameChart.Box;
 import gameChart.BoxBusyException;
 import gameChart.RectangularChart;
 import gameLogic.Attackable;
@@ -29,7 +28,6 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JToggleButton;
 
@@ -40,9 +38,7 @@ import player.HumanPlayer;
 import player.Player;
 import spells.Spell;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -64,6 +60,10 @@ import javax.swing.event.EventListenerList;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class GamePanel extends javax.swing.JPanel implements EntityListener, CombatListener, BoxClickedListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7718056154119235638L;
 	private JTextArea gameLogger;
 	private JPanel actionPanel;
 	private JPanel showDataPanel;
@@ -77,6 +77,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	private PlayableEntity onTurn;
 	private ActionState state;
 	private EventListenerList eventListeners = new EventListenerList();
+	private Spell currentSpell;
 
 	public enum ActionState {
 		OnNavigate,
@@ -92,6 +93,10 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	*/
 	public static void main(String[] args) {
 		Game.getInstance().setChart(new RectangularChart(10,10));
+		Player p1 = Game.getInstance().createNewPlayer("Test1", true);
+		Player p2 = Game.getInstance().createNewPlayer("Test2", true);
+		Game.getInstance().assignCharacter(p1, Game.getInstance().createCharacter(characters.Character.Race.Elf, new Modifier(), "cicci"));
+		Game.getInstance().assignCharacter(p2, Game.getInstance().createCharacter(characters.Character.Race.Wizard, new Modifier(), "picci"));
 		try {
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 9));			
@@ -347,12 +352,13 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					if (ent instanceof Attackable) {
 						CombatHandler.getInstance().meleeAttack((CanMeleeAttack)onTurn, (Attackable)ent);
 						onTurn.performTurnAction(Turn.Action.Attack);
-						break;
+						meleeButton.setSelected(false);
+						setNewActionState(ActionState.OnNavigate, 0, 0);
+						return;
 					}
 				}
-				meleeButton.setSelected(false);
-				setNewActionState(ActionState.OnNavigate, 0, 0);
 			}
+			gameLogger.setText(gameLogger.getText() + "You cannot perform a melee attack on this target\n");
 			break;
 		case OnRangedAttack:
 			if (onTurn.getBox().getChart().getBoxesInRange(onTurn.getBox(), 10).contains(evt.getBox())) {
@@ -361,18 +367,20 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					if (ent instanceof Attackable) {
 						CombatHandler.getInstance().rangedAttack((CanRangedAttack)onTurn, (Attackable)ent);
 						onTurn.performTurnAction(Turn.Action.Attack);
-						break;
+						rangedButton.setSelected(false);
+						setNewActionState(ActionState.OnNavigate, 0, 0);
+						return;
 					}
 				}
-				rangedButton.setSelected(false);
-				setNewActionState(ActionState.OnNavigate, 0, 0);
 			}
+			gameLogger.setText(gameLogger.getText() + "You cannot perform a ranged attack on this target\n");
 			break;
 		case OnMove:
 			if (onTurn.getBox().getAdjacentBoxes().contains(evt.getBox())) {
 				// Move it
 				for (Entity ent : evt.getBox().getChart().getEntitiesOn(evt.getBox())) {
 					if (ent instanceof PlayableEntity) {
+						gameLogger.setText(gameLogger.getText() + "You cannot move here\n");
 						return;
 					}
 				}
@@ -380,7 +388,27 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				moveButton.setSelected(false);
 				setNewActionState(ActionState.OnNavigate, 0, 0);
 			}
+			gameLogger.setText(gameLogger.getText() + "You cannot move here\n");
 			break;
+		case OnSpellCasting:
+			if (onTurn.getBox().getChart().getBoxesInRange(onTurn.getBox(), currentSpell.getDistanceRange()).contains(evt.getBox())) {
+				// Perform the attack
+				for (Entity ent : evt.getBox().getChart().getEntitiesOn(evt.getBox())) {
+					if (ent instanceof Attackable) {
+						if (!CombatHandler.canCastSpell((CanMagicAttack)onTurn, (Attackable)ent, currentSpell)) {
+							continue;
+						}
+						CombatHandler.getInstance().magicAttack((CanMagicAttack)onTurn, (Attackable)ent, currentSpell);
+						onTurn.performTurnAction(Turn.Action.Attack);
+						currentSpell = null;
+						spellButton.setSelected(false);
+						setNewActionState(ActionState.OnNavigate, 0, 0);
+						return;
+					}
+				}
+			}
+			gameLogger.setText(gameLogger.getText() + "You cannot cast this spell on this target\n");
+			
 		}
 	}
 	
@@ -421,6 +449,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			if ((s != null) && (s.length() > 0)) {
 				for (Spell spell : ((CanMagicAttack)onTurn).getAvailableSpells()) {
 					if (spell.getName() == s) {
+						currentSpell = spell;
 						setNewActionState(ActionState.OnSpellCasting, spell.getTargetRange(), spell.getDistanceRange());
 					}
 				}

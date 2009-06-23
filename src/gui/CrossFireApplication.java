@@ -10,7 +10,6 @@ import gameLogic.GameSetupListener;
 import java.awt.BorderLayout;
 
 import javax.swing.ActionMap;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
