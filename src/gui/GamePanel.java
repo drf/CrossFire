@@ -346,6 +346,8 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 						break;
 					}
 				}
+				meleeButton.setSelected(false);
+				setNewActionState(ActionState.OnNavigate, 0, 0);
 			}
 			break;
 		case OnRangedAttack:
@@ -358,6 +360,8 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 						break;
 					}
 				}
+				rangedButton.setSelected(false);
+				setNewActionState(ActionState.OnNavigate, 0, 0);
 			}
 			break;
 		case OnMove:
@@ -369,6 +373,8 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					}
 				}
 				onTurn.move(evt.getBox());
+				moveButton.setSelected(false);
+				setNewActionState(ActionState.OnNavigate, 0, 0);
 			}
 			break;
 		}
@@ -396,7 +402,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	}
 	
 	private void moveButtonMouseClicked(MouseEvent evt) {
-		if (rangedButton.isSelected()) {
+		if (moveButton.isSelected()) {
 			setNewActionState(ActionState.OnMove, 0, 1);
 		} else {
 			setNewActionState(ActionState.OnNavigate, 0, 0);
