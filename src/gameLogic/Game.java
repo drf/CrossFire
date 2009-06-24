@@ -11,6 +11,7 @@ import characters.Character;
 import characters.Elf;
 import characters.Fighter;
 import characters.Human;
+import characters.Monster;
 import characters.Orc;
 import characters.Wizard;
 
@@ -40,6 +41,7 @@ public class Game implements EntityListener {
 	}
 
 	private HashMap<PlayableEntity, Player> entities = new HashMap<PlayableEntity, Player>();
+	private HashMap<PlayableEntity, ComputerPlayer> npcs = new HashMap<PlayableEntity, ComputerPlayer>();
 	private GamePhase state;
 	private static Game instance = null;
 	private HashMap<Integer, PlayableEntity> turnTokens = new HashMap<Integer, PlayableEntity>();
@@ -151,6 +153,7 @@ public class Game implements EntityListener {
 		return newChar;
 
 	}
+	
 	public boolean assignCharacter(Player player, Character character) {
 		
 		if (character == null || player == null) {
@@ -159,6 +162,19 @@ public class Game implements EntityListener {
 		
 		addEntity(character, player);
 		character.setPlayer(player);
+	
+		return true;
+	}
+	
+	public boolean assignNPC(ComputerPlayer player, PlayableEntity npc) {
+		
+		if (npc == null || player == null) {
+			return false;
+		}
+		
+		npcs.put(npc, player);
+		npc.addEntityEventListener(this);
+		npc.setPlayer(player);
 	
 		return true;
 	}
@@ -185,6 +201,7 @@ public class Game implements EntityListener {
 	
 	private void refillTurnQueue() {
 		turnQueue.addAll(entities.keySet());
+		turnQueue.addAll(npcs.keySet());
 	}
 	
 	private PlayableEntity computeNextEntity() {
@@ -225,13 +242,21 @@ public class Game implements EntityListener {
 		
 		onTurn = computeNextEntity();
 		
-		if (onTurn != null && !onTurn.isOnTurn()) {
+		if (onTurn != null && !onTurn.isOnTurn() &&
+		    (entities.containsKey(onTurn) || npcs.containsKey(onTurn))) {
 			int token = generateToken();
 			turnTokens.put(token, onTurn);
 
 			onTurn.startNewTurn();
 
-			entities.get(onTurn).handleTurn(onTurn, token);
+			if (entities.containsKey(onTurn)) {
+				entities.get(onTurn).handleTurn(onTurn, token);
+			} else {
+				npcs.get(onTurn).handleTurn(onTurn, token);
+			}
+		} else {
+			turnQueue.remove(onTurn);
+			performNextTurn();
 		}
 
 	}
@@ -260,6 +285,10 @@ public class Game implements EntityListener {
 	public Set<PlayableEntity> getEntities() {
 		return entities.keySet();
 	}
+	
+	public Set<PlayableEntity> getNPCS() {
+		return npcs.keySet();
+	}
 
 
 	public void EntityEventOccurred(EntityEvent e) {
@@ -274,6 +303,9 @@ public class Game implements EntityListener {
 				}
 				
 				endGame();
+			} else if (npcs.containsKey(e.getSource())) {
+				chart.remove((Entity)(e.getSource()));
+				npcs.remove(e.getSource());
 			}
 		}
 	}

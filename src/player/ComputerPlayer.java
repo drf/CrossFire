@@ -75,6 +75,7 @@ public class ComputerPlayer extends Player {
 			
 			if (CombatHandler.canPerformAttack(attacker, AttackType.Magic)) {
 				// Ok, let's kill someone in range
+				Game.getInstance().endTurn(token);
 				return;
 			}
 			
@@ -93,6 +94,7 @@ public class ComputerPlayer extends Player {
 							// Great, let's hit it!
 							CombatHandler.getInstance().meleeAttack((CanMeleeAttack)attacker, (Attackable)ent);
 							// End of turn
+							Game.getInstance().endTurn(token);
 							return;
 						}
 					}
