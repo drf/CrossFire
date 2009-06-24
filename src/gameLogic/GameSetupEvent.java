@@ -14,7 +14,8 @@ public class GameSetupEvent extends EventObject {
 	private static final long serialVersionUID = -3511556490562656917L;
 	public enum SetupPhase {
 		None, 
-		AddedPlayer, 
+		AddedPlayer,
+		AddPlayer,
 		AddedCharacter,
 		AddCharacter
 	}

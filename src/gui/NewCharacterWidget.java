@@ -14,6 +14,10 @@ import gameLogic.Game.GamePhase;
 import globals.Modifier;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ComboBoxModel;
@@ -105,11 +109,12 @@ public class NewCharacterWidget extends javax.swing.JPanel {
 				this.add(jButton11, new AnchorConstraint(827, 978, 958, 776, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				jButton11.setName("jButton11");
 				jButton11.setBounds(392, 273, 98, 42);
-				jButton11.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent evt) {
-						jButton11MouseClicked(evt);
+				jButton11.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jButton11ActionPerformed(evt);
 					}
 				});
+				jButton11.setEnabled(false);
 			}
 			{
 				ComboBoxModel raceComboModel = 
@@ -320,6 +325,11 @@ public class NewCharacterWidget extends javax.swing.JPanel {
 				nameText.setName("nameText");
 				nameText.setPreferredSize(new java.awt.Dimension(294, 28));
 				nameText.setBounds(62, 19, 236, 26);
+				nameText.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						nameTextActionPerformed(evt);
+					}
+				});
 			}
 
 			{
@@ -337,50 +347,7 @@ public class NewCharacterWidget extends javax.swing.JPanel {
 			e.printStackTrace();
 		}
 	}
-	
-	private void jButton11MouseClicked(MouseEvent evt) {
-		String characterName = nameText.getText();
-		Character.Race charRace = null;
-		Modifier charModifier = new Modifier();
-		Character newCharacter; 
 		
-		switch(raceCombo.getSelectedIndex())
-		{
-			case 0:
-				charRace = Character.Race.Human;
-				break;
-			case 1:
-				charRace = Character.Race.Orc;
-				break;
-			case 2: 
-				charRace = Character.Race.Elf;
-				break;
-			case 3:
-				charRace = Character.Race.Wizard;
-				break;
-			default:
-				charRace = Character.Race.Human;
-				break;
-		}
-		
-		charModifier.setDexterity(Integer.parseInt(jTextField3.getText()));
-		charModifier.setIntelligence(Integer.parseInt(jTextField1.getText()));
-		charModifier.setLuck(Integer.parseInt(jTextField4.getText()));
-		charModifier.setMagicSkill(Integer.parseInt(jTextField2.getText()));
-		charModifier.setStrength(Integer.parseInt(strengthModifier.getText()));
-
-		newCharacter = Game.getInstance().createCharacter(charRace, charModifier, characterName);
-		GameSetupEvent e = new GameSetupEvent(this, GameSetupEvent.SetupPhase.AddedCharacter, newCharacter);
-		
-		Object[] listeners = eventListeners.getListenerList();
-        
-        for (int i = 0; i < listeners.length; i += 2) {
-            if (listeners[i] == GameSetupListener.class) {
-                ((GameSetupListener)listeners[i+1]).GameSetupStateChanged(e);
-            }
-        }		
-	}
-	
 	private void strengthButtonPlusMouseClicked(MouseEvent evt) {
 
 		Integer newValue = Integer.parseInt(strengthModifier.getText()) +1;
@@ -457,6 +424,62 @@ public class NewCharacterWidget extends javax.swing.JPanel {
 		int bonusSum = Integer.parseInt(jTextField3.getText()) + Integer.parseInt(jTextField1.getText()) + Integer.parseInt(jTextField4.getText()) + Integer.parseInt(jTextField2.getText()) + Integer.parseInt(strengthModifier.getText());
 		if(bonusSum <5)
 			jTextField4.setText(newValue.toString());
+	}
+		
+	private void jButton11ActionPerformed(ActionEvent evt) {
+		String characterName = nameText.getText();
+		Character.Race charRace = null;
+		Modifier charModifier = new Modifier();
+		Character newCharacter; 
+		Integer resetVal = 0;
+		
+		switch(raceCombo.getSelectedIndex())
+		{
+			case 0:
+				charRace = Character.Race.Human;
+				break;
+			case 1:
+				charRace = Character.Race.Orc;
+				break;
+			case 2: 
+				charRace = Character.Race.Elf;
+				break;
+			case 3:
+				charRace = Character.Race.Wizard;
+				break;
+			default:
+				charRace = Character.Race.Human;
+				break;
+		}
+		
+		charModifier.setDexterity(Integer.parseInt(jTextField3.getText()));
+		charModifier.setIntelligence(Integer.parseInt(jTextField1.getText()));
+		charModifier.setLuck(Integer.parseInt(jTextField4.getText()));
+		charModifier.setMagicSkill(Integer.parseInt(jTextField2.getText()));
+		charModifier.setStrength(Integer.parseInt(strengthModifier.getText()));
+
+		newCharacter = Game.getInstance().createCharacter(charRace, charModifier, characterName);
+		GameSetupEvent e = new GameSetupEvent(this, GameSetupEvent.SetupPhase.AddedCharacter, newCharacter);
+		
+		Object[] listeners = eventListeners.getListenerList();
+        
+        for (int i = 0; i < listeners.length; i += 2) {
+            if (listeners[i] == GameSetupListener.class) {
+                ((GameSetupListener)listeners[i+1]).GameSetupStateChanged(e);
+            }
+        }
+        nameText.setText(null);
+        jTextField1.setText(resetVal.toString());
+        jTextField2.setText(resetVal.toString());
+        jTextField3.setText(resetVal.toString());
+        jTextField4.setText(resetVal.toString());
+        strengthModifier.setText(resetVal.toString());
+        raceCombo.setSelectedIndex(0);
+        jButton11.setEnabled(false);
+	}
+	
+	private void nameTextActionPerformed(ActionEvent evt) {
+		jButton11.setEnabled(true);
 	}
 
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import gameChart.RectangularChart;
 import gameLogic.Game;
 import gameLogic.GamePhaseChangedEvent;
 import gameLogic.GamePhaseChangedListener;
@@ -37,7 +38,7 @@ import org.jdesktop.application.SingleFrameApplication;
  */
 
 public class CrossFireApplication extends SingleFrameApplication 
-	implements GamePhaseChangedListener, GameSetupListener {
+	implements GamePhaseChangedListener{
 	
     private JMenuBar menuBar;
     private JPanel topPanel;
@@ -46,7 +47,6 @@ public class CrossFireApplication extends SingleFrameApplication
     private JMenuItem jMenuItem1;
     private JMenu fileMenu;
     private JPanel contentPanel;
-    private ManagerCharacter characterFrame;
     private ManagerPlayers playerFrame;
     
     @Action
@@ -68,6 +68,7 @@ public class CrossFireApplication extends SingleFrameApplication
     @Override
     protected void startup() {
         {
+        	
             topPanel = new JPanel();
             BorderLayout panelLayout = new BorderLayout();
             topPanel.setLayout(panelLayout);
@@ -109,31 +110,18 @@ public class CrossFireApplication extends SingleFrameApplication
     	launch(CrossFireApplication.class, args);
     }
 
-    public void GameSetupStateChanged (GameSetupEvent evt)
-    {
-    	switch(evt.getPhase()) {
-    	case AddedPlayer:
-    		
-    		break;
-    	case AddedCharacter:
-    		characterFrame.dispose();
-    		break;
-    	
-    	case AddCharacter:
-			characterFrame = new ManagerCharacter();
-			characterFrame.getCharacterWidget().addGameSetupListener(this);
-			characterFrame.getCharacterWidget().addGameSetupListener(playerFrame.getPlayerWidget());
-			characterFrame.setVisible(true);
-			break;
-    		
-    	}
-    }
- 
   
     public void GamePhaseChanged(GamePhaseChangedEvent e) {
 		
 		switch (e.getPhase()) {
 		case SetupDone:
+			playerFrame.dispose();
+			Game.getInstance().setChart(new RectangularChart(10,10));
+			contentPanel.removeAll();
+			contentPanel.validate();
+			contentPanel.add(new GamePanel());
+			contentPanel.validate();
+			contentPanel.updateUI();
 			break;
 			
 		case EndGame:
@@ -143,7 +131,6 @@ public class CrossFireApplication extends SingleFrameApplication
 			contentPanel.removeAll();
 			contentPanel.validate();
 			playerFrame = new ManagerPlayers();
-			playerFrame.getPlayerWidget().addGameSetupListener(this);
 			playerFrame.setVisible(true);
 			break;
 			
