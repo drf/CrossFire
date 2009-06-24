@@ -27,7 +27,17 @@ import globals.Modifier;
 import globals.PlayableEntity;
 
 /**
- * @author  drf
+ * Game is the main entry point for the game logic. It is a singleton class taking
+ * care of everything to perform the game, including turn handling, players handling
+ * and state
+ * 
+ * <p>Every interface implementing the CrossFire core should refer to Game as the main
+ * entry point. A very minimal interface can be created just by interacting with the Game
+ * instance
+ * 
+ * @author Dario Freddi
+ * @author Vincenzo Iozzo
+ *
  */
 public class Game implements EntityListener {
 	/**
@@ -80,7 +90,7 @@ public class Game implements EntityListener {
 	private Player winner = null;
 	
 	/**
-	 * @return  the onTurn
+	 * @return  the entity that is currently on turn
 	 * @uml.property  name="onTurn"
 	 */
 	public PlayableEntity getOnTurn() {
@@ -88,7 +98,7 @@ public class Game implements EntityListener {
 	}
 
 	/**
-	 * @return  the winner
+	 * @return  the winner, if one, otherwise null
 	 * @uml.property  name="winner"
 	 */
 	public Player getWinner() {
@@ -132,7 +142,7 @@ public class Game implements EntityListener {
 	private Game() {}
 	
 	/**
-	 * @return
+	 * @return the instance of the class
 	 * @uml.property  name="instance"
 	 */
 	public static Game getInstance() {
@@ -143,6 +153,10 @@ public class Game implements EntityListener {
 		return instance;
 	}
 	
+	/**
+	 * Resets the game. WARNING: calling this function will actually start a
+	 * brand new game and delete all the properties of the old one!!
+	 */
 	public static void resetGame() {
 		instance = null;
 	}

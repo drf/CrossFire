@@ -12,8 +12,17 @@ import javax.swing.event.EventListenerList;
 import spells.Spell;
 
 /**
- * <b>CombatHandler</b> is a container of static functions that handle a multitude of attacks between various objects.  <p> In here, it can be appreciated how much flexible the interface approach actually is: each method accepts an interface as a parameter, so that the combat phase is completely abstracted from the type of instance of the object. <p> This means, for example, that we can add another fighting entity just by coding its class, and without modifying any of the internals. 
- * @author  drf
+ * <b>CombatHandler</b> is a singleton class implementing all the needed logic for each attack/casting.
+ * It also takes care of emitting {@link CombatEvent}s everytime an action is performed
+ * 
+ * <p> In here, it can be appreciated how much flexible the interface approach actually is: each method 
+ * accepts an interface as a parameter, so that the combat phase is completely abstracted from the type 
+ * of instance of the object. 
+ * <p>This means, for example, that we can add another fighting entity just by coding its class, 
+ * and without modifying any of the internals.
+ *  
+ * @author Dario Freddi
+ * @author Vincenzo Iozzo
  */
 public class CombatHandler {
 	
