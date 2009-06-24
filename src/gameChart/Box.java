@@ -5,24 +5,26 @@ import java.util.Set;
 
 
 /**
- * 
- * <b>Box</b> is an abstract class. The idea behind this class is to have a way to manage the landscape of a game chart.
- * The attributes are: 
- * <ul>
- * <li>chart the chart we are playing on
- * </ul>
- * Each attribute has a getter.
- * @author	Dario Freddi
- * @author	Vincenzo Iozzo
+ * <b>Box</b> is an abstract class. The idea behind this class is to have a way to manage the landscape of a game chart. The attributes are:  <ul> <li>chart the chart we are playing on </ul> Each attribute has a getter.
+ * @author  	Dario Freddi
+ * @author  	Vincenzo Iozzo
  */
 public abstract class Box {
 	
+	/**
+	 * @uml.property  name="chart"
+	 * @uml.associationEnd  
+	 */
 	AbstractChart chart;
 	
 	public Box(AbstractChart chart) {
 		this.chart = chart;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="chart"
+	 */
 	public AbstractChart getChart() {
 		return chart;
 	}

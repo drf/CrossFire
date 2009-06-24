@@ -11,12 +11,19 @@ import gameLogic.CanMagicAttack;
 import gameLogic.CanPick;
 import gameLogic.Consumable;
 
+/**
+ * @author  drf
+ */
 public class SpellBook extends Item implements Consumable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2906582863509321014L;
+	/**
+	 * @uml.property  name="spell"
+	 * @uml.associationEnd  
+	 */
 	private Spell spell = SpellGenerator.generateCasualSpell();
 
 	public SpellBook() {

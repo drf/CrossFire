@@ -13,17 +13,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
- * 
- * <b>Player</b> is an abstract class. The main aim of this class is to provide a way to handle multiple characters, 
- * either by the computer or by an human player.
- * The attributes are: 
- * <ul>
- * <li>name the name of the player
- * <li>entities an array which contains all the characters of type {@link Entity} that the player handles
- * </ul>
- * Each attribute has a getter/setter.
- * @author	Dario Freddi
- * @author	Vincenzo Iozzo
+ * <b>Player</b> is an abstract class. The main aim of this class is to provide a way to handle multiple characters,  either by the computer or by an human player. The attributes are:  <ul> <li>name the name of the player <li>entities an array which contains all the characters of type  {@link Entity}  that the player handles </ul> Each attribute has a getter/setter.
+ * @author  	Dario Freddi
+ * @author  	Vincenzo Iozzo
  */
 
 public abstract class Player implements java.io.Serializable {
@@ -31,7 +23,13 @@ public abstract class Player implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2965714766005181669L;
+	/**
+	 * @uml.property  name="name"
+	 */
 	String name;
+	/**
+	 * @uml.property  name="entities"
+	 */
 	ArrayList<PlayableEntity> entities;
 	
 	public Player() {}
@@ -40,10 +38,18 @@ public abstract class Player implements java.io.Serializable {
 		
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="name"
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name
+	 * @uml.property  name="name"
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -75,6 +81,10 @@ public abstract class Player implements java.io.Serializable {
 		entities.remove(c);
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="entities"
+	 */
 	public ArrayList<PlayableEntity> getEntities() {
 		return entities;
 	}

@@ -7,37 +7,89 @@ import globals.Pair;
 import gameChart.LandscapeGenerator;
 import gameChart.Box;
 
+/**
+ * @author  drf
+ */
 public abstract class BidimensionalChart extends AbstractChart {
 
+	/**
+	 * @uml.property  name="width"
+	 */
 	private int width;
+	/**
+	 * @uml.property  name="height"
+	 */
 	private int height;
 
+	/**
+	 * @uml.property  name="chart"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
 	private Box chart[][];
 	
+	/**
+	 * @author   drf
+	 */
 	public enum Direction {
+		/**
+		 * @uml.property  name="north"
+		 * @uml.associationEnd  
+		 */
 		North,
+		/**
+		 * @uml.property  name="south"
+		 * @uml.associationEnd  
+		 */
 		South,
+		/**
+		 * @uml.property  name="west"
+		 * @uml.associationEnd  
+		 */
 		West,
+		/**
+		 * @uml.property  name="east"
+		 * @uml.associationEnd  
+		 */
 		East
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="chart"
+	 */
 	public Box[][] getChart()
 	{
 		return chart;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="width"
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * @param width
+	 * @uml.property  name="width"
+	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="height"
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * @param height
+	 * @uml.property  name="height"
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}

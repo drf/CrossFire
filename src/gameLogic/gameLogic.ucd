@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1247,2229" id="gameLogic" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
+  <children xsi:type="editmodel:ClassEditModel" name="CombatEvent" location="579,1758" size="142,122" id="gameLogic/CombatEvent" runTimeClassModel="damage,CombatEvent(LgameLogic.CanAttack;LgameLogic.Attackable;Lspells.Spell;IZ),CombatEvent(LgameLogic.CanAttack;LgameLogic.Attackable;LgameLogic.CombatHandler.AttackType;IZ),success">
+    <children xsi:type="editmodel:CompartmentEditModel" size="119,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="damage" id="gameLogic/CombatEvent#damage"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="success" id="gameLogic/CombatEvent#success"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="106,36">
+      <children xsi:type="editmodel:MethodEditModel" name="CombatEvent" id="gameLogic/CombatEvent#CombatEvent(LgameLogic.CanAttack;LgameLogic.Attackable;Lspells.Spell;IZ)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="CombatEvent" id="gameLogic/CombatEvent#CombatEvent(LgameLogic.CanAttack;LgameLogic.Attackable;LgameLogic.CombatHandler.AttackType;IZ)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="GamePhaseChangedListener" location="274,1758" size="255,81" id="gameLogic/GamePhaseChangedListener" runTimeClassModel="GamePhaseChanged(LgameLogic.GamePhaseChangedEvent;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="150,18">
+      <children xsi:type="editmodel:MethodEditModel" name="GamePhaseChanged" id="gameLogic/GamePhaseChangedListener#GamePhaseChanged(LgameLogic.GamePhaseChangedEvent;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Turn" location="524,1449" size="194,223" id="gameLogic/Turn" runTimeClassModel="availableActions(),performAction(LgameLogic.Turn.Action;),gameLogic.Turn.Action,Turn(),actions">
+    <children xsi:type="editmodel:CompartmentEditModel" size="171,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="actions" id="gameLogic/Turn#actions"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="122,54">
+      <children xsi:type="editmodel:MethodEditModel" name="Turn" id="gameLogic/Turn#Turn()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="availableActions" id="gameLogic/Turn#availableActions()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="performAction" id="gameLogic/Turn#performAction(LgameLogic.Turn.Action;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="109,91">
+      <children xsi:type="editmodel:EnumerationEditModel" name="Action" size="109,89" id="gameLogic/Turn$Action" runTimeClassModel="Move%,Attack%">
+        <children xsi:type="editmodel:CompartmentEditModel" size="53,36">
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Move" id="gameLogic/Turn$Action#Move%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Attack" id="gameLogic/Turn$Action#Attack%"/>
+        </children>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="GameSetupEvent" location="305,1449" size="169,259" id="gameLogic/GameSetupEvent" runTimeClassModel="GameSetupEvent(Ljava.lang.Object;LgameLogic.GameSetupEvent.SetupPhase;Lcharacters.Character;),GameSetupEvent(Ljava.lang.Object;LgameLogic.GameSetupEvent.SetupPhase;),GameSetupEvent(Ljava.lang.Object;LgameLogic.GameSetupEvent.SetupPhase;Lplayer.Player;),gameLogic.GameSetupEvent.SetupPhase">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="129,54">
+      <children xsi:type="editmodel:MethodEditModel" name="GameSetupEvent" id="gameLogic/GameSetupEvent#GameSetupEvent(Ljava.lang.Object;LgameLogic.GameSetupEvent.SetupPhase;Lcharacters.Character;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GameSetupEvent" id="gameLogic/GameSetupEvent#GameSetupEvent(Ljava.lang.Object;LgameLogic.GameSetupEvent.SetupPhase;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GameSetupEvent" id="gameLogic/GameSetupEvent#GameSetupEvent(Ljava.lang.Object;LgameLogic.GameSetupEvent.SetupPhase;Lplayer.Player;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="133,145">
+      <children xsi:type="editmodel:EnumerationEditModel" name="SetupPhase" size="133,143" id="gameLogic/GameSetupEvent$SetupPhase" runTimeClassModel="AddedCharacter%,AddCharacter%,None%,AddPlayer%,AddedPlayer%">
+        <children xsi:type="editmodel:CompartmentEditModel" size="110,90">
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="AddCharacter" id="gameLogic/GameSetupEvent$SetupPhase#AddCharacter%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="AddPlayer" id="gameLogic/GameSetupEvent$SetupPhase#AddPlayer%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="AddedCharacter" id="gameLogic/GameSetupEvent$SetupPhase#AddedCharacter%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="AddedPlayer" id="gameLogic/GameSetupEvent$SetupPhase#AddedPlayer%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="None" id="gameLogic/GameSetupEvent$SetupPhase#None%"/>
+        </children>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="CanPick" location="224,2110" size="101,99" id="gameLogic/CanPick" runTimeClassModel="pick(LgameLogic.Pickable;),canPick(LgameLogic.Pickable;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="73,36">
+      <children xsi:type="editmodel:MethodEditModel" name="canPick" id="gameLogic/CanPick#canPick(LgameLogic.Pickable;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="pick" id="gameLogic/CanPick#pick(LgameLogic.Pickable;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="GamePhaseChangedEvent" location="301,1979" size="237,68" id="gameLogic/GamePhaseChangedEvent" runTimeClassModel="GamePhaseChangedEvent(Ljava.lang.Object;LgameLogic.Game.GamePhase;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="181,18">
+      <children xsi:type="editmodel:MethodEditModel" name="GamePhaseChangedEvent" id="gameLogic/GamePhaseChangedEvent#GamePhaseChangedEvent(Ljava.lang.Object;LgameLogic.Game.GamePhase;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="Movable" location="50,2110" size="124,81" id="gameLogic/Movable" runTimeClassModel="boxChanged(LgameChart.Box;LgameChart.Box;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,18">
+      <children xsi:type="editmodel:MethodEditModel" name="boxChanged" id="gameLogic/Movable#boxChanged(LgameChart.Box;LgameChart.Box;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="CombatHandler" location="379,757" size="165,331" id="gameLogic/CombatHandler" runTimeClassModel="canCastSpell(LgameLogic.CanMagicAttack;LgameLogic.Attackable;Lspells.Spell;),rangedAttack(LgameLogic.CanRangedAttack;LgameLogic.Attackable;),gameLogic.CombatHandler.AttackType,getInstance(),canCastSpell(LgameLogic.CanMagicAttack;Lspells.Spell;),meleeAttack(LgameLogic.CanMeleeAttack;LgameLogic.Attackable;),attackCapabilities(LgameLogic.CanAttack;),fixedAttack(LgameLogic.CanAttack;LgameLogic.Attackable;I),magicAttack(LgameLogic.CanMagicAttack;LgameLogic.Attackable;Lspells.Spell;),canPerformAttack(LgameLogic.CanAttack;LgameLogic.CombatHandler.AttackType;),addCombatListener(LgameLogic.CombatListener;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="142,162">
+      <children xsi:type="editmodel:MethodEditModel" name="addCombatListener" id="gameLogic/CombatHandler#addCombatListener(LgameLogic.CombatListener;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="attackCapabilities" id="gameLogic/CombatHandler#attackCapabilities(LgameLogic.CanAttack;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="canCastSpell" id="gameLogic/CombatHandler#canCastSpell(LgameLogic.CanMagicAttack;Lspells.Spell;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="canCastSpell" id="gameLogic/CombatHandler#canCastSpell(LgameLogic.CanMagicAttack;LgameLogic.Attackable;Lspells.Spell;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="canPerformAttack" id="gameLogic/CombatHandler#canPerformAttack(LgameLogic.CanAttack;LgameLogic.CombatHandler.AttackType;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="fixedAttack" id="gameLogic/CombatHandler#fixedAttack(LgameLogic.CanAttack;LgameLogic.Attackable;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="magicAttack" id="gameLogic/CombatHandler#magicAttack(LgameLogic.CanMagicAttack;LgameLogic.Attackable;Lspells.Spell;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="meleeAttack" id="gameLogic/CombatHandler#meleeAttack(LgameLogic.CanMeleeAttack;LgameLogic.Attackable;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="rangedAttack" id="gameLogic/CombatHandler#rangedAttack(LgameLogic.CanRangedAttack;LgameLogic.Attackable;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="123,109">
+      <children xsi:type="editmodel:EnumerationEditModel" name="AttackType" size="123,107" id="gameLogic/CombatHandler$AttackType" runTimeClassModel="Ranged%,Melee%,Magic%">
+        <children xsi:type="editmodel:CompartmentEditModel" size="61,54">
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Ranged" id="gameLogic/CombatHandler$AttackType#Ranged%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Magic" id="gameLogic/CombatHandler$AttackType#Magic%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Melee" id="gameLogic/CombatHandler$AttackType#Melee%"/>
+        </children>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="CombatListener" location="588,1979" size="181,81" id="gameLogic/CombatListener" runTimeClassModel="CombatEventOccurred(LgameLogic.CombatEvent;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="158,18">
+      <children xsi:type="editmodel:MethodEditModel" name="CombatEventOccurred" id="gameLogic/CombatListener#CombatEventOccurred(LgameLogic.CombatEvent;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="Attackable" location="50,1758" size="174,171" id="gameLogic/Attackable" runTimeClassModel="hp,getLuck(),getDexterity(),onDeath(),getDamageReduction(),getStrength()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="55,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="hp" id="gameLogic/Attackable#hp"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="151,90">
+      <children xsi:type="editmodel:MethodEditModel" name="getDamageReduction" id="gameLogic/Attackable#getDamageReduction()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDexterity" id="gameLogic/Attackable#getDexterity()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLuck" id="gameLogic/Attackable#getLuck()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getStrength" id="gameLogic/Attackable#getStrength()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onDeath" id="gameLogic/Attackable#onDeath()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="GameSetupListener" location="50,1979" size="201,81" id="gameLogic/GameSetupListener" runTimeClassModel="GameSetupStateChanged(LgameLogic.GameSetupEvent;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="178,18">
+      <children xsi:type="editmodel:MethodEditModel" name="GameSetupStateChanged" id="gameLogic/GameSetupListener#GameSetupStateChanged(LgameLogic.GameSetupEvent;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="Consumable" location="375,2110" size="133,43" id="gameLogic/Consumable" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Game" location="50,888" size="279,511" id="gameLogic/Game" runTimeClassModel="createNewPlayer(Ljava.lang.String;Z),removePlayer(Lplayer.Player;),getNPCS(),getInstance(),assignEntity(Lplayer.Player;Lglobals.PlayableEntity;),assignCharacter(Lplayer.Player;Lglobals.PlayableEntity;),entities,removeEntity(Lglobals.PlayableEntity;),randomlyPlaceItems(),endTurn(I),addGameChangedEventListener(LgameLogic.GamePhaseChangedListener;),resetGame(),createCharacter(Lcharacters.Character.Race;Lglobals.Modifier;Ljava.lang.String;),EntityEventOccurred(LgameLogic.EntityEvent;),eventListeners,performNextTurn(),gameLogic.Game.GamePhase,assignNPC(Lplayer.ComputerPlayer;Lglobals.PlayableEntity;),randomlyPlaceEntities()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="256,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="entities" id="gameLogic/Game#entities"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eventListeners" id="gameLogic/Game#eventListeners"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="213,270">
+      <children xsi:type="editmodel:MethodEditModel" name="EntityEventOccurred" id="gameLogic/Game#EntityEventOccurred(LgameLogic.EntityEvent;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addGameChangedEventListener" id="gameLogic/Game#addGameChangedEventListener(LgameLogic.GamePhaseChangedListener;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="assignCharacter" id="gameLogic/Game#assignCharacter(Lplayer.Player;Lglobals.PlayableEntity;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="assignEntity" id="gameLogic/Game#assignEntity(Lplayer.Player;Lglobals.PlayableEntity;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="assignNPC" id="gameLogic/Game#assignNPC(Lplayer.ComputerPlayer;Lglobals.PlayableEntity;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createCharacter" id="gameLogic/Game#createCharacter(Lcharacters.Character.Race;Lglobals.Modifier;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createNewPlayer" id="gameLogic/Game#createNewPlayer(Ljava.lang.String;Z)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="endTurn" id="gameLogic/Game#endTurn(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getNPCS" id="gameLogic/Game#getNPCS()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="performNextTurn" id="gameLogic/Game#performNextTurn()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="randomlyPlaceEntities" id="gameLogic/Game#randomlyPlaceEntities()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="randomlyPlaceItems" id="gameLogic/Game#randomlyPlaceItems()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="removeEntity" id="gameLogic/Game#removeEntity(Lglobals.PlayableEntity;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="removePlayer" id="gameLogic/Game#removePlayer(Lplayer.Player;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="resetGame" id="gameLogic/Game#resetGame()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="130,145">
+      <children xsi:type="editmodel:EnumerationEditModel" name="GamePhase" size="130,143" id="gameLogic/Game$GamePhase" runTimeClassModel="SetupDone%,EndGame%,Turn%,None%,GameCreation%">
+        <children xsi:type="editmodel:CompartmentEditModel" size="101,90">
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="GameCreation" id="gameLogic/Game$GamePhase#GameCreation%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="EndGame" id="gameLogic/Game$GamePhase#EndGame%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="None" id="gameLogic/Game$GamePhase#None%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Turn" id="gameLogic/Game$GamePhase#Turn%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="SetupDone" id="gameLogic/Game$GamePhase#SetupDone%"/>
+        </children>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameLogic/EntityListener&lt;-gameLogic/Game" source="//@children.12" target="//@children.13" targetEnd="//@children.12/@sourceConnections.0/@children.1" sourceEnd="//@children.12/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="139,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="84,81"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.12/@sourceConnections.0" name="EntityListener" location="105,757" size="168,81" id="gameLogic/EntityListener" runTimeClassModel="EntityEventOccurred(LgameLogic.EntityEvent;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="145,18">
+      <children xsi:type="editmodel:MethodEditModel" name="EntityEventOccurred" id="gameLogic/EntityListener#EntityEventOccurred(LgameLogic.EntityEvent;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="TurnEvent" location="194,520" size="139,187" id="gameLogic/TurnEvent" runTimeClassModel="TurnEvent(Lplayer.Player;Lglobals.PlayableEntity;LgameLogic.TurnEvent.TypeEvent;),gameLogic.TurnEvent.TypeEvent">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="86,18">
+      <children xsi:type="editmodel:MethodEditModel" name="TurnEvent" id="gameLogic/TurnEvent#TurnEvent(Lplayer.Player;Lglobals.PlayableEntity;LgameLogic.TurnEvent.TypeEvent;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="116,109">
+      <children xsi:type="editmodel:EnumerationEditModel" name="TypeEvent" size="116,107" id="gameLogic/TurnEvent$TypeEvent" runTimeClassModel="Finished%,Changed%,Started%">
+        <children xsi:type="editmodel:CompartmentEditModel" size="69,54">
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Started" id="gameLogic/TurnEvent$TypeEvent#Started%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Changed" id="gameLogic/TurnEvent$TypeEvent#Changed%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Finished" id="gameLogic/TurnEvent$TypeEvent#Finished%"/>
+        </children>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameLogic/EntityEvent&lt;-gameLogic/TurnEvent" source="//@children.14" target="//@children.17/@sourceConnections.0" targetEnd="//@children.14/@sourceConnections.0/@children.1" sourceEnd="//@children.14/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="69,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.17/@sourceConnections.0" name="EntityEvent" location="280,402" size="125,68" id="gameLogic/EntityEvent" runTimeClassModel="EntityEvent(Ljava.lang.Object;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="93,18">
+      <children xsi:type="editmodel:MethodEditModel" name="EntityEvent" id="gameLogic/EntityEvent#EntityEvent(Ljava.lang.Object;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="MoveEvent" location="363,520" size="122,68" id="gameLogic/MoveEvent" runTimeClassModel="MoveEvent(LgameLogic.Movable;LgameChart.Box;LgameChart.Box;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="91,18">
+      <children xsi:type="editmodel:MethodEditModel" name="MoveEvent" id="gameLogic/MoveEvent#MoveEvent(LgameLogic.Movable;LgameChart.Box;LgameChart.Box;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameLogic/EntityEvent&lt;-gameLogic/MoveEvent" source="//@children.16" target="//@children.17/@sourceConnections.0" targetEnd="//@children.16/@sourceConnections.0/@children.1" sourceEnd="//@children.16/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="61,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="PickEvent" location="50,520" size="114,68" id="gameLogic/PickEvent" runTimeClassModel="PickEvent(LgameLogic.CanPick;LgameLogic.Pickable;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="84,18">
+      <children xsi:type="editmodel:MethodEditModel" name="PickEvent" id="gameLogic/PickEvent#PickEvent(LgameLogic.CanPick;LgameLogic.Pickable;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.14/@sourceConnections.0 //@children.16/@sourceConnections.0 //@children.18/@sourceConnections.0" autoLocated="true" id="gameLogic/EntityEvent&lt;-gameLogic/PickEvent" source="//@children.17" target="//@children.15" targetEnd="//@children.17/@sourceConnections.0/@children.1" sourceEnd="//@children.17/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="57,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="62,68" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="DeathEvent" location="515,520" size="127,68" id="gameLogic/DeathEvent" runTimeClassModel="DeathEvent(Lglobals.Entity;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="95,18">
+      <children xsi:type="editmodel:MethodEditModel" name="DeathEvent" id="gameLogic/DeathEvent#DeathEvent(Lglobals.Entity;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameLogic/EntityEvent&lt;-gameLogic/DeathEvent" source="//@children.18" target="//@children.17/@sourceConnections.0" targetEnd="//@children.18/@sourceConnections.0/@children.1" sourceEnd="//@children.18/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="63,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="CanRangedAttack" location="268,181" size="197,135" id="gameLogic/CanRangedAttack" runTimeClassModel="getRangedDamageBonus(),getDexterity(),canRangedAttack(),getStrength()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="174,72">
+      <children xsi:type="editmodel:MethodEditModel" name="canRangedAttack" id="gameLogic/CanRangedAttack#canRangedAttack()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDexterity" id="gameLogic/CanRangedAttack#getDexterity()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getRangedDamageBonus" id="gameLogic/CanRangedAttack#getRangedDamageBonus()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getStrength" id="gameLogic/CanRangedAttack#getStrength()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameLogic/CanAttack&lt;-gameLogic/CanRangedAttack" source="//@children.19" target="//@children.22/@sourceConnections.0" targetEnd="//@children.19/@sourceConnections.0/@children.1" sourceEnd="//@children.19/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="98,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.22/@sourceConnections.0" name="CanAttack" location="314,50" size="118,81" id="gameLogic/CanAttack" runTimeClassModel="getLuck()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="74,18">
+      <children xsi:type="editmodel:MethodEditModel" name="getLuck" id="gameLogic/CanAttack#getLuck()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="CanMagicAttack" location="495,181" size="229,171" id="gameLogic/CanMagicAttack" runTimeClassModel="mp,getMagicSkill(),availableSpells,getIntelligence(),canMagicAttack(),getMagicDamageBonus()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="206,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="availableSpells" id="gameLogic/CanMagicAttack#availableSpells"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mp" id="gameLogic/CanMagicAttack#mp"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="164,72">
+      <children xsi:type="editmodel:MethodEditModel" name="canMagicAttack" id="gameLogic/CanMagicAttack#canMagicAttack()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getIntelligence" id="gameLogic/CanMagicAttack#getIntelligence()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getMagicDamageBonus" id="gameLogic/CanMagicAttack#getMagicDamageBonus()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getMagicSkill" id="gameLogic/CanMagicAttack#getMagicSkill()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameLogic/CanAttack&lt;-gameLogic/CanMagicAttack" source="//@children.21" target="//@children.22/@sourceConnections.0" targetEnd="//@children.21/@sourceConnections.0/@children.1" sourceEnd="//@children.21/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="114,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="CanMeleeAttack" location="50,181" size="188,99" id="gameLogic/CanMeleeAttack" runTimeClassModel="getMeleeDamageBonus(),getStrength()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="165,36">
+      <children xsi:type="editmodel:MethodEditModel" name="getMeleeDamageBonus" id="gameLogic/CanMeleeAttack#getMeleeDamageBonus()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getStrength" id="gameLogic/CanMeleeAttack#getStrength()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.19/@sourceConnections.0 //@children.21/@sourceConnections.0" autoLocated="true" id="gameLogic/CanAttack&lt;-gameLogic/CanMeleeAttack" source="//@children.22" target="//@children.20" targetEnd="//@children.22/@sourceConnections.0/@children.1" sourceEnd="//@children.22/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="94,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="59,81" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.24/@sourceConnections.0" name="Pickable" location="50,1449" size="205,135" id="gameLogic/Pickable" runTimeClassModel="onPick(LgameLogic.CanPick;),getMaximumRequirements(),getMinimumRequirements(),getModifier()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="182,72">
+      <children xsi:type="editmodel:MethodEditModel" name="getMaximumRequirements" id="gameLogic/Pickable#getMaximumRequirements()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getMinimumRequirements" id="gameLogic/Pickable#getMinimumRequirements()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getModifier" id="gameLogic/Pickable#getModifier()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onPick" id="gameLogic/Pickable#onPick(LgameLogic.CanPick;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="Equipable" location="94,1634" size="116,43" id="gameLogic/Equipable" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameLogic/Pickable&lt;-gameLogic/Equipable" source="//@children.24" target="//@children.23" targetEnd="//@children.24/@sourceConnections.0/@children.1" sourceEnd="//@children.24/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="58,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="102,135"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" level="-1" showScope="InPackage" properties="wireOptions=1;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

@@ -42,17 +42,8 @@ import javax.swing.event.EventListenerList;
 
 
 /**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+ */
 public class ChartWidget extends javax.swing.JPanel implements EntityListener, ActionStateChangedListener {
 
 	/**
@@ -60,6 +51,10 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 	 */
 	private static final long serialVersionUID = -9112439029483183330L;
 	
+	/**
+	 * @uml.property  name="chart"
+	 * @uml.associationEnd  
+	 */
 	private BidimensionalChart chart;
 	private int multiplier = 40;
 	private int XPosition = 100;
@@ -73,9 +68,17 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 	private BufferedImage hillTexture;
 	private BufferedImage cityTexture;
 	private AffineTransform baseTransform;
+	/**
+	 * @uml.property  name="actionState"
+	 * @uml.associationEnd  
+	 */
 	private ActionState actionState;
 	private int distanceRange;
 	private int targetRange;
+	/**
+	 * @uml.property  name="onTurn"
+	 * @uml.associationEnd  
+	 */
 	private PlayableEntity onTurn;
 	private EventListenerList eventListeners = new EventListenerList();
 	HashSet<Pair<Integer>> targetCoordinates = new HashSet<Pair<Integer>>();

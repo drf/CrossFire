@@ -1,27 +1,28 @@
 package globals;
 
 /**
- * 
- * <b>Modifier</b> represents a set of attributes for an {@link Entity}. It inherits from {@link BaseAttributes},
- * the main difference between the two is that {@link Modifier} dynamically changes attributes of a given {@link Entity}. 
- * There are other attributes specific to the {@link Modifier}, they are used to dynamically modifies an attack.
- * The attributes are: 
- * <ul>
- * <li>bonusMagicDamage this attribute specifies a bonus for a Magic attack
- * <li>bonusMeleeDamage this attribute specifies a bonus for a Melee attack
- * <li>bonusRangedDamage this attribute specifies a bonus for a Ranged attack
- * <li>bonusDamageReduction this attribute specifies a bonus for damage reductions of an attack
- * </ul>
- * Each attribute has a getter/setter.
- * @author	Dario Freddi
- * @author	Vincenzo Iozzo
+ * <b>Modifier</b> represents a set of attributes for an  {@link Entity} . It inherits from  {@link BaseAttributes} , the main difference between the two is that  {@link Modifier}  dynamically changes attributes of a given  {@link Entity} .  There are other attributes specific to the  {@link Modifier} , they are used to dynamically modifies an attack. The attributes are:  <ul> <li>bonusMagicDamage this attribute specifies a bonus for a Magic attack <li>bonusMeleeDamage this attribute specifies a bonus for a Melee attack <li>bonusRangedDamage this attribute specifies a bonus for a Ranged attack <li>bonusDamageReduction this attribute specifies a bonus for damage reductions of an attack </ul> Each attribute has a getter/setter.
+ * @author  	Dario Freddi
+ * @author  	Vincenzo Iozzo
  */
 
 public class Modifier extends BaseAttributes {
 
+	/**
+	 * @uml.property  name="bonusMagicDamage"
+	 */
 	private int bonusMagicDamage;
+	/**
+	 * @uml.property  name="bonusMeleeDamage"
+	 */
 	private int bonusMeleeDamage;
+	/**
+	 * @uml.property  name="bonusRangedDamage"
+	 */
 	private int bonusRangedDamage;
+	/**
+	 * @uml.property  name="bonusDamageReduction"
+	 */
 	private int bonusDamageReduction;
 	
 	/**
@@ -108,34 +109,66 @@ public class Modifier extends BaseAttributes {
 	
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="bonusMagicDamage"
+	 */
 	public int getBonusMagicDamage() {
 		return bonusMagicDamage;
 	}
 
+	/**
+	 * @param bonusMagicDamage
+	 * @uml.property  name="bonusMagicDamage"
+	 */
 	public void setBonusMagicDamage(int bonusMagicDamage) {
 		this.bonusMagicDamage = bonusMagicDamage;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="bonusMeleeDamage"
+	 */
 	public int getBonusMeleeDamage() {
 		return bonusMeleeDamage;
 	}
 
+	/**
+	 * @param bonusMeleeDamage
+	 * @uml.property  name="bonusMeleeDamage"
+	 */
 	public void setBonusMeleeDamage(int bonusMeleeDamage) {
 		this.bonusMeleeDamage = bonusMeleeDamage;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="bonusRangedDamage"
+	 */
 	public int getBonusRangedDamage() {
 		return bonusRangedDamage;
 	}
 
+	/**
+	 * @param bonusRangedDamage
+	 * @uml.property  name="bonusRangedDamage"
+	 */
 	public void setBonusRangedDamage(int bonusRangedDamage) {
 		this.bonusRangedDamage = bonusRangedDamage;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="bonusDamageReduction"
+	 */
 	public int getBonusDamageReduction() {
 		return bonusDamageReduction;
 	}
 
+	/**
+	 * @param bonusDamageReduction
+	 * @uml.property  name="bonusDamageReduction"
+	 */
 	public void setBonusDamageReduction(int bonusDamageReduction) {
 		this.bonusDamageReduction = bonusDamageReduction;
 	}

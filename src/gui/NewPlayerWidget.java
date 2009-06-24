@@ -34,17 +34,8 @@ import javax.swing.ListModel;
 import javax.swing.event.EventListenerList;
 
 /**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+ */
 public class NewPlayerWidget extends javax.swing.JPanel {
 	/**
 	 * 
@@ -55,11 +46,19 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 	private JLabel jLabel2;
 	private JButton jButton1;
 	private JLabel jLabel3;
+	/**
+	 * @uml.property  name="characterList"
+	 * @uml.associationEnd  
+	 */
 	private MutableList characterList;
 	private JButton manageCharacterButton;
 	private JButton removeButton;
 	private JComboBox controllerCombo;
 	private EventListenerList eventListeners = new EventListenerList();
+	/**
+	 * @uml.property  name="player"
+	 * @uml.associationEnd  
+	 */
 	private Player player;
 	private ArrayList<Character> charList = new ArrayList<Character>();
 

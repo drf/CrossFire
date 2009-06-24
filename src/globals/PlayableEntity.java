@@ -7,18 +7,9 @@ import gameLogic.TurnEvent.TypeEvent;
 import player.Player;
 
 /**
- *  
- * PlayableEntity represents an Entity that is able to perform a turn.
- * Playable has the strict meaning of "being able to be used by a player".
- * 
- * The attributes are: 
- * <ul>
- * <li>player it represents an actual player of the type {@link Player}
- * </ul>
- * Each attribute has a getter/setter.
- *
- * @author Dario Freddi
- * @author Vincenzo Iozzo 
+ * PlayableEntity represents an Entity that is able to perform a turn. Playable has the strict meaning of "being able to be used by a player". The attributes are:  <ul> <li>player it represents an actual player of the type  {@link Player} </ul> Each attribute has a getter/setter.
+ * @author  Dario Freddi
+ * @author  Vincenzo Iozzo
  */
 public abstract class PlayableEntity extends Entity {
 
@@ -27,7 +18,15 @@ public abstract class PlayableEntity extends Entity {
 	 */
 	private static final long serialVersionUID = 3398477358319337273L;
 	
+	/**
+	 * @uml.property  name="player"
+	 * @uml.associationEnd  
+	 */
 	private Player player;
+	/**
+	 * @uml.property  name="currentTurn"
+	 * @uml.associationEnd  
+	 */
 	private Turn currentTurn = null;
 
 	public PlayableEntity() {}
@@ -41,14 +40,26 @@ public abstract class PlayableEntity extends Entity {
 
 
 
+	/**
+	 * @return
+	 * @uml.property  name="player"
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 
+	/**
+	 * @param player
+	 * @uml.property  name="player"
+	 */
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="currentTurn"
+	 */
 	public Turn getCurrentTurn() {
 		return currentTurn;
 	}

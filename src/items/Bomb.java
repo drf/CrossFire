@@ -7,13 +7,8 @@ import gameLogic.CombatHandler;
 import globals.Entity;
 
 /**
- * <b>Bomb</b> is an item that can be attacked, and upon death damages all the 
- * {@link Attackable} in its range.
- * <p>
- * Although not requested, it's implemented to show the flexibility of our approach
- * 
- * @author drf
- *
+ * <b>Bomb</b> is an item that can be attacked, and upon death damages all the  {@link Attackable}  in its range. <p> Although not requested, it's implemented to show the flexibility of our approach
+ * @author  drf
  */
 public class Bomb extends globals.Entity implements Attackable, CanAttack  {
 
@@ -21,6 +16,9 @@ public class Bomb extends globals.Entity implements Attackable, CanAttack  {
 	 * 
 	 */
 	private static final long serialVersionUID = -2855052652888294440L;
+	/**
+	 * @uml.property  name="hp"
+	 */
 	int hp;
 	
 	/**
@@ -39,7 +37,8 @@ public class Bomb extends globals.Entity implements Attackable, CanAttack  {
 	}
 
 	/**
-	 * @return the health points of the bomb
+	 * @return  the health points of the bomb
+	 * @uml.property  name="hp"
 	 */
 	public int getHp() {
 		return hp;
@@ -82,7 +81,8 @@ public class Bomb extends globals.Entity implements Attackable, CanAttack  {
 	}
 
 	/**
-	 * @param the new health points of the bomb
+	 * @param the  new health points of the bomb
+	 * @uml.property  name="hp"
 	 */
 	public void setHp(int value) {
 		hp = value;

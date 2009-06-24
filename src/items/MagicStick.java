@@ -1,5 +1,9 @@
 package items;
 
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import gameLogic.Equipable;
 import globals.BaseAttributes;
 
@@ -25,6 +29,12 @@ public class MagicStick extends Item implements Equipable {
 		minReq.setMagicSkill(70);
 		setMinimumRequirements(minReq);
 		setName("Magic Stick");
+		
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/bacchettamagica.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -43,14 +43,29 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	
 	/**
 	 * Represent a race of a Character
-	 * 
-	 * @author Dario Freddi
-	 * @author Vincenzo Iozzo
+	 * @author   Dario Freddi
+	 * @author   Vincenzo Iozzo
 	 */
 	public enum Race {
+		/**
+		 * @uml.property  name="human"
+		 * @uml.associationEnd  
+		 */
 		Human,
+		/**
+		 * @uml.property  name="elf"
+		 * @uml.associationEnd  
+		 */
 		Elf,
+		/**
+		 * @uml.property  name="orc"
+		 * @uml.associationEnd  
+		 */
 		Orc,
+		/**
+		 * @uml.property  name="wizard"
+		 * @uml.associationEnd  
+		 */
 		Wizard
 	}
 	

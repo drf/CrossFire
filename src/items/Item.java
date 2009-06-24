@@ -7,14 +7,8 @@ import globals.BaseAttributes;
 import globals.Modifier;
 
 /**
- * <b>Item</b> is the base class for items. It provides some methods to apply and
- * reset modifiers and to allow setting requirements in an easy way.
- * <p>
- * All items are {@link Pickable}, so they must be either {@link Consumable} or 
- * {@link Equipable}
- * 
- * @author drf
- *
+ * <b>Item</b> is the base class for items. It provides some methods to apply and reset modifiers and to allow setting requirements in an easy way. <p> All items are  {@link Pickable} , so they must be either  {@link Consumable}  or  {@link Equipable}
+ * @author  drf
  */
 public abstract class Item extends globals.Entity implements gameLogic.Pickable {
 	
@@ -27,8 +21,20 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 	 * 
 	 */
 	private static final long serialVersionUID = 6452318424066853070L;
+	/**
+	 * @uml.property  name="modifier"
+	 * @uml.associationEnd  
+	 */
 	private Modifier modifier;
+	/**
+	 * @uml.property  name="minimumRequirements"
+	 * @uml.associationEnd  
+	 */
 	private BaseAttributes minimumRequirements;
+	/**
+	 * @uml.property  name="maximumRequirements"
+	 * @uml.associationEnd  
+	 */
 	private BaseAttributes maximumRequirements;
 
 	/**
@@ -56,41 +62,42 @@ public abstract class Item extends globals.Entity implements gameLogic.Pickable 
 	}
 
 	/**
-	 * @return the {@link Modifier} for the item
+	 * @return  the  {@link Modifier}  for the item
+	 * @uml.property  name="modifier"
 	 */
 	public Modifier getModifier() {
 		return modifier;
 	}
 	
 	/**
-	 * @return the minimum requirements for picking the item in form of 
-	 * {@link BaseAttributes}, or null if the item has no minimum requirements
+	 * @return  the minimum requirements for picking the item in form of  {@link BaseAttributes}  , or null if the item has no minimum requirements
+	 * @uml.property  name="minimumRequirements"
 	 */
 	public BaseAttributes getMinimumRequirements() {
 		return minimumRequirements;
 	}
 
 	/**
-	 * Set the minimum requirements for this item in form of {@link BaseAttributes}
-	 * 
-	 * @param minimumRequirements the new minimum requirements for this item
+	 * Set the minimum requirements for this item in form of  {@link BaseAttributes}
+	 * @param minimumRequirements  the new minimum requirements for this item
+	 * @uml.property  name="minimumRequirements"
 	 */
 	protected void setMinimumRequirements(BaseAttributes minimumRequirements) {
 		this.minimumRequirements = minimumRequirements;
 	}
 
 	/**
-	 * @return the maximum requirements for picking the item in form of 
-	 * {@link BaseAttributes}, or null if the item has no maximum requirements
+	 * @return  the maximum requirements for picking the item in form of  {@link BaseAttributes}  , or null if the item has no maximum requirements
+	 * @uml.property  name="maximumRequirements"
 	 */
 	public BaseAttributes getMaximumRequirements() {
 		return maximumRequirements;
 	}
 
 	/**
-	 * Set the maximum requirements for this item in form of {@link BaseAttributes}
-	 * 
-	 * @param maximumRequirements the new maximum requirements for this item
+	 * Set the maximum requirements for this item in form of  {@link BaseAttributes}
+	 * @param maximumRequirements  the new maximum requirements for this item
+	 * @uml.property  name="maximumRequirements"
 	 */
 	protected void setMaximumRequirements(BaseAttributes maximumRequirements) {
 		this.maximumRequirements = maximumRequirements;

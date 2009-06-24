@@ -12,32 +12,45 @@ import javax.swing.event.EventListenerList;
 import spells.Spell;
 
 /**
- * <b>CombatHandler</b> is a container of static functions that handle a multitude
- * of attacks between various objects. 
- * <p>
- * In here, it can be appreciated how much flexible the interface
- * approach actually is: each method accepts an interface as a parameter, so that
- * the combat phase is completely abstracted from the type of instance of the object.
- * <p>
- * This means, for example, that we can add another fighting entity just by coding its
- * class, and without modifying any of the internals. 
- * 
- * @author drf
- *
+ * <b>CombatHandler</b> is a container of static functions that handle a multitude of attacks between various objects.  <p> In here, it can be appreciated how much flexible the interface approach actually is: each method accepts an interface as a parameter, so that the combat phase is completely abstracted from the type of instance of the object. <p> This means, for example, that we can add another fighting entity just by coding its class, and without modifying any of the internals. 
+ * @author  drf
  */
 public class CombatHandler {
 	
+	/**
+	 * @author   drf
+	 */
 	public enum AttackType {
+		/**
+		 * @uml.property  name="melee"
+		 * @uml.associationEnd  
+		 */
 		Melee,
+		/**
+		 * @uml.property  name="ranged"
+		 * @uml.associationEnd  
+		 */
 		Ranged,
+		/**
+		 * @uml.property  name="magic"
+		 * @uml.associationEnd  
+		 */
 		Magic
 	}
 	
+	/**
+	 * @uml.property  name="instance"
+	 * @uml.associationEnd  
+	 */
 	private static CombatHandler instance = null;
 	private EventListenerList eventListeners = new EventListenerList();
 	
 	private CombatHandler() {}
 	
+	/**
+	 * @return
+	 * @uml.property  name="instance"
+	 */
 	public static CombatHandler getInstance() {
 		if (instance == null) {
 			instance = new CombatHandler();

@@ -1,5 +1,8 @@
 package gameLogic;
 
+/**
+ * @author  drf
+ */
 public class PickEvent extends EntityEvent {
 
 	/**
@@ -7,7 +10,15 @@ public class PickEvent extends EntityEvent {
 	 */
 	private static final long serialVersionUID = -6890734211916087157L;
 	
+	/**
+	 * @uml.property  name="picker"
+	 * @uml.associationEnd  
+	 */
 	private CanPick picker;
+	/**
+	 * @uml.property  name="picked"
+	 * @uml.associationEnd  
+	 */
 	private Pickable picked;
 
 	public PickEvent(CanPick source, Pickable picked) {
@@ -18,14 +29,16 @@ public class PickEvent extends EntityEvent {
 	}
 
 	/**
-	 * @return the picker
+	 * @return  the picker
+	 * @uml.property  name="picker"
 	 */
 	public CanPick getPicker() {
 		return picker;
 	}
 
 	/**
-	 * @return the picked
+	 * @return  the picked
+	 * @uml.property  name="picked"
 	 */
 	public Pickable getPicked() {
 		return picked;

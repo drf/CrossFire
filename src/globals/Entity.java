@@ -13,20 +13,9 @@ import gameLogic.MoveEvent;
 import gameLogic.Turn;
 
 /**
- * 
- * <b>Entity</b> represents an abstract class which must be implemented in a subclass. The idea behind this class
- * is to give a spatial consciousness to a {@link Character} or {@link Item}. In fact it contains a {@link Box}
- * to know the position it has on the chart. 
- * 
- * The attributes are: 
- * <ul>
- * <li>box it represents the position on the game chart. 
- * </ul>
- * 
- * Each attribute has a getter/setter.
- * 
- * @author	Dario Freddi
- * @author	Vincenzo Iozzo
+ * <b>Entity</b> represents an abstract class which must be implemented in a subclass. The idea behind this class is to give a spatial consciousness to a  {@link Character}  or  {@link Item} . In fact it contains a  {@link Box} to know the position it has on the chart.  The attributes are:  <ul> <li>box it represents the position on the game chart.  </ul> Each attribute has a getter/setter.
+ * @author  	Dario Freddi
+ * @author  	Vincenzo Iozzo
  */
 
 public abstract class Entity implements java.io.Serializable {
@@ -35,8 +24,18 @@ public abstract class Entity implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 602249422396237313L;
+	/**
+	 * @uml.property  name="box"
+	 * @uml.associationEnd  
+	 */
 	private Box box;
+	/**
+	 * @uml.property  name="image"
+	 */
 	private BufferedImage image;
+	/**
+	 * @uml.property  name="name"
+	 */
 	private String name;
 	
 	private EventListenerList eventListeners = new EventListenerList();
@@ -47,10 +46,18 @@ public abstract class Entity implements java.io.Serializable {
 		this.name = name;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="box"
+	 */
 	public Box getBox() {
 		return this.box;
 	}
 	
+	/**
+	 * @param box
+	 * @uml.property  name="box"
+	 */
 	public void setBox(Box box) {
 		if (this instanceof Movable) {
 			((Movable)this).boxChanged(this.box, box);
@@ -106,10 +113,18 @@ public abstract class Entity implements java.io.Serializable {
         }
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="image"
+	 */
 	public BufferedImage getImage() {
 		return image;
 	}
 
+	/**
+	 * @param image
+	 * @uml.property  name="image"
+	 */
 	protected void setImage(BufferedImage image) {
 		this.image = image;
 	}
@@ -123,14 +138,16 @@ public abstract class Entity implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the name
+	 * @return  the name
+	 * @uml.property  name="name"
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name  the name to set
+	 * @uml.property  name="name"
 	 */
 	public void setName(String name) {
 		this.name = name;

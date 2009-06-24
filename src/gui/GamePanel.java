@@ -60,17 +60,8 @@ import javax.swing.JTextPane;
 import javax.swing.event.EventListenerList;
 
 /**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+ */
 public class GamePanel extends javax.swing.JPanel implements EntityListener, CombatListener, BoxClickedListener {
 	/**
 	 * 
@@ -79,6 +70,10 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	private JTextArea gameLogger;
 	private JPanel actionPanel;
 	private JPanel showDataPanel;
+	/**
+	 * @uml.property  name="chartArea"
+	 * @uml.associationEnd  
+	 */
 	private ChartWidget chartArea;
 	private JToggleButton moveButton;
 	private JButton pickButton;
@@ -87,16 +82,51 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 	private JToggleButton spellButton;
 	private JToggleButton rangedButton;
 	private JToggleButton meleeButton;
+	/**
+	 * @uml.property  name="onTurn"
+	 * @uml.associationEnd  
+	 */
 	private PlayableEntity onTurn;
+	/**
+	 * @uml.property  name="state"
+	 * @uml.associationEnd  
+	 */
 	private ActionState state;
 	private EventListenerList eventListeners = new EventListenerList();
+	/**
+	 * @uml.property  name="currentSpell"
+	 * @uml.associationEnd  
+	 */
 	private Spell currentSpell;
 
+	/**
+	 * @author   drf
+	 */
 	public enum ActionState {
+		/**
+		 * @uml.property  name="onNavigate"
+		 * @uml.associationEnd  
+		 */
 		OnNavigate,
+		/**
+		 * @uml.property  name="onMove"
+		 * @uml.associationEnd  
+		 */
 		OnMove,
+		/**
+		 * @uml.property  name="onMeleeAttack"
+		 * @uml.associationEnd  
+		 */
 		OnMeleeAttack,
+		/**
+		 * @uml.property  name="onRangedAttack"
+		 * @uml.associationEnd  
+		 */
 		OnRangedAttack,
+		/**
+		 * @uml.property  name="onSpellCasting"
+		 * @uml.associationEnd  
+		 */
 		OnSpellCasting,
 	}
 	

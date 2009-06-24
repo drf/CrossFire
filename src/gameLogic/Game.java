@@ -27,40 +27,70 @@ import globals.Entity;
 import globals.Modifier;
 import globals.PlayableEntity;
 
+/**
+ * @author  drf
+ */
 public class Game implements EntityListener {
+	/**
+	 * @uml.property  name="chart"
+	 * @uml.associationEnd  
+	 */
 	private AbstractChart chart;
 	/**
-	 * @return the chart
+	 * @return  the chart
+	 * @uml.property  name="chart"
 	 */
 	public AbstractChart getChart() {
 		return chart;
 	}
 
 	/**
-	 * @param chart the chart to set
+	 * @param chart  the chart to set
+	 * @uml.property  name="chart"
 	 */
 	public void setChart(AbstractChart chart) {
 		this.chart = chart;
 	}
 
+	/**
+	 * @uml.property  name="entities"
+	 */
 	private HashMap<PlayableEntity, Player> entities = new HashMap<PlayableEntity, Player>();
 	private HashMap<PlayableEntity, ComputerPlayer> npcs = new HashMap<PlayableEntity, ComputerPlayer>();
+	/**
+	 * @uml.property  name="state"
+	 * @uml.associationEnd  
+	 */
 	private GamePhase state;
+	/**
+	 * @uml.property  name="instance"
+	 * @uml.associationEnd  
+	 */
 	private static Game instance = null;
 	private HashMap<Integer, PlayableEntity> turnTokens = new HashMap<Integer, PlayableEntity>();
 	private HashSet<PlayableEntity> turnQueue = new HashSet<PlayableEntity>();
+	/**
+	 * @uml.property  name="onTurn"
+	 * @uml.associationEnd  
+	 */
 	private PlayableEntity onTurn = null;
+	/**
+	 * @uml.property  name="winner"
+	 * @uml.associationEnd  
+	 */
 	private Player winner = null;
 	
 	/**
-	 * @return the onTurn
+	 * @return  the onTurn
+	 * @uml.property  name="onTurn"
 	 */
 	public PlayableEntity getOnTurn() {
 		return onTurn;
 	}
 
 	/**
-	 * @return the winner
+	 * @return  the winner
+	 * @uml.property  name="winner"
 	 */
 	public Player getWinner() {
 		return winner;
@@ -69,16 +99,43 @@ public class Game implements EntityListener {
 	// Event Listeners
 	EventListenerList eventListeners = new EventListenerList();
 
+	/**
+	 * @author   drf
+	 */
 	public enum GamePhase {
+		/**
+		 * @uml.property  name="none"
+		 * @uml.associationEnd  
+		 */
 		None,
+		/**
+		 * @uml.property  name="gameCreation"
+		 * @uml.associationEnd  
+		 */
 		GameCreation,
+		/**
+		 * @uml.property  name="setupDone"
+		 * @uml.associationEnd  
+		 */
 		SetupDone,
+		/**
+		 * @uml.property  name="turn"
+		 * @uml.associationEnd  
+		 */
 		Turn,
+		/**
+		 * @uml.property  name="endGame"
+		 * @uml.associationEnd  
+		 */
 		EndGame
 	}
 	
 	private Game() {}
 	
+	/**
+	 * @return
+	 * @uml.property  name="instance"
+	 */
 	public static Game getInstance() {
 		if (instance == null) {
 			instance = new Game();
@@ -91,6 +148,10 @@ public class Game implements EntityListener {
 		instance = null;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="state"
+	 */
 	public GamePhase getState() {
 		return state;
 	}
@@ -99,6 +160,10 @@ public class Game implements EntityListener {
 		eventListeners.add(GamePhaseChangedListener.class, listener);
 	}
 
+	/**
+	 * @param state
+	 * @uml.property  name="state"
+	 */
 	public void setState(GamePhase state) {
 		this.state = state;
 		
@@ -386,6 +451,10 @@ public class Game implements EntityListener {
 		return r.nextInt(65532);
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="entities"
+	 */
 	public Set<PlayableEntity> getEntities() {
 		return entities.keySet();
 	}

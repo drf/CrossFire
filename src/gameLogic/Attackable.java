@@ -3,12 +3,9 @@ package gameLogic;
 import globals.Entity;
 
 /**
- * <b>Attackable</b> should be implemented by every {@link Entity} that can be
- * attacked, hence damaged and killed. Every {@link Attackable} can take part in a
- * fight as the attacked {@link Entity}
- *  
- * @author Dario Freddi
- * @author Vincenzo Iozzo
+ * <b>Attackable</b> should be implemented by every   {@link Entity}   that can be attacked, hence damaged and killed. Every   {@link Attackable}   can take part in a fight as the attacked   {@link Entity}
+ * @author   Dario Freddi
+ * @author   Vincenzo Iozzo
  */
 public interface Attackable {
 	/**
@@ -24,14 +21,14 @@ public interface Attackable {
 	 */
 	public int getDexterity();
 	/**
-	 * @return the health points of the object implementing the interface
+	 * @return   the health points of the object implementing the interface
+	 * @uml.property  name="hp"
 	 */
 	public int getHp();
 	/**
-	 * Set the new health points of the attacked object. This function will be
-	 * called whenever some damage gets inflicted
-	 * 
-	 * @param value the new health points of the object
+	 * Set the new health points of the attacked object. This function will be called whenever some damage gets inflicted
+	 * @param value   the new health points of the object
+	 * @uml.property  name="hp"
 	 */
 	public void setHp(int value);
 	/**

@@ -4,8 +4,19 @@ import java.util.EnumSet;
 
 public class Turn {
 	
+	/**
+	 * @author   drf
+	 */
 	public enum Action {
+		/**
+		 * @uml.property  name="attack"
+		 * @uml.associationEnd  
+		 */
 		Attack,
+		/**
+		 * @uml.property  name="move"
+		 * @uml.associationEnd  
+		 */
 		Move
 	}
 	

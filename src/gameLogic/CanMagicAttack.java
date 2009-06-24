@@ -7,16 +7,8 @@ import spells.Spell;
 import characters.Fighter;
 
 /**
- * <b>CanMagicAttack</b> grants an object implementing it the capability of performing
- * magic attacks. It implements also all needed requirements to perform a magic attack,
- * by exposing all the getters function for the needed attributes.
- * <p>
- * Since performing magic attacks is both determined by race and attributes conditions,
- * different for each {@link Fighter}, a function that determines whether the target can
- * perform a magic attack is provided 
- * 
- * @author drf
- *
+ * <b>CanMagicAttack</b> grants an object implementing it the capability of performing magic attacks. It implements also all needed requirements to perform a magic attack, by exposing all the getters function for the needed attributes. <p> Since performing magic attacks is both determined by race and attributes conditions, different for each   {@link Fighter}  , a function that determines whether the target can perform a magic attack is provided 
+ * @author   drf
  */
 public interface CanMagicAttack extends CanAttack {
 
@@ -33,10 +25,26 @@ public interface CanMagicAttack extends CanAttack {
 	 */
 	public int getMagicDamageBonus();
 	
+	/**
+	 * @return
+	 * @uml.property  name="availableSpells"
+	 */
 	public HashSet<Spell> getAvailableSpells();
+	/**
+	 * @param  spells
+	 * @uml.property  name="availableSpells"
+	 */
 	public void setAvailableSpells(HashSet<Spell> spells);
 	
+	/**
+	 * @return
+	 * @uml.property  name="mp"
+	 */
 	public int getMp();
+	/**
+	 * @param  mp
+	 * @uml.property  name="mp"
+	 */
 	public void setMp(int mp);
 	
 	/**

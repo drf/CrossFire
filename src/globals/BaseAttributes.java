@@ -1,29 +1,39 @@
 package globals;
 
 /**
- * 
- * <b>BaseAttributes</b> represents a set of attributes for an {@link Entity}.
- * The attributes are: 
- * <ul>
- * <li>intelligence the intelligence an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
- * <li>power the power an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
- * <li>dexterity the dexterity an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
- * <li>magicSkill the magic skill an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
- * <li>luck the luck an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
- * <li>hp	the vital points an {@link Entity} has, if used by a {@link Modifier} represents a bonus value
- * </ul>
- * Each attribute has a getter/setter.
- * @author	Dario Freddi
- * @author	Vincenzo Iozzo
+ * <b>BaseAttributes</b> represents a set of attributes for an  {@link Entity} . The attributes are:  <ul> <li>intelligence the intelligence an  {@link Entity}  has, if used by a  {@link Modifier}  represents a bonus value <li>power the power an  {@link Entity}  has, if used by a  {@link Modifier}  represents a bonus value <li>dexterity the dexterity an  {@link Entity}  has, if used by a  {@link Modifier}  represents a bonus value <li>magicSkill the magic skill an  {@link Entity}  has, if used by a  {@link Modifier}  represents a bonus value <li>luck the luck an  {@link Entity}  has, if used by a  {@link Modifier}  represents a bonus value <li>hp	the vital points an  {@link Entity}  has, if used by a  {@link Modifier}  represents a bonus value </ul> Each attribute has a getter/setter.
+ * @author  	Dario Freddi
+ * @author  	Vincenzo Iozzo
  */
 
 public class BaseAttributes implements Comparable<BaseAttributes> {
+	/**
+	 * @uml.property  name="intelligence"
+	 */
 	private int intelligence;
+	/**
+	 * @uml.property  name="strength"
+	 */
 	private int strength;
+	/**
+	 * @uml.property  name="dexterity"
+	 */
 	private int dexterity;
+	/**
+	 * @uml.property  name="magicSkill"
+	 */
 	private int magicSkill;
+	/**
+	 * @uml.property  name="luck"
+	 */
 	private int luck;
+	/**
+	 * @uml.property  name="hp"
+	 */
 	private int hp;
+	/**
+	 * @uml.property  name="mp"
+	 */
 	private int mp;
 	
 	/**
@@ -76,45 +86,101 @@ public class BaseAttributes implements Comparable<BaseAttributes> {
 		this.mp = mp;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="hp"
+	 */
 	public int getHp() {
 		return hp;
 	}
+	/**
+	 * @param hp
+	 * @uml.property  name="hp"
+	 */
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="mp"
+	 */
 	public int getMp() {
 		return mp;
 	}
+	/**
+	 * @param mp
+	 * @uml.property  name="mp"
+	 */
 	public void setMp(int mp) {
 		this.mp = mp;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="intelligence"
+	 */
 	public int getIntelligence() {
 		return intelligence;
 	}
+	/**
+	 * @param intelligence
+	 * @uml.property  name="intelligence"
+	 */
 	public void setIntelligence(int intelligence) {
 		this.intelligence = intelligence;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="strength"
+	 */
 	public int getStrength() {
 		return strength;
 	}
+	/**
+	 * @param strength
+	 * @uml.property  name="strength"
+	 */
 	public void setStrength(int strength) {
 		this.strength = strength;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="dexterity"
+	 */
 	public int getDexterity() {
 		return dexterity;
 	}
+	/**
+	 * @param dexterity
+	 * @uml.property  name="dexterity"
+	 */
 	public void setDexterity(int dexterity) {
 		this.dexterity = dexterity;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="magicSkill"
+	 */
 	public int getMagicSkill() {
 		return magicSkill;
 	}
+	/**
+	 * @param magicSkill
+	 * @uml.property  name="magicSkill"
+	 */
 	public void setMagicSkill(int magicSkill) {
 		this.magicSkill = magicSkill;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="luck"
+	 */
 	public int getLuck() {
 		return luck;
 	}
+	/**
+	 * @param luck
+	 * @uml.property  name="luck"
+	 */
 	public void setLuck(int luck) {
 		this.luck = luck;
 	}

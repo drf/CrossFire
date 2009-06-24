@@ -7,15 +7,10 @@ import globals.BaseAttributes;
 import globals.PlayableEntity;
 
 /**
- * Fighter is the main class for each playable entity that has combat attributes.
- * Each class inheriting from fighter will be provided with all the attributes belonging
- * to {@link BaseAttributes} and a name.
- * 
- * 
- * @author Dario Freddi
- * @author Vincenzo Iozzo
- * @see BaseAttributes
- *
+ * Fighter is the main class for each playable entity that has combat attributes. Each class inheriting from fighter will be provided with all the attributes belonging to  {@link BaseAttributes}  and a name.
+ * @author  Dario Freddi
+ * @author  Vincenzo Iozzo
+ * @see  BaseAttributes
  */
 public abstract class Fighter extends PlayableEntity {
 
@@ -24,6 +19,10 @@ public abstract class Fighter extends PlayableEntity {
 	 */
 	private static final long serialVersionUID = -5913662304478085454L;
 	private String name;
+	/**
+	 * @uml.property  name="attributes"
+	 * @uml.associationEnd  
+	 */
 	private BaseAttributes attributes;
 
 	/**
@@ -209,8 +208,8 @@ public abstract class Fighter extends PlayableEntity {
 	
 	/**
 	 * Get all the attributes for this fighter
-	 * 
-	 * @return a {@link BaseAttributes} object carrying the attributes of the fighter
+	 * @return  a  {@link BaseAttributes}  object carrying the attributes of the fighter
+	 * @uml.property  name="attributes"
 	 */
 	public BaseAttributes getAttributes() {
 		return this.attributes;

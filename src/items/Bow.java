@@ -30,7 +30,7 @@ public class Bow extends Item {
 		setMinimumRequirements(min);
 		
 		try {
-			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/crossbow.gif")));
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/arco.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

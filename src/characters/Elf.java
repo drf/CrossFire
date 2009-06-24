@@ -40,7 +40,7 @@ public class Elf extends Character implements CanRangedAttack, CanMagicAttack {
 		spells.add(new AuraBolt());
 		
 		try {
-			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/hydra.gif")));
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/elfo.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
