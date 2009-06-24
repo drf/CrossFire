@@ -11,7 +11,8 @@ import gameLogic.Pickable;
  * <b>ItemGenerator</b> is a set of static functions that generate casual items. 
  * Its internals are based upon {@link Class} properties.
  * 
- * @author drf
+ * @author Dario Freddi 
+ * @author Vincenzo Iozzo
  *
  */
 public class ItemGenerator {
