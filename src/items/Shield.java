@@ -1,5 +1,9 @@
 package items;
 
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import gameLogic.Equipable;
 
 /**
@@ -21,6 +25,12 @@ public class Shield extends Item implements Equipable {
 	public Shield() {
 		super(0, 0, 0, -10, 0, 0, 0, 0, 0, 0, 10);
 		setName("Shield");
+		
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/shieldback.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

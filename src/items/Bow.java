@@ -1,5 +1,9 @@
 package items;
 
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import globals.BaseAttributes;
 
 /**
@@ -24,5 +28,11 @@ public class Bow extends Item {
 		min.setLuck(50);
 		min.setDexterity(50);
 		setMinimumRequirements(min);
+		
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/crossbow.gif")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

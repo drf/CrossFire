@@ -2,7 +2,10 @@ package characters;
 
 import gameLogic.CanRangedAttack;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 /**
  * <b>Elf</b> is one of {@link Character}'s races. It has a really high strength,
@@ -29,5 +32,11 @@ public class Orc extends Character implements CanRangedAttack {
 		attrs = Character.randomAttributes(0, 50 + 1, 2);
 		this.setLuck(attrs.get(0));
 		this.setIntelligence(attrs.get(1));
+		
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/orc.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -3,8 +3,11 @@ package characters;
 import gameLogic.CanMagicAttack;
 import gameLogic.CanRangedAttack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import javax.imageio.ImageIO;
 
 import spells.AuraBolt;
 import spells.Spell;
@@ -36,6 +39,12 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 		this.setMagicSkill(attrs.get(4));		
 		
 		spells.add(new AuraBolt());
+		
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/angel.gif")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public HashSet<Spell> getAvailableSpells() {

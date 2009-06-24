@@ -43,7 +43,7 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 		spells.add(new AncientKnowledge());
 		
 		try {
-			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/angel.gif")));
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/mago.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

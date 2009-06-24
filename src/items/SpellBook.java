@@ -1,6 +1,9 @@
 package items;
 
+import java.io.IOException;
 import java.util.HashSet;
+
+import javax.imageio.ImageIO;
 
 import spells.Spell;
 import spells.SpellGenerator;
@@ -19,6 +22,12 @@ public class SpellBook extends Item implements Consumable {
 	public SpellBook() {
 		super(0,0,0,0,0,0,0,0,0,0,0);
 		setName("SpellBook of " + spell.getName());
+		
+		try {
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/spellbook.jpg")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* (non-Javadoc)
