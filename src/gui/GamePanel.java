@@ -109,7 +109,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		Player p1 = Game.getInstance().createNewPlayer("Test1", true);
 		Player p2 = Game.getInstance().createNewPlayer("Test2", true);
 		ComputerPlayer p3 = (ComputerPlayer)(Game.getInstance().createNewPlayer("TestPC", false));
-		Game.getInstance().assignCharacter(p1, Game.getInstance().createCharacter(characters.Character.Race.Orc, new Modifier(), "cicci"));
+		Game.getInstance().assignCharacter(p1, Game.getInstance().createCharacter(characters.Character.Race.Human, new Modifier(), "cicci"));
 		Game.getInstance().assignCharacter(p2, Game.getInstance().createCharacter(characters.Character.Race.Wizard, new Modifier(), "picci"));
 		Game.getInstance().assignCharacter(p2, new God());
 		Game.getInstance().assignNPC(p3, new Dragon());

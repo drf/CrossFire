@@ -41,7 +41,7 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 		spells.add(new AuraBolt());
 		
 		try {
-			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/angel.gif")));
+			setImage(ImageIO.read(ClassLoader.getSystemResource("resources/umano.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
