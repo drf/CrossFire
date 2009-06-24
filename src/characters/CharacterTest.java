@@ -21,10 +21,10 @@ public class CharacterTest {
 		System.out.println("Creazione personaggi");
 		Set<Character> chars = new HashSet<Character>();
 		for (int i = 0; i < 300; ++i) {
-			chars.add(new Human());
-			chars.add(new Wizard());
-			chars.add(new Orc());
-			chars.add(new Elf());
+			chars.add(new Human("a"));
+			chars.add(new Wizard("b"));
+			chars.add(new Orc("c"));
+			chars.add(new Elf("d"));
 		}
 		
 		int elf = 0;
