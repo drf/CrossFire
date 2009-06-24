@@ -1,5 +1,8 @@
 package gui;
 
+import gameChart.AbstractChart;
+import gameChart.CircolarChart;
+import gameChart.LinearChart;
 import gameChart.RectangularChart;
 import gameLogic.Game;
 import gameLogic.GamePhaseChangedEvent;
@@ -14,6 +17,7 @@ import javax.swing.ActionMap;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.jdesktop.application.Action;
@@ -110,18 +114,43 @@ public class CrossFireApplication extends SingleFrameApplication
     	launch(CrossFireApplication.class, args);
     }
 
-  
+    private void selectChart() {
+    	Object[] possibilities = {"Circolar", "Rectangular", "Linear"};
+    	String s = (String)JOptionPane.showInputDialog(
+    	                    getMainFrame(),
+    	                    "Choose the chart type:\n",
+    	                    "Chart Shape",
+    	                    JOptionPane.PLAIN_MESSAGE,
+    	                    null,
+    	                    possibilities,
+    	                    "Linear");
+
+    	if ((s != null) && (s.length() > 0)) {
+    		if(s.equals("Circolar"))
+    			Game.getInstance().setChart(new CircolarChart(10,10));
+
+    		else if(s.equals("Rectangular"))
+    			Game.getInstance().setChart(new RectangularChart(10,10));
+
+    		else
+    			Game.getInstance().setChart(new LinearChart());
+
+    	}
+    	
+    }
+    
     public void GamePhaseChanged(GamePhaseChangedEvent e) {
 		
 		switch (e.getPhase()) {
 		case SetupDone:
 			playerFrame.dispose();
-			Game.getInstance().setChart(new RectangularChart(10,10));
+			selectChart();
 			contentPanel.removeAll();
 			contentPanel.validate();
 			contentPanel.add(new GamePanel());
 			contentPanel.validate();
 			contentPanel.updateUI();
+			
 			break;
 			
 		case EndGame:
