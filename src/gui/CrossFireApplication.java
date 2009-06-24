@@ -167,7 +167,7 @@ public class CrossFireApplication extends SingleFrameApplication
 			break;
 			
 		case EndGame:
-			JOptionPane.showMessageDialog(getMainFrame(), "Player " + Game.getInstance().getWinner().getName() + "won the game!", "We have a winner!", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(getMainFrame(), "Player " + Game.getInstance().getWinner().getName() + " won the game!", "We have a winner!", JOptionPane.INFORMATION_MESSAGE);
 			Game.resetGame();
 			Game.getInstance().addGameChangedEventListener(this);
 	        Game.getInstance().setState(GamePhase.None);

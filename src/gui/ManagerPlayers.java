@@ -87,6 +87,8 @@ public class ManagerPlayers extends javax.swing.JFrame implements GameSetupListe
     	case AddPlayer:
     		jPanel1.removeAll();
     		jPanel1.validate();
+    		playerWidget = new NewPlayerWidget();
+			playerWidget.addGameSetupListener(this);
     		jPanel1.add(playerWidget);
     		jPanel1.validate();
     		jPanel1.updateUI();
