@@ -16,20 +16,25 @@ public class AncientKnowledge extends Spell {
 	public int computeDamage(CanMagicAttack caster, Attackable target,
 			int rangeLevel) {
 		for (int i = 0; i < 150; i++) {
+			boolean knowit = false;
 			Spell spell = SpellGenerator.generateCasualSpell();
+			
 			for (Spell sp : caster.getAvailableSpells()) {
 				if (spell.getClass() == sp.getClass()) {
 					// We already know this spell
-					continue;
+					knowit = true;
+					break;
 				}
 			}
 			
-			// Ok, we do not know it. Let's learn it
-			HashSet<Spell> newspells = caster.getAvailableSpells();
-			newspells.add(spell);
-			caster.setAvailableSpells(newspells);
-			
-			return 0;
+			if (!knowit) {
+				// Ok, we do not know it. Let's learn it
+				HashSet<Spell> newspells = caster.getAvailableSpells();
+				newspells.add(spell);
+				caster.setAvailableSpells(newspells);
+
+				return 0;
+			}
 		}
 		
 		return -1;

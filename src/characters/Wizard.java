@@ -34,7 +34,7 @@ public class Wizard extends Character implements CanMagicAttack, CanRangedAttack
 		setName(name);
 		this.setLuck(randomAttribute(50, 100 + 1));
 		this.setIntelligence(randomAttribute(90, 100 + 1));
-		this.setStrength(randomAttribute(0, 20 + 1));
+		this.setStrength(randomAttribute(1, 20 + 1));
 		this.setMagicSkill(randomAttribute(80, 100 + 1));
 		
 		spells.add(new Heal());

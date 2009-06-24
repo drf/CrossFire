@@ -157,7 +157,8 @@ public class CrossFireApplication extends SingleFrameApplication
 			break;
 			
 		case GameCreation:
-			getMainFrame().getContentPane().removeAll();			
+			getMainFrame().getContentPane().removeAll();	
+			playerFrame = null;
 			playerFrame = new ManagerPlayers();
 			playerFrame.setVisible(true);
 			break;
