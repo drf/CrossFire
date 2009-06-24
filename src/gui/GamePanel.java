@@ -144,6 +144,10 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		for (PlayableEntity ent : Game.getInstance().getEntities()) {
 			ent.addEntityEventListener(this);
 		}
+		
+		for (PlayableEntity ent : Game.getInstance().getNPCS()) {
+			ent.addEntityEventListener(this);
+		}
 		initGUI();
 	}
 	

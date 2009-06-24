@@ -6,6 +6,7 @@ import characters.Fighter;
 
 import gameLogic.Attackable;
 import gameLogic.CanMagicAttack;
+import gameLogic.Game;
 import globals.PlayableEntity;
 
 public class DarkGaze extends Spell {
@@ -22,13 +23,13 @@ public class DarkGaze extends Spell {
 		if (target instanceof Fighter) {
 			int possibility = 50 + (caster.getIntelligence() - ((Fighter)target).getIntelligence()) * 2;
 			if (r.nextInt(101) <= possibility) {
-				((PlayableEntity)target).setPlayer(((PlayableEntity)caster).getPlayer());
+				Game.getInstance().assignEntity(((PlayableEntity)caster).getPlayer(), (PlayableEntity)target);
 				return 0;
 			} else {
 				return -1;
 			}
 		} else {
-			((PlayableEntity)target).setPlayer(((PlayableEntity)caster).getPlayer());
+			Game.getInstance().assignEntity(((PlayableEntity)caster).getPlayer(), (PlayableEntity)target);
 			return 0;
 		}
 	}

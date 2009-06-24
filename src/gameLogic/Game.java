@@ -11,7 +11,6 @@ import characters.Character;
 import characters.Elf;
 import characters.Fighter;
 import characters.Human;
-import characters.Monster;
 import characters.Orc;
 import characters.Wizard;
 
@@ -166,10 +165,38 @@ public class Game implements EntityListener {
 		return true;
 	}
 	
+	public boolean assignEntity(Player player, PlayableEntity character) {
+		
+		if (character == null || player == null) {
+			return false;
+		}
+		
+		if (entities.containsKey(character)) {
+			entities.remove(character);
+		}
+		
+		if (npcs.containsKey(character)) {
+			npcs.remove(character);
+		}
+		
+		addEntity(character, player);
+		character.setPlayer(player);
+	
+		return true;
+	}
+	
 	public boolean assignNPC(ComputerPlayer player, PlayableEntity npc) {
 		
 		if (npc == null || player == null) {
 			return false;
+		}
+		
+		if (entities.containsKey(npc)) {
+			entities.remove(npc);
+		}
+		
+		if (npcs.containsKey(npc)) {
+			npcs.remove(npc);
 		}
 		
 		npcs.put(npc, player);
