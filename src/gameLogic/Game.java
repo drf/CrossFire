@@ -1,5 +1,8 @@
 package gameLogic;
 
+import items.Item;
+import items.ItemGenerator;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -19,6 +22,7 @@ import player.HumanPlayer;
 import player.Player;
 
 import gameChart.AbstractChart;
+import gameChart.BidimensionalChart;
 import globals.Entity;
 import globals.Modifier;
 import globals.PlayableEntity;
@@ -153,7 +157,7 @@ public class Game implements EntityListener {
 
 	}
 	
-	public boolean assignCharacter(Player player, Character character) {
+	public boolean assignCharacter(Player player, PlayableEntity character) {
 		
 		if (character == null || player == null) {
 			return false;
@@ -213,6 +217,79 @@ public class Game implements EntityListener {
 	
 	public void removeEntity(PlayableEntity c) {
 		entities.remove(c);
+	}
+	public void removePlayer(Player p){
+		for(PlayableEntity c: entities.keySet()){
+			entities.containsValue(p);
+			removeEntity(c);
+		}
+	}
+	
+	private void randomlyPlaceEntity(Entity ent) 
+	{
+	
+		Random r = new Random(); 
+		BidimensionalChart actualChart;
+		int posY; 
+		int posX; 
+		
+		if(chart != null)
+			actualChart = (BidimensionalChart)chart;
+		else
+			return;
+		
+		while(true)
+		{
+			try {
+				posY = r.nextInt(actualChart.getHeight());
+				posX = r.nextInt(actualChart.getWidth());
+				chart.place(ent, actualChart.getBoxAt(posX, posY));
+				break;
+			}
+			catch (Exception e) {
+				continue;
+			}
+		}
+
+
+	}
+	
+	public void randomlyPlaceItems() {
+		Random r = new Random();
+		BidimensionalChart actualChart;
+		int totalItems;
+		
+		if(chart != null)
+			actualChart = (BidimensionalChart)chart;
+		else
+			return;
+		//we place at most X items
+		totalItems = actualChart.getWidth();
+		
+		for(int i = 0; i <= totalItems; i++) {
+			switch(r.nextInt(4)) {
+				case 0:
+				case 1:
+					randomlyPlaceEntity((Entity)ItemGenerator.generateCasualPickable());
+					break;
+				case 2:
+					randomlyPlaceEntity((Entity)ItemGenerator.generateCasualConsumable());
+					break;
+				case 3:
+					randomlyPlaceEntity((Entity)ItemGenerator.generateCasualEquipable());
+					break;
+			}
+		}
+		
+		
+	}
+	
+	public void randomlyPlaceEntities()
+	{
+
+		for(PlayableEntity p : entities.keySet()) 
+			randomlyPlaceEntity(p);
+		
 	}
 	
 	private boolean hasAWinner() {

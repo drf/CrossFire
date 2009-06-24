@@ -114,6 +114,15 @@ public class CrossFireApplication extends SingleFrameApplication
     	launch(CrossFireApplication.class, args);
     }
 
+    private void selectWidth() 
+    {
+    	
+    }
+    private void selectHeigth() 
+    {
+    	
+    }
+    
     private void selectChart() {
     	Object[] possibilities = {"Circolar", "Rectangular", "Linear"};
     	String s = (String)JOptionPane.showInputDialog(
@@ -145,6 +154,10 @@ public class CrossFireApplication extends SingleFrameApplication
 		case SetupDone:
 			playerFrame.dispose();
 			selectChart();
+			Game.getInstance().randomlyPlaceEntities();
+			Game.getInstance().randomlyPlaceItems();
+			Game.getInstance().setState(Game.GamePhase.Turn);
+			Game.getInstance().performNextTurn();
 			contentPanel.removeAll();
 			contentPanel.validate();
 			contentPanel.add(new GamePanel());

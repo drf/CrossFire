@@ -138,6 +138,7 @@ public class ManagePlayerList extends javax.swing.JPanel {
 			for(Player p: playersArray) {
 				if(p.getName().equals(name)) {
 					playersArray.remove(p);
+					Game.getInstance().removePlayer(p);
 					playersList.getContents().remove(index);
 				}
 			}
