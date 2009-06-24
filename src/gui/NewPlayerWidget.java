@@ -10,6 +10,8 @@ import gameLogic.GameSetupListener;
 import gameLogic.Game.GamePhase;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -43,24 +45,23 @@ import javax.swing.event.EventListenerList;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupListener {
+public class NewPlayerWidget extends javax.swing.JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 763238634689294973L;
 	private JLabel jLabel1;
-	private JButton PlayersCreatedButton;
 	private JTextField nameBox;
 	private JLabel jLabel2;
 	private JButton jButton1;
 	private JLabel jLabel3;
-	private JList characterList;
+	private MutableList characterList;
 	private JButton manageCharacterButton;
 	private JButton removeButton;
 	private JComboBox controllerCombo;
 	private EventListenerList eventListeners = new EventListenerList();
 	private Player player;
-	private ArrayList<Character> charList;
+	private ArrayList<Character> charList = new ArrayList<Character>();
 
 
 	/**
@@ -90,26 +91,16 @@ public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupList
 			this.setLayout(thisLayout);
 			setPreferredSize(new Dimension(500, 300));
 			{
-				PlayersCreatedButton = new JButton();
-				this.add(PlayersCreatedButton, new AnchorConstraint(848, 977, 961, 767, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				PlayersCreatedButton.setPreferredSize(new java.awt.Dimension(105, 34));
-				PlayersCreatedButton.setName("PlayersCreatedButton");
-				PlayersCreatedButton.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent evt) {
-						PlayersCreatedButtonMouseClicked(evt);
-					}
-				});
-			}
-			{
 				jButton1 = new JButton();
-				this.add(jButton1, new AnchorConstraint(545, 691, 658, 525, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				jButton1.setPreferredSize(new java.awt.Dimension(83, 34));
+				this.add(jButton1, new AnchorConstraint(848, 977, 961, 727, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				jButton1.setPreferredSize(new java.awt.Dimension(125, 34));
 				jButton1.setName("jButton1");
-				jButton1.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent evt) {
-						jButton1MouseClicked(evt);
+				jButton1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jButton1ActionPerformed(evt);
 					}
 				});
+				jButton1.setEnabled(false);
 			}
 			{
 				jLabel3 = new JLabel();
@@ -118,12 +109,9 @@ public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupList
 				jLabel3.setName("jLabel3");
 			}
 			{
-				ListModel playerListModel = 
-					new DefaultComboBoxModel(
-							new String[] { "Item One", "Item Two" });
-				characterList = new JList();
+				characterList = new MutableList();
 				this.add(characterList, new AnchorConstraint(212, 981, 770, 714, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				characterList.setModel(playerListModel);
+				characterList.setModel(characterList.getModel());
 				characterList.setPreferredSize(new java.awt.Dimension(196, 203));
 			}
 			{
@@ -142,6 +130,11 @@ public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupList
 				this.add(removeButton, new AnchorConstraint(212, 686, 289, 534, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				removeButton.setPreferredSize(new java.awt.Dimension(112, 28));
 				removeButton.setName("removeButton");
+				removeButton.addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent evt) {
+						removeButtonMouseClicked(evt);
+					}
+				});
 			}
 			{
 				ComboBoxModel controllerComboModel = 
@@ -188,7 +181,32 @@ public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupList
 
 	}
 	
-	private void jButton1MouseClicked(MouseEvent evt) {
+
+	public void updateList(Character c)
+	{
+		Game.getInstance().assignCharacter(player, c);
+		charList.add(c);
+		jButton1.setEnabled(true);
+		characterList.getContents().addElement(c.getName());	
+	}
+		
+
+	private void removeButtonMouseClicked(MouseEvent evt) {
+		String name;
+		int index = characterList.getSelectedIndex();
+		if( index != -1) {
+			name = (String) characterList.getContents().get(index);
+			for(Character c: charList) {
+				if(c.getName().equals(name)) {
+					charList.remove(c);
+					characterList.getContents().remove(index);
+				}
+			}
+		}
+		
+	}
+	
+	private void jButton1ActionPerformed(ActionEvent evt) {
 		boolean isHuman;
 		
 		if(controllerCombo.getSelectedIndex() == 0)
@@ -208,33 +226,11 @@ public class NewPlayerWidget extends javax.swing.JPanel implements GameSetupList
             if (listeners[i] == GameSetupListener.class) {
                 ((GameSetupListener)listeners[i+1]).GameSetupStateChanged(e);
             }
-        }		
-
-	}
-
-	public void GameSetupStateChanged(GameSetupEvent evt) {
-	   	
-		switch(evt.getPhase()) {
-    	case AddedPlayer:
-    		
-    		break;
-    	case AddedCharacter:
-    		Character addedChar = evt.getAddedCharacter();
-    		Game.getInstance().assignCharacter(player, addedChar);
-    		charList.add(addedChar);
-    		jButton1.setEnabled(true);
-    		//TODO add to Jlist
-    		
-    		break;
-    	case AddCharacter:
-    		break;
-    	}
-
-		
-	}
-	
-	private void PlayersCreatedButtonMouseClicked(MouseEvent evt) {
-		Game.getInstance().setState(GamePhase.SetupDone);
+        }	
+        nameBox.setText(null);
+        jButton1.setEnabled(false);
+        controllerCombo.setSelectedIndex(0);
+        characterList.getContents().removeAllElements();
 	}
 
 }

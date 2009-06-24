@@ -1,5 +1,9 @@
 package gui;
 
+import gameChart.AbstractChart;
+import gameChart.CircolarChart;
+import gameChart.LinearChart;
+import gameChart.RectangularChart;
 import gameLogic.Game;
 import gameLogic.GamePhaseChangedEvent;
 import gameLogic.GamePhaseChangedListener;
@@ -13,6 +17,7 @@ import javax.swing.ActionMap;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.jdesktop.application.Action;
@@ -37,7 +42,7 @@ import org.jdesktop.application.SingleFrameApplication;
  */
 
 public class CrossFireApplication extends SingleFrameApplication 
-	implements GamePhaseChangedListener, GameSetupListener {
+	implements GamePhaseChangedListener{
 	
     private JMenuBar menuBar;
     private JPanel topPanel;
@@ -46,7 +51,6 @@ public class CrossFireApplication extends SingleFrameApplication
     private JMenuItem jMenuItem1;
     private JMenu fileMenu;
     private JPanel contentPanel;
-    private ManagerCharacter characterFrame;
     private ManagerPlayers playerFrame;
     
     @Action
@@ -68,6 +72,7 @@ public class CrossFireApplication extends SingleFrameApplication
     @Override
     protected void startup() {
         {
+        	
             topPanel = new JPanel();
             BorderLayout panelLayout = new BorderLayout();
             topPanel.setLayout(panelLayout);
@@ -109,31 +114,43 @@ public class CrossFireApplication extends SingleFrameApplication
     	launch(CrossFireApplication.class, args);
     }
 
-    public void GameSetupStateChanged (GameSetupEvent evt)
-    {
-    	switch(evt.getPhase()) {
-    	case AddedPlayer:
-    		
-    		break;
-    	case AddedCharacter:
-    		characterFrame.dispose();
-    		break;
-    	
-    	case AddCharacter:
-			characterFrame = new ManagerCharacter();
-			characterFrame.getCharacterWidget().addGameSetupListener(this);
-			characterFrame.getCharacterWidget().addGameSetupListener(playerFrame.getPlayerWidget());
-			characterFrame.setVisible(true);
-			break;
-    		
+    private void selectChart() {
+    	Object[] possibilities = {"Circolar", "Rectangular", "Linear"};
+    	String s = (String)JOptionPane.showInputDialog(
+    	                    getMainFrame(),
+    	                    "Choose the chart type:\n",
+    	                    "Chart Shape",
+    	                    JOptionPane.PLAIN_MESSAGE,
+    	                    null,
+    	                    possibilities,
+    	                    "Linear");
+
+    	if ((s != null) && (s.length() > 0)) {
+    		if(s.equals("Circolar"))
+    			Game.getInstance().setChart(new CircolarChart(10,10));
+
+    		else if(s.equals("Rectangular"))
+    			Game.getInstance().setChart(new RectangularChart(10,10));
+
+    		else
+    			Game.getInstance().setChart(new LinearChart());
+
     	}
+    	
     }
- 
-  
+    
     public void GamePhaseChanged(GamePhaseChangedEvent e) {
 		
 		switch (e.getPhase()) {
 		case SetupDone:
+			playerFrame.dispose();
+			selectChart();
+			contentPanel.removeAll();
+			contentPanel.validate();
+			contentPanel.add(new GamePanel());
+			contentPanel.validate();
+			contentPanel.updateUI();
+			
 			break;
 			
 		case EndGame:
@@ -143,7 +160,6 @@ public class CrossFireApplication extends SingleFrameApplication
 			contentPanel.removeAll();
 			contentPanel.validate();
 			playerFrame = new ManagerPlayers();
-			playerFrame.getPlayerWidget().addGameSetupListener(this);
 			playerFrame.setVisible(true);
 			break;
 			
