@@ -7,11 +7,7 @@ import javax.imageio.ImageIO;
 
 import spells.AncientKnowledge;
 import spells.AuraBolt;
-import spells.DarkGaze;
-import spells.DivineIntervention;
-import spells.Fireball;
 import spells.Heal;
-import spells.Implosion;
 import spells.Spell;
 import spells.UnholySacrifice;
 

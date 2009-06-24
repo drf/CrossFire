@@ -1,6 +1,7 @@
 package gui;
 import characters.Dragon;
 import characters.Fighter;
+import characters.God;
 
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
@@ -110,11 +111,13 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		ComputerPlayer p3 = (ComputerPlayer)(Game.getInstance().createNewPlayer("TestPC", false));
 		Game.getInstance().assignCharacter(p1, Game.getInstance().createCharacter(characters.Character.Race.Elf, new Modifier(), "cicci"));
 		Game.getInstance().assignCharacter(p2, Game.getInstance().createCharacter(characters.Character.Race.Wizard, new Modifier(), "picci"));
+		Game.getInstance().assignCharacter(p2, new God());
 		Game.getInstance().assignNPC(p3, new Dragon());
 		Game.getInstance().assignNPC(p3, new Dragon());
 		try {
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(5, 9));
+			Game.getInstance().getChart().place((Entity)(Game.getInstance().getEntities().toArray()[2]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(9, 9));
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getNPCS().toArray()[0]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(4, 7));
 			Game.getInstance().getChart().place((Entity)(Game.getInstance().getNPCS().toArray()[1]), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(6, 9));
 			Game.getInstance().getChart().place(new SpellBook(), ((BidimensionalChart)(Game.getInstance().getChart())).getBoxAt(3, 7));

@@ -30,6 +30,7 @@ public class SpellGenerator {
 		retset.add(DarkGaze.class);
 		retset.add(Bless.class);
 		retset.add(UnholySacrifice.class);
+		retset.add(AncientKnowledge.class);
 		
 		return retset;
 	}
