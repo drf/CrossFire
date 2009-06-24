@@ -10,12 +10,9 @@ import gameChart.RectangularChart;
 import gameLogic.EntityEvent;
 import gameLogic.EntityListener;
 import gameLogic.Game;
-import gameLogic.Movable;
-import gameLogic.MoveEvent;
 import gameLogic.TurnEvent;
 import gameLogic.TurnEvent.TypeEvent;
 import globals.Entity;
-import globals.Modifier;
 import globals.Pair;
 import globals.PlayableEntity;
 import gui.GamePanel.ActionState;
@@ -25,8 +22,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -44,10 +39,6 @@ import javax.imageio.ImageIO;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 import javax.swing.event.EventListenerList;
-
-import player.Player;
-
-import characters.Dragon;
 
 
 /**
@@ -77,7 +68,6 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 	private int lastYMouseOffset;
 	private int mouseXPosition;
 	private int mouseYPosition;
-	private boolean draggingMode = true;
 	private boolean streamClickEvent = false;
 	private BufferedImage plainTexture;
 	private BufferedImage hillTexture;
@@ -109,15 +99,14 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 		super();
 		this.chart = chart;
 		parent.addActionStateChangedEventListener(this);
-		try {
-			chart.place(new Dragon(), chart.getBoxAt(0,0));
-			chart.place(new Dragon(), chart.getBoxAt(6,8));
-		} catch (BoxBusyException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
+		actionState = ActionState.OnNavigate;
 		
 		for (PlayableEntity ent : Game.getInstance().getEntities()) {
+			ent.addEntityEventListener(this);
+		}
+		
+		for (PlayableEntity ent : Game.getInstance().getNPCS()) {
 			ent.addEntityEventListener(this);
 		}
 		
@@ -154,6 +143,9 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 		try {
 			{
 				this.addMouseListener(new MouseAdapter() {
+					public void mouseReleased(MouseEvent evt) {
+						thisMouseReleased(evt);
+					}
 					public void mousePressed(MouseEvent evt) {
 						thisMousePressed(evt);
 					}
@@ -176,16 +168,7 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 					}
 				});
 			}
-			{
-				this.addKeyListener(new KeyAdapter() {
-					public void keyReleased(KeyEvent evt) {
-						thisKeyReleased(evt);
-					}
-					public void keyPressed(KeyEvent evt) {
-						thisKeyPressed(evt);
-					}
-				});
-			}
+			
 			setPreferredSize(new Dimension(chart.getWidth()*multiplier, chart.getHeight()*multiplier));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -292,15 +275,6 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 		g2.setTransform(baseTransform);
 	}
 	
-	private void thisKeyPressed(KeyEvent evt) {
-		System.out.println("this.keyPressed, event="+evt);
-		
-		if (evt.getKeyCode() == KeyEvent.VK_CONTROL) {
-			draggingMode = true;
-			setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-		}
-	}
-	
 	private void thisMouseWheelMoved(MouseWheelEvent evt) {
 		if (evt.getWheelRotation() > 0) {
 			// Avoid getting reversed
@@ -315,10 +289,7 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 	}
 	
 	private void thisMouseDragged(MouseEvent evt) {
-		System.out.println("this.mouseDragged, event="+evt);
-		//TODO add your code for this.mouseDragged
-		
-		if (draggingMode) {
+		if (actionState == GamePanel.ActionState.OnNavigate) {
 
 			XPosition -= lastXMouseOffset - evt.getX();
 			YPosition -= lastYMouseOffset - evt.getY();
@@ -331,20 +302,14 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 	}
 	
 	private void thisMousePressed(MouseEvent evt) {
-		System.out.println("this.mousePressed, event="+evt);
 		lastXMouseOffset = evt.getX();
 		lastYMouseOffset = evt.getY();
-		
-		streamClickEvent = true;
-		updateUI();
-	}
-	
-	private void thisKeyReleased(KeyEvent evt) {
-		System.out.println("this.keyReleased, event="+evt);
-		
-		if (evt.getKeyCode() == KeyEvent.VK_CONTROL) {
-			draggingMode = false;
-			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+		if (actionState != GamePanel.ActionState.OnNavigate) {
+			streamClickEvent = true;
+			updateUI();
+		} else {
+			setCursor(new Cursor(Cursor.MOVE_CURSOR));
 		}
 	}
 	
@@ -395,9 +360,14 @@ public class ChartWidget extends javax.swing.JPanel implements EntityListener, A
 			((Graphics2D)getGraphics()).setPaint(redFill);
 		} else {
 			((Graphics2D)getGraphics()).setPaint(greenFill);
+			
 		}
 		
 		updateUI();
+	}
+	
+	private void thisMouseReleased(MouseEvent evt) {
+		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 }
