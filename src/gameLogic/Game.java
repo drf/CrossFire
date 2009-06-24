@@ -1,6 +1,5 @@
 package gameLogic;
 
-import items.Item;
 import items.ItemGenerator;
 
 import java.util.HashMap;

@@ -17,7 +17,7 @@ public class UnholySacrifice extends Spell {
 		caster.setMp(caster.getMp() + 10 + (int)((caster.getIntelligence() + 
 												 caster.getMagicSkill() +
 												 caster.getMagicDamageBonus())
-												 * 0.12));
+												 * 0.10));
 		return 10;
 	}
 

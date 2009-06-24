@@ -247,12 +247,13 @@ public class CombatHandler {
 	}
 	
 	/**
-	 * Performs a magic attack. This function will take care of computing the damage,
-	 * based on specifics and on a luck+random factor, and deal the damage.
+	 * Casts a spell. This function abstracts all the needed logic, including range calculation
+	 * and computation, and emits an event upon both success and failure. It also applies
+	 * the eventual damage/effect and subtracts the MP from the caster.
 	 * <p>
 	 * Please note that this function doesn't take care of checking the
 	 * dynamic requirements for the magic attack, you should check this before using
-	 * CanPerformAttack()
+	 * canCastSpell
 	 * 
 	 * @param from the {@link CanMagicAttack} attempting the attack
 	 * @param to the {@link Attackable} being attacked
@@ -341,12 +342,13 @@ public class CombatHandler {
 	
 	/**
 	 * This function returns, based on static and dynamic properties, if a generic
-	 * {@link CanAttack} can perform a specific {@link AttackType}.
+	 * {@link CanMagicAttack} can perform a specific {@link Spell} on an {@link Attackable}.
 	 * 
-	 * @param attacker the {@link CanAttack} to check capabilities for
-	 * @param type the {@link AttackType} to check
-	 * @return whether the provided {@link CanAttack} can perform 
-	 * the provided {@link AttackType} or not
+	 * @param attacker the {@link CanMagicAttack} to check capabilities for
+	 * @param target the {@link Attackable} to cast the spell on
+	 * @param type the {@link Spell} to check
+	 * @return whether the provided {@link CanMagicAttack} can perform 
+	 * the provided {@link Spell} or not
 	 */
 	public static boolean canCastSpell(CanMagicAttack attacker,Attackable target, Spell type) {
 		if (attacker.getAvailableSpells().contains(type) && 
@@ -358,6 +360,17 @@ public class CombatHandler {
 		return false;
 	}
 	
+	/**
+	 * This function returns, based on static and dynamic properties, if a generic
+	 * {@link CanMagicAttack} can perform a specific {@link Spell}. Please note that
+	 * this does not take care of any special requirements from the spell, use the overloaded
+	 * method to perform a complete and more reliable check.
+	 * 
+	 * @param attacker the {@link CanMagicAttack} to check capabilities for
+	 * @param type the {@link Spell} to check
+	 * @return whether the provided {@link CanMagicAttack} can perform 
+	 * the provided {@link Spell} or not
+	 */
 	public static boolean canCastSpell(CanMagicAttack attacker, Spell type) {
 		if (attacker.getAvailableSpells().contains(type) && 
 			type.getCost() <= attacker.getMp()) {
