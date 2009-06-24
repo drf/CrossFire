@@ -156,17 +156,21 @@ public class CrossFireApplication extends SingleFrameApplication
 			selectChart();
 			Game.getInstance().randomlyPlaceEntities();
 			Game.getInstance().randomlyPlaceItems();
-			Game.getInstance().setState(Game.GamePhase.Turn);
-			Game.getInstance().performNextTurn();
 			contentPanel.removeAll();
 			contentPanel.validate();
 			contentPanel.add(new GamePanel());
 			contentPanel.validate();
 			contentPanel.updateUI();
+			Game.getInstance().setState(Game.GamePhase.Turn);
+			Game.getInstance().performNextTurn();
 			
 			break;
 			
 		case EndGame:
+			JOptionPane.showMessageDialog(getMainFrame(), "Player " + Game.getInstance().getWinner().getName() + "won the game!", "We have a winner!", JOptionPane.INFORMATION_MESSAGE);
+			Game.resetGame();
+			Game.getInstance().addGameChangedEventListener(this);
+	        Game.getInstance().setState(GamePhase.None);
 			break;
 			
 		case GameCreation:
