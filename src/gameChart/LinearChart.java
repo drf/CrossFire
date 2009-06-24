@@ -10,6 +10,7 @@ public class LinearChart extends BidimensionalChart {
 	
 	public LinearChart(int width) {
 		setSize(width, 1);
+		createChart();
 	}
 		
 }

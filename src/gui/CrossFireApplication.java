@@ -127,7 +127,7 @@ public class CrossFireApplication extends SingleFrameApplication
     			Game.getInstance().setChart(new RectangularChart(10,10));
 
     		else
-    			Game.getInstance().setChart(new LinearChart());
+    			Game.getInstance().setChart(new LinearChart(10));
 
     	}
     	
