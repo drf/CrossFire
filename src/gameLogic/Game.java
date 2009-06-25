@@ -395,7 +395,7 @@ public class Game implements EntityListener {
 			randomlyPlaceEntity(c);
 			}
 		
-		for(Enumeration e = entities.keys(); e.hasMoreElements();) {
+		for(Enumeration e = npcs.keys(); e.hasMoreElements();) {
 			PlayableEntity ch = (PlayableEntity)e.nextElement();
 			randomlyPlaceEntity(ch);
 		}

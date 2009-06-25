@@ -118,15 +118,7 @@ public class CrossFireApplication extends SingleFrameApplication
     	launch(CrossFireApplication.class, args);
     }
 
-    private void selectWidth() 
-    {
-    	
-    }
-    private void selectHeigth() 
-    {
-    	
-    }
-    
+  
     private void selectChart() {
     	Object[] possibilities = {"Circolar", "Rectangular", "Linear"};
     	String s = (String)JOptionPane.showInputDialog(
@@ -137,17 +129,35 @@ public class CrossFireApplication extends SingleFrameApplication
     	                    null,
     	                    possibilities,
     	                    "Linear");
-
+    	
+        String X = JOptionPane.showInputDialog(getMainFrame(), "Select Chart Width");
+        String Y = JOptionPane.showInputDialog(getMainFrame(), "Select Chart Height");
+        
+        
     	if ((s != null) && (s.length() > 0)) {
     		if(s.equals("Circolar"))
-    			Game.getInstance().setChart(new CircolarChart(10,10));
-
+    			try {
+    			Game.getInstance().setChart(new CircolarChart(Integer.parseInt(X),Integer.parseInt(Y)));
+    			}
+    			catch (Exception e) {
+        			Game.getInstance().setChart(new CircolarChart(10, 10));
+				}
     		else if(s.equals("Rectangular"))
-    			Game.getInstance().setChart(new RectangularChart(10,10));
+    			try {
+    			Game.getInstance().setChart(new RectangularChart(Integer.parseInt(X),Integer.parseInt(Y)));
+    			}
+    			catch (Exception e) {
+        			Game.getInstance().setChart(new RectangularChart(10,10));
+    			}
+    		else {
+    			try {
+    			Game.getInstance().setChart(new LinearChart(Integer.parseInt(X)));
+    			}
+    			catch (Exception e) {
+        			Game.getInstance().setChart(new LinearChart(20));
 
-    		else
-    			Game.getInstance().setChart(new LinearChart());
-
+				}
+    		}
     	}
     	
     }
@@ -165,9 +175,10 @@ public class CrossFireApplication extends SingleFrameApplication
 			contentPanel.add(new GamePanel());
 			contentPanel.validate();
 			contentPanel.updateUI();
+			getMainFrame().pack();
+			getMainFrame().setVisible(true);
 			Game.getInstance().setState(Game.GamePhase.Turn);
 			Game.getInstance().performNextTurn();
-			
 			break;
 			
 		case EndGame:

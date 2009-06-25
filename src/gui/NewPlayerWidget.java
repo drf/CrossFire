@@ -31,6 +31,7 @@ import player.Player;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.event.EventListenerList;
@@ -114,6 +115,7 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 				this.add(characterList, new AnchorConstraint(212, 981, 770, 714, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				characterList.setModel(characterList.getModel());
 				characterList.setPreferredSize(new java.awt.Dimension(196, 203));
+
 			}
 			{
 				manageCharacterButton = new JButton();

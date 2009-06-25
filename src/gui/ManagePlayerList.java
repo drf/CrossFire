@@ -31,6 +31,7 @@ import player.Player;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.event.EventListenerList;
 

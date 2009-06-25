@@ -193,6 +193,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				gameLogger.setDefaultLocale(new java.util.Locale("en", "GB"));
 				JScrollPane pScroll = new JScrollPane(gameLogger, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 				this.add(pScroll, new AnchorConstraint(751, 986, 985, 18, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				
 			}
 			{
 				actionPanel = new JPanel();
