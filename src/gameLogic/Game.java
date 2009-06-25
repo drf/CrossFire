@@ -2,16 +2,20 @@ package gameLogic;
 
 import items.ItemGenerator;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Random;
 import java.util.Set;
 
 import javax.swing.event.EventListenerList;
 
 import characters.Character;
+import characters.Dragon;
 import characters.Elf;
 import characters.Fighter;
+import characters.God;
 import characters.Human;
 import characters.Orc;
 import characters.Wizard;
@@ -64,8 +68,8 @@ public class Game implements EntityListener {
 	/**
 	 * @uml.property  name="entities"
 	 */
-	private HashMap<PlayableEntity, Player> entities = new HashMap<PlayableEntity, Player>();
-	private HashMap<PlayableEntity, ComputerPlayer> npcs = new HashMap<PlayableEntity, ComputerPlayer>();
+	private Hashtable<PlayableEntity, Player> entities = new Hashtable<PlayableEntity, Player>();
+	private Hashtable<PlayableEntity, ComputerPlayer> npcs = new Hashtable<PlayableEntity, ComputerPlayer>();
 	/**
 	 * @uml.property  name="state"
 	 * @uml.associationEnd  
@@ -205,6 +209,17 @@ public class Game implements EntityListener {
 		return p;
 	}
 	
+	public PlayableEntity createRandomMonster()  {
+		Random r = new Random();
+		int randomInt = r.nextInt(5);
+		
+		if(randomInt == 4)
+			return new God();
+		else
+			return new Dragon();
+		
+	}
+	
 	public Character createCharacter(Character.Race race, Modifier bonus, String name) {
 		Character newChar = null; 
 		
@@ -296,12 +311,22 @@ public class Game implements EntityListener {
 	public void removeEntity(PlayableEntity c) {
 		entities.remove(c);
 	}
+	
 	public void removePlayer(Player p){
-		for(PlayableEntity c: entities.keySet()){
-			entities.containsValue(p);
-			removeEntity(c);
-		}
-	}
+		
+		for(Enumeration e  = entities.keys(); e.hasMoreElements();){
+			PlayableEntity c = (PlayableEntity) e.nextElement();
+			if(entities.containsValue(p))
+				removeEntity(c);
+			}
+		
+		for(Enumeration e = npcs.keys(); e.hasMoreElements();) {
+			PlayableEntity ch = (PlayableEntity)e.nextElement();
+			if(npcs.containsValue(p))
+				removeEntity(ch);
+			}
+	
+	}	
 	
 	private void randomlyPlaceEntity(Entity ent) 
 	{
@@ -341,8 +366,8 @@ public class Game implements EntityListener {
 			actualChart = (BidimensionalChart)chart;
 		else
 			return;
-		//we place at most X items
-		totalItems = actualChart.getWidth();
+		//we place at most X items, we use Height otherwise linear charts will end up full of items
+		totalItems = actualChart.getHeight();
 		
 		for(int i = 0; i <= totalItems; i++) {
 			switch(r.nextInt(4)) {
@@ -364,10 +389,17 @@ public class Game implements EntityListener {
 	
 	public void randomlyPlaceEntities()
 	{
-
-		for(PlayableEntity p : entities.keySet()) 
-			randomlyPlaceEntity(p);
 		
+		for(Enumeration e  = entities.keys(); e.hasMoreElements();){
+			PlayableEntity c = (PlayableEntity) e.nextElement();
+			randomlyPlaceEntity(c);
+			}
+		
+		for(Enumeration e = entities.keys(); e.hasMoreElements();) {
+			PlayableEntity ch = (PlayableEntity)e.nextElement();
+			randomlyPlaceEntity(ch);
+		}
+			
 	}
 	
 	private boolean hasAWinner() {

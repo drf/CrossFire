@@ -1,5 +1,6 @@
 package gui;
 
+import gameChart.AbstractChart;
 import gameChart.CircolarChart;
 import gameChart.LinearChart;
 import gameChart.RectangularChart;
@@ -7,12 +8,17 @@ import gameLogic.Game;
 import gameLogic.GamePhaseChangedEvent;
 import gameLogic.GamePhaseChangedListener;
 import gameLogic.Game.GamePhase;
+import gameLogic.GameSetupEvent;
+import gameLogic.GameSetupListener;
+
+import java.awt.BorderLayout;
 
 import javax.swing.ActionMap;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.Application;
@@ -39,10 +45,12 @@ public class CrossFireApplication extends SingleFrameApplication
 	implements GamePhaseChangedListener{
 	
     private JMenuBar menuBar;
+    private JPanel topPanel;
     private JMenuItem jMenuItem3;
     private JMenuItem jMenuItem2;
     private JMenuItem jMenuItem1;
     private JMenu fileMenu;
+    private JPanel contentPanel;
     /**
 	 * @uml.property  name="playerFrame"
 	 * @uml.associationEnd  
@@ -67,7 +75,17 @@ public class CrossFireApplication extends SingleFrameApplication
 
     @Override
     protected void startup() {
-        
+        {
+        	
+            topPanel = new JPanel();
+            BorderLayout panelLayout = new BorderLayout();
+            topPanel.setLayout(panelLayout);
+            topPanel.setPreferredSize(new java.awt.Dimension(500, 300));
+            {
+                contentPanel = new JPanel();
+                topPanel.add(contentPanel, BorderLayout.CENTER);
+            }
+        }
         menuBar = new JMenuBar();
         {
             fileMenu = new JMenu();
@@ -92,6 +110,7 @@ public class CrossFireApplication extends SingleFrameApplication
         getMainFrame().setJMenuBar(menuBar);
         Game.getInstance().addGameChangedEventListener(this);
         Game.getInstance().setState(GamePhase.None);
+        show(topPanel);
     }
 
     public static void main(String[] args) {
@@ -127,7 +146,7 @@ public class CrossFireApplication extends SingleFrameApplication
     			Game.getInstance().setChart(new RectangularChart(10,10));
 
     		else
-    			Game.getInstance().setChart(new LinearChart(10));
+    			Game.getInstance().setChart(new LinearChart());
 
     	}
     	
@@ -141,9 +160,11 @@ public class CrossFireApplication extends SingleFrameApplication
 			selectChart();
 			Game.getInstance().randomlyPlaceEntities();
 			Game.getInstance().randomlyPlaceItems();
-			getMainFrame().getContentPane().removeAll();
-			getMainFrame().getContentPane().add(new GamePanel());
-			getMainFrame().pack();
+			contentPanel.removeAll();
+			contentPanel.validate();
+			contentPanel.add(new GamePanel());
+			contentPanel.validate();
+			contentPanel.updateUI();
 			Game.getInstance().setState(Game.GamePhase.Turn);
 			Game.getInstance().performNextTurn();
 			
@@ -157,17 +178,17 @@ public class CrossFireApplication extends SingleFrameApplication
 			break;
 			
 		case GameCreation:
-			getMainFrame().getContentPane().removeAll();	
-			playerFrame = null;
+			contentPanel.removeAll();
+			contentPanel.validate();
 			playerFrame = new ManagerPlayers();
 			playerFrame.setVisible(true);
 			break;
 			
 		case None:
-			getMainFrame().getContentPane().removeAll();
-			getMainFrame().getContentPane().add(new MainPanel());
-			getMainFrame().pack();
-			show(getMainFrame());
+			contentPanel.removeAll();
+			contentPanel.validate();
+			contentPanel.add(new MainPanel());
+			contentPanel.validate();
 			break;
 		case Turn:
 			break;

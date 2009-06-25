@@ -209,9 +209,11 @@ public abstract class Character extends Fighter implements gameLogic.Attackable,
 	 */
 	public void onDeath() {
 		super.onDeath();
-		for(Equipable i: this.itemsList) {
-			if (i instanceof Equipable) {
-				dropEquip(i);
+		synchronized (itemsList) {	
+			for(Equipable i: this.itemsList) {
+				if (i instanceof Equipable) {
+					dropEquip(i);
+				}
 			}
 		}
 	}

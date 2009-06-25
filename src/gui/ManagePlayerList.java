@@ -15,6 +15,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -43,7 +47,7 @@ public class ManagePlayerList extends javax.swing.JPanel {
 	 * @uml.associationEnd  
 	 */
 	private MutableList playersList;
-	private ArrayList<Player> playersArray = new ArrayList<Player>();
+	private List playersArray = Collections.synchronizedList(new ArrayList<Player>());
 	private EventListenerList eventListeners = new EventListenerList();
 
 
@@ -130,9 +134,10 @@ public class ManagePlayerList extends javax.swing.JPanel {
 		int index = playersList.getSelectedIndex();
 		if( index != -1) {
 			name = (String) playersList.getContents().get(index);
-			for(Player p: playersArray) {
+			for(Iterator iter = playersArray.iterator(); iter.hasNext();) {
+				Player p = (Player)iter.next();
 				if(p.getName().equals(name)) {
-					playersArray.remove(p);
+					iter.remove();
 					Game.getInstance().removePlayer(p);
 					playersList.getContents().remove(index);
 				}

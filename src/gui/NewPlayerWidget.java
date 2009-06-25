@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -24,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.WindowConstants;
 import org.jdesktop.application.Application;
 
+import player.ComputerPlayer;
 import player.Player;
 
 import javax.swing.JFrame;
@@ -207,16 +209,24 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 	
 	private void jButton1ActionPerformed(ActionEvent evt) {
 		boolean isHuman;
+		int selectedPlayerType = controllerCombo.getSelectedIndex();
 		
-		if(controllerCombo.getSelectedIndex() == 0)
+		if(selectedPlayerType == 0)
 			isHuman = true;
 		else
 			isHuman = false;
 		
 		player = Game.getInstance().createNewPlayer(nameBox.getText(), isHuman);
-		for(Character c: charList)
-			Game.getInstance().assignCharacter(player, c);
-
+		if(selectedPlayerType == 2) {
+			Random r = new Random();
+			for(int i = 0; i < r.nextInt(4); i++)
+				Game.getInstance().assignNPC((ComputerPlayer) player, Game.getInstance().createRandomMonster());
+		}else {
+			
+			for(Character c: charList)
+				Game.getInstance().assignCharacter(player, c);
+		}
+		
 		GameSetupEvent e = new GameSetupEvent(this, GameSetupEvent.SetupPhase.AddedPlayer, player);
 		
 		Object[] listeners = eventListeners.getListenerList();
