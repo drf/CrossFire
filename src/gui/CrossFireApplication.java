@@ -77,14 +77,6 @@ public class CrossFireApplication extends SingleFrameApplication
     protected void startup() {
         {
         	
-            topPanel = new JPanel();
-            BorderLayout panelLayout = new BorderLayout();
-            topPanel.setLayout(panelLayout);
-            topPanel.setPreferredSize(new java.awt.Dimension(500, 300));
-            {
-                contentPanel = new JPanel();
-                topPanel.add(contentPanel, BorderLayout.CENTER);
-            }
         }
         menuBar = new JMenuBar();
         {
@@ -110,7 +102,7 @@ public class CrossFireApplication extends SingleFrameApplication
         getMainFrame().setJMenuBar(menuBar);
         Game.getInstance().addGameChangedEventListener(this);
         Game.getInstance().setState(GamePhase.None);
-        show(topPanel);
+        show(getMainFrame());
     }
 
     public static void main(String[] args) {
@@ -170,13 +162,9 @@ public class CrossFireApplication extends SingleFrameApplication
 			selectChart();
 			Game.getInstance().randomlyPlaceEntities();
 			Game.getInstance().randomlyPlaceItems();
-			contentPanel.removeAll();
-			contentPanel.validate();
-			contentPanel.add(new GamePanel());
-			contentPanel.validate();
-			contentPanel.updateUI();
+			getMainFrame().getContentPane().removeAll();
+			getMainFrame().getContentPane().add(new GamePanel());
 			getMainFrame().pack();
-			getMainFrame().setVisible(true);
 			Game.getInstance().setState(Game.GamePhase.Turn);
 			Game.getInstance().performNextTurn();
 			break;
@@ -189,17 +177,16 @@ public class CrossFireApplication extends SingleFrameApplication
 			break;
 			
 		case GameCreation:
-			contentPanel.removeAll();
-			contentPanel.validate();
+			getMainFrame().getContentPane().removeAll();
+			getMainFrame().pack();
 			playerFrame = new ManagerPlayers();
 			playerFrame.setVisible(true);
 			break;
 			
 		case None:
-			contentPanel.removeAll();
-			contentPanel.validate();
-			contentPanel.add(new MainPanel());
-			contentPanel.validate();
+			getMainFrame().getContentPane().removeAll();
+			getMainFrame().getContentPane().add(new MainPanel());
+			getMainFrame().pack();
 			break;
 		case Turn:
 			break;

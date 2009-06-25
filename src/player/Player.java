@@ -34,12 +34,20 @@ public abstract class Player implements java.io.Serializable {
 	
 	public Player() {}
 	
-	public void handleTurn(PlayableEntity entity, int token) {
-		
-	}
+	/**
+	 * This function encapsulates the logic for turn handling.
+	 * <p>Turns are handled asynchronously: a token is passed to this function so
+	 * that when calling back {@link Game}.endTurn(), {@link Game} will be able to check
+	 * if the token is valid. For this reason, it's extremely important for you to store
+	 * the token if you're handling the turn asynchronously and not in this function
+	 * 
+	 * @param entity the entity getting the turn
+	 * @param token the turn identifier
+	 */
+	public abstract void handleTurn(PlayableEntity entity, int token);
 	
 	/**
-	 * @return
+	 * @return the name of the player
 	 * @uml.property  name="name"
 	 */
 	public String getName() {
@@ -47,7 +55,7 @@ public abstract class Player implements java.io.Serializable {
 	}
 
 	/**
-	 * @param name
+	 * @param name the name of the player
 	 * @uml.property  name="name"
 	 */
 	public void setName(String name) {
@@ -55,13 +63,11 @@ public abstract class Player implements java.io.Serializable {
 	}
 	
 	/**
-	 * This method adds a new {@link Entity}�to the list they player handles
+	 * This method adds a new {@link Entity} to the list the player handles
 	 * 
 	 * This method always returns immediately. 
 	 *
-	 * @param  entity  the entity we want to add
-	 * @return      void
-	 * 
+	 * @param  entity  the entity we want to add	 * 
 	 */
 
 	public void addNewPlayableEntity(PlayableEntity entity) {
@@ -69,7 +75,7 @@ public abstract class Player implements java.io.Serializable {
 	}
 	
 	/**
-	 * This method removes an {@link Entity}�from the list they player handles
+	 * This method removes an {@link Entity} from the list the player handles
 	 * 
 	 * This method always returns immediately. 
 	 *

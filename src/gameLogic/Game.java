@@ -178,7 +178,10 @@ public class Game implements EntityListener {
 	}
 
 	/**
-	 * @param state
+	 * Sets the new state of the game. This will trigger a GamePhaseChanged event
+	 * that can be grabbed by the interface to update its view
+	 * 
+	 * @param state the new state of the game
 	 * @uml.property  name="state"
 	 */
 	public void setState(GamePhase state) {
@@ -195,6 +198,14 @@ public class Game implements EntityListener {
         }
 	}
 	
+	/**
+	 * Creates and returns a new player. This is a convenience function to create a generic
+	 * player object without dealing with player subclasses
+	 * 
+	 * @param name the name of the new player
+	 * @param human whether the player will be controlled by the user or not
+	 * @return a new {@link Player}
+	 */
 	public Player createNewPlayer(String name, boolean human) {
 		Player p;
 		
@@ -209,6 +220,11 @@ public class Game implements EntityListener {
 		return p;
 	}
 	
+	/**
+	 * Creates a random monster
+	 * 
+	 * @return a random monster
+	 */
 	public PlayableEntity createRandomMonster()  {
 		Random r = new Random();
 		int randomInt = r.nextInt(5);
@@ -220,6 +236,15 @@ public class Game implements EntityListener {
 		
 	}
 	
+	/**
+	 * Creates a new {@link Character} and returns it. This is a convenience function for
+	 * creating {@link Character}s without dealing with its subclasses
+	 * 
+	 * @param race the race of the new character
+	 * @param bonus the attribute bonus given on creation
+	 * @param name the name of the character
+	 * @return a new {@link Character} based on the given attributes
+	 */
 	public Character createCharacter(Character.Race race, Modifier bonus, String name) {
 		Character newChar = null; 
 		
@@ -250,6 +275,15 @@ public class Game implements EntityListener {
 
 	}
 	
+	/**
+	 * Assigns and register a {@link PlayableEntity} to a {@link Player}. After this function
+	 * has been called, the chosen {@link PlayableEntity} will be added to the game logic and
+	 * loop
+	 * 
+	 * @param player the player the entity will belong to
+	 * @param character the {@link PlayableEntity} to register
+	 * @return whether the operation was successful or not
+	 */
 	public boolean assignCharacter(Player player, PlayableEntity character) {
 		
 		if (character == null || player == null) {
@@ -262,6 +296,15 @@ public class Game implements EntityListener {
 		return true;
 	}
 	
+	/**
+	 * Assigns and register a {@link PlayableEntity} to a {@link Player}. After this function
+	 * has been called, the chosen {@link PlayableEntity} will be added to the game logic and
+	 * loop
+	 * 
+	 * @param player the player the entity will belong to
+	 * @param character the {@link PlayableEntity} to register
+	 * @return whether the operation was successful or not
+	 */
 	public boolean assignEntity(Player player, PlayableEntity character) {
 		
 		if (character == null || player == null) {
@@ -282,6 +325,15 @@ public class Game implements EntityListener {
 		return true;
 	}
 	
+	/**
+	 * Assigns and register a {@link PlayableEntity} to a {@link ComputerPlayer}. After this function
+	 * has been called, the chosen {@link PlayableEntity} will be added to the game logic and
+	 * loop. Please note that this function is meant only for NPC characters
+	 * 
+	 * @param player the player the entity will belong to
+	 * @param character the {@link PlayableEntity} to register
+	 * @return whether the operation was successful or not
+	 */
 	public boolean assignNPC(ComputerPlayer player, PlayableEntity npc) {
 		
 		if (npc == null || player == null) {
@@ -308,10 +360,21 @@ public class Game implements EntityListener {
 		c.addEntityEventListener(this);
 	}
 	
+	/**
+	 * Removes an entity from the game
+	 * 
+	 * @param c the entity to remove
+	 */
 	public void removeEntity(PlayableEntity c) {
 		entities.remove(c);
 	}
 	
+	/**
+	 * Removes a player from the game. Every entity registered to him will
+	 * be removed as well
+	 * 
+	 * @param p the {@link Player} to remove
+	 */
 	public void removePlayer(Player p){
 		
 		for(Enumeration e  = entities.keys(); e.hasMoreElements();){
@@ -357,6 +420,9 @@ public class Game implements EntityListener {
 
 	}
 	
+	/**
+	 * Randomly places on the chart a casual number of item depending on the chart's size
+	 */
 	public void randomlyPlaceItems() {
 		Random r = new Random();
 		BidimensionalChart actualChart;
@@ -387,6 +453,9 @@ public class Game implements EntityListener {
 		
 	}
 	
+	/**
+	 * Randomly places on the chart all the registered entities
+	 */
 	public void randomlyPlaceEntities()
 	{
 		
@@ -402,6 +471,9 @@ public class Game implements EntityListener {
 			
 	}
 	
+	/** 
+	 * @return if the current game has a winner
+	 */
 	private boolean hasAWinner() {
 		HashSet<Player> set = new HashSet<Player>();
 		for (Player player : entities.values()) {
@@ -443,6 +515,10 @@ public class Game implements EntityListener {
 		return retent;
 	}
 	
+	/**
+	 * Main entry point for the turn logic. This function computes the next entity who will
+	 * get the turn, and processes it.
+	 */
 	public void performNextTurn() {
 
 		if (hasAWinner()) {
@@ -475,6 +551,11 @@ public class Game implements EntityListener {
 
 	}
 	
+	/**
+	 * Ends a turn
+	 * 
+	 * @param token the turn token
+	 */
 	public void endTurn(int token) {
 		System.out.println("Ending turn");
 		if (turnTokens.containsKey(token)) {
@@ -497,13 +578,17 @@ public class Game implements EntityListener {
 	}
 	
 	/**
-	 * @return
+	 * @return the registered entities in the game
 	 * @uml.property  name="entities"
 	 */
 	public Set<PlayableEntity> getEntities() {
 		return entities.keySet();
 	}
 	
+	/**
+	 * 
+	 * @return the registered NPCs in the game
+	 */
 	public Set<PlayableEntity> getNPCS() {
 		return npcs.keySet();
 	}
