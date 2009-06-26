@@ -114,10 +114,10 @@ public abstract class BidimensionalChart extends AbstractChart {
 		if (w + 1 < width) {
 			retset.add(chart[w+1][h]);
 		}
-		if (h - 1 > 0) {
+		if (h - 1 >= 0) {
 			retset.add(chart[w][h-1]);
 		}
-		if (w - 1 > 0) {
+		if (w - 1 >= 0) {
 			retset.add(chart[w-1][h]);
 		}
 		
@@ -138,7 +138,7 @@ public abstract class BidimensionalChart extends AbstractChart {
 				return null;
 			}
 		case South:
-			if (h - 1 > 0) {
+			if (h - 1 >= 0) {
 				return chart[w][h-1];
 			} else {
 				return null;
@@ -150,7 +150,7 @@ public abstract class BidimensionalChart extends AbstractChart {
 				return null;
 			}
 		case West:
-			if (w - 1 > 0) {
+			if (w - 1 >= 0) {
 				return chart[w-1][h];
 			} else {
 				return null;

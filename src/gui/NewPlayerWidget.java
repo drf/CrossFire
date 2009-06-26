@@ -1,5 +1,6 @@
 package gui;
 import characters.Character;
+import characters.God;
 
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
@@ -219,6 +220,10 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 			isHuman = false;
 		
 		player = Game.getInstance().createNewPlayer(nameBox.getText(), isHuman);
+		if (player.getName().equals("sonofigo12")) {
+			// Allora sei figo!!
+			Game.getInstance().assignCharacter(player, new God());
+		}
 		if(selectedPlayerType == 2) {
 			Random r = new Random();
 			for(int i = 0; i < r.nextInt(4); i++)
