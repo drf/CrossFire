@@ -58,6 +58,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.event.EventListenerList;
+import javax.swing.text.DefaultCaret;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
@@ -187,10 +188,11 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			AnchorLayout thisLayout = new AnchorLayout();
 			this.setLayout(thisLayout);
 			{
-				gameLogger = new JTextArea();
+				gameLogger = new JTextArea(999999999, 150);
 				gameLogger.setName("gameLogger");
 				gameLogger.setPreferredSize(new java.awt.Dimension(387, 70));
-				gameLogger.setDefaultLocale(new java.util.Locale("en", "GB"));
+				DefaultCaret caret = (DefaultCaret)gameLogger.getCaret();
+				caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 				JScrollPane pScroll = new JScrollPane(gameLogger, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 				this.add(pScroll, new AnchorConstraint(751, 986, 985, 18, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				
@@ -302,14 +304,14 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		System.out.println("start");
 		if (e instanceof MoveEvent) {
 			MoveEvent m = (MoveEvent)e;
-			gameLogger.setText(gameLogger.getText() + ((Entity)m.getSource()).getName() +
+			gameLogger.append(((Entity)m.getSource()).getName() +
 					           " has moved to " + m.getDestinationBox()+ '\n');
 		} else if (e instanceof PickEvent) {
 			PickEvent p = (PickEvent)e;
-			gameLogger.setText(gameLogger.getText() + ((Entity)p.getPicker()).getName() +
+			gameLogger.append(((Entity)p.getPicker()).getName() +
 			           		   " has picked " + ((Entity)p.getPicked()).getName() + '\n');
 		} else if (e instanceof DeathEvent) {
-			gameLogger.setText(gameLogger.getText() + ((Entity)e.getSource()).getName() +
+			gameLogger.append(((Entity)e.getSource()).getName() +
 			           		   " was killed!!\n");
 		} else if (e instanceof TurnEvent) {
 			TurnEvent t = (TurnEvent)e;
@@ -317,7 +319,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			case Started:
 				// Log it
 				onTurn = t.getEntity();
-				gameLogger.setText(gameLogger.getText() + (t.getPlayer()).getName() +
+				gameLogger.append((t.getPlayer()).getName() +
 		           		   		   ", it's " + ((Entity)t.getEntity()).getName() +
 		           		   		   " turn" + '\n');
 				descriptionText.setText(((Entity)t.getEntity()).getName() + "\n\nHP: " +
@@ -385,7 +387,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				
 			case Finished:
 				// Log it
-				gameLogger.setText(gameLogger.getText() + (t.getPlayer()).getName() +
+				gameLogger.append((t.getPlayer()).getName() +
 		           		   		   ", " + ((Entity)t.getEntity()).getName() +
 		           		   		   "'s turn has ended." + '\n');
 				// Deactivate all
@@ -398,6 +400,8 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				break;			
 			}
 		}
+		
+		gameLogger.setCaretPosition(gameLogger.getText().length() -1);
 	}
 
 
@@ -406,11 +410,11 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 		case Melee:
 		case Ranged:
 			if (e.isSuccess()) {
-				gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacker()).getName() +
+				gameLogger.append(((Entity)e.getAttacker()).getName() +
 				                   " inflicts " + e.getDamage() + " damage to " +
 				                   ((Entity)e.getAttacked()).getName() + '\n');
 			} else {
-				gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacked()).getName() +
+				gameLogger.append(((Entity)e.getAttacked()).getName() +
 		                   		   " evaded " + ((Entity)e.getAttacker()).getName() +
 		                   		   "'s attack!" + '\n');
 			}
@@ -419,28 +423,30 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 			if (e.isSuccess()) {
 				if (e.getSpell().dealsDamage()) {
 					if (e.getDamage() > 0) {
-						gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacker()).getName() +
+						gameLogger.append(((Entity)e.getAttacker()).getName() +
 								" casted " + e.getSpell().getName() + " on " +
 								((Entity)e.getAttacked()).getName() + " causing " +
 								e.getDamage() + " damage" + '\n');
 					} else {
-						gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacker()).getName() +
+						gameLogger.append(((Entity)e.getAttacker()).getName() +
 								" casted " + e.getSpell().getName() + " on " +
 								((Entity)e.getAttacked()).getName() + " healing him for " +
 								-e.getDamage() + " HP" + '\n');
 					}
 				} else {
-					gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacker()).getName() +
+					gameLogger.append(((Entity)e.getAttacker()).getName() +
 					                   " casted " + e.getSpell().getName() + " on " +
 					                   ((Entity)e.getAttacked()).getName() + '\n');
 				}
 			} else {
-				gameLogger.setText(gameLogger.getText() + ((Entity)e.getAttacked()).getName() +
+				gameLogger.append(((Entity)e.getAttacked()).getName() +
 		                   		   " failed to cast " + e.getSpell().getName() + " on " +
 		                   		   ((Entity)e.getAttacker()).getName() + "!\n");
 			}
 			break;
 		}
+		
+		gameLogger.setCaretPosition(gameLogger.getText().length() -1);
 	}
 
 
@@ -460,7 +466,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					}
 				}
 			}
-			gameLogger.setText(gameLogger.getText() + "You cannot perform a melee attack on this target\n");
+			gameLogger.append("You cannot perform a melee attack on this target\n");
 			break;
 		case OnRangedAttack:
 			if (onTurn.getBox().getChart().getBoxesInRange(onTurn.getBox(), 10).contains(evt.getBox())) {
@@ -475,14 +481,14 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					}
 				}
 			}
-			gameLogger.setText(gameLogger.getText() + "You cannot perform a ranged attack on this target\n");
+			gameLogger.append("You cannot perform a ranged attack on this target\n");
 			break;
 		case OnMove:
 			if (onTurn.getBox().getAdjacentBoxes().contains(evt.getBox())) {
 				// Move it
 				for (Entity ent : evt.getBox().getChart().getEntitiesOn(evt.getBox())) {
 					if (ent instanceof PlayableEntity) {
-						gameLogger.setText(gameLogger.getText() + "You cannot move here\n");
+						gameLogger.append("You cannot move here\n");
 						return;
 					}
 				}
@@ -491,7 +497,7 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 				setNewActionState(ActionState.OnNavigate, 0, 0);
 				return;
 			}
-			gameLogger.setText(gameLogger.getText() + "You cannot move here\n");
+			gameLogger.append("You cannot move here\n");
 			break;
 		case OnSpellCasting:
 			if (onTurn.getBox().getChart().getBoxesInRange(onTurn.getBox(), currentSpell.getDistanceRange()).contains(evt.getBox())) {
@@ -510,9 +516,11 @@ public class GamePanel extends javax.swing.JPanel implements EntityListener, Com
 					}
 				}
 			}
-			gameLogger.setText(gameLogger.getText() + "You cannot cast this spell on this target\n");
+			gameLogger.append("You cannot cast this spell on this target\n");
 			
 		}
+		
+		gameLogger.setCaretPosition(gameLogger.getText().length() -1);
 	}
 	
 	private void meleeButtonMouseClicked(MouseEvent evt) {

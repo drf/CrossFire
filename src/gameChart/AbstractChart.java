@@ -8,10 +8,22 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This class represents the game chart in an abstract shape. It has
+ * no coordinates or physical references, and it implements only the shared logic
+ * to allow easy creation of any kind of chart
+ * 
+ * @author Dario Freddi
+ * @author Vincenzo Iozzo
+ *
+ */
 public abstract class AbstractChart {
 	
 	private Map<Entity, Box> positions = new HashMap<Entity, Box>();
 	
+	/**
+	 * @return all the boxes in the chart
+	 */
 	public Set<Box> getBoxes() {
 		HashSet<Box> retset = new HashSet<Box>();
 		for (Box item : positions.values()) {
@@ -20,7 +32,19 @@ public abstract class AbstractChart {
 		return retset;
 	}
 
+	/**
+	 * This function is meant to return all boxes adjacent to the chosen one
+	 *  
+	 * @param b the {@link Box} to check for
+	 * @return the {@link Box}es adjacent to b
+	 */
 	abstract Set<Box> getAdjacentBoxes(Box b);
+	
+	/**
+	 * This function should be reimplemented to create the actual chart. This
+	 * should create the shape, the boxes, and everything needed by the chart itself.
+	 * The chart is considered invalid until this function gets called
+	 */
 	abstract void createChart();
 	
 	public Set<Entity> getEntitiesOn(Box b) {
