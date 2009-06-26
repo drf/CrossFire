@@ -61,11 +61,12 @@ public abstract class Fighter extends PlayableEntity {
 	 */
 	public static ArrayList<Integer> randomAttributes(int min, int max, int n) {
 		Random r = new Random();
-		int index, delta;
+		int index;
 		ArrayList<Integer> ret = new ArrayList<Integer>();
-		int total = r.nextInt(max - min);
+		int total = min + r.nextInt(max - min);
 		int sum = 0;
-
+		int delta;
+			
 		for(int i = 0; i < n; i++) {
 			int newVal = (total- r.nextInt(n))/n;
 			ret.add(newVal);

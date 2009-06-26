@@ -128,7 +128,7 @@ public class CrossFireApplication extends SingleFrameApplication
     	                    JOptionPane.PLAIN_MESSAGE,
     	                    null,
     	                    possibilities,
-    	                    "Linear");
+    	                    "Rectangular");
     	
         String X = JOptionPane.showInputDialog(getMainFrame(), "Select Chart Width");
         String Y = JOptionPane.showInputDialog(getMainFrame(), "Select Chart Height");
