@@ -1,8 +1,6 @@
 package gameChart;
 
 
-import java.util.Set;
-
 public class CircolarChart extends BidimensionalChart {
 
 	public CircolarChart() {
