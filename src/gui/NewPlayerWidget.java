@@ -142,7 +142,7 @@ public class NewPlayerWidget extends javax.swing.JPanel {
 			{
 				ComboBoxModel controllerComboModel = 
 					new DefaultComboBoxModel(
-							new String[] { "Human", "Computer", "Monster" });
+							new String[] { "Human", "Computer"});
 				controllerCombo = new JComboBox();
 				this.add(controllerCombo, new AnchorConstraint(405, 524, 482, 86, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				controllerCombo.setModel(controllerComboModel);

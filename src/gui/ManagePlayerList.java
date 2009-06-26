@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -26,6 +27,7 @@ import javax.swing.JButton;
 import javax.swing.WindowConstants;
 import org.jdesktop.application.Application;
 
+import player.ComputerPlayer;
 import player.Player;
 
 import javax.swing.JFrame;
@@ -43,6 +45,7 @@ public class ManagePlayerList extends javax.swing.JPanel {
 	private JButton close;
 	private JButton removePlayer;
 	private JLabel jLabel1;
+	private JButton jButton1;
 	/**
 	 * @uml.property  name="playersList"
 	 * @uml.associationEnd  
@@ -78,6 +81,17 @@ public class ManagePlayerList extends javax.swing.JPanel {
 			AnchorLayout thisLayout = new AnchorLayout();
 			this.setLayout(thisLayout);
 			setPreferredSize(new Dimension(400, 300));
+			{
+				jButton1 = new JButton();
+				this.add(jButton1, new AnchorConstraint(501, 331, 625, 53, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				jButton1.setPreferredSize(new java.awt.Dimension(111, 37));
+				jButton1.setName("jButton1");
+				jButton1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jButton1ActionPerformed(evt);
+					}
+				});
+			}
 			{
 				removePlayer = new JButton();
 				this.add(removePlayer, new AnchorConstraint(348, 331, 481, 53, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
@@ -171,5 +185,22 @@ public class ManagePlayerList extends javax.swing.JPanel {
 		Game.getInstance().setState(GamePhase.SetupDone);
 		
 	}
+	
+	private void jButton1ActionPerformed(ActionEvent evt) {		
+		Object[] listeners = eventListeners.getListenerList(); 
+		Random r = new Random();
+		Player player;
+		player = Game.getInstance().createNewPlayer("Monster", false);
+		for(int i = 0; i < r.nextInt(4); i++)
+			Game.getInstance().assignNPC((ComputerPlayer) player, Game.getInstance().createRandomMonster());
+		
+		GameSetupEvent e = new GameSetupEvent(this, GameSetupEvent.SetupPhase.AddedPlayer, player);
+
+	    for (int i = 0; i < listeners.length; i += 2) {
+	        if (listeners[i] == GameSetupListener.class) {
+	                ((GameSetupListener)listeners[i+1]).GameSetupStateChanged(e);
+	            }
+	        }		
+		}
 
 }
