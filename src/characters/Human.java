@@ -57,6 +57,11 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 	
 	public boolean isValid() {
 		return (getStrength()+getDexterity()+getIntelligence()+getLuck()+getMagicSkill()) >= 300 &&
-		(getStrength()+getDexterity()+getIntelligence()+getLuck()+getMagicSkill()) <= 305;
+		(getStrength()+getDexterity()+getIntelligence()+getLuck()+getMagicSkill()) <= 305 &&
+		getStrength() >= 0 &&
+		getDexterity() >= 0 &&
+		getIntelligence() >= 0 &&
+		getLuck() >= 0 &&
+		getMagicSkill() >= 0;
 	}
 }

@@ -80,14 +80,18 @@ public abstract class Fighter extends PlayableEntity {
 				
 				int ind = r.nextInt(n);
 				if (sum > max) {
-					ret.set(ind, ret.get(ind) - 1);
-					--sum;
+					if (ret.get(ind) > 0) {
+						int vv = ret.get(ind) - 1;
+						ret.set(ind, vv);
+						--sum;
+					}
 				} else {
-					ret.set(ind, ret.get(ind) + 1);
+					int vv = ret.get(ind) + 1;
+					ret.set(ind, vv);
 					++sum;
 				}
 			}
-			
+			System.out.println(ret);
 			return ret;
 		}
 		
