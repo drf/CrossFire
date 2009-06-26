@@ -54,4 +54,9 @@ public class Human extends Character implements CanMagicAttack, CanRangedAttack 
 	public void setAvailableSpells(HashSet<Spell> spells) {
 		this.spells = spells;
 	}
+	
+	public boolean isValid() {
+		return (getStrength()+getDexterity()+getIntelligence()+getLuck()+getMagicSkill()) >= 300 &&
+		(getStrength()+getDexterity()+getIntelligence()+getLuck()+getMagicSkill()) <= 305;
+	}
 }

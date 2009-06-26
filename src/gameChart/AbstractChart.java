@@ -47,6 +47,10 @@ public abstract class AbstractChart {
 	 */
 	abstract void createChart();
 	
+	/**
+	 * @param b the {@link Box} in question
+	 * @return the entities on the chosen box
+	 */
 	public Set<Entity> getEntitiesOn(Box b) {
 		HashSet<Entity> retset = new HashSet<Entity>();
 		for (Entity item : positions.keySet()) {
@@ -56,7 +60,16 @@ public abstract class AbstractChart {
 		}
 		return retset;
 	}
-	
+
+	/**
+	 * This function returns whether a {@link Box} is busy for a chosen {@link Entity}. This
+	 * result should always be checked before attempting to place an item on the chart. Please note
+	 * that on a Box can co-exist an infinite number of entities, but one and only {@link PlayableEntity}
+	 * 
+	 * @param box the {@link Box} in question
+	 * @param entity the {@link Entity} about to be placed
+	 * @return whether the {@link Entity} can be placed or not
+	 */
 	public boolean isBoxBusyFor(Box box, Entity entity) {
 		if (!(entity instanceof PlayableEntity)) {
 			// In this case, it can be on any box at any moment
@@ -74,14 +87,33 @@ public abstract class AbstractChart {
 		return false;
 	}
 	
+	/**
+	 * @param t the {@link Entity} in question
+	 * @return the {@link Box} on which the Entity stands
+	 */
 	public Box getBoxOwnedBy(Entity t) {
 		return positions.get(t);
 	}
 	
+	/**
+	 * 
+	 * @return all the {@link Entity} on the chart
+	 */
 	public Set<Entity> getEntities() {
 		return positions.keySet();
 	}
 	
+	/**
+	 * Places an {@link Entity} on the chart and removes it from its previous position
+	 * if it was placed elsewhere before. The function also checks if the chosen {@link Box}
+	 * is busy for it
+	 * 
+	 * @param t the {@link Entity} to place
+	 * @param b the destination {@link Box}
+	 * @throws BoxBusyException if the chosen {@link Box} is busy
+	 * 
+	 * @see isBoxBusyFor
+	 */
 	public void place(Entity t, Box b) throws BoxBusyException {
 		if (isBoxBusyFor(b, t)) {
 			throw new BoxBusyException("The entity can not be on the chosen box!");
@@ -95,10 +127,22 @@ public abstract class AbstractChart {
 		t.setBox(b);
 	}
 	
+	/**
+	 * Removes an entity from the chart
+	 * 
+	 * @param t the entity to remove
+	 */
 	public void remove(Entity t) {
 		positions.remove(t);
 	}
 	
+	/**
+	 * Gets a set of {@link Box}es in the chosen range from a chosen box
+	 * 
+	 * @param b the box in question
+	 * @param range the chosen range
+	 * @return a set of {@link Box}es in the chosen range
+	 */
 	public Set<Box> getBoxesInRange(Box b, int range) {
 		HashSet<Box> retset = new HashSet<Box>();
 		HashSet<Box> latestBoxes = new HashSet<Box>();

@@ -17,6 +17,7 @@ import characters.Elf;
 import characters.Fighter;
 import characters.God;
 import characters.Human;
+import characters.Hydra;
 import characters.Orc;
 import characters.Wizard;
 
@@ -227,12 +228,15 @@ public class Game implements EntityListener {
 	 */
 	public PlayableEntity createRandomMonster()  {
 		Random r = new Random();
-		int randomInt = r.nextInt(5);
+		int randomInt = r.nextInt(10);
 		
-		if(randomInt == 4)
+		if (randomInt == 9) {
 			return new God();
-		else
+		} else if (randomInt >= 5) { 
 			return new Dragon();
+		} else {
+			return new Hydra();
+		}
 		
 	}
 	

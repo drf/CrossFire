@@ -63,9 +63,34 @@ public abstract class Fighter extends PlayableEntity {
 		Random r = new Random();
 		int index, delta;
 		ArrayList<Integer> ret = new ArrayList<Integer>();
-		int total = r.nextInt(max - min);
+		int total = min + r.nextInt(max - min);
 		int sum = 0;
 
+		if (min == 0) {
+			for (int i = 0; i < n; i++) {
+				ret.add(r.nextInt(max));
+			}
+			
+			sum = 0;
+			for (Integer integer : ret) {
+				sum += integer;
+			}
+			
+			while (sum != max) {
+				
+				int ind = r.nextInt(n);
+				if (sum > max) {
+					ret.set(ind, ret.get(ind) - 1);
+					--sum;
+				} else {
+					ret.set(ind, ret.get(ind) + 1);
+					++sum;
+				}
+			}
+			
+			return ret;
+		}
+		
 		for(int i = 0; i < n; i++) {
 			int newVal = (total- r.nextInt(n))/n;
 			ret.add(newVal);
