@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1247,2229" id="gameLogic" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1247,2229" id="gameLogic" metadata="uml2-1.0" initialized="true" scrolledY="1653" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
   <children xsi:type="editmodel:ClassEditModel" name="CombatEvent" location="579,1758" size="142,122" id="gameLogic/CombatEvent" runTimeClassModel="damage,CombatEvent(LgameLogic.CanAttack;LgameLogic.Attackable;Lspells.Spell;IZ),CombatEvent(LgameLogic.CanAttack;LgameLogic.Attackable;LgameLogic.CombatHandler.AttackType;IZ),success">
     <children xsi:type="editmodel:CompartmentEditModel" size="119,36">
       <children xsi:type="editmodel:AttributeEditModel" name="damage" id="gameLogic/CombatEvent#damage"/>
@@ -147,7 +147,7 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Game" location="50,888" size="284,529" id="gameLogic/Game" runTimeClassModel="createNewPlayer(Ljava.lang.String;Z),removePlayer(Lplayer.Player;),getNPCS(),getInstance(),createRandomMonster(),assignEntity(Lplayer.Player;Lglobals.PlayableEntity;),assignCharacter(Lplayer.Player;Lglobals.PlayableEntity;),entities,removeEntity(Lglobals.PlayableEntity;),randomlyPlaceItems(),endTurn(I),addGameChangedEventListener(LgameLogic.GamePhaseChangedListener;),createCharacter(Lcharacters.Character.Race;Lglobals.Modifier;Ljava.lang.String;),resetGame(),EntityEventOccurred(LgameLogic.EntityEvent;),eventListeners,performNextTurn(),gameLogic.Game.GamePhase,assignNPC(Lplayer.ComputerPlayer;Lglobals.PlayableEntity;),randomlyPlaceEntities()">
+  <children xsi:type="editmodel:ClassEditModel" name="Game" location="50,888" size="284,529" id="gameLogic/Game" runTimeClassModel="createNewPlayer(Ljava.lang.String;Z),removePlayer(Lplayer.Player;),getNPCS(),getInstance(),assignEntity(Lplayer.Player;Lglobals.PlayableEntity;),createRandomMonster(),assignCharacter(Lplayer.Player;Lglobals.PlayableEntity;),entities,removeEntity(Lglobals.PlayableEntity;),randomlyPlaceItems(),endTurn(I),addGameChangedEventListener(LgameLogic.GamePhaseChangedListener;),createCharacter(Lcharacters.Character.Race;Lglobals.Modifier;Ljava.lang.String;),resetGame(),EntityEventOccurred(LgameLogic.EntityEvent;),eventListeners,performNextTurn(),gameLogic.Game.GamePhase,assignNPC(Lplayer.ComputerPlayer;Lglobals.PlayableEntity;),randomlyPlaceEntities()">
     <children xsi:type="editmodel:CompartmentEditModel" size="261,36">
       <children xsi:type="editmodel:AttributeEditModel" name="entities" id="gameLogic/Game#entities"/>
       <children xsi:type="editmodel:AttributeEditModel" name="eventListeners" id="gameLogic/Game#eventListeners"/>
@@ -171,7 +171,7 @@
       <children xsi:type="editmodel:MethodEditModel" name="createRandomMonster" id="gameLogic/Game#createRandomMonster()"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="130,145">
-      <children xsi:type="editmodel:EnumerationEditModel" name="GamePhase" size="130,143" id="gameLogic/Game$GamePhase" runTimeClassModel="SetupDone%,EndGame%,Turn%,GameCreation%,None%">
+      <children xsi:type="editmodel:EnumerationEditModel" name="GamePhase" size="130,143" id="gameLogic/Game$GamePhase" runTimeClassModel="SetupDone%,EndGame%,Turn%,None%,GameCreation%">
         <children xsi:type="editmodel:CompartmentEditModel" size="101,90">
           <children xsi:type="editmodel:EnumerationLiteralEditModel" name="GameCreation" id="gameLogic/Game$GamePhase#GameCreation%"/>
           <children xsi:type="editmodel:EnumerationLiteralEditModel" name="EndGame" id="gameLogic/Game$GamePhase#EndGame%"/>
@@ -315,7 +315,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.24/@sourceConnections.0" name="Pickable" location="50,1449" size="205,135" id="gameLogic/Pickable" runTimeClassModel="onPick(LgameLogic.CanPick;),getMaximumRequirements(),getMinimumRequirements(),getModifier()">
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.24/@sourceConnections.0" name="Pickable" location="50,1449" size="205,135" id="gameLogic/Pickable" runTimeClassModel="onPick(LgameLogic.CanPick;),getMinimumRequirements(),getMaximumRequirements(),getModifier()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="182,72">
       <children xsi:type="editmodel:MethodEditModel" name="getMaximumRequirements" id="gameLogic/Pickable#getMaximumRequirements()"/>

@@ -1,5 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" id="gameChart" metadata="uml2-1.0" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1172,1271" id="gameChart" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
+  <children xsi:type="editmodel:ClassEditModel" name="OutOfBoundsException" location="933,50" size="212,122" id="gameChart/OutOfBoundsException" runTimeClassModel="OutOfBoundsException(Ljava.lang.String;),OutOfBoundsException(),OutOfBoundsException(Ljava.lang.Throwable;),OutOfBoundsException(Ljava.lang.String;Ljava.lang.Throwable;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="161,72">
+      <children xsi:type="editmodel:MethodEditModel" name="OutOfBoundsException" id="gameChart/OutOfBoundsException#OutOfBoundsException()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="OutOfBoundsException" id="gameChart/OutOfBoundsException#OutOfBoundsException(Ljava.lang.Throwable;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="OutOfBoundsException" id="gameChart/OutOfBoundsException#OutOfBoundsException(Ljava.lang.String;Ljava.lang.Throwable;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="OutOfBoundsException" id="gameChart/OutOfBoundsException#OutOfBoundsException(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="BoxBusyException" location="50,847" size="176,122" id="gameChart/BoxBusyException" runTimeClassModel="BoxBusyException(),BoxBusyException(Ljava.lang.String;),BoxBusyException(Ljava.lang.Throwable;),BoxBusyException(Ljava.lang.String;Ljava.lang.Throwable;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="134,72">
+      <children xsi:type="editmodel:MethodEditModel" name="BoxBusyException" id="gameChart/BoxBusyException#BoxBusyException(Ljava.lang.Throwable;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="BoxBusyException" id="gameChart/BoxBusyException#BoxBusyException(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="BoxBusyException" id="gameChart/BoxBusyException#BoxBusyException(Ljava.lang.String;Ljava.lang.Throwable;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="BoxBusyException" id="gameChart/BoxBusyException#BoxBusyException()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="LandscapeGenerator" location="276,847" size="212,68" id="gameChart/LandscapeGenerator" runTimeClassModel="generateRandomLandscape(LgameChart.AbstractChart;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="189,18">
+      <children xsi:type="editmodel:MethodEditModel" name="generateRandomLandscape" id="gameChart/LandscapeGenerator#generateRandomLandscape(LgameChart.AbstractChart;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="LinearChart" location="419,711" size="127,86" id="gameChart/LinearChart" runTimeClassModel="LinearChart(),LinearChart(I)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="97,36">
+      <children xsi:type="editmodel:MethodEditModel" name="LinearChart" id="gameChart/LinearChart#LinearChart(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="LinearChart" id="gameChart/LinearChart#LinearChart()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameChart/BidimensionalChart&lt;-gameChart/LinearChart" source="//@children.3" target="//@children.7/@sourceConnections.0" targetEnd="//@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="63,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0" name="AbstractChart" location="235,50" size="155,248" id="gameChart/AbstractChart" runTimeClassModel="createChart(),getBoxesAtRange(LgameChart.Box;I),place(Lglobals.Entity;LgameChart.Box;),getAdjacentBoxes(LgameChart.Box;),getBoxOwnedBy(Lglobals.Entity;),getBoxes(),getEntities(),getEntitiesOn(LgameChart.Box;),remove(Lglobals.Entity;),getBoxesInRange(LgameChart.Box;I),isBoxBusyFor(LgameChart.Box;Lglobals.Entity;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="132,198">
+      <children xsi:type="editmodel:MethodEditModel" name="createChart" id="gameChart/AbstractChart#createChart()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAdjacentBoxes" id="gameChart/AbstractChart#getAdjacentBoxes(LgameChart.Box;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBoxOwnedBy" id="gameChart/AbstractChart#getBoxOwnedBy(Lglobals.Entity;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBoxes" id="gameChart/AbstractChart#getBoxes()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBoxesAtRange" id="gameChart/AbstractChart#getBoxesAtRange(LgameChart.Box;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBoxesInRange" id="gameChart/AbstractChart#getBoxesInRange(LgameChart.Box;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getEntities" id="gameChart/AbstractChart#getEntities()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getEntitiesOn" id="gameChart/AbstractChart#getEntitiesOn(LgameChart.Box;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isBoxBusyFor" id="gameChart/AbstractChart#isBoxBusyFor(LgameChart.Box;Lglobals.Entity;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="place" id="gameChart/AbstractChart#place(Lglobals.Entity;LgameChart.Box;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="remove" id="gameChart/AbstractChart#remove(Lglobals.Entity;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="CircolarChart" location="251,711" size="138,86" id="gameChart/CircolarChart" runTimeClassModel="CircolarChart(II),CircolarChart()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="106,36">
+      <children xsi:type="editmodel:MethodEditModel" name="CircolarChart" id="gameChart/CircolarChart#CircolarChart(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="CircolarChart" id="gameChart/CircolarChart#CircolarChart()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameChart/BidimensionalChart&lt;-gameChart/CircolarChart" source="//@children.5" target="//@children.7/@sourceConnections.0" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="69,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.7/@sourceConnections.0" name="BidimensionalChart" location="220,348" size="185,313" id="gameChart/BidimensionalChart" runTimeClassModel="height,width,gameChart.BidimensionalChart.Direction,getAdjacentBox(LgameChart.BidimensionalChart.Direction;LgameChart.Box;),getAdjacentBoxes(LgameChart.Box;),setSize(II),getBoxAt(II),getBoxPosition(LgameChart.Box;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="76,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="height" id="gameChart/BidimensionalChart#height"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="width" id="gameChart/BidimensionalChart#width"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="132,90">
+      <children xsi:type="editmodel:MethodEditModel" name="getAdjacentBox" id="gameChart/BidimensionalChart#getAdjacentBox(LgameChart.BidimensionalChart.Direction;LgameChart.Box;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAdjacentBoxes" id="gameChart/BidimensionalChart#getAdjacentBoxes(LgameChart.Box;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBoxAt" id="gameChart/BidimensionalChart#getBoxAt(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBoxPosition" id="gameChart/BidimensionalChart#getBoxPosition(LgameChart.Box;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setSize" id="gameChart/BidimensionalChart#setSize(II)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="109,127">
+      <children xsi:type="editmodel:EnumerationEditModel" name="Direction" size="109,125" id="gameChart/BidimensionalChart$Direction" runTimeClassModel="South%,West%,East%,North%">
+        <children xsi:type="editmodel:CompartmentEditModel" size="52,72">
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="South" id="gameChart/BidimensionalChart$Direction#South%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="West" id="gameChart/BidimensionalChart$Direction#West%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="North" id="gameChart/BidimensionalChart$Direction#North%"/>
+          <children xsi:type="editmodel:EnumerationLiteralEditModel" name="East" id="gameChart/BidimensionalChart$Direction#East%"/>
+        </children>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameChart/AbstractChart&lt;-gameChart/BidimensionalChart" source="//@children.6" target="//@children.4" targetEnd="//@children.6/@sourceConnections.0/@children.1" sourceEnd="//@children.6/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="92,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="77,248"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="RectangularChart" location="50,711" size="171,86" id="gameChart/RectangularChart" runTimeClassModel="RectangularChart(II),RectangularChart()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="129,36">
+      <children xsi:type="editmodel:MethodEditModel" name="RectangularChart" id="gameChart/RectangularChart#RectangularChart()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="RectangularChart" id="gameChart/RectangularChart#RectangularChart(II)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.5/@sourceConnections.0 //@children.3/@sourceConnections.0" autoLocated="true" id="gameChart/BidimensionalChart&lt;-gameChart/RectangularChart" source="//@children.7" target="//@children.6" targetEnd="//@children.7/@sourceConnections.0/@children.1" sourceEnd="//@children.7/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="85,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="92,313" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Hill" location="812,204" size="71,68" id="gameChart/Hill" runTimeClassModel="Hill(LgameChart.AbstractChart;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="48,18">
+      <children xsi:type="editmodel:MethodEditModel" name="Hill" id="gameChart/Hill#Hill(LgameChart.AbstractChart;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameChart/Box&lt;-gameChart/Hill" source="//@children.8" target="//@children.11/@sourceConnections.0" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="35,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="City" location="707,204" size="75,68" id="gameChart/City" runTimeClassModel="City(LgameChart.AbstractChart;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="52,18">
+      <children xsi:type="editmodel:MethodEditModel" name="City" id="gameChart/City#City(LgameChart.AbstractChart;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameChart/Box&lt;-gameChart/City" source="//@children.9" target="//@children.11/@sourceConnections.0" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="37,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.11/@sourceConnections.0" name="Box" location="665,50" size="155,104" id="gameChart/Box" runTimeClassModel="getAdjacentBoxes(),isAdjacentTo(LgameChart.Box;),Box(LgameChart.AbstractChart;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="132,54">
+      <children xsi:type="editmodel:MethodEditModel" name="Box" id="gameChart/Box#Box(LgameChart.AbstractChart;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAdjacentBoxes" id="gameChart/Box#getAdjacentBoxes()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isAdjacentTo" id="gameChart/Box#isAdjacentTo(LgameChart.Box;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Plain" location="596,204" size="81,68" id="gameChart/Plain" runTimeClassModel="Plain(LgameChart.AbstractChart;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="58,18">
+      <children xsi:type="editmodel:MethodEditModel" name="Plain" id="gameChart/Plain#Plain(LgameChart.AbstractChart;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.9/@sourceConnections.0 //@children.8/@sourceConnections.0" autoLocated="true" id="gameChart/Box&lt;-gameChart/Plain" source="//@children.11" target="//@children.10" targetEnd="//@children.11/@sourceConnections.0/@children.1" sourceEnd="//@children.11/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="40,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="77,104" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
   <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" level="-1" showScope="InPackage" properties="wireOptions=1;Product=eUML2"/>
   <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
     <leftRuler/>

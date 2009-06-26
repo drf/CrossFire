@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="characters2" size="1324,1295" id="characters" metadata="uml2-1.0" initialized="true" scrolledX="143" scrolledY="335" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="characters2" size="1324,1295" id="characters" metadata="uml2-1.0" initialized="true" scrolledY="738" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
   <children xsi:type="editmodel:ClassEditModel" name="CharacterTest" location="273,1171" size="143,86" id="characters/CharacterTest" runTimeClassModel="main([Ljava.lang.String;),killahFaighht(Lcharacters.Character;Lcharacters.Character;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="100,36">
@@ -43,7 +43,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Dragon" location="898,999" size="188,122" id="characters/Dragon" runTimeClassModel="onDeath(),Dragon(),getMeleeDamageBonus(),getDamageReduction()">
+  <children xsi:type="editmodel:ClassEditModel" name="Dragon" location="898,999" size="188,122" id="characters/Dragon" runTimeClassModel="onDeath(),getMeleeDamageBonus(),Dragon(),getDamageReduction()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="165,72">
       <children xsi:type="editmodel:MethodEditModel" name="Dragon" id="characters/Dragon#Dragon()"/>
@@ -58,7 +58,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0" name="Character" location="526,510" size="197,439" id="characters/Character" runTimeClassModel="pick(LgameLogic.Pickable;),dropEquip(LgameLogic.Equipable;),boxChanged(LgameChart.Box;LgameChart.Box;),getRangedDamageBonus(),getMagicDamageBonus(),Character(IIIIIII),characters.Character.Race,Character(),unequip(LgameLogic.Equipable;),onDeath(),canRangedAttack(),canMagicAttack(),getMeleeDamageBonus(),canPick(LgameLogic.Pickable;),getDamageReduction()">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0" name="Character" location="526,510" size="197,439" id="characters/Character" runTimeClassModel="pick(LgameLogic.Pickable;),dropEquip(LgameLogic.Equipable;),getRangedDamageBonus(),boxChanged(LgameChart.Box;LgameChart.Box;),getMagicDamageBonus(),Character(IIIIIII),characters.Character.Race,Character(),unequip(LgameLogic.Equipable;),onDeath(),canRangedAttack(),canMagicAttack(),getMeleeDamageBonus(),canPick(LgameLogic.Pickable;),getDamageReduction()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="174,252">
       <children xsi:type="editmodel:MethodEditModel" name="Character" id="characters/Character#Character()"/>
@@ -77,7 +77,7 @@
       <children xsi:type="editmodel:MethodEditModel" name="unequip" id="characters/Character#unequip(LgameLogic.Equipable;)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="109,127">
-      <children xsi:type="editmodel:EnumerationEditModel" name="Race" size="109,125" id="characters/Character$Race" runTimeClassModel="Human%,Wizard%,Orc%,Elf%">
+      <children xsi:type="editmodel:EnumerationEditModel" name="Race" size="109,125" id="characters/Character$Race" runTimeClassModel="Human%,Wizard%,Elf%,Orc%">
         <children xsi:type="editmodel:CompartmentEditModel" size="59,72">
           <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Wizard" id="characters/Character$Race#Wizard%"/>
           <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Elf" id="characters/Character$Race#Elf%"/>
@@ -93,7 +93,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Elf" location="50,999" size="156,104" id="characters/Elf" runTimeClassModel="setAvailableSpells(Ljava.util.HashSet;),getAvailableSpells(),Elf(Ljava.lang.String;)">
+  <children xsi:type="editmodel:ClassEditModel" name="Elf" location="50,999" size="156,104" id="characters/Elf" runTimeClassModel="getAvailableSpells(),setAvailableSpells(Ljava.util.HashSet;),Elf(Ljava.lang.String;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="133,54">
       <children xsi:type="editmodel:MethodEditModel" name="Elf" id="characters/Elf#Elf(Ljava.lang.String;)"/>
@@ -107,7 +107,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Human" location="712,999" size="156,122" id="characters/Human" runTimeClassModel="getAvailableSpells(),Human(Ljava.lang.String;),setAvailableSpells(Ljava.util.HashSet;),isValid()">
+  <children xsi:type="editmodel:ClassEditModel" name="Human" location="712,999" size="156,122" id="characters/Human" runTimeClassModel="Human(Ljava.lang.String;),getAvailableSpells(),setAvailableSpells(Ljava.util.HashSet;),isValid()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="133,72">
       <children xsi:type="editmodel:MethodEditModel" name="Human" id="characters/Human#Human(Ljava.lang.String;)"/>
@@ -122,7 +122,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Wizard" location="236,999" size="156,104" id="characters/Wizard" runTimeClassModel="setAvailableSpells(Ljava.util.HashSet;),getAvailableSpells(),Wizard(Ljava.lang.String;)">
+  <children xsi:type="editmodel:ClassEditModel" name="Wizard" location="236,999" size="156,104" id="characters/Wizard" runTimeClassModel="getAvailableSpells(),setAvailableSpells(Ljava.util.HashSet;),Wizard(Ljava.lang.String;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="133,54">
       <children xsi:type="editmodel:MethodEditModel" name="Wizard" id="characters/Wizard#Wizard(Ljava.lang.String;)"/>
@@ -136,7 +136,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.0" name="Fighter" location="786,50" size="153,410" id="characters/Fighter" runTimeClassModel="getHp(),setIntelligence(I),getMagicSkill(),getMp(),setMagicSkill(I),setAttibutes(Lglobals.BaseAttributes;),getDexterity(),getIntelligence(),Fighter(IIIIIII),setDexterity(I),toString(),getStrength(),setMp(I),Fighter(),setStrength(I),randomAttributes(III),getLuck(),setHp(I),randomAttribute(II),setLuck(I)">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.0" name="Fighter" location="786,50" size="153,410" id="characters/Fighter" runTimeClassModel="getHp(),setIntelligence(I),getMagicSkill(),getMp(),setMagicSkill(I),setAttibutes(Lglobals.BaseAttributes;),Fighter(IIIIIII),getIntelligence(),getDexterity(),setMp(I),toString(),getStrength(),setDexterity(I),Fighter(),setStrength(I),getLuck(),randomAttributes(III),setHp(I),randomAttribute(II),setLuck(I)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="130,360">
       <children xsi:type="editmodel:MethodEditModel" name="Fighter" id="characters/Fighter#Fighter()"/>
@@ -163,7 +163,7 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="God" location="526,999" size="156,104" id="characters/God" runTimeClassModel="getAvailableSpells(),setAvailableSpells(Ljava.util.HashSet;),God()">
+  <children xsi:type="editmodel:ClassEditModel" name="God" location="526,999" size="156,104" id="characters/God" runTimeClassModel="setAvailableSpells(Ljava.util.HashSet;),getAvailableSpells(),God()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="133,54">
       <children xsi:type="editmodel:MethodEditModel" name="God" id="characters/God#God()"/>
