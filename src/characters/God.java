@@ -19,6 +19,7 @@ import spells.Fireball;
 import spells.Heal;
 import spells.Implosion;
 import spells.Spell;
+import spells.Teleport;
 import spells.UnholySacrifice;
 
 public class God extends Character implements CanRangedAttack, CanMagicAttack {
@@ -43,6 +44,7 @@ public class God extends Character implements CanRangedAttack, CanMagicAttack {
 		spells.add(new DarkPrison());
 		spells.add(new Fireball());
 		spells.add(new Implosion());
+		spells.add(new Teleport());
 		
 		setName("God");
 		

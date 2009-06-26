@@ -147,12 +147,12 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Game" location="50,888" size="279,511" id="gameLogic/Game" runTimeClassModel="createNewPlayer(Ljava.lang.String;Z),removePlayer(Lplayer.Player;),getNPCS(),getInstance(),assignEntity(Lplayer.Player;Lglobals.PlayableEntity;),assignCharacter(Lplayer.Player;Lglobals.PlayableEntity;),entities,removeEntity(Lglobals.PlayableEntity;),randomlyPlaceItems(),endTurn(I),addGameChangedEventListener(LgameLogic.GamePhaseChangedListener;),resetGame(),createCharacter(Lcharacters.Character.Race;Lglobals.Modifier;Ljava.lang.String;),EntityEventOccurred(LgameLogic.EntityEvent;),eventListeners,performNextTurn(),gameLogic.Game.GamePhase,assignNPC(Lplayer.ComputerPlayer;Lglobals.PlayableEntity;),randomlyPlaceEntities()">
-    <children xsi:type="editmodel:CompartmentEditModel" size="256,36">
+  <children xsi:type="editmodel:ClassEditModel" name="Game" location="50,888" size="284,529" id="gameLogic/Game" runTimeClassModel="createNewPlayer(Ljava.lang.String;Z),removePlayer(Lplayer.Player;),getNPCS(),getInstance(),createRandomMonster(),assignEntity(Lplayer.Player;Lglobals.PlayableEntity;),assignCharacter(Lplayer.Player;Lglobals.PlayableEntity;),entities,removeEntity(Lglobals.PlayableEntity;),randomlyPlaceItems(),endTurn(I),addGameChangedEventListener(LgameLogic.GamePhaseChangedListener;),createCharacter(Lcharacters.Character.Race;Lglobals.Modifier;Ljava.lang.String;),resetGame(),EntityEventOccurred(LgameLogic.EntityEvent;),eventListeners,performNextTurn(),gameLogic.Game.GamePhase,assignNPC(Lplayer.ComputerPlayer;Lglobals.PlayableEntity;),randomlyPlaceEntities()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="261,36">
       <children xsi:type="editmodel:AttributeEditModel" name="entities" id="gameLogic/Game#entities"/>
       <children xsi:type="editmodel:AttributeEditModel" name="eventListeners" id="gameLogic/Game#eventListeners"/>
     </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="213,270">
+    <children xsi:type="editmodel:CompartmentEditModel" size="213,288">
       <children xsi:type="editmodel:MethodEditModel" name="EntityEventOccurred" id="gameLogic/Game#EntityEventOccurred(LgameLogic.EntityEvent;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="addGameChangedEventListener" id="gameLogic/Game#addGameChangedEventListener(LgameLogic.GamePhaseChangedListener;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="assignCharacter" id="gameLogic/Game#assignCharacter(Lplayer.Player;Lglobals.PlayableEntity;)"/>
@@ -168,9 +168,10 @@
       <children xsi:type="editmodel:MethodEditModel" name="removeEntity" id="gameLogic/Game#removeEntity(Lglobals.PlayableEntity;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="removePlayer" id="gameLogic/Game#removePlayer(Lplayer.Player;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="resetGame" id="gameLogic/Game#resetGame()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createRandomMonster" id="gameLogic/Game#createRandomMonster()"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="130,145">
-      <children xsi:type="editmodel:EnumerationEditModel" name="GamePhase" size="130,143" id="gameLogic/Game$GamePhase" runTimeClassModel="SetupDone%,EndGame%,Turn%,None%,GameCreation%">
+      <children xsi:type="editmodel:EnumerationEditModel" name="GamePhase" size="130,143" id="gameLogic/Game$GamePhase" runTimeClassModel="SetupDone%,EndGame%,Turn%,GameCreation%,None%">
         <children xsi:type="editmodel:CompartmentEditModel" size="101,90">
           <children xsi:type="editmodel:EnumerationLiteralEditModel" name="GameCreation" id="gameLogic/Game$GamePhase#GameCreation%"/>
           <children xsi:type="editmodel:EnumerationLiteralEditModel" name="EndGame" id="gameLogic/Game$GamePhase#EndGame%"/>
@@ -182,8 +183,8 @@
       </children>
     </children>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gameLogic/EntityListener&lt;-gameLogic/Game" source="//@children.12" target="//@children.13" targetEnd="//@children.12/@sourceConnections.0/@children.1" sourceEnd="//@children.12/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="139,0" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="84,81"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="138,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="83,81"/>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>

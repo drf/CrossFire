@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1185,561" id="globals" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
-  <children xsi:type="editmodel:ClassEditModel" name="Pair" location="534,50" size="114,158" id="globals/Pair" runTimeClassModel="getSecond(),Pair(),Pair(LE;LE;),setFirst(LE;),setSecond(LE;),getFirst()">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="668,544" id="globals" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302043726F7373464972652F647266">
+  <children xsi:type="editmodel:ClassEditModel" name="Pair" location="534,50" size="114,158" id="globals/Pair" runTimeClassModel="getSecond(),Pair(),setFirst(LE;),Pair(LE;LE;),setSecond(LE;),getFirst()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="91,108">
       <children xsi:type="editmodel:MethodEditModel" name="Pair" id="globals/Pair#Pair()"/>

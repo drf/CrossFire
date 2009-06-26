@@ -26,17 +26,17 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/CharacterTest-Standard::Instantiate->characters/Human*characters/CharacterTest-Soyatec::Import->characters/Human" source="//@children.2" target="//@children.5" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/CharacterTest->Standard::Instantiate" source="//@children.2" target="//@children.5" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
       <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate»" size="119,13" anchorKind="MiddlePart"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="120,0" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="21,30"/>
     </sourceConnections>
-    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/CharacterTest-Standard::Instantiate->characters/Elf*characters/CharacterTest-Soyatec::Import->characters/Elf" source="//@children.2" target="//@children.4" targetEnd="//@children.2/@sourceConnections.1/@children.2" label="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/CharacterTest->Standard::Instantiate" source="//@children.2" target="//@children.4" targetEnd="//@children.2/@sourceConnections.1/@children.2" label="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
       <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate»" size="119,13" anchorKind="MiddlePart"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="60,30" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="41,0"/>
     </sourceConnections>
-    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/CharacterTest-Standard::Instantiate->characters/Orc*characters/CharacterTest-Soyatec::Import->characters/Orc" source="//@children.2" target="//@children.9" targetEnd="//@children.2/@sourceConnections.2/@children.2" label="//@children.2/@sourceConnections.2/@children.0" sourceEnd="//@children.2/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/CharacterTest->Standard::Instantiate" source="//@children.2" target="//@children.9" targetEnd="//@children.2/@sourceConnections.2/@children.2" label="//@children.2/@sourceConnections.2/@children.0" sourceEnd="//@children.2/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
       <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate»" size="119,13" anchorKind="MiddlePart"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="7,30" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="67,7"/>
@@ -79,7 +79,7 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/Human-Standard::Call->characters/Character*characters/Human-Standard::Derive->characters/Character" source="//@children.5" target="//@children.8" targetEnd="//@children.5/@sourceConnections.0/@children.2" label="//@children.5/@sourceConnections.0/@children.0" sourceEnd="//@children.5/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/Human->Standard::Call" source="//@children.5" target="//@children.8" targetEnd="//@children.5/@sourceConnections.0/@children.2" label="//@children.5/@sourceConnections.0/@children.0" sourceEnd="//@children.5/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
       <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Derive»" size="79,13" anchorKind="MiddlePart"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="46,30" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="49,0"/>
@@ -127,7 +127,7 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/Orc-Standard::Call->characters/Character*characters/Orc-Standard::Derive->characters/Character" source="//@children.9" target="//@children.8" targetEnd="//@children.9/@sourceConnections.0/@children.2" label="//@children.9/@sourceConnections.0/@children.0" sourceEnd="//@children.9/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="characters/Orc->Standard::Call" source="//@children.9" target="//@children.8" targetEnd="//@children.9/@sourceConnections.0/@children.2" label="//@children.9/@sourceConnections.0/@children.0" sourceEnd="//@children.9/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
       <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Derive»" size="79,13" anchorKind="MiddlePart"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="58,30" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="0,53"/>
