@@ -1,6 +1,5 @@
 package gui;
 
-import gameChart.AbstractChart;
 import gameChart.CircolarChart;
 import gameChart.LinearChart;
 import gameChart.RectangularChart;
@@ -8,17 +7,12 @@ import gameLogic.Game;
 import gameLogic.GamePhaseChangedEvent;
 import gameLogic.GamePhaseChangedListener;
 import gameLogic.Game.GamePhase;
-import gameLogic.GameSetupEvent;
-import gameLogic.GameSetupListener;
-
-import java.awt.BorderLayout;
 
 import javax.swing.ActionMap;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.Application;
@@ -45,12 +39,10 @@ public class CrossFireApplication extends SingleFrameApplication
 	implements GamePhaseChangedListener{
 	
     private JMenuBar menuBar;
-    private JPanel topPanel;
     private JMenuItem jMenuItem3;
     private JMenuItem jMenuItem2;
     private JMenuItem jMenuItem1;
     private JMenu fileMenu;
-    private JPanel contentPanel;
     /**
 	 * @uml.property  name="playerFrame"
 	 * @uml.associationEnd  
