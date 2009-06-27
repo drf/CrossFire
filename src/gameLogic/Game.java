@@ -604,10 +604,6 @@ public class Game implements EntityListener {
 			if (entities.containsKey(e.getSource())) {
 				chart.remove((Entity)(e.getSource()));
 				entities.remove(e.getSource());
-				
-				if (onTurn.getPlayer() instanceof HumanPlayer) {
-					((HumanPlayer)(onTurn.getPlayer())).skipTurn();
-				}
 			} else if (npcs.containsKey(e.getSource())) {
 				chart.remove((Entity)(e.getSource()));
 				npcs.remove(e.getSource());

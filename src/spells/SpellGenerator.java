@@ -31,6 +31,8 @@ public class SpellGenerator {
 		retset.add(Bless.class);
 		retset.add(UnholySacrifice.class);
 		retset.add(AncientKnowledge.class);
+		retset.add(Martyrism.class);
+		retset.add(DeathTouch.class);
 		
 		return retset;
 	}
