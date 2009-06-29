@@ -14,10 +14,12 @@ import spells.AuraBolt;
 import spells.Bless;
 import spells.DarkGaze;
 import spells.DarkPrison;
+import spells.DeathTouch;
 import spells.DivineIntervention;
 import spells.Fireball;
 import spells.Heal;
 import spells.Implosion;
+import spells.Martyrism;
 import spells.Spell;
 import spells.Teleport;
 import spells.UnholySacrifice;
@@ -45,6 +47,8 @@ public class God extends Character implements CanRangedAttack, CanMagicAttack {
 		spells.add(new Fireball());
 		spells.add(new Implosion());
 		spells.add(new Teleport());
+		spells.add(new DeathTouch());
+		spells.add(new Martyrism());
 		
 		setName("God");
 		
